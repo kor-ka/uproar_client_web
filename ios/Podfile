@@ -1,0 +1,13 @@
+platform :ios, '8.0'
+use_frameworks!
+
+workspace 'ios'
+project 'ios.xcodeproj'
+
+inhibit_all_warnings!
+
+target 'ios' do
+
+     pod 'RxSwift',    '~> 3.0'
+     pod 'RxCocoa',    '~> 3.0'
+end
