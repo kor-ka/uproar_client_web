@@ -1,4 +1,4 @@
-# qiwi_j2objc_rxwrapper
+# WVMIP (work very much in progress)
 
 пример переиспользования бизнесс логики на java для ios
 
