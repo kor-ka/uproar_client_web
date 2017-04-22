@@ -3,17 +3,19 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="match_parent" tools:context="ru.korinc.j2objc.MainActivity">
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+    <EditText android:id="@+id/input" android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Hello World!" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/start_count" android:text="START" tools:layout_editor_absoluteY="91dp"
-            tools:layout_editor_absoluteX="33dp" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/res" />
+
 
     <ProgressBar android:layout_width="wrap_content" android:layout_height="wrap_content"
             tools:layout_editor_absoluteY="29dp" tools:layout_editor_absoluteX="33dp" />

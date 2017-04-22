@@ -14,4 +14,9 @@ public class AndroidLogging implements LogProvider {
     public void d(String tag, String msg) {
         Log.d(tag, msg);
     }
+
+    @Override
+    public void e(Throwable throwable) {
+        throwable.printStackTrace();
+    }
 }

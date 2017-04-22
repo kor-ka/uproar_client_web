@@ -1,8 +1,9 @@
 package ru.korinc.j2objc;
 
-import io.reactivex.Observable;
-import ru.korinc.Model;
+import ru.korinc.core.Model;
 import ru.korinc.j2objc.runtime.logging.AndroidLogging;
+import ru.korinc.j2objc.runtime.network.Http;
+import ru.korinc.j2objc.runtime.network.mok.HttpMock;
 import ru.korinc.j2objc.runtime.rx.AndroidRxProvider;
 import ru.korinc.j2objc.runtime.timeout.AndroidTimeout;
 import ru.korinc.runtime.RuntimeConfiguration;
@@ -25,7 +26,7 @@ public class AppCore {
 
     public void initCore(android.app.Application application) {
         mModel = new Model(new RuntimeConfiguration(new AndroidRxProvider(), new AndroidTimeout(),
-                new AndroidLogging()));
+                new AndroidLogging(), () -> new HttpMock(new Http())));
     }
 
     public Model getModel() {

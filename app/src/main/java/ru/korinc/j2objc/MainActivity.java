@@ -2,41 +2,49 @@ package ru.korinc.j2objc;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
+import android.widget.TextView;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import ru.korinc.core.Model;
 import ru.korinc.j2objc.runtime.rx.AndroidObservable;
-import ru.korinc.runtime.rx.ObservableWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button btn = (Button) findViewById(R.id.start_count);
+        model = AppCore.sharedCore().getModel();
 
-        AppCore.sharedCore().getModel().subscribeCount().observeOnMain()
-                .subscribe(new ru.korinc.runtime.rx.Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        btn.setText(s);
+        final EditText input = (EditText) findViewById(R.id.input);
+        final TextView res = (TextView) findViewById(R.id.res);
 
-                    }
-                });
-
-        btn.setOnClickListener(new View.OnClickListener() {
+        input.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                AppCore.sharedCore().getModel().count(4);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                AppCore.sharedCore().getModel().searchQuery(s.toString());
+            }
         });
+
+        ((AndroidObservable<String>) model.getSearchResults()).getSource()
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(res::setText);
+
     }
 }

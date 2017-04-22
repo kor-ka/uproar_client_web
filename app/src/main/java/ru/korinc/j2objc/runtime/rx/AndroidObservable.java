@@ -1,5 +1,7 @@
 package ru.korinc.j2objc.runtime.rx;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -74,4 +76,32 @@ public class AndroidObservable<T> implements ObservableWrapper<T> {
     public Observable<T> getSource() {
         return source;
     }
+
+    public ObservableWrapper<T> throttleFirst(long windowMillis) {
+        return new AndroidObservable<T>(source.throttleFirst(windowMillis, TimeUnit.MILLISECONDS));
+    }
+
+    @Override
+    public ObservableWrapper<T> delay(long millis) {
+        return new AndroidObservable<T>(source.delay(millis, TimeUnit.MILLISECONDS));
+
+    }
+
+    @Override
+    public ObservableWrapper<T> retryWhen(
+            final ru.korinc.runtime.rx.Function<? super ObservableWrapper<Throwable>, ? extends ObservableWrapper<?>> handler) {
+        return new AndroidObservable<T>(
+                source.retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
+                    @Override
+                    public ObservableSource<?> apply(
+                            @NonNull Observable<Throwable> throwableObservable) throws Exception {
+                        return ((AndroidObservable<?>) handler
+                                .apply(new AndroidObservable<Throwable>(
+                                        throwableObservable))).source;
+                    }
+                }));
+
+    }
+
+
 }

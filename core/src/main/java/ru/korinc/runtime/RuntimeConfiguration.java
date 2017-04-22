@@ -1,8 +1,7 @@
 package ru.korinc.runtime;
 
-import com.google.j2objc.annotations.ObjectiveCName;
-
 import ru.korinc.runtime.logging.LogProvider;
+import ru.korinc.runtime.network.HttpProvider;
 import ru.korinc.runtime.rx.RxProvider;
 import ru.korinc.runtime.timeout.TimeoutProvider;
 
@@ -12,28 +11,31 @@ import ru.korinc.runtime.timeout.TimeoutProvider;
 
 public class RuntimeConfiguration {
 
-    private RxProvider mRxProvider;
+    public static RxProvider rxProvider;
 
-    private TimeoutProvider mTimeoutProvider;
+    public static TimeoutProvider timeoutProvider;
 
-    private LogProvider mLogProvider;
+    public static LogProvider log;
+
+    public static HttpProvider http;
 
     public RuntimeConfiguration(RxProvider rxProvider, TimeoutProvider timeoutProvider,
-            LogProvider logProvider) {
-        mRxProvider = rxProvider;
-        mTimeoutProvider = timeoutProvider;
-        mLogProvider = logProvider;
+            LogProvider logProvider, HttpProvider httpProvider) {
+        RuntimeConfiguration.rxProvider = rxProvider;
+        RuntimeConfiguration.timeoutProvider = timeoutProvider;
+        RuntimeConfiguration.log = logProvider;
+        RuntimeConfiguration.http = httpProvider;
     }
 
     public RxProvider getRxProvider() {
-        return mRxProvider;
+        return rxProvider;
     }
 
     public TimeoutProvider getTimeoutProvider() {
-        return mTimeoutProvider;
+        return timeoutProvider;
     }
 
     public LogProvider getLogProvider() {
-        return mLogProvider;
+        return log;
     }
 }

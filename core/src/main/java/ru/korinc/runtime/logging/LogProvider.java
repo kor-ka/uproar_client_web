@@ -7,4 +7,6 @@ package ru.korinc.runtime.logging;
 public interface LogProvider {
 
     void d(String tag, String msg);
+
+    void e(Throwable throwable);
 }

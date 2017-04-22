@@ -26,4 +26,15 @@ public interface ObservableWrapper<T> {
     @ObjectiveCName("flatMapWithFunc:")
     <R> ObservableWrapper<R> flatMap(
             Function<? super T, ? extends ObservableWrapper<? extends R>> mapper);
+
+    @ObjectiveCName("throttleFirstWithWindowMillis:")
+    ObservableWrapper<T> throttleFirst(long windowMillis);
+
+    @ObjectiveCName("delayWithWindowMillis:")
+    ObservableWrapper<T> delay(long millis);
+
+    @ObjectiveCName("retryWhenWithWindowMillis:")
+    ObservableWrapper<T> retryWhen(
+            Function<? super ObservableWrapper<Throwable>, ? extends ObservableWrapper<?>> handler);
+
 }
