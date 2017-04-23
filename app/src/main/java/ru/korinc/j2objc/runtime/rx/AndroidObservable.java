@@ -90,16 +90,9 @@ public class AndroidObservable<T> implements ObservableWrapper<T> {
     @Override
     public ObservableWrapper<T> retryWhen(
             final ru.korinc.runtime.rx.Function<? super ObservableWrapper<Throwable>, ? extends ObservableWrapper<?>> handler) {
-        return new AndroidObservable<T>(
-                source.retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
-                    @Override
-                    public ObservableSource<?> apply(
-                            @NonNull Observable<Throwable> throwableObservable) throws Exception {
-                        return ((AndroidObservable<?>) handler
-                                .apply(new AndroidObservable<Throwable>(
-                                        throwableObservable))).source;
-                    }
-                }));
+        return new AndroidObservable<T>(source.retryWhen(
+                throwableObservable -> ((AndroidObservable<?>) handler
+                        .apply(new AndroidObservable<Throwable>(throwableObservable))).source));
 
     }
 

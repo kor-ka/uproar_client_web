@@ -1,6 +1,7 @@
 package ru.korinc.j2objc;
 
 import ru.korinc.core.Model;
+import ru.korinc.j2objc.runtime.json.AndroidJsonProvider;
 import ru.korinc.j2objc.runtime.logging.AndroidLogging;
 import ru.korinc.j2objc.runtime.network.Http;
 import ru.korinc.j2objc.runtime.network.mok.HttpMock;
@@ -26,7 +27,7 @@ public class AppCore {
 
     public void initCore(android.app.Application application) {
         mModel = new Model(new RuntimeConfiguration(new AndroidRxProvider(), new AndroidTimeout(),
-                new AndroidLogging(), () -> new HttpMock(new Http())));
+                new AndroidLogging(), () -> new HttpMock(new Http()), new AndroidJsonProvider()));
     }
 
     public Model getModel() {

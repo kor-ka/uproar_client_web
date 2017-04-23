@@ -30,7 +30,7 @@ public class Model {
         mModulesContext.getSearchModule().query(query);
     }
 
-    public ObservableWrapper<String> getSearchResults() {
+    public ObservableWrapper<ArrayList<String>> getSearchResults() {
         return mModulesContext.getSearchModule().getSearchResults();
     }
 

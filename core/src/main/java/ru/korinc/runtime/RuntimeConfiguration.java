@@ -1,5 +1,6 @@
 package ru.korinc.runtime;
 
+import ru.korinc.runtime.json.JsonProvider;
 import ru.korinc.runtime.logging.LogProvider;
 import ru.korinc.runtime.network.HttpProvider;
 import ru.korinc.runtime.rx.RxProvider;
@@ -19,12 +20,15 @@ public class RuntimeConfiguration {
 
     public static HttpProvider http;
 
+    public static JsonProvider json;
+
     public RuntimeConfiguration(RxProvider rxProvider, TimeoutProvider timeoutProvider,
-            LogProvider logProvider, HttpProvider httpProvider) {
+            LogProvider logProvider, HttpProvider httpProvider, JsonProvider jsonProvider) {
         RuntimeConfiguration.rxProvider = rxProvider;
         RuntimeConfiguration.timeoutProvider = timeoutProvider;
         RuntimeConfiguration.log = logProvider;
         RuntimeConfiguration.http = httpProvider;
+        RuntimeConfiguration.json = jsonProvider;
     }
 
     public RxProvider getRxProvider() {
@@ -37,5 +41,9 @@ public class RuntimeConfiguration {
 
     public LogProvider getLogProvider() {
         return log;
+    }
+
+    public static JsonProvider getJson() {
+        return json;
     }
 }
