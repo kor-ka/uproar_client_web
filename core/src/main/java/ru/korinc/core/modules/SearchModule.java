@@ -1,15 +1,9 @@
 package ru.korinc.core.modules;
 
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import ru.korinc.runtime.network.HTTPResponse;
 import ru.korinc.runtime.network.HttpObserver;
-import ru.korinc.runtime.rx.Consumer;
-import ru.korinc.runtime.rx.Function;
 import ru.korinc.runtime.rx.ObservableWrapper;
-import ru.korinc.runtime.rx.RxProvider;
 import ru.korinc.runtime.rx.subject.BSWrapper;
 
 /**
@@ -25,6 +19,8 @@ public class SearchModule extends ModuleBase {
 
     private BSWrapper<String> input;
 
+    private BSWrapper<ObservableWrapper<String>> loaders;
+
     private BSWrapper<String> searchResults;
 
     @Override
@@ -37,8 +33,10 @@ public class SearchModule extends ModuleBase {
         if (input == null) {
             input = mRxProvider.bs(query);
 
-            input.throttleFirst(500).flatMap(s -> HttpObserver.get("http://www.omdbapi.com/?t=" + s,
-                            new HashMap<>())).subscribeOn(mRxProvider.scheduler()).subscribe(
+            input.switchOnNext(input.throttleLast(500)
+                    .map(s -> HttpObserver.get("http://www.omdbapi.com/?t=" + s, new HashMap<>())
+                            .subscribeOn(mRxProvider.scheduler())))
+                    .subscribeOn(mRxProvider.scheduler()).subscribe(
                     httpResponse -> searchResults.onNext(new String(httpResponse.getContent())));
         } else {
             input.onNext(query);

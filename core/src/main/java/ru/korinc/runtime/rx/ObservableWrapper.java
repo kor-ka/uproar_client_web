@@ -28,7 +28,7 @@ public interface ObservableWrapper<T> {
             Function<? super T, ? extends ObservableWrapper<? extends R>> mapper);
 
     @ObjectiveCName("throttleFirstWithWindowMillis:")
-    ObservableWrapper<T> throttleFirst(long windowMillis);
+    ObservableWrapper<T> throttleLast(long windowMillis);
 
     @ObjectiveCName("delayWithWindowMillis:")
     ObservableWrapper<T> delay(long millis);
@@ -37,4 +37,7 @@ public interface ObservableWrapper<T> {
     ObservableWrapper<T> retryWhen(
             Function<? super ObservableWrapper<Throwable>, ? extends ObservableWrapper<?>> handler);
 
+    @ObjectiveCName("switchOnNextWithSources:")
+    <S> ObservableWrapper<S> switchOnNext(
+            ObservableWrapper<? extends ObservableWrapper<? extends S>> sources);
 }

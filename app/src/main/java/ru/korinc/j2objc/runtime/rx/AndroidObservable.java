@@ -77,8 +77,8 @@ public class AndroidObservable<T> implements ObservableWrapper<T> {
         return source;
     }
 
-    public ObservableWrapper<T> throttleFirst(long windowMillis) {
-        return new AndroidObservable<T>(source.throttleFirst(windowMillis, TimeUnit.MILLISECONDS));
+    public ObservableWrapper<T> throttleLast(long windowMillis) {
+        return new AndroidObservable<T>(source.throttleLast(windowMillis, TimeUnit.MILLISECONDS));
     }
 
     @Override
@@ -101,6 +101,16 @@ public class AndroidObservable<T> implements ObservableWrapper<T> {
                     }
                 }));
 
+    }
+
+    @Override
+    public <S> ObservableWrapper<S> switchOnNext(
+            ObservableWrapper<? extends ObservableWrapper<? extends S>> sources) {
+        Observable<ObservableSource<S>> converted
+                = ((AndroidObservable<ObservableWrapper<S>>) sources).source
+                .map(tObservableWrapper -> ((AndroidObservable<S>) tObservableWrapper).source);
+        Observable<S> res = Observable.switchOnNext(converted);
+        return new AndroidObservable<S>(res);
     }
 
 

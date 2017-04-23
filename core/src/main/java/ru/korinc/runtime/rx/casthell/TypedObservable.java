@@ -53,8 +53,8 @@ public abstract class TypedObservable<T> implements ObservableWrapper<T> {
     }
 
     @Override
-    public ObservableWrapper<T> throttleFirst(long windowMillis) {
-        return fromInternal(source.throttleFirst(windowMillis));
+    public ObservableWrapper<T> throttleLast(long windowMillis) {
+        return fromInternal(source.throttleLast(windowMillis));
     }
 
     @Override
@@ -66,6 +66,14 @@ public abstract class TypedObservable<T> implements ObservableWrapper<T> {
     public ObservableWrapper<T> retryWhen(
             Function<? super ObservableWrapper<Throwable>, ? extends ObservableWrapper<?>> handler) {
         return fromInternal(source.retryWhen(handler));
+    }
+
+    @Override
+    public <S> ObservableWrapper<S> switchOnNext(
+            ObservableWrapper<? extends ObservableWrapper<? extends S>> sources) {
+        //Fixme: cast hell detected
+//        return fromInternal(source.switchOnNext(sources));
+        throw new RuntimeException("switchOnNext not implemented for TypedObservableWrappers");
     }
 
     public ObservableWrapper<T> getSource() {
