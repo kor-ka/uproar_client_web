@@ -1,26 +1,23 @@
 package ru.korinc.runtime.network;
 
-
-import java.util.HashMap;
-
-public class HTTPResponse {
+public class HttpResponse {
 
     private final int code;
 
-    private final byte[] content;
+    private final String content;
 
     private String url = "";
 
-    private HashMap<String, String> headers = new HashMap<>();
+    private String[] headers;
 
-    public HTTPResponse(int code, byte[] content, String url, HashMap<String, String> headers) {
+    public HttpResponse(int code, String content, String url, String... headers) {
         this.code = code;
         this.content = content;
         this.url = url;
         this.headers = headers;
     }
 
-    public HTTPResponse(int code, byte[] content, String url) {
+    public HttpResponse(int code, String content, String url) {
         this.url = url;
         this.code = code;
         this.content = content;
@@ -34,7 +31,7 @@ public class HTTPResponse {
         return code != 0;
     }
 
-    public byte[] getContent() {
+    public String getContent() {
         return content;
     }
 
@@ -42,7 +39,7 @@ public class HTTPResponse {
         return url;
     }
 
-    public HashMap<String, String> getHeaders() {
+    public String[] getHeaders() {
         return headers;
     }
 }

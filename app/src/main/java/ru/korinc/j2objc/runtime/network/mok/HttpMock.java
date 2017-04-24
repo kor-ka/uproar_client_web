@@ -1,12 +1,9 @@
 package ru.korinc.j2objc.runtime.network.mok;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
+import java.util.Map;
 
 import ru.korinc.j2objc.runtime.network.Http;
-import ru.korinc.runtime.network.HTTPResponse;
+import ru.korinc.runtime.network.HttpResponse;
 import ru.korinc.runtime.network.HttpExecutor;
 
 
@@ -37,12 +34,12 @@ public class HttpMock implements HttpExecutor {
     }
 
     @Override
-    public HTTPResponse getMethod(String url, HashMap<String, String> headers) throws Exception {
-        return mHttp.getMethod(url, headers);
+    public HttpResponse get(String url, String... headers) throws Exception {
+        return mHttp.get(url, headers);
     }
 
     @Override
-    public HTTPResponse putMethod(String url, byte[] contents, HashMap<String, String> headers)
+    public HttpResponse put(String url, String contents, String... headers)
             throws Exception {
         return null;
     }

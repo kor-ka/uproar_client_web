@@ -10,6 +10,22 @@ import Foundation
 import RxSwift
 
 class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
+    public func switchOnNext(withSources sources: RuKorincRuntimeRxObservableWrapper!) -> RuKorincRuntimeRxObservableWrapper! {
+        return nil
+    }
+
+    public func retryWhen(withWindowMillis handler: RuKorincRuntimeRxFunction!) -> RuKorincRuntimeRxObservableWrapper! {
+        return nil
+    }
+
+    public func delay(withWindowMillis millis: jlong) -> RuKorincRuntimeRxObservableWrapper! {
+        return nil
+    }
+
+    public func throttleFirst(withWindowMillis windowMillis: jlong) -> RuKorincRuntimeRxObservableWrapper! {
+        return nil
+    }
+
     public func subscribeOn(withScheduler scheduler: RuKorincRuntimeRxBackgroundSchedulerWrapper!) -> RuKorincRuntimeRxObservableWrapper! {
         return ObservableSwift(obs: (obs.subscribeOn((scheduler as! SchedulerSwift).scheduler)))
     }

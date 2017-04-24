@@ -17,11 +17,11 @@ import static ru.korinc.runtime.RuntimeConfiguration.rxProvider;
 
 public class HttpObserver {
 
-    public static ObservableWrapper<HTTPResponse> get(String url, HashMap<String, String> headers) {
+    public static ObservableWrapper<HttpResponse> get(String url, String... headers) {
 
-        return rxProvider.observableCreate((ObservableOnSubscribe<HTTPResponse>) e -> {
+        return rxProvider.observableCreate((ObservableOnSubscribe<HttpResponse>) e -> {
             try {
-                HTTPResponse response = http.getExecutor().getMethod(url, headers);
+                HttpResponse response = http.getExecutor().get(url, headers);
                 if (response.getCode() / 100 == 2) {
                     e.onNext(response);
                     e.onComplete();
@@ -36,12 +36,12 @@ public class HttpObserver {
         }).retryWhen(throwableObservableWrapper -> throwableObservableWrapper.delay(5000));
     }
 
-    public static ObservableWrapper<HTTPResponse> put(String url, byte[] data,
-            HashMap<String, String> headers) {
+    public static ObservableWrapper<HttpResponse> put(String url, String data, String... headers) {
 
-        return rxProvider.observableCreate((ObservableOnSubscribe<HTTPResponse>) e -> {
+        return rxProvider.observableCreate((ObservableOnSubscribe<HttpResponse>) e -> {
             try {
-                HTTPResponse response = http.getExecutor().putMethod(url, data, headers);
+
+                HttpResponse response = http.getExecutor().put(url, data, headers);
                 if (response.getCode() / 100 == 2) {
                     e.onNext(response);
                     e.onComplete();

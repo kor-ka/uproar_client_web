@@ -5,9 +5,7 @@ import java.util.HashMap;
 
 import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
-import ru.korinc.runtime.network.HTTPResponse;
 import ru.korinc.runtime.network.HttpObserver;
-import ru.korinc.runtime.rx.Function;
 import ru.korinc.runtime.rx.ObservableWrapper;
 import ru.korinc.runtime.rx.subject.BSWrapper;
 
@@ -40,7 +38,7 @@ public class SearchModule extends ModuleBase {
             input = mRxProvider.bs(query);
 
             input.switchOnNext(input.throttleLast(500)
-                    .map(s -> HttpObserver.get("http://www.omdbapi.com/?s=" + s, new HashMap<>())
+                    .map(s -> HttpObserver.get("http://www.omdbapi.com/?s=" + s, new String[]{})
                             .subscribeOn(mRxProvider.scheduler()))).map(httpResponse -> {
                 ArrayList<String> res = new ArrayList<>();
 

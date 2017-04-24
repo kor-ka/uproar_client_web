@@ -15,13 +15,15 @@
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 2, 3, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(dWithNSString:withNSString:);
+  methods[1].selector = @selector(eWithNSException:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "d", "LNSString;LNSString;" };
-  static const J2ObjcClassInfo _RuKorincRuntimeLoggingLogProvider = { "LogProvider", "ru.korinc.runtime.logging", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "d", "LNSString;LNSString;", "e", "LNSException;" };
+  static const J2ObjcClassInfo _RuKorincRuntimeLoggingLogProvider = { "LogProvider", "ru.korinc.runtime.logging", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_RuKorincRuntimeLoggingLogProvider;
 }
 

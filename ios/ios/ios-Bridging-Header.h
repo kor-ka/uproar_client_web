@@ -25,3 +25,17 @@
 #include "BackgroundSchedulerWrapper.h"
 #include "Function.h"
 #include "StringObservable.h"
+
+#include "HttpExecutor.h"
+
+#include "HttpObserver.h"
+#include "HttpProvider.h"
+#include "HttpResponse.h"
+#include "JsonArrayWrapper.h"
+#include "JsonObjectWrapper.h"
+#include "JsonProvider.h"
+#include "ModuleBase.h"
+#include "ModulesContext.h"
+#include "SearchModule.h"
+#include "TypedObservable.h"
+#include "Utils.h"

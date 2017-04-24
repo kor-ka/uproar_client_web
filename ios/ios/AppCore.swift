@@ -12,7 +12,7 @@ import Foundation
     
     
 
-    open var model: RuKorincModel?
+    open var model: RuKorincCoreModel?
     
     fileprivate(set) open var isStarted = false
 
@@ -22,13 +22,13 @@ import Foundation
     open static func sharedActor() -> AppCore {
         return shared
     }
-    open func initCore()-> RuKorincModel {
+    open func initCore()-> RuKorincCoreModel {
             
         if isStarted {
             return model!
         }
         
-        model = RuKorincModel(ruKorincRuntimeRuntimeConfiguration: RuKorincRuntimeRuntimeConfiguration(ruKorincRuntimeRxRxProvider: RxProvider(), with: TimeoutSwift(), with: LogSwift()));
+        model = RuKorincCoreModel(ruKorincRuntimeRuntimeConfiguration: RuKorincRuntimeRuntimeConfiguration(ruKorincRuntimeRxRxProvider: RxProvider(), with: TimeoutSwift(), with: LogSwift(), with: HttpProviderSwift(), with: JsonProviderSwift()));
 
         isStarted = true
 

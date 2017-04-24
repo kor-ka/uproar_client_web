@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var pb: UIActivityIndicatorView!
     @IBAction func click(_ sender: UIButton) {
         
-        AppCore.sharedActor().model?.count(with: 4)
+        //AppCore.sharedActor().model?.count(with: 4)
         
     }
     
@@ -26,8 +26,8 @@ class ViewController: UIViewController {
         pb.startAnimating()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let res = AppCore.sharedActor().model?.subscribeCount().observeOnMain()
-        res?.subscribe(with: CountListenerToText(et: result))
+        //let res = AppCore.sharedActor().model?.subscribeCount().observeOnMain()
+        //res?.subscribe(with: CountListenerToText(et: result))
     }
 
     override func didReceiveMemoryWarning() {

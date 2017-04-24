@@ -49,12 +49,41 @@
 		56AB64491E9FE890009D2EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56AB64481E9FE890009D2EA7 /* Assets.xcassets */; };
 		56AB644C1E9FE890009D2EA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56AB644A1E9FE890009D2EA7 /* LaunchScreen.storyboard */; };
 		56ABC2C41EA0D88700BD2A16 /* java in Resources */ = {isa = PBXBuildFile; fileRef = 56ABC2C31EA0D88700BD2A16 /* java */; };
+		56C35B5D1EADE62900E007A0 /* HttpExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B451EADE62900E007A0 /* HttpExecutor.h */; };
+		56C35B5E1EADE62900E007A0 /* HttpExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B461EADE62900E007A0 /* HttpExecutor.m */; };
+		56C35B5F1EADE62900E007A0 /* HttpObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B471EADE62900E007A0 /* HttpObserver.h */; };
+		56C35B601EADE62900E007A0 /* HttpObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B481EADE62900E007A0 /* HttpObserver.m */; };
+		56C35B611EADE62900E007A0 /* HttpProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B491EADE62900E007A0 /* HttpProvider.h */; };
+		56C35B621EADE62900E007A0 /* HttpProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B4A1EADE62900E007A0 /* HttpProvider.m */; };
+		56C35B631EADE62900E007A0 /* HTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B4B1EADE62900E007A0 /* HTTPResponse.h */; };
+		56C35B641EADE62900E007A0 /* HTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B4C1EADE62900E007A0 /* HTTPResponse.m */; };
+		56C35B651EADE62900E007A0 /* JsonArrayWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B4D1EADE62900E007A0 /* JsonArrayWrapper.h */; };
+		56C35B661EADE62900E007A0 /* JsonArrayWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B4E1EADE62900E007A0 /* JsonArrayWrapper.m */; };
+		56C35B671EADE62900E007A0 /* JsonObjectWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B4F1EADE62900E007A0 /* JsonObjectWrapper.h */; };
+		56C35B681EADE62900E007A0 /* JsonObjectWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B501EADE62900E007A0 /* JsonObjectWrapper.m */; };
+		56C35B691EADE62900E007A0 /* JsonProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B511EADE62900E007A0 /* JsonProvider.h */; };
+		56C35B6A1EADE62900E007A0 /* JsonProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B521EADE62900E007A0 /* JsonProvider.m */; };
+		56C35B6B1EADE62900E007A0 /* ModuleBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B531EADE62900E007A0 /* ModuleBase.h */; };
+		56C35B6C1EADE62900E007A0 /* ModuleBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B541EADE62900E007A0 /* ModuleBase.m */; };
+		56C35B6D1EADE62900E007A0 /* ModulesContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B551EADE62900E007A0 /* ModulesContext.h */; };
+		56C35B6E1EADE62900E007A0 /* ModulesContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B561EADE62900E007A0 /* ModulesContext.m */; };
+		56C35B6F1EADE62900E007A0 /* SearchModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B571EADE62900E007A0 /* SearchModule.h */; };
+		56C35B701EADE62900E007A0 /* SearchModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B581EADE62900E007A0 /* SearchModule.m */; };
+		56C35B711EADE62900E007A0 /* TypedObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B591EADE62900E007A0 /* TypedObservable.h */; };
+		56C35B721EADE62900E007A0 /* TypedObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B5A1EADE62900E007A0 /* TypedObservable.m */; };
+		56C35B731EADE62900E007A0 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B5B1EADE62900E007A0 /* Utils.h */; };
+		56C35B741EADE62900E007A0 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B5C1EADE62900E007A0 /* Utils.m */; };
+		56C35B781EADE72100E007A0 /* HttpProviderSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B771EADE72100E007A0 /* HttpProviderSwift.swift */; };
+		56C35B7A1EADE76900E007A0 /* HttpExecutorSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B791EADE76900E007A0 /* HttpExecutorSwift.swift */; };
+		56C35B7C1EADEAF200E007A0 /* JsonProviderSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B7B1EADEAF200E007A0 /* JsonProviderSwift.swift */; };
 		56F1120F1EA6103E00FF27E7 /* TimeoutProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 56F1120D1EA6103E00FF27E7 /* TimeoutProvider.h */; };
 		56F112101EA6103E00FF27E7 /* TimeoutProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 56F1120E1EA6103E00FF27E7 /* TimeoutProvider.m */; };
 		56F112141EA6110F00FF27E7 /* TimeoutSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F112131EA6110F00FF27E7 /* TimeoutSwift.swift */; };
 		56F112171EA61C9B00FF27E7 /* LogProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 56F112151EA61C9B00FF27E7 /* LogProvider.h */; };
 		56F112181EA61C9B00FF27E7 /* LogProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 56F112161EA61C9B00FF27E7 /* LogProvider.m */; };
 		56F1121B1EA61CCC00FF27E7 /* LogSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F1121A1EA61CCC00FF27E7 /* LogSwift.swift */; };
+		56F17B361EADED8600DD00AC /* JsonObjectWrapperSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F17B351EADED8600DD00AC /* JsonObjectWrapperSwift.swift */; };
+		56F17B3C1EAE0DDA00DD00AC /* JsonArraySwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F17B3B1EAE0DDA00DD00AC /* JsonArraySwift.swift */; };
 		56FD671C1EA511B50050192A /* AppCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FD671B1EA511B50050192A /* AppCore.swift */; };
 		56FE60EC1EA4D28C006E52BB /* ObservableSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE60EB1EA4D28C006E52BB /* ObservableSwift.swift */; };
 		56FE60EE1EA4D641006E52BB /* DisposableSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FE60ED1EA4D641006E52BB /* DisposableSwift.swift */; };
@@ -106,16 +135,42 @@
 		56AB644B1E9FE890009D2EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56AB644D1E9FE890009D2EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56ABC2B81E9FEC8500BD2A16 /* ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-Bridging-Header.h"; sourceTree = "<group>"; };
-		56ABC2BD1E9FEE7800BD2A16 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = include; path = "../j2objc-1.3.1/include"; sourceTree = "<group>"; };
-		56ABC2BF1E9FEEA200BD2A16 /* J2ObjC_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = J2ObjC_header.h; path = "../j2objc-1.3.1/include/J2ObjC_header.h"; sourceTree = "<group>"; };
-		56ABC2C11E9FEEB700BD2A16 /* J2ObjC_source.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = J2ObjC_source.h; path = "../j2objc-1.3.1/include/J2ObjC_source.h"; sourceTree = "<group>"; };
 		56ABC2C31EA0D88700BD2A16 /* java */ = {isa = PBXFileReference; lastKnownFileType = folder; name = java; path = /Users/gputintsev/Documents/j2objc/core/src/main/java; sourceTree = "<absolute>"; };
+		56C35B451EADE62900E007A0 /* HttpExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpExecutor.h; sourceTree = "<group>"; };
+		56C35B461EADE62900E007A0 /* HttpExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpExecutor.m; sourceTree = "<group>"; };
+		56C35B471EADE62900E007A0 /* HttpObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpObserver.h; sourceTree = "<group>"; };
+		56C35B481EADE62900E007A0 /* HttpObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpObserver.m; sourceTree = "<group>"; };
+		56C35B491EADE62900E007A0 /* HttpProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpProvider.h; sourceTree = "<group>"; };
+		56C35B4A1EADE62900E007A0 /* HttpProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpProvider.m; sourceTree = "<group>"; };
+		56C35B4B1EADE62900E007A0 /* HTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponse.h; sourceTree = "<group>"; };
+		56C35B4C1EADE62900E007A0 /* HTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPResponse.m; sourceTree = "<group>"; };
+		56C35B4D1EADE62900E007A0 /* JsonArrayWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonArrayWrapper.h; sourceTree = "<group>"; };
+		56C35B4E1EADE62900E007A0 /* JsonArrayWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonArrayWrapper.m; sourceTree = "<group>"; };
+		56C35B4F1EADE62900E007A0 /* JsonObjectWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonObjectWrapper.h; sourceTree = "<group>"; };
+		56C35B501EADE62900E007A0 /* JsonObjectWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonObjectWrapper.m; sourceTree = "<group>"; };
+		56C35B511EADE62900E007A0 /* JsonProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonProvider.h; sourceTree = "<group>"; };
+		56C35B521EADE62900E007A0 /* JsonProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonProvider.m; sourceTree = "<group>"; };
+		56C35B531EADE62900E007A0 /* ModuleBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleBase.h; sourceTree = "<group>"; };
+		56C35B541EADE62900E007A0 /* ModuleBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleBase.m; sourceTree = "<group>"; };
+		56C35B551EADE62900E007A0 /* ModulesContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModulesContext.h; sourceTree = "<group>"; };
+		56C35B561EADE62900E007A0 /* ModulesContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModulesContext.m; sourceTree = "<group>"; };
+		56C35B571EADE62900E007A0 /* SearchModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchModule.h; sourceTree = "<group>"; };
+		56C35B581EADE62900E007A0 /* SearchModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchModule.m; sourceTree = "<group>"; };
+		56C35B591EADE62900E007A0 /* TypedObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypedObservable.h; sourceTree = "<group>"; };
+		56C35B5A1EADE62900E007A0 /* TypedObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypedObservable.m; sourceTree = "<group>"; };
+		56C35B5B1EADE62900E007A0 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		56C35B5C1EADE62900E007A0 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		56C35B771EADE72100E007A0 /* HttpProviderSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpProviderSwift.swift; sourceTree = "<group>"; };
+		56C35B791EADE76900E007A0 /* HttpExecutorSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpExecutorSwift.swift; sourceTree = "<group>"; };
+		56C35B7B1EADEAF200E007A0 /* JsonProviderSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonProviderSwift.swift; sourceTree = "<group>"; };
 		56F1120D1EA6103E00FF27E7 /* TimeoutProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeoutProvider.h; sourceTree = "<group>"; };
 		56F1120E1EA6103E00FF27E7 /* TimeoutProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeoutProvider.m; sourceTree = "<group>"; };
 		56F112131EA6110F00FF27E7 /* TimeoutSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeoutSwift.swift; sourceTree = "<group>"; };
 		56F112151EA61C9B00FF27E7 /* LogProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogProvider.h; sourceTree = "<group>"; };
 		56F112161EA61C9B00FF27E7 /* LogProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogProvider.m; sourceTree = "<group>"; };
 		56F1121A1EA61CCC00FF27E7 /* LogSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogSwift.swift; sourceTree = "<group>"; };
+		56F17B351EADED8600DD00AC /* JsonObjectWrapperSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonObjectWrapperSwift.swift; sourceTree = "<group>"; };
+		56F17B3B1EAE0DDA00DD00AC /* JsonArraySwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonArraySwift.swift; sourceTree = "<group>"; };
 		56FD671B1EA511B50050192A /* AppCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCore.swift; sourceTree = "<group>"; };
 		56FE60EB1EA4D28C006E52BB /* ObservableSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableSwift.swift; sourceTree = "<group>"; };
 		56FE60ED1EA4D641006E52BB /* DisposableSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisposableSwift.swift; sourceTree = "<group>"; };
@@ -139,6 +194,30 @@
 		56A0770A1EA1081C0041EB96 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				56C35B451EADE62900E007A0 /* HttpExecutor.h */,
+				56C35B461EADE62900E007A0 /* HttpExecutor.m */,
+				56C35B471EADE62900E007A0 /* HttpObserver.h */,
+				56C35B481EADE62900E007A0 /* HttpObserver.m */,
+				56C35B491EADE62900E007A0 /* HttpProvider.h */,
+				56C35B4A1EADE62900E007A0 /* HttpProvider.m */,
+				56C35B4B1EADE62900E007A0 /* HTTPResponse.h */,
+				56C35B4C1EADE62900E007A0 /* HTTPResponse.m */,
+				56C35B4D1EADE62900E007A0 /* JsonArrayWrapper.h */,
+				56C35B4E1EADE62900E007A0 /* JsonArrayWrapper.m */,
+				56C35B4F1EADE62900E007A0 /* JsonObjectWrapper.h */,
+				56C35B501EADE62900E007A0 /* JsonObjectWrapper.m */,
+				56C35B511EADE62900E007A0 /* JsonProvider.h */,
+				56C35B521EADE62900E007A0 /* JsonProvider.m */,
+				56C35B531EADE62900E007A0 /* ModuleBase.h */,
+				56C35B541EADE62900E007A0 /* ModuleBase.m */,
+				56C35B551EADE62900E007A0 /* ModulesContext.h */,
+				56C35B561EADE62900E007A0 /* ModulesContext.m */,
+				56C35B571EADE62900E007A0 /* SearchModule.h */,
+				56C35B581EADE62900E007A0 /* SearchModule.m */,
+				56C35B591EADE62900E007A0 /* TypedObservable.h */,
+				56C35B5A1EADE62900E007A0 /* TypedObservable.m */,
+				56C35B5B1EADE62900E007A0 /* Utils.h */,
+				56C35B5C1EADE62900E007A0 /* Utils.m */,
 				5678A5A51EA7EC0A00506776 /* StringObservable.h */,
 				5678A5A61EA7EC0A00506776 /* StringObservable.m */,
 				5678A59F1EA7BE0400506776 /* Function.h */,
@@ -183,6 +262,8 @@
 		56A0773F1EA10A4E0041EB96 /* providers */ = {
 			isa = PBXGroup;
 			children = (
+				56C35B761EADE6DC00E007A0 /* json */,
+				56C35B751EADE6D300E007A0 /* network */,
 				56F112191EA61CBD00FF27E7 /* logging */,
 				56F112121EA610FA00FF27E7 /* timeout */,
 				56F112111EA610F200FF27E7 /* rx */,
@@ -195,9 +276,6 @@
 			children = (
 				566259401EA11A81001E9945 /* Podfile */,
 				56A0770A1EA1081C0041EB96 /* core */,
-				56ABC2C11E9FEEB700BD2A16 /* J2ObjC_source.h */,
-				56ABC2BF1E9FEEA200BD2A16 /* J2ObjC_header.h */,
-				56ABC2BD1E9FEE7800BD2A16 /* include */,
 				56AB64401E9FE890009D2EA7 /* ios */,
 				56AB643F1E9FE890009D2EA7 /* Products */,
 				B7CCCC37D2035D8C1E463A96 /* Pods */,
@@ -227,6 +305,25 @@
 				56FD671B1EA511B50050192A /* AppCore.swift */,
 			);
 			path = ios;
+			sourceTree = "<group>";
+		};
+		56C35B751EADE6D300E007A0 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				56C35B771EADE72100E007A0 /* HttpProviderSwift.swift */,
+				56C35B791EADE76900E007A0 /* HttpExecutorSwift.swift */,
+			);
+			name = network;
+			sourceTree = "<group>";
+		};
+		56C35B761EADE6DC00E007A0 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				56C35B7B1EADEAF200E007A0 /* JsonProviderSwift.swift */,
+				56F17B351EADED8600DD00AC /* JsonObjectWrapperSwift.swift */,
+				56F17B3B1EAE0DDA00DD00AC /* JsonArraySwift.swift */,
+			);
+			name = json;
 			sourceTree = "<group>";
 		};
 		56F112111EA610F200FF27E7 /* rx */ = {
@@ -281,21 +378,33 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56C35B5F1EADE62900E007A0 /* HttpObserver.h in Headers */,
 				56F112171EA61C9B00FF27E7 /* LogProvider.h in Headers */,
 				56A0773D1EA109F50041EB96 /* Foo2.h in Headers */,
 				5678A5A71EA7EC0A00506776 /* StringObservable.h in Headers */,
+				56C35B6F1EADE62900E007A0 /* SearchModule.h in Headers */,
 				56A0772D1EA1081C0041EB96 /* Model.h in Headers */,
+				56C35B6B1EADE62900E007A0 /* ModuleBase.h in Headers */,
+				56C35B631EADE62900E007A0 /* HTTPResponse.h in Headers */,
 				56A077251EA1081C0041EB96 /* Consumer.h in Headers */,
 				56A0772F1EA1081C0041EB96 /* ObservableOnSubscribe.h in Headers */,
 				56A077331EA1081C0041EB96 /* ObserverWrapper.h in Headers */,
+				56C35B5D1EADE62900E007A0 /* HttpExecutor.h in Headers */,
+				56C35B711EADE62900E007A0 /* TypedObservable.h in Headers */,
 				56A077351EA1081C0041EB96 /* RuntimeConfiguration.h in Headers */,
+				56C35B671EADE62900E007A0 /* JsonObjectWrapper.h in Headers */,
+				56C35B6D1EADE62900E007A0 /* ModulesContext.h in Headers */,
 				56A077291EA1081C0041EB96 /* Emitter.h in Headers */,
 				5678A5A31EA7BE0400506776 /* Function.h in Headers */,
+				56C35B731EADE62900E007A0 /* Utils.h in Headers */,
 				56A077371EA1081C0041EB96 /* RxProvider.h in Headers */,
+				56C35B691EADE62900E007A0 /* JsonProvider.h in Headers */,
 				56A077391EA1081C0041EB96 /* SubjectWrapper.h in Headers */,
+				56C35B611EADE62900E007A0 /* HttpProvider.h in Headers */,
 				56A077231EA1081C0041EB96 /* BSWrapper.h in Headers */,
 				56F1120F1EA6103E00FF27E7 /* TimeoutProvider.h in Headers */,
 				56A077271EA1081C0041EB96 /* DisposableWrapper.h in Headers */,
+				56C35B651EADE62900E007A0 /* JsonArrayWrapper.h in Headers */,
 				56A0772B1EA1081C0041EB96 /* Foo.h in Headers */,
 				5678A5991EA7990800506776 /* BackgroundSchedulerWrapper.h in Headers */,
 				56A077311EA1081C0041EB96 /* ObservableWrapper.h in Headers */,
@@ -445,29 +554,46 @@
 			files = (
 				56F112181EA61C9B00FF27E7 /* LogProvider.m in Sources */,
 				5678A5A81EA7EC0A00506776 /* StringObservable.m in Sources */,
+				56C35B681EADE62900E007A0 /* JsonObjectWrapper.m in Sources */,
+				56C35B741EADE62900E007A0 /* Utils.m in Sources */,
+				56C35B5E1EADE62900E007A0 /* HttpExecutor.m in Sources */,
 				5678A5A41EA7BE0400506776 /* Function.m in Sources */,
+				56C35B6A1EADE62900E007A0 /* JsonProvider.m in Sources */,
 				56A1B3B11EA1268D007F9F76 /* RxProvider.swift in Sources */,
 				56A0773A1EA1081C0041EB96 /* SubjectWrapper.m in Sources */,
 				56A0772A1EA1081C0041EB96 /* Emitter.m in Sources */,
+				56F17B361EADED8600DD00AC /* JsonObjectWrapperSwift.swift in Sources */,
 				56A077361EA1081C0041EB96 /* RuntimeConfiguration.m in Sources */,
 				56AB64441E9FE890009D2EA7 /* ViewController.swift in Sources */,
 				56A077381EA1081C0041EB96 /* RxProvider.m in Sources */,
 				56A0773E1EA109F50041EB96 /* Foo2.m in Sources */,
+				56C35B721EADE62900E007A0 /* TypedObservable.m in Sources */,
 				56A0772C1EA1081C0041EB96 /* Foo.m in Sources */,
 				56F112141EA6110F00FF27E7 /* TimeoutSwift.swift in Sources */,
 				56A077341EA1081C0041EB96 /* ObserverWrapper.m in Sources */,
+				56F17B3C1EAE0DDA00DD00AC /* JsonArraySwift.swift in Sources */,
+				56C35B621EADE62900E007A0 /* HttpProvider.m in Sources */,
 				56F1121B1EA61CCC00FF27E7 /* LogSwift.swift in Sources */,
 				56A0772E1EA1081C0041EB96 /* Model.m in Sources */,
 				56A077281EA1081C0041EB96 /* DisposableWrapper.m in Sources */,
+				56C35B7C1EADEAF200E007A0 /* JsonProviderSwift.swift in Sources */,
 				56A077261EA1081C0041EB96 /* Consumer.m in Sources */,
 				56F112101EA6103E00FF27E7 /* TimeoutProvider.m in Sources */,
 				56A077321EA1081C0041EB96 /* ObservableWrapper.m in Sources */,
 				5678A59C1EA79B1400506776 /* SchedulerSwift.swift in Sources */,
 				56FE60EC1EA4D28C006E52BB /* ObservableSwift.swift in Sources */,
+				56C35B661EADE62900E007A0 /* JsonArrayWrapper.m in Sources */,
+				56C35B6E1EADE62900E007A0 /* ModulesContext.m in Sources */,
+				56C35B781EADE72100E007A0 /* HttpProviderSwift.swift in Sources */,
 				56A077301EA1081C0041EB96 /* ObservableOnSubscribe.m in Sources */,
+				56C35B641EADE62900E007A0 /* HTTPResponse.m in Sources */,
+				56C35B6C1EADE62900E007A0 /* ModuleBase.m in Sources */,
 				56FE60EE1EA4D641006E52BB /* DisposableSwift.swift in Sources */,
 				5678A59A1EA7990800506776 /* BackgroundSchedulerWrapper.m in Sources */,
+				56C35B601EADE62900E007A0 /* HttpObserver.m in Sources */,
+				56C35B701EADE62900E007A0 /* SearchModule.m in Sources */,
 				56AB64421E9FE890009D2EA7 /* AppDelegate.swift in Sources */,
+				56C35B7A1EADE76900E007A0 /* HttpExecutorSwift.swift in Sources */,
 				56FD671C1EA511B50050192A /* AppCore.swift in Sources */,
 				56A077241EA1081C0041EB96 /* BSWrapper.m in Sources */,
 				56FE60F01EA4D960006E52BB /* BsSwift.swift in Sources */,

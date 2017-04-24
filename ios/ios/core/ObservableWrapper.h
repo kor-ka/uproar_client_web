@@ -35,6 +35,14 @@
 
 - (id<RuKorincRuntimeRxObservableWrapper>)flatMapWithFunc:(id<RuKorincRuntimeRxFunction>)mapper;
 
+- (id<RuKorincRuntimeRxObservableWrapper>)throttleFirstWithWindowMillis:(jlong)windowMillis;
+
+- (id<RuKorincRuntimeRxObservableWrapper>)delayWithWindowMillis:(jlong)millis;
+
+- (id<RuKorincRuntimeRxObservableWrapper>)retryWhenWithWindowMillis:(id<RuKorincRuntimeRxFunction>)handler;
+
+- (id<RuKorincRuntimeRxObservableWrapper>)switchOnNextWithSources:(id<RuKorincRuntimeRxObservableWrapper>)sources;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(RuKorincRuntimeRxObservableWrapper)

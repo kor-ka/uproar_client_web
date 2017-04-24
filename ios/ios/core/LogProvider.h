@@ -21,6 +21,8 @@
 - (void)dWithNSString:(NSString *)tag
          withNSString:(NSString *)msg;
 
+- (void)eWithNSException:(NSException *)throwable;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(RuKorincRuntimeLoggingLogProvider)
