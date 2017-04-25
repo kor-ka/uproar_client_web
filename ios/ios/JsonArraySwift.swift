@@ -8,6 +8,12 @@
 
 import Foundation
 class JsonArraySwift: NSObject, RuKorincRuntimeJsonJsonArrayWrapper{
+    let source:Array<AnyObject>!
+    
+    init(source: Array<AnyObject>) {
+        self.source = source
+    }
+    
     func length() -> jint {
         return 1
     }

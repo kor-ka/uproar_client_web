@@ -11,7 +11,10 @@ import RxSwift
 
 class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
     public func switchOnNext(withSources sources: RuKorincRuntimeRxObservableWrapper!) -> RuKorincRuntimeRxObservableWrapper! {
-        return nil
+        let res:Observable<Observable<Any>> = ((sources as! ObservableSwift).obs as! Observable<ObservableSwift>).map { (o) -> Observable<Any> in
+            return (o as ObservableSwift).obs
+        }
+        return ObservableSwift(obs: res.switchLatest())
     }
 
     public func retryWhen(withWindowMillis handler: RuKorincRuntimeRxFunction!) -> RuKorincRuntimeRxObservableWrapper! {

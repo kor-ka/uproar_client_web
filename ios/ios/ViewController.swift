@@ -7,27 +7,44 @@
 //
 
 import UIKit
-
-class ViewController: UIViewController {
-    @IBOutlet weak var addCount: UIButton!
+import RxSwift
+class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewDataSource, UITableViewDelegate  {
+    
     @IBOutlet weak var result: UITextField!
 
-    @IBOutlet weak var pb: UIActivityIndicatorView!
-    @IBAction func click(_ sender: UIButton) {
-        
-        //AppCore.sharedActor().model?.count(with: 4)
-        
-    }
+    @IBOutlet weak var list: UITableView!
+    
+    var res:Array<String> = Array<String>()
+
     
     var d:RuKorincRuntimeRxDisposableWrapper?
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return res.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Getting the right element
+        let element = res[indexPath.row]
+        
+        // Instantiate a cell
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "ElementCell")
+        
+        // Adding the right informations
+        cell.textLabel?.text = element
+        // Returning the cell
+        return cell
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pb.startAnimating()
-        // Do any additional setup after loading the view, typically from a nib.
+        list.dataSource = self
         
-        //let res = AppCore.sharedActor().model?.subscribeCount().observeOnMain()
-        //res?.subscribe(with: CountListenerToText(et: result))
+        let searchResults = AppCore.sharedActor().model?.getSearchResults().observeOnMain()
+        searchResults?.subscribe(with: self)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,19 +55,11 @@ class ViewController: UIViewController {
     deinit {
         d?.dispose()
     }
-
-
-}
-
-class CountListenerToText:NSObject, RuKorincRuntimeRxConsumer{
-    var et: UITextField?
-    
-    init(et: UITextField) {
-        self.et = et
-    }
     
     func accept(withId val: Any!) {
-        et?.text = val as! String?
+        res = (val as! JavaUtilArrayList).toNSArray()
     }
+
+
 }
 

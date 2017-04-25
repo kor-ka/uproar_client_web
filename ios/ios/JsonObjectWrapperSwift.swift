@@ -9,11 +9,10 @@
 import Foundation
 
 class JsonObjectWrapperSwift: NSObject, RuKorincRuntimeJsonJsonObjectWrapper {
-    var source:[String: Any]?
+    var source:[String: AnyObject]?
     
-    init(source:String) {
+    init(source:[String: AnyObject]) {
         super.init()
-        self.source = convertToDictionary(text: source)
         
     }
     
@@ -25,24 +24,11 @@ class JsonObjectWrapperSwift: NSObject, RuKorincRuntimeJsonJsonObjectWrapper {
         return self.source![key] as! String
     }
 
-    public func getJsonArray(with key: String!) -> RuKorincRuntimeJsonJsonArrayWrapper! {
-       return JsonArraS self.source![key]
+    public func getJsonArray(with key: String) -> RuKorincRuntimeJsonJsonArrayWrapper! {
+       return JsonArraySwift(source: self.source![key] as! Array<AnyObject>)
     }
 
-    public func getJsonObject(with key: String!) -> RuKorincRuntimeJsonJsonObjectWrapper! {
-       return self.source![key] as! RuKorincRuntimeJsonJsonArrayWrapper
+    public func getJsonObject(with key: String) -> RuKorincRuntimeJsonJsonObjectWrapper! {
+       return JsonObjectWrapperSwift(source: self.source![key] as! [String : AnyObject] )
     }
-    
-    func convertToDictionary(text: String) -> [String: Any]? {
-        if let data = text.data(using: .utf8) {
-            do {
-                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return nil
-    }
-
-    
 }

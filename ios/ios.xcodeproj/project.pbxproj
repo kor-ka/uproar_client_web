@@ -49,6 +49,7 @@
 		56AB64491E9FE890009D2EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56AB64481E9FE890009D2EA7 /* Assets.xcassets */; };
 		56AB644C1E9FE890009D2EA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56AB644A1E9FE890009D2EA7 /* LaunchScreen.storyboard */; };
 		56ABC2C41EA0D88700BD2A16 /* java in Resources */ = {isa = PBXBuildFile; fileRef = 56ABC2C31EA0D88700BD2A16 /* java */; };
+		56B8A0391EAFCA5D005938DE /* ListExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B8A0381EAFCA5D005938DE /* ListExt.swift */; };
 		56C35B5D1EADE62900E007A0 /* HttpExecutor.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B451EADE62900E007A0 /* HttpExecutor.h */; };
 		56C35B5E1EADE62900E007A0 /* HttpExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C35B461EADE62900E007A0 /* HttpExecutor.m */; };
 		56C35B5F1EADE62900E007A0 /* HttpObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C35B471EADE62900E007A0 /* HttpObserver.h */; };
@@ -136,6 +137,7 @@
 		56AB644D1E9FE890009D2EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56ABC2B81E9FEC8500BD2A16 /* ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		56ABC2C31EA0D88700BD2A16 /* java */ = {isa = PBXFileReference; lastKnownFileType = folder; name = java; path = /Users/gputintsev/Documents/j2objc/core/src/main/java; sourceTree = "<absolute>"; };
+		56B8A0381EAFCA5D005938DE /* ListExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListExt.swift; sourceTree = "<group>"; };
 		56C35B451EADE62900E007A0 /* HttpExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpExecutor.h; sourceTree = "<group>"; };
 		56C35B461EADE62900E007A0 /* HttpExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpExecutor.m; sourceTree = "<group>"; };
 		56C35B471EADE62900E007A0 /* HttpObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpObserver.h; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		56AB64401E9FE890009D2EA7 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				56B8A0371EAFCA47005938DE /* ext */,
 				56A0773F1EA10A4E0041EB96 /* providers */,
 				56AB64411E9FE890009D2EA7 /* AppDelegate.swift */,
 				56AB64431E9FE890009D2EA7 /* ViewController.swift */,
@@ -305,6 +308,14 @@
 				56FD671B1EA511B50050192A /* AppCore.swift */,
 			);
 			path = ios;
+			sourceTree = "<group>";
+		};
+		56B8A0371EAFCA47005938DE /* ext */ = {
+			isa = PBXGroup;
+			children = (
+				56B8A0381EAFCA5D005938DE /* ListExt.swift */,
+			);
+			name = ext;
 			sourceTree = "<group>";
 		};
 		56C35B751EADE6D300E007A0 /* network */ = {
@@ -589,6 +600,7 @@
 				56C35B641EADE62900E007A0 /* HTTPResponse.m in Sources */,
 				56C35B6C1EADE62900E007A0 /* ModuleBase.m in Sources */,
 				56FE60EE1EA4D641006E52BB /* DisposableSwift.swift in Sources */,
+				56B8A0391EAFCA5D005938DE /* ListExt.swift in Sources */,
 				5678A59A1EA7990800506776 /* BackgroundSchedulerWrapper.m in Sources */,
 				56C35B601EADE62900E007A0 /* HttpObserver.m in Sources */,
 				56C35B701EADE62900E007A0 /* SearchModule.m in Sources */,

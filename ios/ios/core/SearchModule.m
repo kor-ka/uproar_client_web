@@ -97,7 +97,9 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$3 *create
 }
 
 - (void)run {
-  searchResults_ = [((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) bsWithId:new_JavaUtilArrayList_init()];
+  JavaUtilArrayList *defaultValue = new_JavaUtilArrayList_init();
+  [defaultValue addWithId:@"search some movies!"];
+  searchResults_ = [((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) bsWithId:defaultValue];
 }
 
 - (void)queryWithNSString:(NSString *)query {

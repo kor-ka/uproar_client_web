@@ -29,7 +29,9 @@ public class SearchModule extends ModuleBase {
 
     @Override
     public void run() {
-        searchResults = mRxProvider.bs(new ArrayList<>());
+        ArrayList<String> defaultValue = new ArrayList<>();
+        defaultValue.add("search some movies!");
+        searchResults = mRxProvider.bs(defaultValue);
 
     }
 
