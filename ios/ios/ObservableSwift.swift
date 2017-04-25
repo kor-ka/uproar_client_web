@@ -18,7 +18,12 @@ class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
     }
 
     public func retryWhen(withWindowMillis handler: RuKorincRuntimeRxFunction!) -> RuKorincRuntimeRxObservableWrapper! {
-        return nil
+        let res:Observable<Any> = obs.retryWhen { (trowObs) -> Observable<Any> in
+            let switched = handler.apply(withId: (ObservableSwift(obs: trowObs))) as! ObservableSwift
+            let swObs = switched.obs as Observable<Any>
+            return swObs
+        }
+        return ObservableSwift(obs: res)
     }
 
     public func delay(withWindowMillis millis: jlong) -> RuKorincRuntimeRxObservableWrapper! {
@@ -43,6 +48,13 @@ class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
     
     init(obs: Observable<Any>) {
         self.obs = obs;
+    }
+    
+    //cat heeeeellllllll
+    init(obs: Observable<Error>) {
+        self.obs = obs.map({ (er) -> Any in
+            return er as Any
+        });
     }
     
     func observeOnMain() -> RuKorincRuntimeRxObservableWrapper! {
