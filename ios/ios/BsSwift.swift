@@ -11,19 +11,14 @@ import RxSwift
 
 class BsSwift: ObservableSwift, RuKorincRuntimeRxSubjectBSWrapper{
     
-    var sourceRs: ReplaySubject<Any>?
+    var sourceRs: BehaviorSubject<Any>?
     
-    var las: Any?
-    
-    init(obs: ReplaySubject<Any>) {
+    init(obs: BehaviorSubject<Any>) {
         super.init(obs: obs);
         self.sourceRs = obs;
     }
     
     func onNext(withId t: Any!) {
-        if las != nil {
-            las = t
-        }
         if sourceRs != nil {
             sourceRs?.onNext(t)
         }
@@ -44,7 +39,12 @@ class BsSwift: ObservableSwift, RuKorincRuntimeRxSubjectBSWrapper{
     }
     
     func getValue() -> Any! {
-        return las
+        do{
+            return try sourceRs?.value()
+        } catch {
+            return nil
+        }
+        
     }
     
     

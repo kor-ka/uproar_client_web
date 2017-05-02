@@ -58,8 +58,8 @@ J2OBJC_FIELD_SETTER(RuKorincRuntimeRxCasthellTypedObservable, source_, id<RuKori
   return nil;
 }
 
-- (id<RuKorincRuntimeRxObservableWrapper>)throttleFirstWithWindowMillis:(jlong)windowMillis {
-  return [self fromInternalWithRuKorincRuntimeRxObservableWrapper:[((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(source_)) throttleFirstWithWindowMillis:windowMillis]];
+- (id<RuKorincRuntimeRxObservableWrapper>)throttleLastWithWindowMillis:(jlong)windowMillis {
+  return [self fromInternalWithRuKorincRuntimeRxObservableWrapper:[((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(source_)) throttleLastWithWindowMillis:windowMillis]];
 }
 
 - (id<RuKorincRuntimeRxObservableWrapper>)delayWithWindowMillis:(jlong)millis {
@@ -104,7 +104,7 @@ J2OBJC_FIELD_SETTER(RuKorincRuntimeRxCasthellTypedObservable, source_, id<RuKori
   methods[5].selector = @selector(subscribeWithConsumer:);
   methods[6].selector = @selector(mapWithFunc:);
   methods[7].selector = @selector(flatMapWithFunc:);
-  methods[8].selector = @selector(throttleFirstWithWindowMillis:);
+  methods[8].selector = @selector(throttleLastWithWindowMillis:);
   methods[9].selector = @selector(delayWithWindowMillis:);
   methods[10].selector = @selector(retryWhenWithWindowMillis:);
   methods[11].selector = @selector(switchOnNextWithSources:);

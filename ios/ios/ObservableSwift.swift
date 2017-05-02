@@ -10,9 +10,10 @@ import Foundation
 import RxSwift
 
 class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
+  
     public func switchOnNext(withSources sources: RuKorincRuntimeRxObservableWrapper!) -> RuKorincRuntimeRxObservableWrapper! {
-        let res:Observable<Observable<Any>> = ((sources as! ObservableSwift).obs as! Observable<ObservableSwift>).map { (o) -> Observable<Any> in
-            return (o as ObservableSwift).obs
+        let res:Observable<Observable<Any>> = ((sources as! ObservableSwift).obs ).map { (o) -> Observable<Any> in
+            return (o as! ObservableSwift).obs
         }
         return ObservableSwift(obs: res.switchLatest())
     }
@@ -27,11 +28,13 @@ class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
     }
 
     public func delay(withWindowMillis millis: jlong) -> RuKorincRuntimeRxObservableWrapper! {
-        return nil
+        let res:Observable<Any> = obs.delay(RxTimeInterval(millis), scheduler: SchedulerSwift().scheduler)
+        return ObservableSwift(obs: res)
     }
 
-    public func throttleFirst(withWindowMillis windowMillis: jlong) -> RuKorincRuntimeRxObservableWrapper! {
-        return nil
+    public func throttleLast(withWindowMillis windowMillis: jlong) -> RuKorincRuntimeRxObservableWrapper! {
+         let res:Observable<Any> = obs.throttle(RxTimeInterval(windowMillis), latest: true, scheduler: SchedulerSwift().scheduler)
+        return ObservableSwift(obs: res)
     }
 
     public func subscribeOn(withScheduler scheduler: RuKorincRuntimeRxBackgroundSchedulerWrapper!) -> RuKorincRuntimeRxObservableWrapper! {

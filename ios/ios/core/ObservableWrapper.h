@@ -35,7 +35,7 @@
 
 - (id<RuKorincRuntimeRxObservableWrapper>)flatMapWithFunc:(id<RuKorincRuntimeRxFunction>)mapper;
 
-- (id<RuKorincRuntimeRxObservableWrapper>)throttleFirstWithWindowMillis:(jlong)windowMillis;
+- (id<RuKorincRuntimeRxObservableWrapper>)throttleLastWithWindowMillis:(jlong)windowMillis;
 
 - (id<RuKorincRuntimeRxObservableWrapper>)delayWithWindowMillis:(jlong)millis;
 

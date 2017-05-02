@@ -27,7 +27,7 @@ public interface ObservableWrapper<T> {
     <R> ObservableWrapper<R> flatMap(
             Function<? super T, ? extends ObservableWrapper<? extends R>> mapper);
 
-    @ObjectiveCName("throttleFirstWithWindowMillis:")
+    @ObjectiveCName("throttleLastWithWindowMillis:")
     ObservableWrapper<T> throttleLast(long windowMillis);
 
     @ObjectiveCName("delayWithWindowMillis:")

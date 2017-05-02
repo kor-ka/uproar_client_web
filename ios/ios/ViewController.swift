@@ -45,6 +45,13 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
         let searchResults = AppCore.sharedActor().model?.getSearchResults().observeOnMain()
         searchResults?.subscribe(with: self)
         
+        result.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+
+        
+    }
+    
+    func textFieldDidChange(_ textField: UITextField) {
+        AppCore.sharedActor().model?.searchQuery(with: textField.text!)
     }
 
     override func didReceiveMemoryWarning() {

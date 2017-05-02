@@ -33,7 +33,7 @@
   methods[3].selector = @selector(subscribeWithConsumer:);
   methods[4].selector = @selector(mapWithFunc:);
   methods[5].selector = @selector(flatMapWithFunc:);
-  methods[6].selector = @selector(throttleFirstWithWindowMillis:);
+  methods[6].selector = @selector(throttleLastWithWindowMillis:);
   methods[7].selector = @selector(delayWithWindowMillis:);
   methods[8].selector = @selector(retryWhenWithWindowMillis:);
   methods[9].selector = @selector(switchOnNextWithSources:);

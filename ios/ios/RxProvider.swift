@@ -25,8 +25,7 @@ class RxProvider: NSObject, RuKorincRuntimeRxRxProvider{
     
     func bs(withId defaultValue: Any!) -> RuKorincRuntimeRxSubjectBSWrapper! {
         
-        let res = BsSwift(obs: ReplaySubject<Any>.create(bufferSize: 1))
-        res.onNext(withId: defaultValue)
+        let res = BsSwift(obs:BehaviorSubject(value: defaultValue))
         return res;
     }
     

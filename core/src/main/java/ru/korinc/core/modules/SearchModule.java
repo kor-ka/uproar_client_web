@@ -6,10 +6,12 @@ import java.util.HashMap;
 import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.network.HttpObserver;
+import ru.korinc.runtime.network.HttpResponse;
 import ru.korinc.runtime.rx.ObservableWrapper;
 import ru.korinc.runtime.rx.subject.BSWrapper;
 
 import static ru.korinc.runtime.RuntimeConfiguration.json;
+import static ru.korinc.runtime.RuntimeConfiguration.log;
 
 /**
  * Created by gputintsev on 22.04.17.
@@ -39,9 +41,11 @@ public class SearchModule extends ModuleBase {
         if (input == null) {
             input = mRxProvider.bs(query);
 
-            input.switchOnNext(input.throttleLast(500)
-                    .map(s -> HttpObserver.get("http://www.omdbapi.com/?s=" + s, new String[]{})
-                            .subscribeOn(mRxProvider.scheduler()))).map(httpResponse -> {
+            ObservableWrapper<HttpResponse> httpResponseObservableWrapper = input.switchOnNext(
+                    input.throttleLast(500).map(s -> HttpObserver
+                            .get("http://www.omdbapi.com/?s=" + s, new String[]{})
+                            .subscribeOn(mRxProvider.scheduler())));
+            httpResponseObservableWrapper.map(httpResponse -> {
                 ArrayList<String> res = new ArrayList<>();
 
                 JsonArrayWrapper resp = json.getJson(new String(httpResponse.getContent()))

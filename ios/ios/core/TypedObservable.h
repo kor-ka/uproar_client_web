@@ -51,7 +51,7 @@
 
 - (id<RuKorincRuntimeRxObservableWrapper>)switchOnNextWithSources:(id<RuKorincRuntimeRxObservableWrapper>)sources;
 
-- (id<RuKorincRuntimeRxObservableWrapper>)throttleFirstWithWindowMillis:(jlong)windowMillis;
+- (id<RuKorincRuntimeRxObservableWrapper>)throttleLastWithWindowMillis:(jlong)windowMillis;
 
 #pragma mark Protected
 

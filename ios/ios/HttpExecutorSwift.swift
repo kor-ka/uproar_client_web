@@ -9,11 +9,11 @@
 import Foundation
 class HttpExecutorSwift: NSObject, RuKorincRuntimeNetworkHttpExecutor {
     func getMethodWithUrl(_ url: String!, withHeaders headers: IOSObjectArray!) -> RuKorincRuntimeNetworkHttpResponse! {
-        var request = NSURLRequest(url: URL(string: url)!)
+        let request = NSURLRequest(url: URL(string: url)!)
         var response: URLResponse?
         do{
-            var data = try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: &response)
-            var reply = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
+            let data = try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: &response)
+            let reply = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
             return RuKorincRuntimeNetworkHttpResponse(int: 200, with: reply as String!, with: url)
         }catch{
             
