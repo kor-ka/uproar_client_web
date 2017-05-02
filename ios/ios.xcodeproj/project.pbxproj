@@ -136,7 +136,7 @@
 		56AB644B1E9FE890009D2EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56AB644D1E9FE890009D2EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56ABC2B81E9FEC8500BD2A16 /* ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-Bridging-Header.h"; sourceTree = "<group>"; };
-		56ABC2C31EA0D88700BD2A16 /* java */ = {isa = PBXFileReference; lastKnownFileType = folder; name = java; path = /Users/gputintsev/Documents/j2objc/core/src/main/java; sourceTree = "<absolute>"; };
+		56ABC2C31EA0D88700BD2A16 /* java */ = {isa = PBXFileReference; lastKnownFileType = folder; name = java; path = ../core/src/main/java; sourceTree = "<absolute>"; };
 		56B8A0381EAFCA5D005938DE /* ListExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListExt.swift; sourceTree = "<group>"; };
 		56C35B451EADE62900E007A0 /* HttpExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpExecutor.h; sourceTree = "<group>"; };
 		56C35B461EADE62900E007A0 /* HttpExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpExecutor.m; sourceTree = "<group>"; };
