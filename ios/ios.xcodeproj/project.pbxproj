@@ -16,6 +16,8 @@
 		5678A5A41EA7BE0400506776 /* Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 5678A5A01EA7BE0400506776 /* Function.m */; };
 		5678A5A71EA7EC0A00506776 /* StringObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 5678A5A51EA7EC0A00506776 /* StringObservable.h */; };
 		5678A5A81EA7EC0A00506776 /* StringObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 5678A5A61EA7EC0A00506776 /* StringObservable.m */; };
+		568BF89D1EBA11A200CDC956 /* Movie.h in Headers */ = {isa = PBXBuildFile; fileRef = 568BF89B1EBA11A200CDC956 /* Movie.h */; };
+		568BF89E1EBA11A200CDC956 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 568BF89C1EBA11A200CDC956 /* Movie.m */; };
 		56A077231EA1081C0041EB96 /* BSWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 56A0770B1EA1081C0041EB96 /* BSWrapper.h */; };
 		56A077241EA1081C0041EB96 /* BSWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A0770C1EA1081C0041EB96 /* BSWrapper.m */; };
 		56A077251EA1081C0041EB96 /* Consumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 56A0770D1EA1081C0041EB96 /* Consumer.h */; };
@@ -101,6 +103,8 @@
 		5678A5A01EA7BE0400506776 /* Function.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Function.m; sourceTree = "<group>"; };
 		5678A5A51EA7EC0A00506776 /* StringObservable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringObservable.h; sourceTree = "<group>"; };
 		5678A5A61EA7EC0A00506776 /* StringObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringObservable.m; sourceTree = "<group>"; };
+		568BF89B1EBA11A200CDC956 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
+		568BF89C1EBA11A200CDC956 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		56A0770B1EA1081C0041EB96 /* BSWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSWrapper.h; sourceTree = "<group>"; };
 		56A0770C1EA1081C0041EB96 /* BSWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSWrapper.m; sourceTree = "<group>"; };
 		56A0770D1EA1081C0041EB96 /* Consumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consumer.h; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 		56A0770A1EA1081C0041EB96 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				568BF89B1EBA11A200CDC956 /* Movie.h */,
+				568BF89C1EBA11A200CDC956 /* Movie.m */,
 				56C35B451EADE62900E007A0 /* HttpExecutor.h */,
 				56C35B461EADE62900E007A0 /* HttpExecutor.m */,
 				56C35B471EADE62900E007A0 /* HttpObserver.h */,
@@ -409,6 +415,7 @@
 				5678A5A31EA7BE0400506776 /* Function.h in Headers */,
 				56C35B731EADE62900E007A0 /* Utils.h in Headers */,
 				56A077371EA1081C0041EB96 /* RxProvider.h in Headers */,
+				568BF89D1EBA11A200CDC956 /* Movie.h in Headers */,
 				56C35B691EADE62900E007A0 /* JsonProvider.h in Headers */,
 				56A077391EA1081C0041EB96 /* SubjectWrapper.h in Headers */,
 				56C35B611EADE62900E007A0 /* HttpProvider.h in Headers */,
@@ -603,6 +610,7 @@
 				56B8A0391EAFCA5D005938DE /* ListExt.swift in Sources */,
 				5678A59A1EA7990800506776 /* BackgroundSchedulerWrapper.m in Sources */,
 				56C35B601EADE62900E007A0 /* HttpObserver.m in Sources */,
+				568BF89E1EBA11A200CDC956 /* Movie.m in Sources */,
 				56C35B701EADE62900E007A0 /* SearchModule.m in Sources */,
 				56AB64421E9FE890009D2EA7 /* AppDelegate.swift in Sources */,
 				56C35B7A1EADE76900E007A0 /* HttpExecutorSwift.swift in Sources */,

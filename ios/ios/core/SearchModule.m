@@ -19,6 +19,7 @@
 #include "LogProvider.h"
 #include "ModuleBase.h"
 #include "ModulesContext.h"
+#include "Movie.h"
 #include "ObservableWrapper.h"
 #include "RuntimeConfiguration.h"
 #include "RxProvider.h"
@@ -100,7 +101,7 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$3 *create
 
 - (void)run {
   JavaUtilArrayList *defaultValue = new_JavaUtilArrayList_init();
-  [defaultValue addWithId:@"search some movies!"];
+  [defaultValue addWithId:new_RuKorincCoreEntityMovie_initWithNSString_withNSString_(@"search some movies!", @"")];
   searchResults_ = [((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) bsWithId:defaultValue];
 }
 
@@ -137,7 +138,7 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$3 *create
     { "input_", "LRuKorincRuntimeRxSubjectBSWrapper;", .constantValue.asLong = 0, 0x2, -1, -1, 4, -1 },
     { "searchResults_", "LRuKorincRuntimeRxSubjectBSWrapper;", .constantValue.asLong = 0, 0x2, -1, -1, 5, -1 },
   };
-  static const void *ptrTable[] = { "LRuKorincCoreModulesModulesContext;", "query", "LNSString;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Ljava/lang/String;>;>;", "Lru/korinc/runtime/rx/subject/BSWrapper<Ljava/lang/String;>;", "Lru/korinc/runtime/rx/subject/BSWrapper<Ljava/util/ArrayList<Ljava/lang/String;>;>;" };
+  static const void *ptrTable[] = { "LRuKorincCoreModulesModulesContext;", "query", "LNSString;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/Movie;>;>;", "Lru/korinc/runtime/rx/subject/BSWrapper<Ljava/lang/String;>;", "Lru/korinc/runtime/rx/subject/BSWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/Movie;>;>;" };
   static const J2ObjcClassInfo _RuKorincCoreModulesSearchModule = { "SearchModule", "ru.korinc.core.modules", ptrTable, methods, fields, 7, 0x1, 4, 2, -1, -1, -1, -1, -1 };
   return &_RuKorincCoreModulesSearchModule;
 }
@@ -187,15 +188,14 @@ J2OBJC_INITIALIZED_DEFN(RuKorincCoreModulesSearchModule_$Lambda$2)
   JavaUtilArrayList *res = new_JavaUtilArrayList_init();
   id<RuKorincRuntimeJsonJsonArrayWrapper> resp = [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk([((id<RuKorincRuntimeJsonJsonProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, json))) getJsonWithNSString:[NSString stringWithString:[((RuKorincRuntimeNetworkHttpResponse *) nil_chk(httpResponse)) getContent]]])) getJsonArrayWithNSString:@"Search"];
   if (resp == nil) {
-    [res addWithId:@"Movie not found :'("];
+    [res addWithId:new_RuKorincCoreEntityMovie_initWithNSString_withNSString_(@"Movie not found :'(", @"")];
     return res;
   }
-  NSString *movieInfo;
+  RuKorincCoreEntityMovie *movieInfo;
   id<RuKorincRuntimeJsonJsonObjectWrapper> movieJson;
   for (jint i = 0; i < [resp length]; i++) {
     movieJson = [resp getJsonObjectWrapperWithInt:i];
-    movieInfo = [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk(movieJson)) getStringWithNSString:@"Title"];
-    (void) JreStrAppendStrong(&movieInfo, "$$C", @"(year: ", [movieJson getStringWithNSString:@"Year"], ')');
+    movieInfo = new_RuKorincCoreEntityMovie_initWithNSString_withNSString_([((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk(movieJson)) getStringWithNSString:@"Title"], [movieJson getStringWithNSString:@"Year"]);
     [res addWithId:movieInfo];
   }
   return res;

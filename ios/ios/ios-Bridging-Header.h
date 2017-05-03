@@ -39,6 +39,7 @@
 #include "SearchModule.h"
 #include "TypedObservable.h"
 #include "Utils.h"
+#include "Movie.h"
 
 #include "java/util/List.h"
 #include "java/util/ArrayList.h"

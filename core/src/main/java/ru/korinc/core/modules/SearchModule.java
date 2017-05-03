@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ru.korinc.core.entity.Movie;
 import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.network.HttpObserver;
@@ -28,12 +29,12 @@ public class SearchModule extends ModuleBase {
     private BSWrapper<String> input;
 
 
-    private BSWrapper<ArrayList<String>> searchResults;
+    private BSWrapper<ArrayList<Movie>> searchResults;
 
     @Override
     public void run() {
-        ArrayList<String> defaultValue = new ArrayList<>();
-        defaultValue.add("search some movies!");
+        ArrayList<Movie> defaultValue = new ArrayList<>();
+        defaultValue.add(new Movie("search some movies!", ""));
         searchResults = mRxProvider.bs(defaultValue);
 
     }
@@ -52,20 +53,20 @@ public class SearchModule extends ModuleBase {
                             )
             );
             httpResponseObservableWrapper.map(httpResponse -> {
-                ArrayList<String> res = new ArrayList<>();
+                ArrayList<Movie> res = new ArrayList<>();
 
                 JsonArrayWrapper resp = json.getJson(new String(httpResponse.getContent()))
                         .getJsonArray("Search");
                 if (resp == null) {
-                    res.add("Movie not found :\'(");
+                    res.add(new Movie("Movie not found :\'(", ""));
                     return res;
                 }
-                String movieInfo;
+                Movie movieInfo;
                 JsonObjectWrapper movieJson;
                 for (int i = 0; i < resp.length(); i++) {
                     movieJson = resp.getJsonObjectWrapper(i);
-                    movieInfo = movieJson.getString("Title");
-                    movieInfo += "(year: " + movieJson.getString("Year") + ")";
+                    movieInfo = new Movie(movieJson.getString("Title"),
+                            movieJson.getString("Year"));
                     res.add(movieInfo);
                 }
                 return res;
@@ -80,7 +81,7 @@ public class SearchModule extends ModuleBase {
         }
     }
 
-    public ObservableWrapper<ArrayList<String>> getSearchResults() {
+    public ObservableWrapper<ArrayList<Movie>> getSearchResults() {
         return searchResults;
     }
 }

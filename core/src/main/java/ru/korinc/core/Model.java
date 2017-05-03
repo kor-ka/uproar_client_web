@@ -2,6 +2,7 @@ package ru.korinc.core;
 
 import java.util.ArrayList;
 
+import ru.korinc.core.entity.Movie;
 import ru.korinc.core.modules.ModulesContext;
 import ru.korinc.runtime.RuntimeConfiguration;
 import ru.korinc.runtime.logging.LogProvider;
@@ -30,7 +31,7 @@ public class Model {
         mModulesContext.getSearchModule().query(query);
     }
 
-    public ObservableWrapper<ArrayList<String>> getSearchResults() {
+    public ObservableWrapper<ArrayList<Movie>> getSearchResults() {
         return mModulesContext.getSearchModule().getSearchResults();
     }
 

@@ -14,7 +14,7 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
 
     @IBOutlet weak var list: UITableView!
     
-    var res:Array<String> = Array<String>()
+    var res:Array<RuKorincCoreEntityMovie> = Array<RuKorincCoreEntityMovie>()
 
     
     var d:RuKorincRuntimeRxDisposableWrapper?
@@ -25,13 +25,14 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Getting the right element
-        let element = res[indexPath.row]
+        let element = res[indexPath.row] 
         
         // Instantiate a cell
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "ElementCell")
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "ElementCell")
         
         // Adding the right informations
-        cell.textLabel?.text = element
+        cell.textLabel?.text = element.getTitle()
+        cell.detailTextLabel?.text = element.getYear()
         // Returning the cell
         return cell
     }

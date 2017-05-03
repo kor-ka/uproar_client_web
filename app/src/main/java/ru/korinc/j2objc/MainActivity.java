@@ -18,6 +18,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import ru.korinc.core.Model;
+import ru.korinc.core.entity.Movie;
 import ru.korinc.j2objc.adapter.AwesomeAdapter;
 import ru.korinc.j2objc.adapter.matcher.ViewHolder;
 import ru.korinc.j2objc.adapter.matcher.XMLLayouter;
@@ -39,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         final RecyclerView res = (RecyclerView) findViewById(R.id.list);
 
         CompositeDisposable binder = new CompositeDisposable();
-        AwesomeAdapter<String> adapter = new AwesomeAdapter<>();
-        adapter.addHolder(String.class, (v, root) -> new MovieHolder(v, root, binder),
+        AwesomeAdapter<Movie> adapter = new AwesomeAdapter<>();
+        adapter.addHolder(Movie.class, (v, root) -> new MovieHolder(v, root, binder),
                 R.layout.entry);
 
         res.setLayoutManager(new LinearLayoutManager(this));
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         });
         input.setText("Star Wars");
 
-        ((AndroidObservable<ArrayList<String>>) model.getSearchResults()).getSource()
+        ((AndroidObservable<ArrayList<Movie>>) model.getSearchResults()).getSource()
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(strings -> {
             adapter.setList(strings);
             adapter.notifyDataSetChanged();
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private static class MovieHolder extends ViewHolder<String> {
+    private static class MovieHolder extends ViewHolder<Movie> {
 
         private TextView tv;
 
@@ -82,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void performBind(String data) {
+        protected void performBind(Movie data) {
             super.performBind(data);
-            tv.setText(data);
+            tv.setText(data.getTitle() + "\n" + data.getYear());
         }
     }
 }

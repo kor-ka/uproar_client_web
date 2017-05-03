@@ -52,7 +52,7 @@ J2OBJC_FIELD_SETTER(RuKorincCoreModel, mModulesContext_, RuKorincCoreModulesModu
     { "configuration_", "LRuKorincRuntimeRuntimeConfiguration;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mModulesContext_", "LRuKorincCoreModulesModulesContext;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LRuKorincRuntimeRuntimeConfiguration;", "searchQuery", "LNSString;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Ljava/lang/String;>;>;" };
+  static const void *ptrTable[] = { "LRuKorincRuntimeRuntimeConfiguration;", "searchQuery", "LNSString;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/Movie;>;>;" };
   static const J2ObjcClassInfo _RuKorincCoreModel = { "Model", "ru.korinc.core", ptrTable, methods, fields, 7, 0x1, 3, 2, -1, -1, -1, -1, -1 };
   return &_RuKorincCoreModel;
 }
