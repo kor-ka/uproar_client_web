@@ -4,13 +4,19 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import ru.korinc.core.entity.Load;
 import ru.korinc.core.entity.Movie;
+import ru.korinc.core.entity.Query;
+import ru.korinc.core.entity.SearchEntity;
+import ru.korinc.core.entity.SearchResults;
 import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.network.HttpObserver;
 import ru.korinc.runtime.network.HttpResponse;
+import ru.korinc.runtime.rx.Function;
 import ru.korinc.runtime.rx.ObservableWrapper;
 import ru.korinc.runtime.rx.subject.BSWrapper;
+import ru.korinc.utils.Touple;
 
 import static ru.korinc.runtime.RuntimeConfiguration.json;
 import static ru.korinc.runtime.RuntimeConfiguration.log;
@@ -26,39 +32,54 @@ public class SearchModule extends ModuleBase {
 
     }
 
-    private BSWrapper<String> input;
+    private BSWrapper<Query> input;
 
 
-    private BSWrapper<ArrayList<Movie>> searchResults;
+    private BSWrapper<ArrayList<SearchEntity>> searchResults;
 
     @Override
     public void run() {
-        ArrayList<Movie> defaultValue = new ArrayList<>();
+        ArrayList<SearchEntity> defaultValue = new ArrayList<>();
         defaultValue.add(new Movie("search some movies!", ""));
         searchResults = mRxProvider.bs(defaultValue);
 
     }
 
     public void query(String query) {
+        query(new Query(1, query));
+    }
+
+    private Query lastQuery;
+
+    public void query(Query query) {
+        if (lastQuery != null && query.getPage() > 1 && !query.getTitle()
+                .endsWith(lastQuery.getTitle())) {
+            return;
+        }
+        lastQuery = query;
+
         if (input == null) {
             input = mRxProvider.bs(query);
 
-            ObservableWrapper<HttpResponse> httpResponseObservableWrapper = input
+            ObservableWrapper<Touple<Query, HttpResponse>> httpResponseObservableWrapper = input
                     .switchOnNext(
                     input
                             .throttleLast(500)
-                            .map(s -> HttpObserver
-                            .get("http://www.omdbapi.com/?s=" + URLEncoder.encode(s, "UTF-8"), new String[]{})
+                            .map(s -> HttpObserver.get(s.toString(), new String[]{})
+                                            .map(httpResponse -> new Touple<>(s, httpResponse))
                             .subscribeOn(mRxProvider.scheduler())
                             )
             );
-            httpResponseObservableWrapper.map(httpResponse -> {
-                ArrayList<Movie> res = new ArrayList<>();
+            httpResponseObservableWrapper.map(respAndQuery -> {
+                ArrayList<SearchEntity> res = new ArrayList<>();
 
-                JsonArrayWrapper resp = json.getJson(new String(httpResponse.getContent()))
+                JsonArrayWrapper resp = json.getJson(respAndQuery.getB().getContent())
                         .getJsonArray("Search");
                 if (resp == null) {
-                    res.add(new Movie("Movie not found :\'(", ""));
+                    res.addAll(respAndQuery.getA().getOldResults());
+                    if (res.size() == 0) {
+                        res.add(new Movie("Movie not found :\'(", ""));
+                    }
                     return res;
                 }
                 Movie movieInfo;
@@ -69,6 +90,15 @@ public class SearchModule extends ModuleBase {
                             movieJson.getString("Year") + " | " + movieJson.getString("Type"));
                     res.add(movieInfo);
                 }
+
+                res.addAll(0, respAndQuery.getA().getOldResults());
+
+                Query q = respAndQuery.getA();
+                q.setPage(respAndQuery.getA().getPage() + 1);
+                ArrayList<SearchEntity> oldResults = new ArrayList<>(res);
+                q.setOldResults(oldResults);
+                res.add(new Load(q));
+
                 return res;
             })
                     .subscribeOn(mRxProvider.scheduler()).subscribe(
@@ -81,7 +111,7 @@ public class SearchModule extends ModuleBase {
         }
     }
 
-    public ObservableWrapper<ArrayList<Movie>> getSearchResults() {
+    public ObservableWrapper<ArrayList<SearchEntity>> getSearchResults() {
         return searchResults;
     }
 }

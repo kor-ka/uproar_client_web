@@ -16,7 +16,11 @@
 #if !defined (RuKorincCoreEntityMovie_) && (INCLUDE_ALL_Movie || defined(INCLUDE_RuKorincCoreEntityMovie))
 #define RuKorincCoreEntityMovie_
 
-@interface RuKorincCoreEntityMovie : NSObject
+#define RESTRICT_SearchEntity 1
+#define INCLUDE_RuKorincCoreEntitySearchEntity 1
+#include "SearchEntity.h"
+
+@interface RuKorincCoreEntityMovie : RuKorincCoreEntitySearchEntity
 
 #pragma mark Public
 

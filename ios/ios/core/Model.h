@@ -16,6 +16,7 @@
 #if !defined (RuKorincCoreModel_) && (INCLUDE_ALL_Model || defined(INCLUDE_RuKorincCoreModel))
 #define RuKorincCoreModel_
 
+@class RuKorincCoreEntityQuery;
 @class RuKorincRuntimeRuntimeConfiguration;
 @protocol RuKorincRuntimeRxObservableWrapper;
 
@@ -26,6 +27,8 @@
 - (instancetype)initWithRuKorincRuntimeRuntimeConfiguration:(RuKorincRuntimeRuntimeConfiguration *)configuration;
 
 - (id<RuKorincRuntimeRxObservableWrapper>)getSearchResults;
+
+- (void)searchMovieByTitleQueryWithRuKorincCoreEntityQuery:(RuKorincCoreEntityQuery *)query;
 
 - (void)searchMovieByTitleQueryWithNSString:(NSString *)query;
 

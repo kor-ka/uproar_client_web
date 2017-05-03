@@ -7,6 +7,7 @@
 #include "Model.h"
 #include "ModulesContext.h"
 #include "ObservableWrapper.h"
+#include "Query.h"
 #include "RuntimeConfiguration.h"
 #include "SearchModule.h"
 
@@ -32,6 +33,10 @@ J2OBJC_FIELD_SETTER(RuKorincCoreModel, mModulesContext_, RuKorincCoreModulesModu
   [((RuKorincCoreModulesSearchModule *) nil_chk([((RuKorincCoreModulesModulesContext *) nil_chk(mModulesContext_)) getSearchModule])) queryWithNSString:query];
 }
 
+- (void)searchMovieByTitleQueryWithRuKorincCoreEntityQuery:(RuKorincCoreEntityQuery *)query {
+  [((RuKorincCoreModulesSearchModule *) nil_chk([((RuKorincCoreModulesModulesContext *) nil_chk(mModulesContext_)) getSearchModule])) queryWithRuKorincCoreEntityQuery:query];
+}
+
 - (id<RuKorincRuntimeRxObservableWrapper>)getSearchResults {
   return [((RuKorincCoreModulesSearchModule *) nil_chk([((RuKorincCoreModulesModulesContext *) nil_chk(mModulesContext_)) getSearchModule])) getSearchResults];
 }
@@ -40,20 +45,22 @@ J2OBJC_FIELD_SETTER(RuKorincCoreModel, mModulesContext_, RuKorincCoreModulesModu
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "V", 0x1, 1, 3, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x1, -1, -1, -1, 4, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(initWithRuKorincRuntimeRuntimeConfiguration:);
   methods[1].selector = @selector(searchMovieByTitleQueryWithNSString:);
-  methods[2].selector = @selector(getSearchResults);
+  methods[2].selector = @selector(searchMovieByTitleQueryWithRuKorincCoreEntityQuery:);
+  methods[3].selector = @selector(getSearchResults);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "configuration_", "LRuKorincRuntimeRuntimeConfiguration;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mModulesContext_", "LRuKorincCoreModulesModulesContext;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LRuKorincRuntimeRuntimeConfiguration;", "searchMovieByTitleQuery", "LNSString;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/Movie;>;>;" };
-  static const J2ObjcClassInfo _RuKorincCoreModel = { "Model", "ru.korinc.core", ptrTable, methods, fields, 7, 0x1, 3, 2, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LRuKorincRuntimeRuntimeConfiguration;", "searchMovieByTitleQuery", "LNSString;", "LRuKorincCoreEntityQuery;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/SearchEntity;>;>;" };
+  static const J2ObjcClassInfo _RuKorincCoreModel = { "Model", "ru.korinc.core", ptrTable, methods, fields, 7, 0x1, 4, 2, -1, -1, -1, -1, -1 };
   return &_RuKorincCoreModel;
 }
 

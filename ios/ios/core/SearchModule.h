@@ -20,6 +20,7 @@
 #define INCLUDE_RuKorincCoreModulesModuleBase 1
 #include "ModuleBase.h"
 
+@class RuKorincCoreEntityQuery;
 @class RuKorincCoreModulesModulesContext;
 @protocol RuKorincRuntimeRxObservableWrapper;
 
@@ -30,6 +31,8 @@
 - (instancetype)initWithRuKorincCoreModulesModulesContext:(RuKorincCoreModulesModulesContext *)context;
 
 - (id<RuKorincRuntimeRxObservableWrapper>)getSearchResults;
+
+- (void)queryWithRuKorincCoreEntityQuery:(RuKorincCoreEntityQuery *)query;
 
 - (void)queryWithNSString:(NSString *)query;
 

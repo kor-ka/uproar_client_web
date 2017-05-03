@@ -5,6 +5,7 @@
 
 #include "J2ObjC_source.h"
 #include "Movie.h"
+#include "SearchEntity.h"
 
 @interface RuKorincCoreEntityMovie () {
  @public
@@ -57,7 +58,7 @@ J2OBJC_FIELD_SETTER(RuKorincCoreEntityMovie, additionalInfo_, NSString *)
 @end
 
 void RuKorincCoreEntityMovie_initWithNSString_withNSString_(RuKorincCoreEntityMovie *self, NSString *title, NSString *year) {
-  NSObject_init(self);
+  RuKorincCoreEntitySearchEntity_init(self);
   self->title_ = title;
   self->additionalInfo_ = year;
 }

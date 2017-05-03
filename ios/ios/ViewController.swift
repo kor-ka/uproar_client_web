@@ -14,8 +14,7 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
 
     @IBOutlet weak var list: UITableView!
     
-    var res:Array<RuKorincCoreEntityMovie> = Array<RuKorincCoreEntityMovie>()
-
+    var res:Array<RuKorincCoreEntitySearchEntity> = Array<RuKorincCoreEntitySearchEntity>()
     
     var d:RuKorincRuntimeRxDisposableWrapper?
     
@@ -31,8 +30,17 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "ElementCell")
         
         // Adding the right informations
-        cell.textLabel?.text = element.getTitle()
-        cell.detailTextLabel?.text = element.additionalInfo()
+        if(element.isMember(of: RuKorincCoreEntityMovie.self)){
+            let movie = element as! RuKorincCoreEntityMovie
+            cell.textLabel?.text = movie.getTitle()
+            cell.detailTextLabel?.text = movie.additionalInfo()
+        }else if (element.isMember(of: RuKorincCoreEntityLoad.self)){
+            let load = element as! RuKorincCoreEntityLoad
+            cell.textLabel?.text = "Loading..."
+            cell.detailTextLabel?.text = nil
+            AppCore.sharedActor().model?.searchMovieByTitleQuery(with: load.getQuery())
+        }
+        
         // Returning the cell
         return cell
     }

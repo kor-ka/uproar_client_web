@@ -18,6 +18,16 @@
 		5678A5A81EA7EC0A00506776 /* StringObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 5678A5A61EA7EC0A00506776 /* StringObservable.m */; };
 		568BF89D1EBA11A200CDC956 /* Movie.h in Headers */ = {isa = PBXBuildFile; fileRef = 568BF89B1EBA11A200CDC956 /* Movie.h */; };
 		568BF89E1EBA11A200CDC956 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 568BF89C1EBA11A200CDC956 /* Movie.m */; };
+		568BF8A91EBA33FA00CDC956 /* Load.h in Headers */ = {isa = PBXBuildFile; fileRef = 568BF89F1EBA33FA00CDC956 /* Load.h */; };
+		568BF8AA1EBA33FA00CDC956 /* Load.m in Sources */ = {isa = PBXBuildFile; fileRef = 568BF8A01EBA33FA00CDC956 /* Load.m */; };
+		568BF8AB1EBA33FA00CDC956 /* Query.h in Headers */ = {isa = PBXBuildFile; fileRef = 568BF8A11EBA33FA00CDC956 /* Query.h */; };
+		568BF8AC1EBA33FA00CDC956 /* Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 568BF8A21EBA33FA00CDC956 /* Query.m */; };
+		568BF8AD1EBA33FA00CDC956 /* SearchEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = 568BF8A31EBA33FA00CDC956 /* SearchEntity.h */; };
+		568BF8AE1EBA33FA00CDC956 /* SearchEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 568BF8A41EBA33FA00CDC956 /* SearchEntity.m */; };
+		568BF8AF1EBA33FA00CDC956 /* SearchResults.h in Headers */ = {isa = PBXBuildFile; fileRef = 568BF8A51EBA33FA00CDC956 /* SearchResults.h */; };
+		568BF8B01EBA33FA00CDC956 /* SearchResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 568BF8A61EBA33FA00CDC956 /* SearchResults.m */; };
+		568BF8B11EBA33FA00CDC956 /* Touple.h in Headers */ = {isa = PBXBuildFile; fileRef = 568BF8A71EBA33FA00CDC956 /* Touple.h */; };
+		568BF8B21EBA33FA00CDC956 /* Touple.m in Sources */ = {isa = PBXBuildFile; fileRef = 568BF8A81EBA33FA00CDC956 /* Touple.m */; };
 		56A077231EA1081C0041EB96 /* BSWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 56A0770B1EA1081C0041EB96 /* BSWrapper.h */; };
 		56A077241EA1081C0041EB96 /* BSWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A0770C1EA1081C0041EB96 /* BSWrapper.m */; };
 		56A077251EA1081C0041EB96 /* Consumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 56A0770D1EA1081C0041EB96 /* Consumer.h */; };
@@ -105,6 +115,16 @@
 		5678A5A61EA7EC0A00506776 /* StringObservable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringObservable.m; sourceTree = "<group>"; };
 		568BF89B1EBA11A200CDC956 /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		568BF89C1EBA11A200CDC956 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
+		568BF89F1EBA33FA00CDC956 /* Load.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Load.h; sourceTree = "<group>"; };
+		568BF8A01EBA33FA00CDC956 /* Load.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Load.m; sourceTree = "<group>"; };
+		568BF8A11EBA33FA00CDC956 /* Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Query.h; sourceTree = "<group>"; };
+		568BF8A21EBA33FA00CDC956 /* Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Query.m; sourceTree = "<group>"; };
+		568BF8A31EBA33FA00CDC956 /* SearchEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchEntity.h; sourceTree = "<group>"; };
+		568BF8A41EBA33FA00CDC956 /* SearchEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchEntity.m; sourceTree = "<group>"; };
+		568BF8A51EBA33FA00CDC956 /* SearchResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResults.h; sourceTree = "<group>"; };
+		568BF8A61EBA33FA00CDC956 /* SearchResults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResults.m; sourceTree = "<group>"; };
+		568BF8A71EBA33FA00CDC956 /* Touple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Touple.h; sourceTree = "<group>"; };
+		568BF8A81EBA33FA00CDC956 /* Touple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Touple.m; sourceTree = "<group>"; };
 		56A0770B1EA1081C0041EB96 /* BSWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSWrapper.h; sourceTree = "<group>"; };
 		56A0770C1EA1081C0041EB96 /* BSWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSWrapper.m; sourceTree = "<group>"; };
 		56A0770D1EA1081C0041EB96 /* Consumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Consumer.h; sourceTree = "<group>"; };
@@ -200,6 +220,16 @@
 		56A0770A1EA1081C0041EB96 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				568BF89F1EBA33FA00CDC956 /* Load.h */,
+				568BF8A01EBA33FA00CDC956 /* Load.m */,
+				568BF8A11EBA33FA00CDC956 /* Query.h */,
+				568BF8A21EBA33FA00CDC956 /* Query.m */,
+				568BF8A31EBA33FA00CDC956 /* SearchEntity.h */,
+				568BF8A41EBA33FA00CDC956 /* SearchEntity.m */,
+				568BF8A51EBA33FA00CDC956 /* SearchResults.h */,
+				568BF8A61EBA33FA00CDC956 /* SearchResults.m */,
+				568BF8A71EBA33FA00CDC956 /* Touple.h */,
+				568BF8A81EBA33FA00CDC956 /* Touple.m */,
 				568BF89B1EBA11A200CDC956 /* Movie.h */,
 				568BF89C1EBA11A200CDC956 /* Movie.m */,
 				56C35B451EADE62900E007A0 /* HttpExecutor.h */,
@@ -402,6 +432,7 @@
 				56C35B6F1EADE62900E007A0 /* SearchModule.h in Headers */,
 				56A0772D1EA1081C0041EB96 /* Model.h in Headers */,
 				56C35B6B1EADE62900E007A0 /* ModuleBase.h in Headers */,
+				568BF8AF1EBA33FA00CDC956 /* SearchResults.h in Headers */,
 				56C35B631EADE62900E007A0 /* HTTPResponse.h in Headers */,
 				56A077251EA1081C0041EB96 /* Consumer.h in Headers */,
 				56A0772F1EA1081C0041EB96 /* ObservableOnSubscribe.h in Headers */,
@@ -416,13 +447,17 @@
 				56C35B731EADE62900E007A0 /* Utils.h in Headers */,
 				56A077371EA1081C0041EB96 /* RxProvider.h in Headers */,
 				568BF89D1EBA11A200CDC956 /* Movie.h in Headers */,
+				568BF8AB1EBA33FA00CDC956 /* Query.h in Headers */,
+				568BF8B11EBA33FA00CDC956 /* Touple.h in Headers */,
 				56C35B691EADE62900E007A0 /* JsonProvider.h in Headers */,
+				568BF8AD1EBA33FA00CDC956 /* SearchEntity.h in Headers */,
 				56A077391EA1081C0041EB96 /* SubjectWrapper.h in Headers */,
 				56C35B611EADE62900E007A0 /* HttpProvider.h in Headers */,
 				56A077231EA1081C0041EB96 /* BSWrapper.h in Headers */,
 				56F1120F1EA6103E00FF27E7 /* TimeoutProvider.h in Headers */,
 				56A077271EA1081C0041EB96 /* DisposableWrapper.h in Headers */,
 				56C35B651EADE62900E007A0 /* JsonArrayWrapper.h in Headers */,
+				568BF8A91EBA33FA00CDC956 /* Load.h in Headers */,
 				56A0772B1EA1081C0041EB96 /* Foo.h in Headers */,
 				5678A5991EA7990800506776 /* BackgroundSchedulerWrapper.h in Headers */,
 				56A077311EA1081C0041EB96 /* ObservableWrapper.h in Headers */,
@@ -571,17 +606,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				56F112181EA61C9B00FF27E7 /* LogProvider.m in Sources */,
+				568BF8AA1EBA33FA00CDC956 /* Load.m in Sources */,
 				5678A5A81EA7EC0A00506776 /* StringObservable.m in Sources */,
 				56C35B681EADE62900E007A0 /* JsonObjectWrapper.m in Sources */,
 				56C35B741EADE62900E007A0 /* Utils.m in Sources */,
 				56C35B5E1EADE62900E007A0 /* HttpExecutor.m in Sources */,
 				5678A5A41EA7BE0400506776 /* Function.m in Sources */,
 				56C35B6A1EADE62900E007A0 /* JsonProvider.m in Sources */,
+				568BF8AE1EBA33FA00CDC956 /* SearchEntity.m in Sources */,
 				56A1B3B11EA1268D007F9F76 /* RxProvider.swift in Sources */,
 				56A0773A1EA1081C0041EB96 /* SubjectWrapper.m in Sources */,
 				56A0772A1EA1081C0041EB96 /* Emitter.m in Sources */,
 				56F17B361EADED8600DD00AC /* JsonObjectWrapperSwift.swift in Sources */,
 				56A077361EA1081C0041EB96 /* RuntimeConfiguration.m in Sources */,
+				568BF8B01EBA33FA00CDC956 /* SearchResults.m in Sources */,
 				56AB64441E9FE890009D2EA7 /* ViewController.swift in Sources */,
 				56A077381EA1081C0041EB96 /* RxProvider.m in Sources */,
 				56A0773E1EA109F50041EB96 /* Foo2.m in Sources */,
@@ -595,12 +633,14 @@
 				56A0772E1EA1081C0041EB96 /* Model.m in Sources */,
 				56A077281EA1081C0041EB96 /* DisposableWrapper.m in Sources */,
 				56C35B7C1EADEAF200E007A0 /* JsonProviderSwift.swift in Sources */,
+				568BF8B21EBA33FA00CDC956 /* Touple.m in Sources */,
 				56A077261EA1081C0041EB96 /* Consumer.m in Sources */,
 				56F112101EA6103E00FF27E7 /* TimeoutProvider.m in Sources */,
 				56A077321EA1081C0041EB96 /* ObservableWrapper.m in Sources */,
 				5678A59C1EA79B1400506776 /* SchedulerSwift.swift in Sources */,
 				56FE60EC1EA4D28C006E52BB /* ObservableSwift.swift in Sources */,
 				56C35B661EADE62900E007A0 /* JsonArrayWrapper.m in Sources */,
+				568BF8AC1EBA33FA00CDC956 /* Query.m in Sources */,
 				56C35B6E1EADE62900E007A0 /* ModulesContext.m in Sources */,
 				56C35B781EADE72100E007A0 /* HttpProviderSwift.swift in Sources */,
 				56A077301EA1081C0041EB96 /* ObservableOnSubscribe.m in Sources */,

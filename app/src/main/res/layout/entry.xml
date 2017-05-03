@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" android:layout_margin="20dp">
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:id="@+id/text" />
+            android:text="asdasd" android:textSize="20sp" android:id="@+id/title" />
 
-</FrameLayout>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="asdasd" android:id="@+id/description" />
+
+
+</LinearLayout>
