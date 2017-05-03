@@ -27,7 +27,7 @@
 
 - (id<RuKorincRuntimeRxObservableWrapper>)getSearchResults;
 
-- (void)searchQueryWithNSString:(NSString *)query;
+- (void)searchMovieByTitleQueryWithNSString:(NSString *)query;
 
 @end
 

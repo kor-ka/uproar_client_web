@@ -28,7 +28,7 @@ J2OBJC_FIELD_SETTER(RuKorincCoreModel, mModulesContext_, RuKorincCoreModulesModu
   return self;
 }
 
-- (void)searchQueryWithNSString:(NSString *)query {
+- (void)searchMovieByTitleQueryWithNSString:(NSString *)query {
   [((RuKorincCoreModulesSearchModule *) nil_chk([((RuKorincCoreModulesModulesContext *) nil_chk(mModulesContext_)) getSearchModule])) queryWithNSString:query];
 }
 
@@ -45,14 +45,14 @@ J2OBJC_FIELD_SETTER(RuKorincCoreModel, mModulesContext_, RuKorincCoreModulesModu
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(initWithRuKorincRuntimeRuntimeConfiguration:);
-  methods[1].selector = @selector(searchQueryWithNSString:);
+  methods[1].selector = @selector(searchMovieByTitleQueryWithNSString:);
   methods[2].selector = @selector(getSearchResults);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "configuration_", "LRuKorincRuntimeRuntimeConfiguration;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mModulesContext_", "LRuKorincCoreModulesModulesContext;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LRuKorincRuntimeRuntimeConfiguration;", "searchQuery", "LNSString;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/Movie;>;>;" };
+  static const void *ptrTable[] = { "LRuKorincRuntimeRuntimeConfiguration;", "searchMovieByTitleQuery", "LNSString;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/Movie;>;>;" };
   static const J2ObjcClassInfo _RuKorincCoreModel = { "Model", "ru.korinc.core", ptrTable, methods, fields, 7, 0x1, 3, 2, -1, -1, -1, -1, -1 };
   return &_RuKorincCoreModel;
 }

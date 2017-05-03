@@ -27,7 +27,7 @@ public class Model {
     }
 
 
-    public void searchQuery(String query) {
+    public void searchMovieByTitleQuery(String query) {
         mModulesContext.getSearchModule().query(query);
     }
 

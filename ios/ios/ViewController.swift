@@ -48,12 +48,12 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
         
         result.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        AppCore.sharedActor().model?.searchQuery(with: self.result.text!)
+        AppCore.sharedActor().model?.searchMovieByTitleQuery(with: self.result.text!)
     }
     
     func textFieldDidChange(_ textField: UITextField) {
         if textField.text != nil{
-            AppCore.sharedActor().model?.searchQuery(with: textField.text!)
+            AppCore.sharedActor().model?.searchMovieByTitleQuery(with: textField.text!)
         }
     }
 

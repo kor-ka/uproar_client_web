@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                AppCore.sharedCore().getModel().searchQuery(s.toString());
+                AppCore.sharedCore().getModel().searchMovieByTitleQuery(s.toString());
             }
         });
         input.setText("Star Wars");
