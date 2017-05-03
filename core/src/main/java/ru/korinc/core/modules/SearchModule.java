@@ -1,5 +1,6 @@
 package ru.korinc.core.modules;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,10 +42,15 @@ public class SearchModule extends ModuleBase {
         if (input == null) {
             input = mRxProvider.bs(query);
 
-            ObservableWrapper<HttpResponse> httpResponseObservableWrapper = input.switchOnNext(
-                    input.throttleLast(500).map(s -> HttpObserver
-                            .get("http://www.omdbapi.com/?s=" + s, new String[]{})
-                            .subscribeOn(mRxProvider.scheduler())));
+            ObservableWrapper<HttpResponse> httpResponseObservableWrapper = input
+                    .switchOnNext(
+                    input
+                            .throttleLast(500)
+                            .map(s -> HttpObserver
+                            .get("http://www.omdbapi.com/?s=" + URLEncoder.encode(s, "UTF-8"), new String[]{})
+                            .subscribeOn(mRxProvider.scheduler())
+                            )
+            );
             httpResponseObservableWrapper.map(httpResponse -> {
                 ArrayList<String> res = new ArrayList<>();
 
@@ -65,7 +71,10 @@ public class SearchModule extends ModuleBase {
                 return res;
             })
                     .subscribeOn(mRxProvider.scheduler()).subscribe(
-                    res -> searchResults.onNext(res));
+                    res -> {
+                        searchResults.onNext(res);
+                        log.d("result", res.toString());
+                    });
         } else {
             input.onNext(query);
         }

@@ -46,12 +46,14 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
         searchResults?.subscribe(with: self)
         
         result.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-
         
+        AppCore.sharedActor().model?.searchQuery(with: self.result.text!)
     }
     
     func textFieldDidChange(_ textField: UITextField) {
-        AppCore.sharedActor().model?.searchQuery(with: textField.text!)
+        if textField.text != nil{
+            AppCore.sharedActor().model?.searchQuery(with: textField.text!)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,8 +67,8 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
     
     func accept(withId val: Any!) {
         res = (val as! JavaUtilArrayList).toNSArray()
+        self.list.reloadData()
     }
-
 
 }
 

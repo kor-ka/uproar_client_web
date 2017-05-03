@@ -23,6 +23,7 @@
 #include "RuntimeConfiguration.h"
 #include "RxProvider.h"
 #include "SearchModule.h"
+#include "java/net/URLEncoder.h"
 #include "java/util/ArrayList.h"
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -104,20 +105,13 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$3 *create
 }
 
 - (void)queryWithNSString:(NSString *)query {
-  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"1"];
   if (input_ == nil) {
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"2"];
     input_ = [((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) bsWithId:query];
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"3"];
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:[((id<RuKorincRuntimeRxSubjectBSWrapper>) nil_chk(input_)) description]];
     id<RuKorincRuntimeRxObservableWrapper> httpResponseObservableWrapper = [((id<RuKorincRuntimeRxSubjectBSWrapper>) nil_chk(input_)) switchOnNextWithSources:[((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([input_ throttleLastWithWindowMillis:500])) mapWithFunc:new_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(self)]];
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"afterSwitch"];
     (void) [((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(httpResponseObservableWrapper)) mapWithFunc:JreLoadStatic(RuKorincCoreModulesSearchModule_$Lambda$2, instance)])) subscribeOnWithScheduler:[((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) scheduler]])) subscribeWithConsumer:new_RuKorincCoreModulesSearchModule_$Lambda$3_initWithRuKorincCoreModulesSearchModule_(self)];
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"15"];
   }
   else {
     [input_ onNextWithId:query];
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"16"];
   }
 }
 
@@ -167,7 +161,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(RuKorincCoreModulesSearchModule)
 @implementation RuKorincCoreModulesSearchModule_$Lambda$1
 
 - (id)applyWithId:(NSString *)s {
-  return [((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(RuKorincRuntimeNetworkHttpObserver_getWithNSString_withNSStringArray_(JreStrcat("$$", @"http://www.omdbapi.com/?s=", s), [IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()]))) subscribeOnWithScheduler:[((id<RuKorincRuntimeRxRxProvider>) nil_chk(this$0_->mRxProvider_)) scheduler]];
+  return [((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(RuKorincRuntimeNetworkHttpObserver_getWithNSString_withNSStringArray_(JreStrcat("$$", @"http://www.omdbapi.com/?s=", JavaNetURLEncoder_encodeWithNSString_withNSString_(s, @"UTF-8")), [IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()]))) subscribeOnWithScheduler:[((id<RuKorincRuntimeRxRxProvider>) nil_chk(this$0_->mRxProvider_)) scheduler]];
 }
 
 @end
@@ -190,30 +184,19 @@ J2OBJC_INITIALIZED_DEFN(RuKorincCoreModulesSearchModule_$Lambda$2)
 @implementation RuKorincCoreModulesSearchModule_$Lambda$2
 
 - (id)applyWithId:(RuKorincRuntimeNetworkHttpResponse *)httpResponse {
-  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"4"];
   JavaUtilArrayList *res = new_JavaUtilArrayList_init();
-  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"5"];
   id<RuKorincRuntimeJsonJsonArrayWrapper> resp = [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk([((id<RuKorincRuntimeJsonJsonProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, json))) getJsonWithNSString:[NSString stringWithString:[((RuKorincRuntimeNetworkHttpResponse *) nil_chk(httpResponse)) getContent]]])) getJsonArrayWithNSString:@"Search"];
-  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"6"];
   if (resp == nil) {
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"7"];
     [res addWithId:@"Movie not found :'("];
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"8"];
     return res;
   }
-  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"9"];
   NSString *movieInfo;
   id<RuKorincRuntimeJsonJsonObjectWrapper> movieJson;
   for (jint i = 0; i < [resp length]; i++) {
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"10"];
     movieJson = [resp getJsonObjectWrapperWithInt:i];
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"11"];
     movieInfo = [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk(movieJson)) getStringWithNSString:@"Title"];
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"12"];
     (void) JreStrAppendStrong(&movieInfo, "$$C", @"(year: ", [movieJson getStringWithNSString:@"Year"], ')');
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"13"];
     [res addWithId:movieInfo];
-    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"wind null" withNSString:@"14"];
   }
   return res;
 }
@@ -243,6 +226,7 @@ RuKorincCoreModulesSearchModule_$Lambda$2 *create_RuKorincCoreModulesSearchModul
 
 - (void)acceptWithId:(JavaUtilArrayList *)res {
   [((id<RuKorincRuntimeRxSubjectBSWrapper>) nil_chk(this$0_->searchResults_)) onNextWithId:res];
+  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"result" withNSString:[((JavaUtilArrayList *) nil_chk(res)) description]];
 }
 
 @end

@@ -33,7 +33,7 @@ class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
     }
 
     public func throttleLast(withWindowMillis windowMillis: jlong) -> RuKorincRuntimeRxObservableWrapper! {
-         let res:Observable<Any> = obs.throttle(RxTimeInterval(windowMillis), latest: true, scheduler: SchedulerSwift().scheduler)
+         let res:Observable<Any> = obs.debounce(RxTimeInterval( Double(windowMillis) / Double(1000)), scheduler: SchedulerSwift().scheduler)
         return ObservableSwift(obs: res)
     }
 
