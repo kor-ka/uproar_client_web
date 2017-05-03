@@ -13,7 +13,7 @@ class JsonObjectWrapperSwift: NSObject, RuKorincRuntimeJsonJsonObjectWrapper {
     
     init(source:[String: AnyObject]) {
         super.init()
-        
+        self.source = source
     }
     
     public func getStringWith(_ key: String!, with defaultValue: String!) -> String! {
@@ -25,7 +25,10 @@ class JsonObjectWrapperSwift: NSObject, RuKorincRuntimeJsonJsonObjectWrapper {
     }
 
     public func getJsonArray(with key: String) -> RuKorincRuntimeJsonJsonArrayWrapper! {
-       return JsonArraySwift(source: self.source![key] as! Array<AnyObject>)
+        if let array = self.source?[key]{
+            return JsonArraySwift(source: array as! Array<AnyObject>)
+        }
+       return nil
     }
 
     public func getJsonObject(with key: String) -> RuKorincRuntimeJsonJsonObjectWrapper! {

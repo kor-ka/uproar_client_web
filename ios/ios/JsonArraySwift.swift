@@ -15,7 +15,7 @@ class JsonArraySwift: NSObject, RuKorincRuntimeJsonJsonArrayWrapper{
     }
     
     func length() -> jint {
-        return 1
+        return jint(self.source.count)
     }
     
     func getStringWith(_ position: jint) -> String! {
@@ -23,7 +23,7 @@ class JsonArraySwift: NSObject, RuKorincRuntimeJsonJsonArrayWrapper{
     }
     
     func getJsonObjectWrapper(with position: jint) -> RuKorincRuntimeJsonJsonObjectWrapper! {
-        return nil
+        return JsonObjectWrapperSwift(source: self.source![Int(position)] as! [String : AnyObject])
     }
     
     func getWith(_ position: jint) -> RuKorincRuntimeJsonJsonArrayWrapper! {

@@ -46,10 +46,12 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
         searchResults?.subscribe(with: self)
         
         result.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        AppCore.sharedActor().model?.searchQuery(with: self.result.text!)
     }
     
     func textFieldDidChange(_ textField: UITextField) {
-        if let text = textField.text, text.characters.count > 0 {
+        if textField.text != nil{
             AppCore.sharedActor().model?.searchQuery(with: textField.text!)
         }
     }
@@ -65,6 +67,7 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
     
     func accept(withId val: Any!) {
         res = (val as! JavaUtilArrayList).toNSArray()
+        self.list.reloadData()
     }
 
 }
