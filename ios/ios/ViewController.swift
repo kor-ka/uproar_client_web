@@ -32,7 +32,7 @@ class ViewController: UIViewController,  RuKorincRuntimeRxConsumer, UITableViewD
         
         // Adding the right informations
         cell.textLabel?.text = element.getTitle()
-        cell.detailTextLabel?.text = element.getYear()
+        cell.detailTextLabel?.text = element.additionalInfo()
         // Returning the cell
         return cell
     }

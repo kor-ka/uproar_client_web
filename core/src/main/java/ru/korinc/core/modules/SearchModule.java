@@ -66,7 +66,7 @@ public class SearchModule extends ModuleBase {
                 for (int i = 0; i < resp.length(); i++) {
                     movieJson = resp.getJsonObjectWrapper(i);
                     movieInfo = new Movie(movieJson.getString("Title"),
-                            movieJson.getString("Year"));
+                            movieJson.getString("Year") + " | " + movieJson.getString("Type"));
                     res.add(movieInfo);
                 }
                 return res;

@@ -9,13 +9,13 @@
 @interface RuKorincCoreEntityMovie () {
  @public
   NSString *title_;
-  NSString *year_;
+  NSString *additionalInfo_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(RuKorincCoreEntityMovie, title_, NSString *)
-J2OBJC_FIELD_SETTER(RuKorincCoreEntityMovie, year_, NSString *)
+J2OBJC_FIELD_SETTER(RuKorincCoreEntityMovie, additionalInfo_, NSString *)
 
 @implementation RuKorincCoreEntityMovie
 
@@ -29,8 +29,8 @@ J2OBJC_FIELD_SETTER(RuKorincCoreEntityMovie, year_, NSString *)
   return title_;
 }
 
-- (NSString *)getYear {
-  return year_;
+- (NSString *)additionalInfo {
+  return additionalInfo_;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -43,11 +43,11 @@ J2OBJC_FIELD_SETTER(RuKorincCoreEntityMovie, year_, NSString *)
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(initWithNSString:withNSString:);
   methods[1].selector = @selector(getTitle);
-  methods[2].selector = @selector(getYear);
+  methods[2].selector = @selector(additionalInfo);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "title_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "year_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "additionalInfo_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LNSString;LNSString;" };
   static const J2ObjcClassInfo _RuKorincCoreEntityMovie = { "Movie", "ru.korinc.core.entity", ptrTable, methods, fields, 7, 0x1, 3, 2, -1, -1, -1, -1, -1 };
@@ -59,7 +59,7 @@ J2OBJC_FIELD_SETTER(RuKorincCoreEntityMovie, year_, NSString *)
 void RuKorincCoreEntityMovie_initWithNSString_withNSString_(RuKorincCoreEntityMovie *self, NSString *title, NSString *year) {
   NSObject_init(self);
   self->title_ = title;
-  self->year_ = year;
+  self->additionalInfo_ = year;
 }
 
 RuKorincCoreEntityMovie *new_RuKorincCoreEntityMovie_initWithNSString_withNSString_(NSString *title, NSString *year) {

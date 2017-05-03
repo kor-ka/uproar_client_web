@@ -23,9 +23,9 @@
 - (instancetype)initWithNSString:(NSString *)title
                     withNSString:(NSString *)year;
 
-- (NSString *)getTitle;
+- (NSString *)additionalInfo;
 
-- (NSString *)getYear;
+- (NSString *)getTitle;
 
 @end
 

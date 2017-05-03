@@ -14,14 +14,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import ru.korinc.core.Model;
 import ru.korinc.core.entity.Movie;
 import ru.korinc.j2objc.adapter.AwesomeAdapter;
 import ru.korinc.j2objc.adapter.matcher.ViewHolder;
-import ru.korinc.j2objc.adapter.matcher.XMLLayouter;
 import ru.korinc.j2objc.runtime.rx.AndroidObservable;
 
 public class MainActivity extends AppCompatActivity {
@@ -85,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void performBind(Movie data) {
             super.performBind(data);
-            tv.setText(data.getTitle() + "\n" + data.getYear());
+            tv.setText(data.getTitle() + "\n" + data.additionalInfo());
         }
     }
 }
