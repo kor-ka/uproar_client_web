@@ -22,6 +22,7 @@ public class HttpObserver {
         return rxProvider.observableCreate((ObservableOnSubscribe<HttpResponse>) e -> {
             try {
                 HttpResponse response = http.getExecutor().get(url, headers);
+                assert response != null;
                 if (response.getCode() / 100 == 2) {
                     e.onNext(response);
                     e.onComplete();
@@ -40,8 +41,9 @@ public class HttpObserver {
 
         return rxProvider.observableCreate((ObservableOnSubscribe<HttpResponse>) e -> {
             try {
-
                 HttpResponse response = http.getExecutor().put(url, data, headers);
+                assert response != null;
+
                 if (response.getCode() / 100 == 2) {
                     e.onNext(response);
                     e.onComplete();

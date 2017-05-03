@@ -13,6 +13,7 @@ import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.network.HttpObserver;
 import ru.korinc.runtime.network.HttpResponse;
+import ru.korinc.runtime.rx.Consumer;
 import ru.korinc.runtime.rx.Function;
 import ru.korinc.runtime.rx.ObservableWrapper;
 import ru.korinc.runtime.rx.subject.BSWrapper;
@@ -52,55 +53,71 @@ public class SearchModule extends ModuleBase {
     private Query lastQuery;
 
     public void query(Query query) {
+
+        // skip page change if query changed
         if (lastQuery != null && query.getPage() > 1 && !query.getTitle()
                 .endsWith(lastQuery.getTitle())) {
             return;
         }
+
+        if (lastQuery == null || !lastQuery.getTitle().equals(query.getTitle())) {
+            ArrayList<SearchEntity> empty = new ArrayList<>();
+            empty.add(new Movie("Loading...", ""));
+            searchResults.onNext(empty);
+        }
+
         lastQuery = query;
 
         if (input == null) {
             input = mRxProvider.bs(query);
 
-            ObservableWrapper<Touple<Query, HttpResponse>> httpResponseObservableWrapper = input
+            ObservableWrapper<ArrayList<SearchEntity>> httpResponseObservableWrapper = input
                     .switchOnNext(
                     input
                             .throttleLast(500)
                             .map(s -> HttpObserver.get(s.toString(), new String[]{})
                                             .map(httpResponse -> new Touple<>(s, httpResponse))
+                                            .map(respAndQuery -> {
+                                                ArrayList<SearchEntity> res = new ArrayList<>();
+
+                                                JsonArrayWrapper resp = json
+                                                        .getJson(respAndQuery.getB().getContent())
+                                                        .getJsonArray("Search");
+                                                if (resp == null) {
+                                                    res.addAll(respAndQuery.getA().getOldResults());
+                                                    if (res.size() == 0) {
+                                                        res.add(new Movie("Movie not found :\'(", ""));
+                                                    }
+                                                    return res;
+                                                }
+                                                JsonObjectWrapper movieJson;
+                                                for (int i = 0; i < resp.length(); i++) {
+                                                    final Movie movieInfo;
+                                                    movieJson = resp.getJsonObjectWrapper(i);
+                                                    movieInfo = new Movie(movieJson.getString("Title"),
+                                                            movieJson.getString("Year") + " | " + movieJson
+                                                                    .getString("Type"));
+
+//                                                    HttpObserver.get("http://www.omdbapi.com/?i=" + movieJson.getString("imdbID")).subscribe(
+//                                                            httpResponse -> movieInfo.setAdditionalInfo(movieInfo.additionalInfo() + " | "+ json.getJson(httpResponse.getContent()).getString("Plot")));
+
+                                                    res.add(movieInfo);
+                                                }
+
+                                                res.addAll(0, respAndQuery.getA().getOldResults());
+
+                                                Query q = respAndQuery.getA();
+                                                q.setPage(respAndQuery.getA().getPage() + 1);
+                                                ArrayList<SearchEntity> oldResults = new ArrayList<>(res);
+                                                q.setOldResults(oldResults);
+                                                res.add(new Load(q));
+
+                                                return res;
+                                            })
                             .subscribeOn(mRxProvider.scheduler())
                             )
             );
-            httpResponseObservableWrapper.map(respAndQuery -> {
-                ArrayList<SearchEntity> res = new ArrayList<>();
-
-                JsonArrayWrapper resp = json.getJson(respAndQuery.getB().getContent())
-                        .getJsonArray("Search");
-                if (resp == null) {
-                    res.addAll(respAndQuery.getA().getOldResults());
-                    if (res.size() == 0) {
-                        res.add(new Movie("Movie not found :\'(", ""));
-                    }
-                    return res;
-                }
-                Movie movieInfo;
-                JsonObjectWrapper movieJson;
-                for (int i = 0; i < resp.length(); i++) {
-                    movieJson = resp.getJsonObjectWrapper(i);
-                    movieInfo = new Movie(movieJson.getString("Title"),
-                            movieJson.getString("Year") + " | " + movieJson.getString("Type"));
-                    res.add(movieInfo);
-                }
-
-                res.addAll(0, respAndQuery.getA().getOldResults());
-
-                Query q = respAndQuery.getA();
-                q.setPage(respAndQuery.getA().getPage() + 1);
-                ArrayList<SearchEntity> oldResults = new ArrayList<>(res);
-                q.setOldResults(oldResults);
-                res.add(new Load(q));
-
-                return res;
-            })
+            httpResponseObservableWrapper
                     .subscribeOn(mRxProvider.scheduler()).subscribe(
                     res -> {
                         searchResults.onNext(res);

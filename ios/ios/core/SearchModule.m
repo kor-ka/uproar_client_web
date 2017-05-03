@@ -61,23 +61,6 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$2 *new_Ru
 
 __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$2 *create_RuKorincCoreModulesSearchModule_$Lambda$2_initWithRuKorincCoreEntityQuery_(RuKorincCoreEntityQuery *capture$0);
 
-@interface RuKorincCoreModulesSearchModule_$Lambda$1 : NSObject < RuKorincRuntimeRxFunction > {
- @public
-  RuKorincCoreModulesSearchModule *this$0_;
-}
-
-- (id)applyWithId:(RuKorincCoreEntityQuery *)s;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(RuKorincCoreModulesSearchModule_$Lambda$1)
-
-__attribute__((unused)) static void RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule_$Lambda$1 *self, RuKorincCoreModulesSearchModule *outer$);
-
-__attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$1 *new_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule *outer$) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$1 *create_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule *outer$);
-
 @interface RuKorincCoreModulesSearchModule_$Lambda$3 : NSObject < RuKorincRuntimeRxFunction >
 
 - (id)applyWithId:(RuKorincUtilsTouple *)respAndQuery;
@@ -95,6 +78,23 @@ __attribute__((unused)) static void RuKorincCoreModulesSearchModule_$Lambda$3_in
 __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$3 *new_RuKorincCoreModulesSearchModule_$Lambda$3_init() NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$3 *create_RuKorincCoreModulesSearchModule_$Lambda$3_init();
+
+@interface RuKorincCoreModulesSearchModule_$Lambda$1 : NSObject < RuKorincRuntimeRxFunction > {
+ @public
+  RuKorincCoreModulesSearchModule *this$0_;
+}
+
+- (id)applyWithId:(RuKorincCoreEntityQuery *)s;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(RuKorincCoreModulesSearchModule_$Lambda$1)
+
+__attribute__((unused)) static void RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule_$Lambda$1 *self, RuKorincCoreModulesSearchModule *outer$);
+
+__attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$1 *new_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$1 *create_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule *outer$);
 
 @interface RuKorincCoreModulesSearchModule_$Lambda$4 : NSObject < RuKorincRuntimeRxConsumer > {
  @public
@@ -134,11 +134,16 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$4 *create
   if (lastQuery_ != nil && [((RuKorincCoreEntityQuery *) nil_chk(query)) getPage] > 1 && ![((NSString *) nil_chk([query getTitle])) hasSuffix:[((RuKorincCoreEntityQuery *) nil_chk(lastQuery_)) getTitle]]) {
     return;
   }
+  if (lastQuery_ == nil || ![((NSString *) nil_chk([lastQuery_ getTitle])) isEqual:[((RuKorincCoreEntityQuery *) nil_chk(query)) getTitle]]) {
+    JavaUtilArrayList *empty = new_JavaUtilArrayList_init();
+    [empty addWithId:new_RuKorincCoreEntityMovie_initWithNSString_withNSString_(@"Loading...", @"")];
+    [((id<RuKorincRuntimeRxSubjectBSWrapper>) nil_chk(searchResults_)) onNextWithId:empty];
+  }
   lastQuery_ = query;
   if (input_ == nil) {
     input_ = [((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) bsWithId:query];
     id<RuKorincRuntimeRxObservableWrapper> httpResponseObservableWrapper = [((id<RuKorincRuntimeRxSubjectBSWrapper>) nil_chk(input_)) switchOnNextWithSources:[((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([input_ throttleLastWithWindowMillis:500])) mapWithFunc:new_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(self)]];
-    (void) [((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(httpResponseObservableWrapper)) mapWithFunc:JreLoadStatic(RuKorincCoreModulesSearchModule_$Lambda$3, instance)])) subscribeOnWithScheduler:[((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) scheduler]])) subscribeWithConsumer:new_RuKorincCoreModulesSearchModule_$Lambda$4_initWithRuKorincCoreModulesSearchModule_(self)];
+    (void) [((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(httpResponseObservableWrapper)) subscribeOnWithScheduler:[((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) scheduler]])) subscribeWithConsumer:new_RuKorincCoreModulesSearchModule_$Lambda$4_initWithRuKorincCoreModulesSearchModule_(self)];
   }
   else {
     [input_ onNextWithId:query];
@@ -212,27 +217,6 @@ RuKorincCoreModulesSearchModule_$Lambda$2 *create_RuKorincCoreModulesSearchModul
   J2OBJC_CREATE_IMPL(RuKorincCoreModulesSearchModule_$Lambda$2, initWithRuKorincCoreEntityQuery_, capture$0)
 }
 
-@implementation RuKorincCoreModulesSearchModule_$Lambda$1
-
-- (id)applyWithId:(RuKorincCoreEntityQuery *)s {
-  return [((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(RuKorincRuntimeNetworkHttpObserver_getWithNSString_withNSStringArray_([((RuKorincCoreEntityQuery *) nil_chk(s)) description], [IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()]))) mapWithFunc:new_RuKorincCoreModulesSearchModule_$Lambda$2_initWithRuKorincCoreEntityQuery_(s)])) subscribeOnWithScheduler:[((id<RuKorincRuntimeRxRxProvider>) nil_chk(this$0_->mRxProvider_)) scheduler]];
-}
-
-@end
-
-void RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule_$Lambda$1 *self, RuKorincCoreModulesSearchModule *outer$) {
-  self->this$0_ = outer$;
-  NSObject_init(self);
-}
-
-RuKorincCoreModulesSearchModule_$Lambda$1 *new_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule *outer$) {
-  J2OBJC_NEW_IMPL(RuKorincCoreModulesSearchModule_$Lambda$1, initWithRuKorincCoreModulesSearchModule_, outer$)
-}
-
-RuKorincCoreModulesSearchModule_$Lambda$1 *create_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule *outer$) {
-  J2OBJC_CREATE_IMPL(RuKorincCoreModulesSearchModule_$Lambda$1, initWithRuKorincCoreModulesSearchModule_, outer$)
-}
-
 J2OBJC_INITIALIZED_DEFN(RuKorincCoreModulesSearchModule_$Lambda$3)
 
 @implementation RuKorincCoreModulesSearchModule_$Lambda$3
@@ -247,9 +231,9 @@ J2OBJC_INITIALIZED_DEFN(RuKorincCoreModulesSearchModule_$Lambda$3)
     }
     return res;
   }
-  RuKorincCoreEntityMovie *movieInfo;
   id<RuKorincRuntimeJsonJsonObjectWrapper> movieJson;
   for (jint i = 0; i < [resp length]; i++) {
+    RuKorincCoreEntityMovie *movieInfo;
     movieJson = [resp getJsonObjectWrapperWithInt:i];
     movieInfo = new_RuKorincCoreEntityMovie_initWithNSString_withNSString_([((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk(movieJson)) getStringWithNSString:@"Title"], JreStrcat("$$$", [movieJson getStringWithNSString:@"Year"], @" | ", [movieJson getStringWithNSString:@"Type"]));
     [res addWithId:movieInfo];
@@ -282,6 +266,27 @@ RuKorincCoreModulesSearchModule_$Lambda$3 *new_RuKorincCoreModulesSearchModule_$
 
 RuKorincCoreModulesSearchModule_$Lambda$3 *create_RuKorincCoreModulesSearchModule_$Lambda$3_init() {
   J2OBJC_CREATE_IMPL(RuKorincCoreModulesSearchModule_$Lambda$3, init)
+}
+
+@implementation RuKorincCoreModulesSearchModule_$Lambda$1
+
+- (id)applyWithId:(RuKorincCoreEntityQuery *)s {
+  return [((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(RuKorincRuntimeNetworkHttpObserver_getWithNSString_withNSStringArray_([((RuKorincCoreEntityQuery *) nil_chk(s)) description], [IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()]))) mapWithFunc:new_RuKorincCoreModulesSearchModule_$Lambda$2_initWithRuKorincCoreEntityQuery_(s)])) mapWithFunc:JreLoadStatic(RuKorincCoreModulesSearchModule_$Lambda$3, instance)])) subscribeOnWithScheduler:[((id<RuKorincRuntimeRxRxProvider>) nil_chk(this$0_->mRxProvider_)) scheduler]];
+}
+
+@end
+
+void RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule_$Lambda$1 *self, RuKorincCoreModulesSearchModule *outer$) {
+  self->this$0_ = outer$;
+  NSObject_init(self);
+}
+
+RuKorincCoreModulesSearchModule_$Lambda$1 *new_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule *outer$) {
+  J2OBJC_NEW_IMPL(RuKorincCoreModulesSearchModule_$Lambda$1, initWithRuKorincCoreModulesSearchModule_, outer$)
+}
+
+RuKorincCoreModulesSearchModule_$Lambda$1 *create_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(RuKorincCoreModulesSearchModule *outer$) {
+  J2OBJC_CREATE_IMPL(RuKorincCoreModulesSearchModule_$Lambda$1, initWithRuKorincCoreModulesSearchModule_, outer$)
 }
 
 @implementation RuKorincCoreModulesSearchModule_$Lambda$4

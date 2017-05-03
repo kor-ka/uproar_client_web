@@ -34,24 +34,38 @@ J2OBJC_FIELD_SETTER(RuKorincCoreEntityMovie, additionalInfo_, NSString *)
   return additionalInfo_;
 }
 
+- (RuKorincCoreEntityMovie *)setTitleWithNSString:(NSString *)title {
+  self->title_ = title;
+  return self;
+}
+
+- (RuKorincCoreEntityMovie *)setAdditionalInfoWithNSString:(NSString *)additionalInfo {
+  self->additionalInfo_ = additionalInfo;
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LRuKorincCoreEntityMovie;", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "LRuKorincCoreEntityMovie;", 0x1, 3, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(initWithNSString:withNSString:);
   methods[1].selector = @selector(getTitle);
   methods[2].selector = @selector(additionalInfo);
+  methods[3].selector = @selector(setTitleWithNSString:);
+  methods[4].selector = @selector(setAdditionalInfoWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "title_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "additionalInfo_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LNSString;LNSString;" };
-  static const J2ObjcClassInfo _RuKorincCoreEntityMovie = { "Movie", "ru.korinc.core.entity", ptrTable, methods, fields, 7, 0x1, 3, 2, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LNSString;LNSString;", "setTitle", "LNSString;", "setAdditionalInfo" };
+  static const J2ObjcClassInfo _RuKorincCoreEntityMovie = { "Movie", "ru.korinc.core.entity", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, -1, -1 };
   return &_RuKorincCoreEntityMovie;
 }
 

@@ -31,6 +31,10 @@
 
 - (NSString *)getTitle;
 
+- (RuKorincCoreEntityMovie *)setAdditionalInfoWithNSString:(NSString *)additionalInfo;
+
+- (RuKorincCoreEntityMovie *)setTitleWithNSString:(NSString *)title;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(RuKorincCoreEntityMovie)

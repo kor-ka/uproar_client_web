@@ -22,4 +22,14 @@ public class Movie extends SearchEntity {
     public String additionalInfo() {
         return additionalInfo;
     }
+
+    public Movie setTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public Movie setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
+        return this;
+    }
 }
