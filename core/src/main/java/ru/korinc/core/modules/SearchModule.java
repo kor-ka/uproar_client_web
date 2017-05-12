@@ -98,7 +98,7 @@ public class SearchModule extends ModuleBase {
                                                     subtitle);
 
                                             //TODO get Plot from http://www.omdbapi.com/?i=imdbID
-
+                                            res.add(movieInfo);
                                         }
 
                                         res.addAll(0, respAndQuery.getA().getOldResults());

@@ -235,8 +235,8 @@ J2OBJC_INITIALIZED_DEFN(RuKorincCoreModulesSearchModule_$Lambda$3)
   for (jint i = 0; i < [resp length]; i++) {
     RuKorincCoreEntityMovie *movieInfo;
     movieJson = [resp getJsonObjectWrapperWithInt:i];
-    movieInfo = new_RuKorincCoreEntityMovie_initWithNSString_withNSString_([((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk(movieJson)) getStringWithNSString:@"Title"], JreStrcat("$$$", [movieJson getStringWithNSString:@"Year"], @" | ", [movieJson getStringWithNSString:@"Type"]));
-    [res addWithId:movieInfo];
+    NSString *subtitle = JreStrcat("$$$", [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk(movieJson)) getStringWithNSString:@"Year"], @" | ", [movieJson getStringWithNSString:@"Type"]);
+    movieInfo = new_RuKorincCoreEntityMovie_initWithNSString_withNSString_([movieJson getStringWithNSString:@"Title"], subtitle);
   }
   [res addAllWithInt:0 withJavaUtilCollection:[((RuKorincCoreEntityQuery *) nil_chk([respAndQuery getA])) getOldResults]];
   RuKorincCoreEntityQuery *q = [respAndQuery getA];
