@@ -78,7 +78,8 @@ public class AndroidObservable<T> implements ObservableWrapper<T> {
     }
 
     public ObservableWrapper<T> throttleLast(long windowMillis) {
-        return new AndroidObservable<T>(source.throttleLast(windowMillis, TimeUnit.MILLISECONDS));
+        return new AndroidObservable<T>(
+                source.throttleWithTimeout(windowMillis, TimeUnit.MILLISECONDS));
     }
 
     @Override

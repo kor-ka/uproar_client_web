@@ -72,57 +72,49 @@ public class SearchModule extends ModuleBase {
             input = mRxProvider.bs(query);
 
             ObservableWrapper<ArrayList<SearchEntity>> httpResponseObservableWrapper = input
-                    .switchOnNext(
-                    input
-                            .throttleLast(500)
+                    .switchOnNext(input.throttleLast(500)
                             .map(s -> HttpObserver.get(s.toString(), new String[]{})
-                                            .map(httpResponse -> new Touple<>(s, httpResponse))
-                                            .map(respAndQuery -> {
-                                                ArrayList<SearchEntity> res = new ArrayList<>();
+                                    .map(httpResponse -> new Touple<>(s, httpResponse))
+                                    .map(respAndQuery -> {
+                                        ArrayList<SearchEntity> res = new ArrayList<>();
 
-                                                JsonArrayWrapper resp = json
-                                                        .getJson(respAndQuery.getB().getContent())
-                                                        .getJsonArray("Search");
-                                                if (resp == null) {
-                                                    res.addAll(respAndQuery.getA().getOldResults());
-                                                    if (res.size() == 0) {
-                                                        res.add(new Movie("Movie not found :\'(", ""));
-                                                    }
-                                                    return res;
-                                                }
-                                                JsonObjectWrapper movieJson;
-                                                for (int i = 0; i < resp.length(); i++) {
-                                                    final Movie movieInfo;
-                                                    movieJson = resp.getJsonObjectWrapper(i);
-                                                    movieInfo = new Movie(movieJson.getString("Title"),
-                                                            movieJson.getString("Year") + " | " + movieJson
-                                                                    .getString("Type"));
+                                        JsonArrayWrapper resp = json
+                                                .getJson(respAndQuery.getB().getContent())
+                                                .getJsonArray("Search");
+                                        if (resp == null) {
+                                            res.addAll(respAndQuery.getA().getOldResults());
+                                            if (res.size() == 0) {
+                                                res.add(new Movie("Movie not found :\'(", ""));
+                                            }
+                                            return res;
+                                        }
+                                        JsonObjectWrapper movieJson;
+                                        for (int i = 0; i < resp.length(); i++) {
+                                            final Movie movieInfo;
+                                            movieJson = resp.getJsonObjectWrapper(i);
+                                            String subtitle = movieJson.getString("Year") + " | "
+                                                    + movieJson.getString("Type");
+                                            movieInfo = new Movie(movieJson.getString("Title"),
+                                                    subtitle);
 
-//                                                    HttpObserver.get("http://www.omdbapi.com/?i=" + movieJson.getString("imdbID")).subscribe(
-//                                                            httpResponse -> movieInfo.setAdditionalInfo(movieInfo.additionalInfo() + " | "+ json.getJson(httpResponse.getContent()).getString("Plot")));
+                                            //TODO get Plot from http://www.omdbapi.com/?i=imdbID
 
-                                                    res.add(movieInfo);
-                                                }
+                                        }
 
-                                                res.addAll(0, respAndQuery.getA().getOldResults());
+                                        res.addAll(0, respAndQuery.getA().getOldResults());
 
-                                                Query q = respAndQuery.getA();
-                                                q.setPage(respAndQuery.getA().getPage() + 1);
-                                                ArrayList<SearchEntity> oldResults = new ArrayList<>(res);
-                                                q.setOldResults(oldResults);
-                                                res.add(new Load(q));
+                                        Query q = respAndQuery.getA();
+                                        q.setPage(respAndQuery.getA().getPage() + 1);
+                                        ArrayList<SearchEntity> oldResults = new ArrayList<>(res);
+                                        q.setOldResults(oldResults);
+                                        res.add(new Load(q));
 
-                                                return res;
-                                            })
-                            .subscribeOn(mRxProvider.scheduler())
-                            )
-            );
-            httpResponseObservableWrapper
-                    .subscribeOn(mRxProvider.scheduler()).subscribe(
-                    res -> {
-                        searchResults.onNext(res);
-                        log.d("result", res.toString());
-                    });
+                                        return res;
+                                    }).subscribeOn(mRxProvider.scheduler())));
+            httpResponseObservableWrapper.subscribeOn(mRxProvider.scheduler()).subscribe(res -> {
+                searchResults.onNext(res);
+                log.d("result", res.toString());
+            });
         } else {
             input.onNext(query);
         }
