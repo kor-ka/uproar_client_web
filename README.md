@@ -2,7 +2,8 @@
 
 ###j2objc_rxwrapper - настроенная среда + набор библиотек для разработки кроссплатформенного ядра бизнесс логики
 
-j2objc - open source инструмент от google для перевода java в obj-c; используется в паре с gwt в таких проектах как google keep и inbox 
+j2objc - open source инструмент от google для перевода java в obj-c; используется в паре с gwt в таких проектах как google keep и inbox
+
 ractiveX - "An API for asynchronous programming with observable streams" удобная парадигма разработки (на данный момент широко используется в qiwi при разработке мобильных приложений)
 
 j2objc_rxwrapper - попытка объединить две эти технологии для наиболее эффективного переиспользования переносимой кодовой базы frontend'a
