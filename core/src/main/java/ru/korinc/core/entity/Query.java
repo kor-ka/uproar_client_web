@@ -52,7 +52,8 @@ public class Query {
     public String toString() {
 
         try {
-            return "http://www.omdbapi.com/?s=" + URLEncoder.encode(title, "UTF-8") + "&page="
+            return "http://www.omdbapi.com/?apikey=7b7f708c&s=" + URLEncoder.encode(title, "UTF-8")
+                    + "&page="
                     + page;
         } catch (UnsupportedEncodingException e) {
             return "";
