@@ -69,6 +69,11 @@ public abstract class TypedObservable<T> implements ObservableWrapper<T> {
     }
 
     @Override
+    public ObservableWrapper<Long> timer(long millis) {
+        return source.timer(millis);
+    }
+
+    @Override
     public <S> ObservableWrapper<S> switchOnNext(
             ObservableWrapper<? extends ObservableWrapper<? extends S>> sources) {
         //Fixme: cast hell detected

@@ -22,6 +22,7 @@
 
 @class RuKorincCoreEntityQuery;
 @class RuKorincCoreEntitySearchEntity;
+@protocol JavaUtilCollection;
 
 @interface RuKorincCoreEntitySearchResults : JavaUtilArrayList
 
@@ -39,6 +40,14 @@
                                         withId:(RuKorincCoreEntitySearchEntity *)arg1;
 
 #pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithInt:(jint)arg0 NS_UNAVAILABLE;
+
+- (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)arg0 NS_UNAVAILABLE;
 
 @end
 

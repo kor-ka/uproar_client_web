@@ -21,10 +21,10 @@
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(onNextWithId:);
-  methods[1].selector = @selector(onErrorWithNSException:);
+  methods[1].selector = @selector(onErrorWithJavaLangThrowable:);
   methods[2].selector = @selector(onComplete);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "onNext", "LNSObject;", "(TT;)V", "onError", "LNSException;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const void *ptrTable[] = { "onNext", "LNSObject;", "(TT;)V", "onError", "LJavaLangThrowable;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
   static const J2ObjcClassInfo _RuKorincRuntimeRxObserverWrapper = { "ObserverWrapper", "ru.korinc.runtime.rx", ptrTable, methods, NULL, 7, 0x609, 3, 0, -1, -1, -1, 5, -1 };
   return &_RuKorincRuntimeRxObserverWrapper;
 }

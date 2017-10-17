@@ -33,6 +33,9 @@ public interface ObservableWrapper<T> {
     @ObjectiveCName("delayWithWindowMillis:")
     ObservableWrapper<T> delay(long millis);
 
+    @ObjectiveCName("timerWithWindowMillis:")
+    ObservableWrapper<Long> timer(long millis);
+
     @ObjectiveCName("retryWhenWithWindowMillis:")
     ObservableWrapper<T> retryWhen(
             Function<? super ObservableWrapper<Throwable>, ? extends ObservableWrapper<?>> handler);

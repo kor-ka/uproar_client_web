@@ -47,3 +47,4 @@
 
 #include "java/util/List.h"
 #include "java/util/ArrayList.h"
+#include "java/lang/Throwable.h"

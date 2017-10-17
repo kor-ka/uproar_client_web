@@ -39,6 +39,8 @@
 
 - (id<RuKorincRuntimeRxObservableWrapper>)delayWithWindowMillis:(jlong)millis;
 
+- (id<RuKorincRuntimeRxObservableWrapper>)timerWithWindowMillis:(jlong)millis;
+
 - (id<RuKorincRuntimeRxObservableWrapper>)retryWhenWithWindowMillis:(id<RuKorincRuntimeRxFunction>)handler;
 
 - (id<RuKorincRuntimeRxObservableWrapper>)switchOnNextWithSources:(id<RuKorincRuntimeRxObservableWrapper>)sources;

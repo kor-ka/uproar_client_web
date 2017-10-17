@@ -58,7 +58,7 @@ J2OBJC_FIELD_SETTER(RuKorincCoreEntityQuery, oldResults_, JavaUtilArrayList *)
 
 - (NSString *)description {
   @try {
-    return JreStrcat("$$$I", @"http://www.omdbapi.com/?s=", JavaNetURLEncoder_encodeWithNSString_withNSString_(title_, @"UTF-8"), @"&page=", page_);
+    return JreStrcat("$$$I", @"http://www.omdbapi.com/?apikey=7b7f708c&s=", JavaNetURLEncoder_encodeWithNSString_withNSString_(title_, @"UTF-8"), @"&page=", page_);
   }
   @catch (JavaIoUnsupportedEncodingException *e) {
     return @"";

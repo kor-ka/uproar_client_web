@@ -89,11 +89,16 @@ public class AndroidObservable<T> implements ObservableWrapper<T> {
     }
 
     @Override
+    public ObservableWrapper<Long> timer(long millis) {
+        return new AndroidObservable<>(Observable.timer(millis, TimeUnit.MILLISECONDS));
+    }
+
+    @Override
     public ObservableWrapper<T> retryWhen(
             final ru.korinc.runtime.rx.Function<? super ObservableWrapper<Throwable>, ? extends ObservableWrapper<?>> handler) {
-        return new AndroidObservable<T>(source.retryWhen(
+        return new AndroidObservable<>(source.retryWhen(
                 throwableObservable -> ((AndroidObservable<?>) handler
-                        .apply(new AndroidObservable<Throwable>(throwableObservable))).source));
+                        .apply(new AndroidObservable<>(throwableObservable))).source));
 
     }
 

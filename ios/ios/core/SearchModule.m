@@ -131,7 +131,7 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$4 *create
 }
 
 - (void)queryWithRuKorincCoreEntityQuery:(RuKorincCoreEntityQuery *)query {
-  if (lastQuery_ != nil && [((RuKorincCoreEntityQuery *) nil_chk(query)) getPage] > 1 && ![((NSString *) nil_chk([query getTitle])) hasSuffix:[((RuKorincCoreEntityQuery *) nil_chk(lastQuery_)) getTitle]]) {
+  if (lastQuery_ != nil && [((RuKorincCoreEntityQuery *) nil_chk(query)) getPage] > 1 && ![((NSString *) nil_chk([query getTitle])) java_hasSuffix:[((RuKorincCoreEntityQuery *) nil_chk(lastQuery_)) getTitle]]) {
     return;
   }
   if (lastQuery_ == nil || ![((NSString *) nil_chk([lastQuery_ getTitle])) isEqual:[((RuKorincCoreEntityQuery *) nil_chk(query)) getTitle]]) {
@@ -237,6 +237,7 @@ J2OBJC_INITIALIZED_DEFN(RuKorincCoreModulesSearchModule_$Lambda$3)
     movieJson = [resp getJsonObjectWrapperWithInt:i];
     NSString *subtitle = JreStrcat("$$$", [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk(movieJson)) getStringWithNSString:@"Year"], @" | ", [movieJson getStringWithNSString:@"Type"]);
     movieInfo = new_RuKorincCoreEntityMovie_initWithNSString_withNSString_([movieJson getStringWithNSString:@"Title"], subtitle);
+    [res addWithId:movieInfo];
   }
   [res addAllWithInt:0 withJavaUtilCollection:[((RuKorincCoreEntityQuery *) nil_chk([respAndQuery getA])) getOldResults]];
   RuKorincCoreEntityQuery *q = [respAndQuery getA];

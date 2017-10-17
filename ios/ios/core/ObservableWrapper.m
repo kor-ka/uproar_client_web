@@ -22,8 +22,9 @@
     { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x401, 11, 9, -1, 12, -1, -1 },
     { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x401, 13, 14, -1, 15, -1, -1 },
     { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x401, 16, 14, -1, 15, -1, -1 },
-    { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x401, 17, 9, -1, 18, -1, -1 },
-    { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x401, 19, 20, -1, 21, -1, -1 },
+    { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x401, 17, 14, -1, 18, -1, -1 },
+    { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x401, 19, 9, -1, 20, -1, -1 },
+    { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x401, 21, 22, -1, 23, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -35,11 +36,12 @@
   methods[5].selector = @selector(flatMapWithFunc:);
   methods[6].selector = @selector(throttleLastWithWindowMillis:);
   methods[7].selector = @selector(delayWithWindowMillis:);
-  methods[8].selector = @selector(retryWhenWithWindowMillis:);
-  methods[9].selector = @selector(switchOnNextWithSources:);
+  methods[8].selector = @selector(timerWithWindowMillis:);
+  methods[9].selector = @selector(retryWhenWithWindowMillis:);
+  methods[10].selector = @selector(switchOnNextWithSources:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "()Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "observeOn", "LRuKorincRuntimeRxBackgroundSchedulerWrapper;", "(Lru/korinc/runtime/rx/BackgroundSchedulerWrapper;)Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "subscribeOn", "subscribe", "LRuKorincRuntimeRxConsumer;", "(Lru/korinc/runtime/rx/Consumer<TT;>;)Lru/korinc/runtime/rx/DisposableWrapper;", "map", "LRuKorincRuntimeRxFunction;", "<R:Ljava/lang/Object;>(Lru/korinc/runtime/rx/Function<-TT;+TR;>;)Lru/korinc/runtime/rx/ObservableWrapper<TR;>;", "flatMap", "<R:Ljava/lang/Object;>(Lru/korinc/runtime/rx/Function<-TT;+Lru/korinc/runtime/rx/ObservableWrapper<+TR;>;>;)Lru/korinc/runtime/rx/ObservableWrapper<TR;>;", "throttleLast", "J", "(J)Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "delay", "retryWhen", "(Lru/korinc/runtime/rx/Function<-Lru/korinc/runtime/rx/ObservableWrapper<Ljava/lang/Throwable;>;+Lru/korinc/runtime/rx/ObservableWrapper<*>;>;)Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "switchOnNext", "LRuKorincRuntimeRxObservableWrapper;", "<S:Ljava/lang/Object;>(Lru/korinc/runtime/rx/ObservableWrapper<+Lru/korinc/runtime/rx/ObservableWrapper<+TS;>;>;)Lru/korinc/runtime/rx/ObservableWrapper<TS;>;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
-  static const J2ObjcClassInfo _RuKorincRuntimeRxObservableWrapper = { "ObservableWrapper", "ru.korinc.runtime.rx", ptrTable, methods, NULL, 7, 0x609, 10, 0, -1, -1, -1, 22, -1 };
+  static const void *ptrTable[] = { "()Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "observeOn", "LRuKorincRuntimeRxBackgroundSchedulerWrapper;", "(Lru/korinc/runtime/rx/BackgroundSchedulerWrapper;)Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "subscribeOn", "subscribe", "LRuKorincRuntimeRxConsumer;", "(Lru/korinc/runtime/rx/Consumer<TT;>;)Lru/korinc/runtime/rx/DisposableWrapper;", "map", "LRuKorincRuntimeRxFunction;", "<R:Ljava/lang/Object;>(Lru/korinc/runtime/rx/Function<-TT;+TR;>;)Lru/korinc/runtime/rx/ObservableWrapper<TR;>;", "flatMap", "<R:Ljava/lang/Object;>(Lru/korinc/runtime/rx/Function<-TT;+Lru/korinc/runtime/rx/ObservableWrapper<+TR;>;>;)Lru/korinc/runtime/rx/ObservableWrapper<TR;>;", "throttleLast", "J", "(J)Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "delay", "timer", "(J)Lru/korinc/runtime/rx/ObservableWrapper<Ljava/lang/Long;>;", "retryWhen", "(Lru/korinc/runtime/rx/Function<-Lru/korinc/runtime/rx/ObservableWrapper<Ljava/lang/Throwable;>;+Lru/korinc/runtime/rx/ObservableWrapper<*>;>;)Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "switchOnNext", "LRuKorincRuntimeRxObservableWrapper;", "<S:Ljava/lang/Object;>(Lru/korinc/runtime/rx/ObservableWrapper<+Lru/korinc/runtime/rx/ObservableWrapper<+TS;>;>;)Lru/korinc/runtime/rx/ObservableWrapper<TS;>;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _RuKorincRuntimeRxObservableWrapper = { "ObservableWrapper", "ru.korinc.runtime.rx", ptrTable, methods, NULL, 7, 0x609, 11, 0, -1, -1, -1, 24, -1 };
   return &_RuKorincRuntimeRxObservableWrapper;
 }
 

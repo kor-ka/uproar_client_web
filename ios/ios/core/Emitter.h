@@ -16,11 +16,13 @@
 #if !defined (RuKorincRuntimeRxEmitter_) && (INCLUDE_ALL_Emitter || defined(INCLUDE_RuKorincRuntimeRxEmitter))
 #define RuKorincRuntimeRxEmitter_
 
+@class JavaLangThrowable;
+
 @protocol RuKorincRuntimeRxEmitter < JavaObject >
 
 - (void)onNextWithId:(id)value;
 
-- (void)onErrorWithNSException:(NSException *)error;
+- (void)onErrorWithJavaLangThrowable:(JavaLangThrowable *)error;
 
 - (void)onComplete;
 

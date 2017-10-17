@@ -20,9 +20,9 @@
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(dWithNSString:withNSString:);
-  methods[1].selector = @selector(eWithNSException:);
+  methods[1].selector = @selector(eWithJavaLangThrowable:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "d", "LNSString;LNSString;", "e", "LNSException;" };
+  static const void *ptrTable[] = { "d", "LNSString;LNSString;", "e", "LJavaLangThrowable;" };
   static const J2ObjcClassInfo _RuKorincRuntimeLoggingLogProvider = { "LogProvider", "ru.korinc.runtime.logging", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_RuKorincRuntimeLoggingLogProvider;
 }

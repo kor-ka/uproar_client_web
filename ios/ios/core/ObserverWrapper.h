@@ -16,11 +16,13 @@
 #if !defined (RuKorincRuntimeRxObserverWrapper_) && (INCLUDE_ALL_ObserverWrapper || defined(INCLUDE_RuKorincRuntimeRxObserverWrapper))
 #define RuKorincRuntimeRxObserverWrapper_
 
+@class JavaLangThrowable;
+
 @protocol RuKorincRuntimeRxObserverWrapper < JavaObject >
 
 - (void)onNextWithId:(id)t;
 
-- (void)onErrorWithNSException:(NSException *)e;
+- (void)onErrorWithJavaLangThrowable:(JavaLangThrowable *)e;
 
 - (void)onComplete;
 

@@ -22,7 +22,9 @@ public class HttpObserver {
         return rxProvider.observableCreate((ObservableOnSubscribe<HttpResponse>) e -> {
             try {
                 HttpResponse response = http.getExecutor().get(url, headers);
-                assert response != null;
+                if (response == null) {
+                    throw new NullPointerException();
+                }
                 if (response.getCode() / 100 == 2) {
                     e.onNext(response);
                     e.onComplete();
@@ -34,7 +36,8 @@ public class HttpObserver {
                 log.e(ex);
                 e.onError(ex);
             }
-        }).retryWhen(throwableObservableWrapper -> throwableObservableWrapper.delay(5000));
+        }).retryWhen(throwableObservableWrapper -> throwableObservableWrapper
+                .flatMap(t -> throwableObservableWrapper.timer(500)));
     }
 
     public static ObservableWrapper<HttpResponse> put(String url, String data, String... headers) {

@@ -16,12 +16,14 @@
 #if !defined (RuKorincRuntimeLoggingLogProvider_) && (INCLUDE_ALL_LogProvider || defined(INCLUDE_RuKorincRuntimeLoggingLogProvider))
 #define RuKorincRuntimeLoggingLogProvider_
 
+@class JavaLangThrowable;
+
 @protocol RuKorincRuntimeLoggingLogProvider < JavaObject >
 
 - (void)dWithNSString:(NSString *)tag
          withNSString:(NSString *)msg;
 
-- (void)eWithNSException:(NSException *)throwable;
+- (void)eWithJavaLangThrowable:(JavaLangThrowable *)throwable;
 
 @end
 

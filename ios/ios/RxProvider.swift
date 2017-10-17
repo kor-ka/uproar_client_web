@@ -49,8 +49,11 @@ class Em<T>: NSObject,  RuKorincRuntimeRxEmitter{
         ao?.onCompleted()
     }
     
-    func onError(with error: NSException!) {
-        ao?.onError(error as! Error)
+    func onError(with error: JavaLangThrowable!) {
+        ao?.onError(JavaError())
     }
 }
+
+class JavaError: Error {
+  }
 

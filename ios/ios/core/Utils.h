@@ -89,6 +89,10 @@ J2OBJC_TYPE_LITERAL_HEADER(RuKorincUtilsUtils)
 
 - (jint)getPosition;
 
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(RuKorincUtilsUtils_SearchResult)

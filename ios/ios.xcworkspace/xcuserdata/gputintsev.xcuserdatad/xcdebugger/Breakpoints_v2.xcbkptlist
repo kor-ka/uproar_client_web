@@ -212,22 +212,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios/RxProvider.swift"
-            timestampString = "515434361.865895"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "onNext(withId:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ios/RxProvider.swift"
             timestampString = "514321076.796426"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -313,8 +297,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "66"
             endingLineNumber = "66"
-            landmarkName = "ObservableSwift"
-            landmarkType = "3">
+            landmarkName = "init(obs:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -329,7 +313,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
             endingLineNumber = "65"
-            landmarkName = "observeOnMain()"
+            landmarkName = "init(obs:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -345,7 +329,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
             endingLineNumber = "67"
-            landmarkName = "subscribe(with:)"
+            landmarkName = "init(obs:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -377,8 +361,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
             endingLineNumber = "70"
-            landmarkName = "subscribe(with:)"
-            landmarkType = "7">
+            landmarkName = "ObservableSwift"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -426,22 +410,6 @@
             startingLineNumber = "15"
             endingLineNumber = "15"
             landmarkName = "switchOnNext(withSources:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ios/BsSwift.swift"
-            timestampString = "515434361.865895"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "getValue()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

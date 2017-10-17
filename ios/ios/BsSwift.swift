@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 class BsSwift: ObservableSwift, RuKorincRuntimeRxSubjectBSWrapper{
+   
     
     var sourceRs: BehaviorSubject<Any>?
     
@@ -18,25 +19,6 @@ class BsSwift: ObservableSwift, RuKorincRuntimeRxSubjectBSWrapper{
         self.sourceRs = obs;
     }
     
-    func onNext(withId t: Any!) {
-        if sourceRs != nil {
-            sourceRs?.onNext(t)
-        }
-        
-    }
-    
-    func onComplete() {
-        if sourceRs != nil {
-            sourceRs?.onCompleted()
-        }
-    }
-    
-    func onError(with e: NSException!) {
-        
-        if sourceRs != nil {
-            sourceRs?.onError(e as! Error)
-        }
-    }
     
     func getValue() -> Any! {
         do{

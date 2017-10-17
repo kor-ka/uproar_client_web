@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
+class ObservableSwift: Em<Any>, RuKorincRuntimeRxObservableWrapper{
   
     public func switchOnNext(withSources sources: RuKorincRuntimeRxObservableWrapper!) -> RuKorincRuntimeRxObservableWrapper! {
         let res:Observable<Observable<Any>> = ((sources as! ObservableSwift).obs ).map { (o) -> Observable<Any> in
@@ -28,7 +28,7 @@ class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
     }
 
     public func delay(withWindowMillis millis: jlong) -> RuKorincRuntimeRxObservableWrapper! {
-        let res:Observable<Any> = obs.delay(RxTimeInterval(millis), scheduler: SchedulerSwift().scheduler)
+        let res:Observable<Any> = obs.delay(RxTimeInterval(Double(millis) / Double(1000)), scheduler: SchedulerSwift().scheduler)
         return ObservableSwift(obs: res)
     }
 
@@ -53,8 +53,16 @@ class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
         self.obs = obs;
     }
     
-    //cat heeeeellllllll
+    
+    //cast heeeeellllllll
     init(obs: Observable<Error>) {
+        self.obs = obs.map({ (er) -> Any in
+            return er as Any
+        });
+    }
+    
+    //cast heeeeellllllll
+    init(obs: Observable<Int64>) {
         self.obs = obs.map({ (er) -> Any in
             return er as Any
         });
@@ -94,6 +102,11 @@ class ObservableSwift: NSObject, RuKorincRuntimeRxObservableWrapper{
             let flatObs =  flatted.obs as Observable<Any>
             return flatObs
         })
+        return ObservableSwift(obs: res )
+    }
+    
+    public func timer(withWindowMillis millis: jlong) -> RuKorincRuntimeRxObservableWrapper! {
+        let res = Observable<Int64>.timer(RxTimeInterval(Double(millis) / Double(1000)), scheduler: SchedulerSwift().scheduler)
         return ObservableSwift(obs: res )
     }
     

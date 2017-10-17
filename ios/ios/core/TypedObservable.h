@@ -53,6 +53,8 @@
 
 - (id<RuKorincRuntimeRxObservableWrapper>)throttleLastWithWindowMillis:(jlong)windowMillis;
 
+- (id<RuKorincRuntimeRxObservableWrapper>)timerWithWindowMillis:(jlong)millis;
+
 #pragma mark Protected
 
 - (RuKorincRuntimeRxCasthellTypedObservable *)fromInternalWithRuKorincRuntimeRxObservableWrapper:(id<RuKorincRuntimeRxObservableWrapper>)source;

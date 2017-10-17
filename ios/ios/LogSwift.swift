@@ -9,11 +9,11 @@
 import Foundation
 
 class LogSwift: NSObject, RuKorincRuntimeLoggingLogProvider {
-    public func e(with throwable: NSException!) {
+    public func e(with throwable: JavaLangThrowable!) {
         print(throwable)
     }
 
-    func d(with tag: String!, with msg: String!) {
+    public func d(with tag: String!, with msg: String!) {
         print(Thread.current ,tag, msg)
     }
 }
