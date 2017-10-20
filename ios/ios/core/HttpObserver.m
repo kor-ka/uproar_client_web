@@ -180,10 +180,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(RuKorincRuntimeNetworkHttpObserver)
 - (void)subscribeWithRuKorincRuntimeRxEmitter:(id<RuKorincRuntimeRxEmitter>)e {
   @try {
     RuKorincRuntimeNetworkHttpResponse *response = [((id<RuKorincRuntimeNetworkHttpExecutor>) nil_chk([((id<RuKorincRuntimeNetworkHttpProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, http))) getExecutor])) getMethodWithUrl:val$url_ WithHeaders:val$headers_];
-    if (response != nil) {
+    if (response == nil) {
       @throw new_JavaLangNullPointerException_init();
     }
-    if ([((RuKorincRuntimeNetworkHttpResponse *) nil_chk(response)) getCode] / 100 == 2) {
+    if ([response getCode] / 100 == 2) {
       [((id<RuKorincRuntimeRxEmitter>) nil_chk(e)) onNextWithId:response];
       [e onComplete];
     }
@@ -268,7 +268,7 @@ RuKorincRuntimeNetworkHttpObserver_$Lambda$2 *create_RuKorincRuntimeNetworkHttpO
 - (void)subscribeWithRuKorincRuntimeRxEmitter:(id<RuKorincRuntimeRxEmitter>)e {
   @try {
     RuKorincRuntimeNetworkHttpResponse *response = [((id<RuKorincRuntimeNetworkHttpExecutor>) nil_chk([((id<RuKorincRuntimeNetworkHttpProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, http))) getExecutor])) putMethodWithUrl:val$url_ WithContent:val$data_ WithHeaders:val$headers_];
-    JreAssert(response != nil, @"ru/korinc/runtime/network/HttpObserver.java:47 condition failed: assert response != null;");
+    JreAssert(response != nil, @"ru/korinc/runtime/network/HttpObserver.java:48 condition failed: assert response != null;");
     if ([((RuKorincRuntimeNetworkHttpResponse *) nil_chk(response)) getCode] / 100 == 2) {
       [((id<RuKorincRuntimeRxEmitter>) nil_chk(e)) onNextWithId:response];
       [e onComplete];

@@ -30,4 +30,17 @@ class BsSwift: ObservableSwift, RuKorincRuntimeRxSubjectBSWrapper{
     }
     
     
+    
+    override func onNext(withId value: Any!) {
+        sourceRs?.onNext(value)
+    }
+    
+    override func onComplete() {
+        sourceRs?.onCompleted()
+    }
+    
+    override func onError(with error: JavaLangThrowable!) {
+        sourceRs?.onError(JavaError())
+    }
+    
 }
