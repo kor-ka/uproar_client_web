@@ -567,7 +567,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "../j2objc_lib/j2objc --no-package-directories -use-arc -sourcepath ../core/src/main/java -d ios/core $(find \"../core/src/main/java\" -type f -name \"*.java\")";
+			shellScript = "../j2objc_lib/j2objc --no-package-directories -use-arc -sourcepath ../runtime/src/main/java -d ios/runtime $(find \"../runtime/src/main/java\" -type f -name \"*.java\")\n../j2objc_lib/j2objc --no-package-directories -use-arc -sourcepath ../core/src/main/java -sourcepath ../runtime/src/main/java -d ios/core $(find \"../core/src/main/java\" -type f -name \"*.java\")";
 		};
 		5FA95492691F7DE6E164D5A0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

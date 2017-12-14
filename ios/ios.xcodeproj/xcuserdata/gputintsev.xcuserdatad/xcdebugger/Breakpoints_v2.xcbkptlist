@@ -25,7 +25,7 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ios/core/ru/korinc/runtime/rx/RxProvider.m"
+            filePath = "ios/core/ru/korinc/ru.korinc.runtime/rx/RxProvider.m"
             timestampString = "513861649.718735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"

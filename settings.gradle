@@ -1,1 +1,1 @@
-include ':app', ':core', ':j2objcannotations'
+include ':app', ':core', ':j2objcannotations', ':runtime'

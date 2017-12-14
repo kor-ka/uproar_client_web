@@ -8,7 +8,7 @@
 
 #import <pthread.h>
 #import <Foundation/Foundation.h>
-#import <objc/runtime.h>
+//#import <objc/ru.korinc.runtime.h>
 #import <objc/message.h>
 #import <libkern/OSAtomic.h>
 
@@ -44,7 +44,7 @@ static int32_t numberOfForwardedMethods = 0;
 #endif
 
 #define THREADING_HAZARD(class) \
-    NSLog(@"There was a problem swizzling on `%@`.\nYou have probably two libraries performing swizzling in runtime.\nWe didn't want to crash your program, but this is not good ...\nYou an solve this problem by either not using swizzling in this library, removing one of those other libraries, or making sure that swizzling parts are synchronized (only perform them on main thread).\nAnd yes, this message will self destruct when you clear the console, and since it's non deterministic, the problem could still exist and it will be hard for you to reproduce it.", NSStringFromClass(class)); ABORT_IN_DEBUG if (RXAbortOnThreadingHazard) { abort(); }
+    NSLog(@"There was a problem swizzling on `%@`.\nYou have probably two libraries performing swizzling in ru.korinc.runtime.\nWe didn't want to crash your program, but this is not good ...\nYou an solve this problem by either not using swizzling in this library, removing one of those other libraries, or making sure that swizzling parts are synchronized (only perform them on main thread).\nAnd yes, this message will self destruct when you clear the console, and since it's non deterministic, the problem could still exist and it will be hard for you to reproduce it.", NSStringFromClass(class)); ABORT_IN_DEBUG if (RXAbortOnThreadingHazard) { abort(); }
 
 #define ALWAYS(condition, message) if (!(condition)) { [NSException raise:@"RX Invalid Operator" format:@"%@", message]; }
 #define ALWAYS_WITH_INFO(condition, message) NSAssert((condition), @"%@ [%@] > %@", NSStringFromClass(class), NSStringFromSelector(selector), (message))
@@ -852,7 +852,7 @@ static NSMutableDictionary<NSString *, RXInterceptWithOptimizedObserver> *optimi
 }
 
 /**
- If object don't have some weird behavior, claims it's the same class that runtime shows,
+ If object don't have some weird behavior, claims it's the same class that ru.korinc.runtime shows,
  then dynamic subclass is created (only this instance will have performance hit).
  
  In case something weird is detected, then original base class is being swizzled and all instances
