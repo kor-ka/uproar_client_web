@@ -1,9 +1,12 @@
 package ru.korinc.server;
 
 import ru.korinc.client.GreetingService;
+import ru.korinc.core.Model;
 import ru.korinc.shared.FieldVerifier;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+import javax.servlet.ServletException;
 
 /**
  * The server-side implementation of the RPC service.

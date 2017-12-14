@@ -23,9 +23,8 @@
     <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
     <!-- Other module inherits                                      -->
+    <inherits name="com.github.timofeevda.gwt.rxjs.interop" />
 
-
-    <source path='shared' />
 
     <!-- allow Super Dev Mode -->
     <add-linker name="xsiframe" />

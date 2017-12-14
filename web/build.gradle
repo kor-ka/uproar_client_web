@@ -42,6 +42,9 @@ dependencies {
     compile project(path: ':core')
     compile project(path: ':j2objcannotations')
 
+    compile 'com.github.timofeevda:gwt-rxjs-jsinterop:1.1.5'
+
+
 }
 
 task buildPackage(dependsOn: ['war']) {
