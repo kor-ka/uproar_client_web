@@ -30,6 +30,7 @@
 
 #include "HttpObserver.h"
 #include "HttpProvider.h"
+#include "UrlEncoderProvider.h"
 #include "HttpResponse.h"
 #include "JsonArrayWrapper.h"
 #include "JsonObjectWrapper.h"

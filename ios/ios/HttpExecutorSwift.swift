@@ -9,6 +9,7 @@
 import Foundation
 class HttpExecutorSwift: NSObject, RuKorincRuntimeNetworkHttpExecutor {
     func getMethodWithUrl(_ url: String!, withHeaders headers: IOSObjectArray!) -> RuKorincRuntimeNetworkHttpResponse! {
+        print(url)
         let request = NSURLRequest(url: URL(string: url)!)
         var response: URLResponse?
         do {

@@ -63,7 +63,7 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$2 *create
 
 @interface RuKorincCoreModulesSearchModule_$Lambda$3 : NSObject < RuKorincRuntimeRxFunction >
 
-- (id)applyWithId:(RuKorincUtilsTouple *)respAndQuery;
+- (id)applyWithId:(RuKorincCoreUtilsTouple *)respAndQuery;
 
 @end
 
@@ -199,7 +199,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(RuKorincCoreModulesSearchModule)
 @implementation RuKorincCoreModulesSearchModule_$Lambda$2
 
 - (id)applyWithId:(RuKorincRuntimeNetworkHttpResponse *)httpResponse {
-  return new_RuKorincUtilsTouple_initWithId_withId_(val$s_, httpResponse);
+  return new_RuKorincCoreUtilsTouple_initWithId_withId_(val$s_, httpResponse);
 }
 
 @end
@@ -221,9 +221,9 @@ J2OBJC_INITIALIZED_DEFN(RuKorincCoreModulesSearchModule_$Lambda$3)
 
 @implementation RuKorincCoreModulesSearchModule_$Lambda$3
 
-- (id)applyWithId:(RuKorincUtilsTouple *)respAndQuery {
+- (id)applyWithId:(RuKorincCoreUtilsTouple *)respAndQuery {
   JavaUtilArrayList *res = new_JavaUtilArrayList_init();
-  id<RuKorincRuntimeJsonJsonArrayWrapper> resp = [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk([((id<RuKorincRuntimeJsonJsonProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, json))) getJsonWithNSString:[((RuKorincRuntimeNetworkHttpResponse *) nil_chk([((RuKorincUtilsTouple *) nil_chk(respAndQuery)) getB])) getContent]])) getJsonArrayWithNSString:@"Search"];
+  id<RuKorincRuntimeJsonJsonArrayWrapper> resp = [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk([((id<RuKorincRuntimeJsonJsonProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, json))) getJsonWithNSString:[((RuKorincRuntimeNetworkHttpResponse *) nil_chk([((RuKorincCoreUtilsTouple *) nil_chk(respAndQuery)) getB])) getContent]])) getJsonArrayWithNSString:@"Search"];
   if (resp == nil) {
     [res addAllWithJavaUtilCollection:[((RuKorincCoreEntityQuery *) nil_chk([respAndQuery getA])) getOldResults]];
     if ([res size] == 0) {

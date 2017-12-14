@@ -10,7 +10,7 @@ import java.io.IOException;
 import ru.korinc.runtime.network.HttpResponse;
 import ru.korinc.runtime.network.HttpExecutor;
 
-import static ru.korinc.utils.Utils.apply;
+import static ru.korinc.core.utils.Utils.apply;
 
 
 /**

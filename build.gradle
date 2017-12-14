@@ -16,6 +16,12 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    buildscript {
+        repositories {
+            jcenter()
+        }
+    }
 }
 
 task clean(type: Delete) {

@@ -5,8 +5,8 @@
 
 #include "J2ObjC_source.h"
 #include "Query.h"
-#include "java/io/UnsupportedEncodingException.h"
-#include "java/net/URLEncoder.h"
+#include "RuntimeConfiguration.h"
+#include "UrlEncoderProvider.h"
 #include "java/util/ArrayList.h"
 
 @interface RuKorincCoreEntityQuery () {
@@ -57,12 +57,7 @@ J2OBJC_FIELD_SETTER(RuKorincCoreEntityQuery, oldResults_, JavaUtilArrayList *)
 }
 
 - (NSString *)description {
-  @try {
-    return JreStrcat("$$$I", @"http://www.omdbapi.com/?apikey=7b7f708c&s=", JavaNetURLEncoder_encodeWithNSString_withNSString_(title_, @"UTF-8"), @"&page=", page_);
-  }
-  @catch (JavaIoUnsupportedEncodingException *e) {
-    return @"";
-  }
+  return JreStrcat("$$$I", @"http://www.omdbapi.com/?apikey=7b7f708c&s=", [((id<RuKorincRuntimeUtilsUrlEncoderProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, encoder))) encodeQueryStringWithNSString:title_], @"&page=", page_);
 }
 
 + (const J2ObjcClassInfo *)__metadata {

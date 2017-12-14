@@ -28,9 +28,15 @@ import Foundation
             return model!
         }
         
-        model = RuKorincCoreModel(ruKorincRuntimeRuntimeConfiguration: RuKorincRuntimeRuntimeConfiguration(ruKorincRuntimeRxRxProvider: RxProvider(), with: TimeoutSwift(), with: LogSwift(), with: HttpProviderSwift(), with: JsonProviderSwift()));
-
-        isStarted = true
+        model = RuKorincCoreModel(ruKorincRuntimeRuntimeConfiguration: RuKorincRuntimeRuntimeConfiguration()
+            .setLogWith(LogSwift())
+            .setRxProviderWith(RxProvider())
+            .setTimeoutProviderWith(TimeoutSwift())
+            .setJsonWith(JsonProviderSwift())
+            .setHttpWith(HttpProviderSwift())
+            .setEncoderWith(UrlEncoderProvider())
+        );
+                isStarted = true
 
         return model!
         

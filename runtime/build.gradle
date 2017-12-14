@@ -14,6 +14,21 @@ apply plugin: "me.tatarka.retrolambda"
 
 apply plugin: 'java'
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', '../j2objcannotations/src/main/java'
+            ]
+        }
+    }
+
+    test {
+        java {
+            srcDirs = ["src/test/java"]
+        }
+    }
+}
+
 dependencies {
     compile project(path: ':j2objcannotations')
     compile fileTree(dir: 'libs', include: ['*.jar'])

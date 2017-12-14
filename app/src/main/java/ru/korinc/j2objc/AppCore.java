@@ -1,5 +1,7 @@
 package ru.korinc.j2objc;
 
+import java.io.UnsupportedEncodingException;
+
 import ru.korinc.core.Model;
 import ru.korinc.j2objc.runtime.json.AndroidJsonProvider;
 import ru.korinc.j2objc.runtime.logging.AndroidLogging;
@@ -26,8 +28,17 @@ public class AppCore {
 
 
     public void initCore(android.app.Application application) {
-        mModel = new Model(new RuntimeConfiguration(new AndroidRxProvider(), new AndroidTimeout(),
-                new AndroidLogging(), () -> new HttpMock(new Http()), new AndroidJsonProvider()));
+        mModel = new Model(new RuntimeConfiguration().setRxProvider(new AndroidRxProvider())
+                .setTimeoutProvider(new AndroidTimeout()).setLog(new AndroidLogging())
+                .setHttp(() -> new HttpMock(new Http())).setJson(new AndroidJsonProvider())
+                .setEncoder(s -> {
+                    try {
+                        return java.net.URLEncoder.encode(s, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                    return s;
+                }));
     }
 
     public Model getModel() {

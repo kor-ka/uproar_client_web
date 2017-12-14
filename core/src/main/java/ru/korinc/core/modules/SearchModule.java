@@ -1,23 +1,17 @@
 package ru.korinc.core.modules;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import ru.korinc.core.entity.Load;
 import ru.korinc.core.entity.Movie;
 import ru.korinc.core.entity.Query;
 import ru.korinc.core.entity.SearchEntity;
-import ru.korinc.core.entity.SearchResults;
 import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.network.HttpObserver;
-import ru.korinc.runtime.network.HttpResponse;
-import ru.korinc.runtime.rx.Consumer;
-import ru.korinc.runtime.rx.Function;
 import ru.korinc.runtime.rx.ObservableWrapper;
 import ru.korinc.runtime.rx.subject.BSWrapper;
-import ru.korinc.utils.Touple;
+import ru.korinc.core.utils.Touple;
 
 import static ru.korinc.runtime.RuntimeConfiguration.json;
 import static ru.korinc.runtime.RuntimeConfiguration.log;

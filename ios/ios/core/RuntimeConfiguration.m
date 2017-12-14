@@ -10,90 +10,135 @@
 #include "RuntimeConfiguration.h"
 #include "RxProvider.h"
 #include "TimeoutProvider.h"
+#include "UrlEncoderProvider.h"
 
 id<RuKorincRuntimeRxRxProvider> RuKorincRuntimeRuntimeConfiguration_rxProvider;
 id<RuKorincRuntimeTimeoutTimeoutProvider> RuKorincRuntimeRuntimeConfiguration_timeoutProvider;
 id<RuKorincRuntimeLoggingLogProvider> RuKorincRuntimeRuntimeConfiguration_log;
 id<RuKorincRuntimeNetworkHttpProvider> RuKorincRuntimeRuntimeConfiguration_http;
 id<RuKorincRuntimeJsonJsonProvider> RuKorincRuntimeRuntimeConfiguration_json;
+id<RuKorincRuntimeUtilsUrlEncoderProvider> RuKorincRuntimeRuntimeConfiguration_encoder;
 
 @implementation RuKorincRuntimeRuntimeConfiguration
 
-- (instancetype)initWithRuKorincRuntimeRxRxProvider:(id<RuKorincRuntimeRxRxProvider>)rxProvider
-          withRuKorincRuntimeTimeoutTimeoutProvider:(id<RuKorincRuntimeTimeoutTimeoutProvider>)timeoutProvider
-              withRuKorincRuntimeLoggingLogProvider:(id<RuKorincRuntimeLoggingLogProvider>)logProvider
-             withRuKorincRuntimeNetworkHttpProvider:(id<RuKorincRuntimeNetworkHttpProvider>)httpProvider
-                withRuKorincRuntimeJsonJsonProvider:(id<RuKorincRuntimeJsonJsonProvider>)jsonProvider {
-  RuKorincRuntimeRuntimeConfiguration_initWithRuKorincRuntimeRxRxProvider_withRuKorincRuntimeTimeoutTimeoutProvider_withRuKorincRuntimeLoggingLogProvider_withRuKorincRuntimeNetworkHttpProvider_withRuKorincRuntimeJsonJsonProvider_(self, rxProvider, timeoutProvider, logProvider, httpProvider, jsonProvider);
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  RuKorincRuntimeRuntimeConfiguration_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<RuKorincRuntimeRxRxProvider>)getRxProvider {
   return RuKorincRuntimeRuntimeConfiguration_rxProvider;
+}
+
+- (RuKorincRuntimeRuntimeConfiguration *)setRxProviderWithRuKorincRuntimeRxRxProvider:(id<RuKorincRuntimeRxRxProvider>)rxProvider {
+  RuKorincRuntimeRuntimeConfiguration_rxProvider = rxProvider;
+  return self;
 }
 
 - (id<RuKorincRuntimeTimeoutTimeoutProvider>)getTimeoutProvider {
   return RuKorincRuntimeRuntimeConfiguration_timeoutProvider;
 }
 
-- (id<RuKorincRuntimeLoggingLogProvider>)getLogProvider {
+- (RuKorincRuntimeRuntimeConfiguration *)setTimeoutProviderWithRuKorincRuntimeTimeoutTimeoutProvider:(id<RuKorincRuntimeTimeoutTimeoutProvider>)timeoutProvider {
+  RuKorincRuntimeRuntimeConfiguration_timeoutProvider = timeoutProvider;
+  return self;
+}
+
+- (id<RuKorincRuntimeLoggingLogProvider>)getLog {
   return RuKorincRuntimeRuntimeConfiguration_log;
 }
 
-+ (id<RuKorincRuntimeJsonJsonProvider>)getJson {
-  return RuKorincRuntimeRuntimeConfiguration_getJson();
+- (RuKorincRuntimeRuntimeConfiguration *)setLogWithRuKorincRuntimeLoggingLogProvider:(id<RuKorincRuntimeLoggingLogProvider>)log {
+  RuKorincRuntimeRuntimeConfiguration_log = log;
+  return self;
+}
+
+- (id<RuKorincRuntimeNetworkHttpProvider>)getHttp {
+  return RuKorincRuntimeRuntimeConfiguration_http;
+}
+
+- (RuKorincRuntimeRuntimeConfiguration *)setHttpWithRuKorincRuntimeNetworkHttpProvider:(id<RuKorincRuntimeNetworkHttpProvider>)http {
+  RuKorincRuntimeRuntimeConfiguration_http = http;
+  return self;
+}
+
+- (id<RuKorincRuntimeJsonJsonProvider>)getJson {
+  return RuKorincRuntimeRuntimeConfiguration_json;
+}
+
+- (RuKorincRuntimeRuntimeConfiguration *)setJsonWithRuKorincRuntimeJsonJsonProvider:(id<RuKorincRuntimeJsonJsonProvider>)json {
+  RuKorincRuntimeRuntimeConfiguration_json = json;
+  return self;
+}
+
+- (id<RuKorincRuntimeUtilsUrlEncoderProvider>)getEncoder {
+  return RuKorincRuntimeRuntimeConfiguration_encoder;
+}
+
+- (RuKorincRuntimeRuntimeConfiguration *)setEncoderWithRuKorincRuntimeUtilsUrlEncoderProvider:(id<RuKorincRuntimeUtilsUrlEncoderProvider>)encoder {
+  RuKorincRuntimeRuntimeConfiguration_encoder = encoder;
+  return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LRuKorincRuntimeRxRxProvider;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeRuntimeConfiguration;", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, "LRuKorincRuntimeTimeoutTimeoutProvider;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeRuntimeConfiguration;", 0x1, 2, 3, -1, -1, -1, -1 },
     { NULL, "LRuKorincRuntimeLoggingLogProvider;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LRuKorincRuntimeJsonJsonProvider;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeRuntimeConfiguration;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeNetworkHttpProvider;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeRuntimeConfiguration;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeJsonJsonProvider;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeRuntimeConfiguration;", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeUtilsUrlEncoderProvider;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LRuKorincRuntimeRuntimeConfiguration;", 0x1, 10, 11, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  methods[0].selector = @selector(initWithRuKorincRuntimeRxRxProvider:withRuKorincRuntimeTimeoutTimeoutProvider:withRuKorincRuntimeLoggingLogProvider:withRuKorincRuntimeNetworkHttpProvider:withRuKorincRuntimeJsonJsonProvider:);
+  methods[0].selector = @selector(init);
   methods[1].selector = @selector(getRxProvider);
-  methods[2].selector = @selector(getTimeoutProvider);
-  methods[3].selector = @selector(getLogProvider);
-  methods[4].selector = @selector(getJson);
+  methods[2].selector = @selector(setRxProviderWithRuKorincRuntimeRxRxProvider:);
+  methods[3].selector = @selector(getTimeoutProvider);
+  methods[4].selector = @selector(setTimeoutProviderWithRuKorincRuntimeTimeoutTimeoutProvider:);
+  methods[5].selector = @selector(getLog);
+  methods[6].selector = @selector(setLogWithRuKorincRuntimeLoggingLogProvider:);
+  methods[7].selector = @selector(getHttp);
+  methods[8].selector = @selector(setHttpWithRuKorincRuntimeNetworkHttpProvider:);
+  methods[9].selector = @selector(getJson);
+  methods[10].selector = @selector(setJsonWithRuKorincRuntimeJsonJsonProvider:);
+  methods[11].selector = @selector(getEncoder);
+  methods[12].selector = @selector(setEncoderWithRuKorincRuntimeUtilsUrlEncoderProvider:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "rxProvider", "LRuKorincRuntimeRxRxProvider;", .constantValue.asLong = 0, 0x9, -1, 1, -1, -1 },
-    { "timeoutProvider", "LRuKorincRuntimeTimeoutTimeoutProvider;", .constantValue.asLong = 0, 0x9, -1, 2, -1, -1 },
-    { "log", "LRuKorincRuntimeLoggingLogProvider;", .constantValue.asLong = 0, 0x9, -1, 3, -1, -1 },
-    { "http", "LRuKorincRuntimeNetworkHttpProvider;", .constantValue.asLong = 0, 0x9, -1, 4, -1, -1 },
-    { "json", "LRuKorincRuntimeJsonJsonProvider;", .constantValue.asLong = 0, 0x9, -1, 5, -1, -1 },
+    { "rxProvider", "LRuKorincRuntimeRxRxProvider;", .constantValue.asLong = 0, 0x9, -1, 12, -1, -1 },
+    { "timeoutProvider", "LRuKorincRuntimeTimeoutTimeoutProvider;", .constantValue.asLong = 0, 0x9, -1, 13, -1, -1 },
+    { "log", "LRuKorincRuntimeLoggingLogProvider;", .constantValue.asLong = 0, 0x9, -1, 14, -1, -1 },
+    { "http", "LRuKorincRuntimeNetworkHttpProvider;", .constantValue.asLong = 0, 0x9, -1, 15, -1, -1 },
+    { "json", "LRuKorincRuntimeJsonJsonProvider;", .constantValue.asLong = 0, 0x9, -1, 16, -1, -1 },
+    { "encoder", "LRuKorincRuntimeUtilsUrlEncoderProvider;", .constantValue.asLong = 0, 0x9, -1, 17, -1, -1 },
   };
-  static const void *ptrTable[] = { "LRuKorincRuntimeRxRxProvider;LRuKorincRuntimeTimeoutTimeoutProvider;LRuKorincRuntimeLoggingLogProvider;LRuKorincRuntimeNetworkHttpProvider;LRuKorincRuntimeJsonJsonProvider;", &RuKorincRuntimeRuntimeConfiguration_rxProvider, &RuKorincRuntimeRuntimeConfiguration_timeoutProvider, &RuKorincRuntimeRuntimeConfiguration_log, &RuKorincRuntimeRuntimeConfiguration_http, &RuKorincRuntimeRuntimeConfiguration_json };
-  static const J2ObjcClassInfo _RuKorincRuntimeRuntimeConfiguration = { "RuntimeConfiguration", "ru.korinc.runtime", ptrTable, methods, fields, 7, 0x1, 5, 5, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setRxProvider", "LRuKorincRuntimeRxRxProvider;", "setTimeoutProvider", "LRuKorincRuntimeTimeoutTimeoutProvider;", "setLog", "LRuKorincRuntimeLoggingLogProvider;", "setHttp", "LRuKorincRuntimeNetworkHttpProvider;", "setJson", "LRuKorincRuntimeJsonJsonProvider;", "setEncoder", "LRuKorincRuntimeUtilsUrlEncoderProvider;", &RuKorincRuntimeRuntimeConfiguration_rxProvider, &RuKorincRuntimeRuntimeConfiguration_timeoutProvider, &RuKorincRuntimeRuntimeConfiguration_log, &RuKorincRuntimeRuntimeConfiguration_http, &RuKorincRuntimeRuntimeConfiguration_json, &RuKorincRuntimeRuntimeConfiguration_encoder };
+  static const J2ObjcClassInfo _RuKorincRuntimeRuntimeConfiguration = { "RuntimeConfiguration", "ru.korinc.runtime", ptrTable, methods, fields, 7, 0x1, 13, 6, -1, -1, -1, -1, -1 };
   return &_RuKorincRuntimeRuntimeConfiguration;
 }
 
 @end
 
-void RuKorincRuntimeRuntimeConfiguration_initWithRuKorincRuntimeRxRxProvider_withRuKorincRuntimeTimeoutTimeoutProvider_withRuKorincRuntimeLoggingLogProvider_withRuKorincRuntimeNetworkHttpProvider_withRuKorincRuntimeJsonJsonProvider_(RuKorincRuntimeRuntimeConfiguration *self, id<RuKorincRuntimeRxRxProvider> rxProvider, id<RuKorincRuntimeTimeoutTimeoutProvider> timeoutProvider, id<RuKorincRuntimeLoggingLogProvider> logProvider, id<RuKorincRuntimeNetworkHttpProvider> httpProvider, id<RuKorincRuntimeJsonJsonProvider> jsonProvider) {
+void RuKorincRuntimeRuntimeConfiguration_init(RuKorincRuntimeRuntimeConfiguration *self) {
   NSObject_init(self);
-  RuKorincRuntimeRuntimeConfiguration_rxProvider = rxProvider;
-  RuKorincRuntimeRuntimeConfiguration_timeoutProvider = timeoutProvider;
-  RuKorincRuntimeRuntimeConfiguration_log = logProvider;
-  RuKorincRuntimeRuntimeConfiguration_http = httpProvider;
-  RuKorincRuntimeRuntimeConfiguration_json = jsonProvider;
 }
 
-RuKorincRuntimeRuntimeConfiguration *new_RuKorincRuntimeRuntimeConfiguration_initWithRuKorincRuntimeRxRxProvider_withRuKorincRuntimeTimeoutTimeoutProvider_withRuKorincRuntimeLoggingLogProvider_withRuKorincRuntimeNetworkHttpProvider_withRuKorincRuntimeJsonJsonProvider_(id<RuKorincRuntimeRxRxProvider> rxProvider, id<RuKorincRuntimeTimeoutTimeoutProvider> timeoutProvider, id<RuKorincRuntimeLoggingLogProvider> logProvider, id<RuKorincRuntimeNetworkHttpProvider> httpProvider, id<RuKorincRuntimeJsonJsonProvider> jsonProvider) {
-  J2OBJC_NEW_IMPL(RuKorincRuntimeRuntimeConfiguration, initWithRuKorincRuntimeRxRxProvider_withRuKorincRuntimeTimeoutTimeoutProvider_withRuKorincRuntimeLoggingLogProvider_withRuKorincRuntimeNetworkHttpProvider_withRuKorincRuntimeJsonJsonProvider_, rxProvider, timeoutProvider, logProvider, httpProvider, jsonProvider)
+RuKorincRuntimeRuntimeConfiguration *new_RuKorincRuntimeRuntimeConfiguration_init() {
+  J2OBJC_NEW_IMPL(RuKorincRuntimeRuntimeConfiguration, init)
 }
 
-RuKorincRuntimeRuntimeConfiguration *create_RuKorincRuntimeRuntimeConfiguration_initWithRuKorincRuntimeRxRxProvider_withRuKorincRuntimeTimeoutTimeoutProvider_withRuKorincRuntimeLoggingLogProvider_withRuKorincRuntimeNetworkHttpProvider_withRuKorincRuntimeJsonJsonProvider_(id<RuKorincRuntimeRxRxProvider> rxProvider, id<RuKorincRuntimeTimeoutTimeoutProvider> timeoutProvider, id<RuKorincRuntimeLoggingLogProvider> logProvider, id<RuKorincRuntimeNetworkHttpProvider> httpProvider, id<RuKorincRuntimeJsonJsonProvider> jsonProvider) {
-  J2OBJC_CREATE_IMPL(RuKorincRuntimeRuntimeConfiguration, initWithRuKorincRuntimeRxRxProvider_withRuKorincRuntimeTimeoutTimeoutProvider_withRuKorincRuntimeLoggingLogProvider_withRuKorincRuntimeNetworkHttpProvider_withRuKorincRuntimeJsonJsonProvider_, rxProvider, timeoutProvider, logProvider, httpProvider, jsonProvider)
-}
-
-id<RuKorincRuntimeJsonJsonProvider> RuKorincRuntimeRuntimeConfiguration_getJson() {
-  RuKorincRuntimeRuntimeConfiguration_initialize();
-  return RuKorincRuntimeRuntimeConfiguration_json;
+RuKorincRuntimeRuntimeConfiguration *create_RuKorincRuntimeRuntimeConfiguration_init() {
+  J2OBJC_CREATE_IMPL(RuKorincRuntimeRuntimeConfiguration, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(RuKorincRuntimeRuntimeConfiguration)

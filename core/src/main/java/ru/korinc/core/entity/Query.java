@@ -1,8 +1,9 @@
 package ru.korinc.core.entity;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
+
+import static ru.korinc.runtime.RuntimeConfiguration.encoder;
 
 /**
  * Created by gputintsev on 03.05.17.
@@ -50,13 +51,7 @@ public class Query {
 
     @Override
     public String toString() {
-
-        try {
-            return "http://www.omdbapi.com/?apikey=7b7f708c&s=" + URLEncoder.encode(title, "UTF-8")
-                    + "&page="
-                    + page;
-        } catch (UnsupportedEncodingException e) {
-            return "";
-        }
+        return "http://www.omdbapi.com/?apikey=7b7f708c&s=" + encoder.encodeQueryString(title)
+                + "&page=" + page;
     }
 }

@@ -21,28 +21,37 @@
 @protocol RuKorincRuntimeNetworkHttpProvider;
 @protocol RuKorincRuntimeRxRxProvider;
 @protocol RuKorincRuntimeTimeoutTimeoutProvider;
+@protocol RuKorincRuntimeUtilsUrlEncoderProvider;
 
 @interface RuKorincRuntimeRuntimeConfiguration : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithRuKorincRuntimeRxRxProvider:(id<RuKorincRuntimeRxRxProvider>)rxProvider
-          withRuKorincRuntimeTimeoutTimeoutProvider:(id<RuKorincRuntimeTimeoutTimeoutProvider>)timeoutProvider
-              withRuKorincRuntimeLoggingLogProvider:(id<RuKorincRuntimeLoggingLogProvider>)logProvider
-             withRuKorincRuntimeNetworkHttpProvider:(id<RuKorincRuntimeNetworkHttpProvider>)httpProvider
-                withRuKorincRuntimeJsonJsonProvider:(id<RuKorincRuntimeJsonJsonProvider>)jsonProvider;
+- (instancetype)init;
 
-+ (id<RuKorincRuntimeJsonJsonProvider>)getJson;
+- (id<RuKorincRuntimeUtilsUrlEncoderProvider>)getEncoder;
 
-- (id<RuKorincRuntimeLoggingLogProvider>)getLogProvider;
+- (id<RuKorincRuntimeNetworkHttpProvider>)getHttp;
+
+- (id<RuKorincRuntimeJsonJsonProvider>)getJson;
+
+- (id<RuKorincRuntimeLoggingLogProvider>)getLog;
 
 - (id<RuKorincRuntimeRxRxProvider>)getRxProvider;
 
 - (id<RuKorincRuntimeTimeoutTimeoutProvider>)getTimeoutProvider;
 
-// Disallowed inherited constructors, do not use.
+- (RuKorincRuntimeRuntimeConfiguration *)setEncoderWithRuKorincRuntimeUtilsUrlEncoderProvider:(id<RuKorincRuntimeUtilsUrlEncoderProvider>)encoder;
 
-- (instancetype)init NS_UNAVAILABLE;
+- (RuKorincRuntimeRuntimeConfiguration *)setHttpWithRuKorincRuntimeNetworkHttpProvider:(id<RuKorincRuntimeNetworkHttpProvider>)http;
+
+- (RuKorincRuntimeRuntimeConfiguration *)setJsonWithRuKorincRuntimeJsonJsonProvider:(id<RuKorincRuntimeJsonJsonProvider>)json;
+
+- (RuKorincRuntimeRuntimeConfiguration *)setLogWithRuKorincRuntimeLoggingLogProvider:(id<RuKorincRuntimeLoggingLogProvider>)log;
+
+- (RuKorincRuntimeRuntimeConfiguration *)setRxProviderWithRuKorincRuntimeRxRxProvider:(id<RuKorincRuntimeRxRxProvider>)rxProvider;
+
+- (RuKorincRuntimeRuntimeConfiguration *)setTimeoutProviderWithRuKorincRuntimeTimeoutTimeoutProvider:(id<RuKorincRuntimeTimeoutTimeoutProvider>)timeoutProvider;
 
 @end
 
@@ -78,13 +87,17 @@ inline id<RuKorincRuntimeJsonJsonProvider> RuKorincRuntimeRuntimeConfiguration_s
 FOUNDATION_EXPORT id<RuKorincRuntimeJsonJsonProvider> RuKorincRuntimeRuntimeConfiguration_json;
 J2OBJC_STATIC_FIELD_OBJ(RuKorincRuntimeRuntimeConfiguration, json, id<RuKorincRuntimeJsonJsonProvider>)
 
-FOUNDATION_EXPORT void RuKorincRuntimeRuntimeConfiguration_initWithRuKorincRuntimeRxRxProvider_withRuKorincRuntimeTimeoutTimeoutProvider_withRuKorincRuntimeLoggingLogProvider_withRuKorincRuntimeNetworkHttpProvider_withRuKorincRuntimeJsonJsonProvider_(RuKorincRuntimeRuntimeConfiguration *self, id<RuKorincRuntimeRxRxProvider> rxProvider, id<RuKorincRuntimeTimeoutTimeoutProvider> timeoutProvider, id<RuKorincRuntimeLoggingLogProvider> logProvider, id<RuKorincRuntimeNetworkHttpProvider> httpProvider, id<RuKorincRuntimeJsonJsonProvider> jsonProvider);
+inline id<RuKorincRuntimeUtilsUrlEncoderProvider> RuKorincRuntimeRuntimeConfiguration_get_encoder();
+inline id<RuKorincRuntimeUtilsUrlEncoderProvider> RuKorincRuntimeRuntimeConfiguration_set_encoder(id<RuKorincRuntimeUtilsUrlEncoderProvider> value);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT id<RuKorincRuntimeUtilsUrlEncoderProvider> RuKorincRuntimeRuntimeConfiguration_encoder;
+J2OBJC_STATIC_FIELD_OBJ(RuKorincRuntimeRuntimeConfiguration, encoder, id<RuKorincRuntimeUtilsUrlEncoderProvider>)
 
-FOUNDATION_EXPORT RuKorincRuntimeRuntimeConfiguration *new_RuKorincRuntimeRuntimeConfiguration_initWithRuKorincRuntimeRxRxProvider_withRuKorincRuntimeTimeoutTimeoutProvider_withRuKorincRuntimeLoggingLogProvider_withRuKorincRuntimeNetworkHttpProvider_withRuKorincRuntimeJsonJsonProvider_(id<RuKorincRuntimeRxRxProvider> rxProvider, id<RuKorincRuntimeTimeoutTimeoutProvider> timeoutProvider, id<RuKorincRuntimeLoggingLogProvider> logProvider, id<RuKorincRuntimeNetworkHttpProvider> httpProvider, id<RuKorincRuntimeJsonJsonProvider> jsonProvider) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void RuKorincRuntimeRuntimeConfiguration_init(RuKorincRuntimeRuntimeConfiguration *self);
 
-FOUNDATION_EXPORT RuKorincRuntimeRuntimeConfiguration *create_RuKorincRuntimeRuntimeConfiguration_initWithRuKorincRuntimeRxRxProvider_withRuKorincRuntimeTimeoutTimeoutProvider_withRuKorincRuntimeLoggingLogProvider_withRuKorincRuntimeNetworkHttpProvider_withRuKorincRuntimeJsonJsonProvider_(id<RuKorincRuntimeRxRxProvider> rxProvider, id<RuKorincRuntimeTimeoutTimeoutProvider> timeoutProvider, id<RuKorincRuntimeLoggingLogProvider> logProvider, id<RuKorincRuntimeNetworkHttpProvider> httpProvider, id<RuKorincRuntimeJsonJsonProvider> jsonProvider);
+FOUNDATION_EXPORT RuKorincRuntimeRuntimeConfiguration *new_RuKorincRuntimeRuntimeConfiguration_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT id<RuKorincRuntimeJsonJsonProvider> RuKorincRuntimeRuntimeConfiguration_getJson();
+FOUNDATION_EXPORT RuKorincRuntimeRuntimeConfiguration *create_RuKorincRuntimeRuntimeConfiguration_init();
 
 J2OBJC_TYPE_LITERAL_HEADER(RuKorincRuntimeRuntimeConfiguration)
 

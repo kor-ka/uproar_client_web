@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ru.korinc.utils.Utils;
+import ru.korinc.core.utils.Utils;
 
 
 public class ViewHolderMatcher<T> {

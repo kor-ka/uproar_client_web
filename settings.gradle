@@ -1,1 +1,1 @@
-include ':app', ':core', ':j2objcannotations', ':runtime'
+include ':app', ':core',':core:core-js', ':j2objcannotations', ':runtime',  ':runtime:runtime-js', ':web'
