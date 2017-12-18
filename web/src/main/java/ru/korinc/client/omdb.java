@@ -16,8 +16,15 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import java.util.ArrayList;
+
+import ru.korinc.core.AppCore;
+import ru.korinc.core.Model;
+import ru.korinc.core.entity.Movie;
 import ru.korinc.core.modules.Foo;
 import ru.korinc.shared.FieldVerifier;
+
+import static ru.korinc.core.utils.Utils.apply;
 
 
 /**
@@ -38,12 +45,15 @@ public class Omdb implements EntryPoint {
      */
     private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
+    private final Model model = AppCore.sharedCore().getModel();
+
     /**
      * This is the entry point method.
      */
     public void onModuleLoad() {
         final Button sendButton = new Button("Send");
         final TextBox nameField = new TextBox();
+        final Label res = new Label();
         nameField.setText(new Foo().foo() + "");
         final Label errorLabel = new Label();
 
@@ -53,6 +63,7 @@ public class Omdb implements EntryPoint {
         // Add the nameField and sendButton to the RootPanel
         // Use RootPanel.get() to get the entire body element
         RootPanel.get("nameFieldContainer").add(nameField);
+        RootPanel.get("nameFieldContainer").add(res);
         RootPanel.get("sendButtonContainer").add(sendButton);
         RootPanel.get("errorLabelContainer").add(errorLabel);
 
@@ -140,6 +151,16 @@ public class Omdb implements EntryPoint {
                         dialogBox.center();
                         closeButton.setFocus(true);
                     }
+                });
+
+                model.getSearchResults().subscribe(searchEntities -> {
+                    StringBuilder s = new StringBuilder();
+                    apply(searchEntities, (iterator, val) -> {
+                        if (val instanceof Movie) {
+                            s.append(((Movie) val).getTitle()).append("\n\n");
+                        }
+                    });
+                    res.setText(s.toString());
                 });
             }
         }

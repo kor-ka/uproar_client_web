@@ -36,6 +36,8 @@ sourceSets {
 dependencies {
     gwt 'org.timepedia.exporter:gwtexporter:2.4.0'
 
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+
     // Hack for IntelliJ IDEA
     providedCompile 'com.google.gwt:gwt-user:2.8.0-beta1'
     providedCompile 'org.timepedia.exporter:gwtexporter:2.4.0'

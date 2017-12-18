@@ -86,13 +86,9 @@ public class JsObservable<T> implements ObservableWrapper<T> {
     @Override
     public ObservableWrapper<T> retryWhen(
             Function<? super ObservableWrapper<Throwable>, ? extends ObservableWrapper<?>> handler) {
-        return new JsObservable<>(source.retryWhen(observable -> {
-            try {
-                return ((JsObservable<?>) handler.apply(new JsObservable<>(observable))).source;
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }));
+        return new JsObservable<>(source.retryWhen(throwableObservable -> ((JsObservable<?>) handler
+                .apply(new JsObservable<Throwable>(throwableObservable))).source));
+
     }
 
     @Override

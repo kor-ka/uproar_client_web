@@ -23,7 +23,8 @@
     <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
     <!-- Other module inherits                                      -->
-    <inherits name="com.github.timofeevda.gwt.rxjs.interop" />
+
+    <inherits name="com.google.gwt.logging.Logging" />
 
 
     <!-- allow Super Dev Mode -->

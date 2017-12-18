@@ -26,5 +26,5 @@ import jsinterop.annotations.JsFunction;
 @JsFunction
 public interface Func1<T, R> {
 
-    R call(T t);
+    R call(T t) throws Exception;
 }
