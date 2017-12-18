@@ -17,15 +17,15 @@ public class HttpProxyImpl extends RemoteServiceServlet implements HttpProxy {
     private Http http = new Http();
 
     @Override
-    public void get(String url, String[] headers, HttpCallback callback)
+    public HttpResponse get(String url, String[] headers)
             throws IllegalArgumentException, IOException {
-        http.get(url, headers, callback);
+        return http.get(url, headers);
     }
 
     @Override
-    public void put(String url, String[] headers, HttpCallback callback)
+    public HttpResponse put(String url, String[] headers)
             throws IllegalArgumentException, IOException {
-        http.get(url, headers, callback);
+        return http.get(url, headers);
 
     }
 }

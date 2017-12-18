@@ -22,7 +22,7 @@ public class JsHttpExecutor implements HttpExecutor {
     @Override
     public void get(String url, String[] headers, HttpCallback callback) throws Exception {
 //        log.d("JsHttpExecutor", "get:" + url + " " + headers);
-        proxy.get(url, headers, callback, new AsyncCallback<HttpResponse>() {
+        proxy.get(url, headers, new AsyncCallback<HttpResponse>() {
             @Override
             public void onFailure(Throwable caught) {
                 callback.onFailure(caught);

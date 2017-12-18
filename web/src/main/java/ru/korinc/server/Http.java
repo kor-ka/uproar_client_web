@@ -7,8 +7,6 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
-import ru.korinc.runtime.network.HttpCallback;
-import ru.korinc.runtime.network.HttpExecutor;
 import ru.korinc.runtime.network.HttpResponse;
 
 
@@ -16,11 +14,10 @@ import ru.korinc.runtime.network.HttpResponse;
  * Created by gputintsev on 20.03.17.
  */
 
-public class Http implements HttpExecutor {
+public class Http {
 
 
-    @Override
-    public void get(String url, String[] headers, HttpCallback callback) throws IOException {
+    public HttpResponse get(String url, String[] headers) throws IOException {
 
         final Request.Builder builder = new Request.Builder().url(url);
         for (int i = 0; i < headers.length; i++) {
@@ -30,19 +27,13 @@ public class Http implements HttpExecutor {
         }
         OkHttpClient client = new OkHttpClient();
 
-        try {
-            Response response = client.newCall(builder.build()).execute();
-            callback.onResponce(new HttpResponse(response.code(), response.body().string(), url));
-        } catch (Exception e) {
-            callback.onFailure(e);
-        }
+        Response response = client.newCall(builder.build()).execute();
+        return new HttpResponse(response.code(), response.body().string(), url);
 
 
     }
 
-    @Override
-    public void put(String url, String contents, String[] headers, HttpCallback callback)
-            throws IOException {
+    public HttpResponse put(String url, String contents, String[] headers) throws IOException {
         final Request.Builder builder = new Request.Builder().url(url)
                 .method("PUT", RequestBody.create(null, contents));
         for (int i = 0; i < headers.length; i++) {
@@ -52,12 +43,9 @@ public class Http implements HttpExecutor {
         }
         OkHttpClient client = new OkHttpClient();
 
-        try {
-            Response response = client.newCall(builder.build()).execute();
-            callback.onResponce(new HttpResponse(response.code(), response.body().string(), url));
-        } catch (Exception e) {
-            callback.onFailure(e);
-        }
+        Response response = client.newCall(builder.build()).execute();
+        return new HttpResponse(response.code(), response.body().string(), url);
+
 
     }
 }
