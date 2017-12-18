@@ -15,7 +15,5 @@ public interface RxProvider {
 
     <T> BSWrapper<T> bs(T defaultValue);
 
-    <T> BSWrapper<T> bs();
-
     BackgroundSchedulerWrapper scheduler();
 }

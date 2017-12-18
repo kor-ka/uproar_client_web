@@ -27,8 +27,6 @@
 
 - (id<RuKorincRuntimeRxSubjectBSWrapper>)bsWithId:(id)defaultValue;
 
-- (id<RuKorincRuntimeRxSubjectBSWrapper>)bs;
-
 - (id<RuKorincRuntimeRxBackgroundSchedulerWrapper>)scheduler;
 
 @end

@@ -29,9 +29,6 @@ class RxProvider: NSObject, RuKorincRuntimeRxRxProvider{
         return res;
     }
     
-    func bs() -> RuKorincRuntimeRxSubjectBSWrapper! {
-        return nil    }
-    
     func scheduler() -> RuKorincRuntimeRxBackgroundSchedulerWrapper! {
         return SchedulerSwift()
     }
