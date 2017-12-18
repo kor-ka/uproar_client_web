@@ -18,20 +18,30 @@ import static ru.korinc.runtime.RuntimeConfiguration.rxProvider;
 public class HttpObserver {
 
     public static ObservableWrapper<HttpResponse> get(String url, String... headers) {
-
         return rxProvider.observableCreate((ObservableOnSubscribe<HttpResponse>) e -> {
             try {
-                HttpResponse response = http.getExecutor().get(url, headers);
-                if (response == null) {
-                    throw new NullPointerException();
-                }
-                if (response.getCode() / 100 == 2) {
-                    e.onNext(response);
-                    e.onComplete();
-                } else {
-                    e.onError(new Exception(
-                            "URL: " + url + "\nHttp error code" + response.getCode()));
-                }
+                log.d("HttpObserver", "try get: " + url + " " + headers);
+
+                http.getExecutor().get(url, headers, new HttpCallback() {
+                    @Override
+                    public void onResponce(HttpResponse response) {
+                        if (response.getCode() / 100 == 2) {
+                            e.onNext(response);
+                            e.onComplete();
+                        } else {
+                            e.onError(new Exception(
+                                    "URL: " + url + "\nHttp error code" + response.getCode()));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        log.e(throwable);
+
+                        e.onError(throwable);
+                    }
+                });
+
             } catch (Exception ex) {
                 log.e(ex);
                 e.onError(ex);
@@ -44,16 +54,25 @@ public class HttpObserver {
 
         return rxProvider.observableCreate((ObservableOnSubscribe<HttpResponse>) e -> {
             try {
-                HttpResponse response = http.getExecutor().put(url, data, headers);
-                assert response != null;
+                http.getExecutor().put(url, data, headers, new HttpCallback() {
+                    @Override
+                    public void onResponce(HttpResponse response) {
+                        if (response.getCode() / 100 == 2) {
+                            e.onNext(response);
+                            e.onComplete();
+                        } else {
+                            e.onError(new Exception(
+                                    "URL: " + url + "\nHttp error code" + response.getCode()));
+                        }
+                    }
 
-                if (response.getCode() / 100 == 2) {
-                    e.onNext(response);
-                    e.onComplete();
-                } else {
-                    e.onError(new Exception(
-                            "URL: " + url + "\nHttp error code" + response.getCode()));
-                }
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        e.onError(throwable);
+                    }
+                });
+
+
             } catch (Exception ex) {
                 log.e(ex);
                 e.onError(ex);

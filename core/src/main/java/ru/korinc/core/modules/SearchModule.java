@@ -48,6 +48,8 @@ public class SearchModule extends ModuleBase {
 
     public void query(Query query) {
 
+        log.d("SearchModule", "new query:" + query.toString());
+
         // skip page change if query changed
         if (lastQuery != null && query.getPage() > 1 && !query.getTitle()
                 .endsWith(lastQuery.getTitle())) {
@@ -63,13 +65,19 @@ public class SearchModule extends ModuleBase {
         lastQuery = query;
 
         if (input == null) {
+            log.d("SearchModule", "create bs");
             input = mRxProvider.bs(query);
+            log.d("SearchModule", "bs created");
+
+            log.d("SearchModule", "switchOnNext");
 
             ObservableWrapper<ArrayList<SearchEntity>> httpResponseObservableWrapper = input
                     .switchOnNext(input.throttleLast(500)
                             .map(s -> HttpObserver.get(s.toString(), new String[]{})
                                     .map(httpResponse -> new Touple<>(s, httpResponse))
                                     .map(respAndQuery -> {
+                                        log.d("SearchModule", "switch map");
+
                                         ArrayList<SearchEntity> res = new ArrayList<>();
 
                                         JsonArrayWrapper resp = json
@@ -105,11 +113,15 @@ public class SearchModule extends ModuleBase {
 
                                         return res;
                                     }).subscribeOn(mRxProvider.scheduler())));
+            log.d("SearchModule", "switchOnNext created");
+
             httpResponseObservableWrapper.subscribeOn(mRxProvider.scheduler()).subscribe(res -> {
                 searchResults.onNext(res);
                 log.d("result", res.toString());
             });
         } else {
+            log.d("SearchModule", "new input:" + query.toString());
+
             input.onNext(query);
         }
     }

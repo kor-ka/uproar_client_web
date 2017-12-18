@@ -5,9 +5,11 @@ import com.google.gwt.http.client.URL;
 import ru.korinc.runtime.RuntimeConfiguration;
 import ru.korinc.runtime.json.JsonPrivider;
 import ru.korinc.runtime.logging.JsLog;
+import ru.korinc.runtime.network.JsHttpExecutor;
+import ru.korinc.runtime.network.JsHttpProvider;
 import ru.korinc.runtime.rx.JsRxProvider;
 import ru.korinc.runtime.timeout.JsTimeout;
-import ru.korinc.server.proxy.Http;
+import ru.korinc.server.Http;
 
 /**
  * Created by gputintsev on 20.03.17.
@@ -31,8 +33,10 @@ public class AppCore {
 
     public void initCore() {
         mModel = new Model(new RuntimeConfiguration().setRxProvider(new JsRxProvider())
-                .setTimeoutProvider(new JsTimeout()).setLog(new JsLog()).setHttp(Http::new)
+                .setTimeoutProvider(new JsTimeout()).setLog(new JsLog())
+                .setHttp(new JsHttpProvider())
                 .setJson(new JsonPrivider()).setEncoder(URL::encodeQueryString));
+
     }
 
     public Model getModel() {

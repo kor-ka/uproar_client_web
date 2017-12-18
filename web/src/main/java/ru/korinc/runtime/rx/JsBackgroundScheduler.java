@@ -1,6 +1,6 @@
 package ru.korinc.runtime.rx;
 
-import com.github.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
+import ru.korinc.runtime.interop.scheduler.Scheduler;
 
 /**
  * Created by gputintsev on 15.12.17.

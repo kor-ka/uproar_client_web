@@ -20,6 +20,8 @@ public class Model {
     public Model(RuntimeConfiguration configuration) {
         this.configuration = configuration;
         mModulesContext = new ModulesContext(configuration);
+
+        configuration.getLog().d("Model", "inited");
     }
 
 

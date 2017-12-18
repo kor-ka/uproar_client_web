@@ -9,15 +9,20 @@ import java.util.logging.Logger;
 
 public class JsLog implements LogProvider {
 
-    Logger logger = Logger.getLogger("NameOfYourLogger");
+    private Logger logger = Logger.getLogger("DEFAULT");
 
     @Override
     public void d(String tag, String msg) {
-        logger.log(Level.INFO, msg);
+        consoleLog(tag, msg);
     }
 
     @Override
     public void e(Throwable throwable) {
-        logger.log(Level.INFO, "EX! " + throwable.toString());
+        consoleLog("EX", throwable.toString());
     }
+
+
+    native void consoleLog(String tag, String message) /*-{
+      console.log( tag + " " + message );
+  }-*/;
 }

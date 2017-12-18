@@ -1,7 +1,7 @@
 package ru.korinc.runtime.rx;
 
-import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
-import com.github.timofeevda.gwt.rxjs.interop.scheduler.Scheduler;
+import ru.korinc.runtime.interop.observable.Observable;
+import ru.korinc.runtime.interop.scheduler.Scheduler;
 
 /**
  * Created by gputintsev on 15.12.17.
@@ -94,6 +94,8 @@ public class JsObservable<T> implements ObservableWrapper<T> {
     @Override
     public <S> ObservableWrapper<S> switchOnNext(
             ObservableWrapper<? extends ObservableWrapper<? extends S>> sources) {
-        return new JsObservable<>((Observable<S>) source._switch());
+        Observable<Observable<S>> converted = ((JsObservable<ObservableWrapper<S>>) sources).source
+                .map(tObservableWrapper -> ((JsObservable<S>) tObservableWrapper).source);
+        return new JsObservable<S>((Observable<S>) converted._switch());
     }
 }

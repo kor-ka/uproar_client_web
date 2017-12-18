@@ -1,14 +1,19 @@
 package ru.korinc.runtime.network;
 
-public class HttpResponse {
+import java.io.Serializable;
 
-    private final int code;
+public class HttpResponse implements Serializable {
 
-    private final String content;
+    private int code;
+
+    private String content;
 
     private String url = "";
 
     private String[] headers;
+
+    public HttpResponse() {
+    }
 
     public HttpResponse(int code, String content, String url, String... headers) {
         this.code = code;

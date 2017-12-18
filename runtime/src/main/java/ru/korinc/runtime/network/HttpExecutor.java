@@ -11,9 +11,9 @@ import java.util.Map;
 public interface HttpExecutor {
 
     @ObjectiveCName("getMethodWithUrl:WithHeaders:")
-    HttpResponse get(String url, String... headers) throws Exception;
+    void get(String url, String[] headers, HttpCallback callback) throws Exception;
 
     @ObjectiveCName("putMethodWithUrl:WithContent:WithHeaders:")
-    HttpResponse put(String url, String contents, String... headers)
+    void put(String url, String contents, String[] headers, HttpCallback callback)
             throws Exception;
 }

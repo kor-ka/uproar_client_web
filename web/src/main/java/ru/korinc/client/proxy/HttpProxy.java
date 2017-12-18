@@ -5,6 +5,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 import java.io.IOException;
 
+import ru.korinc.runtime.network.HttpCallback;
 import ru.korinc.runtime.network.HttpResponse;
 
 /**
@@ -13,7 +14,9 @@ import ru.korinc.runtime.network.HttpResponse;
 @RemoteServiceRelativePath("proxy")
 public interface HttpProxy extends RemoteService {
 
-    HttpResponse get(String url, String... headers) throws IllegalArgumentException, IOException;
+    void get(String url, String[] headers, HttpCallback callback)
+            throws IllegalArgumentException, IOException;
 
-    HttpResponse put(String url, String... headers) throws IllegalArgumentException, IOException;
+    void put(String url, String[] headers, HttpCallback callback)
+            throws IllegalArgumentException, IOException;
 }

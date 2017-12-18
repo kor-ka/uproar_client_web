@@ -1,7 +1,6 @@
 package ru.korinc.runtime.rx;
 
-import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
-import com.github.timofeevda.gwt.rxjs.interop.subject.Subject;
+import ru.korinc.runtime.interop.subject.Subject;
 
 import ru.korinc.runtime.rx.subject.SubjectWrapper;
 

@@ -8,6 +8,6 @@ public class JsHttpProvider implements HttpProvider {
 
     @Override
     public HttpExecutor getExecutor() {
-        return null;
+        return new JsHttpExecutor();
     }
 }

@@ -1,8 +1,8 @@
 package ru.korinc.runtime.rx;
 
 
-import com.github.timofeevda.gwt.rxjs.interop.observable.Observable;
-import com.github.timofeevda.gwt.rxjs.interop.subject.BehaviorSubject;
+import ru.korinc.runtime.interop.observable.Observable;
+import ru.korinc.runtime.interop.subject.BehaviorSubject;
 
 import ru.korinc.runtime.rx.subject.BSWrapper;
 

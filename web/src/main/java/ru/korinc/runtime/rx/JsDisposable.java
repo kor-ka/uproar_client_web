@@ -1,6 +1,6 @@
 package ru.korinc.runtime.rx;
 
-import com.github.timofeevda.gwt.rxjs.interop.subscription.Subscription;
+import ru.korinc.runtime.interop.subscription.Subscription;
 
 /**
  * Created by gputintsev on 15.12.17.
