@@ -3,6 +3,7 @@ package ru.korinc.j2objc.runtime.network.mok;
 import java.util.Map;
 
 import ru.korinc.j2objc.runtime.network.Http;
+import ru.korinc.runtime.network.HttpCallback;
 import ru.korinc.runtime.network.HttpResponse;
 import ru.korinc.runtime.network.HttpExecutor;
 
@@ -34,13 +35,12 @@ public class HttpMock implements HttpExecutor {
     }
 
     @Override
-    public HttpResponse get(String url, String... headers) throws Exception {
-        return mHttp.get(url, headers);
+    public void get(String url, String[] headers, HttpCallback callback) throws Exception {
+        mHttp.get(url, headers, callback);
     }
 
     @Override
-    public HttpResponse put(String url, String contents, String... headers)
+    public void put(String url, String contents, String[] headers, HttpCallback callback)
             throws Exception {
-        return null;
     }
 }

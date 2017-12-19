@@ -19,6 +19,7 @@ import ru.korinc.core.Model;
 import ru.korinc.core.entity.Load;
 import ru.korinc.core.entity.Movie;
 import ru.korinc.core.entity.SearchEntity;
+import ru.korinc.core.modules.QueryList;
 import ru.korinc.j2objc.adapter.AwesomeAdapter;
 import ru.korinc.j2objc.adapter.matcher.ViewHolder;
 import ru.korinc.j2objc.runtime.rx.AndroidObservable;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         });
         input.setText("Star Wars");
 
-        ((AndroidObservable<ArrayList<SearchEntity>>) model.getSearchResults()).getSource()
+        ((AndroidObservable<QueryList<SearchEntity>>) model.getSearchResults()).getSource()
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(strings -> {
             adapter.setList(strings);
             adapter.notifyDataSetChanged();

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		47D9E46BC4574E06B7558749 /* Pods_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D845FCD0A9F8C789A377659 /* Pods_ios.framework */; };
+		562C20AC1FE9165B00A1D38D /* HttpCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 562C20AA1FE9165B00A1D38D /* HttpCallback.h */; };
+		562C20AD1FE9165B00A1D38D /* HttpCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 562C20AB1FE9165B00A1D38D /* HttpCallback.m */; };
+		562C20B01FE9195E00A1D38D /* QueryList.h in Headers */ = {isa = PBXBuildFile; fileRef = 562C20AE1FE9195E00A1D38D /* QueryList.h */; };
+		562C20B11FE9195E00A1D38D /* QueryList.m in Sources */ = {isa = PBXBuildFile; fileRef = 562C20AF1FE9195E00A1D38D /* QueryList.m */; };
 		566259411EA11A81001E9945 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 566259401EA11A81001E9945 /* Podfile */; };
 		5670E8E11FE2F1C900068D36 /* BackgroundSchedulerWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5670E8931FE2F1C800068D36 /* BackgroundSchedulerWrapper.h */; };
 		5670E8E21FE2F1C900068D36 /* BackgroundSchedulerWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5670E8941FE2F1C800068D36 /* BackgroundSchedulerWrapper.m */; };
@@ -112,6 +116,10 @@
 
 /* Begin PBXFileReference section */
 		4D845FCD0A9F8C789A377659 /* Pods_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		562C20AA1FE9165B00A1D38D /* HttpCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpCallback.h; sourceTree = "<group>"; };
+		562C20AB1FE9165B00A1D38D /* HttpCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpCallback.m; sourceTree = "<group>"; };
+		562C20AE1FE9195E00A1D38D /* QueryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryList.h; sourceTree = "<group>"; };
+		562C20AF1FE9195E00A1D38D /* QueryList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryList.m; sourceTree = "<group>"; };
 		566259401EA11A81001E9945 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5670E8931FE2F1C800068D36 /* BackgroundSchedulerWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundSchedulerWrapper.h; sourceTree = "<group>"; };
 		5670E8941FE2F1C800068D36 /* BackgroundSchedulerWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundSchedulerWrapper.m; sourceTree = "<group>"; };
@@ -242,6 +250,10 @@
 		56A0770A1EA1081C0041EB96 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				562C20AE1FE9195E00A1D38D /* QueryList.h */,
+				562C20AF1FE9195E00A1D38D /* QueryList.m */,
+				562C20AA1FE9165B00A1D38D /* HttpCallback.h */,
+				562C20AB1FE9165B00A1D38D /* HttpCallback.m */,
 				5670E8931FE2F1C800068D36 /* BackgroundSchedulerWrapper.h */,
 				5670E8941FE2F1C800068D36 /* BackgroundSchedulerWrapper.m */,
 				5670E8951FE2F1C800068D36 /* BSWrapper.h */,
@@ -457,6 +469,7 @@
 				5670E8E71FE2F1C900068D36 /* DisposableWrapper.h in Headers */,
 				5670E9231FE2F1C900068D36 /* TimeoutProvider.h in Headers */,
 				5670E9211FE2F1C900068D36 /* SubjectWrapper.h in Headers */,
+				562C20B01FE9195E00A1D38D /* QueryList.h in Headers */,
 				5670E8F51FE2F1C900068D36 /* HttpObserver.h in Headers */,
 				5670E8FD1FE2F1C900068D36 /* JsonObjectWrapper.h in Headers */,
 				5670E9171FE2F1C900068D36 /* RxProvider.h in Headers */,
@@ -471,6 +484,7 @@
 				5670E91B1FE2F1C900068D36 /* SearchModule.h in Headers */,
 				5670E8ED1FE2F1C900068D36 /* Foo2.h in Headers */,
 				5670E8FF1FE2F1C900068D36 /* JsonProvider.h in Headers */,
+				562C20AC1FE9165B00A1D38D /* HttpCallback.h in Headers */,
 				5670E9191FE2F1C900068D36 /* SearchEntity.h in Headers */,
 				5670E9131FE2F1C900068D36 /* Query.h in Headers */,
 				5670E90D1FE2F1C900068D36 /* ObservableOnSubscribe.h in Headers */,
@@ -648,6 +662,7 @@
 				5670E8F41FE2F1C900068D36 /* HttpExecutor.m in Sources */,
 				56A1B3B11EA1268D007F9F76 /* RxProvider.swift in Sources */,
 				5670E9311FE2F26B00068D36 /* UrlEncoderProvider.swift in Sources */,
+				562C20AD1FE9165B00A1D38D /* HttpCallback.m in Sources */,
 				5670E92C1FE2F1C900068D36 /* UrlEncoderProvider.m in Sources */,
 				5670E8F81FE2F1C900068D36 /* HttpProvider.m in Sources */,
 				5670E9261FE2F1C900068D36 /* Touple.m in Sources */,
@@ -687,6 +702,7 @@
 				5670E9081FE2F1C900068D36 /* ModuleBase.m in Sources */,
 				56AB64421E9FE890009D2EA7 /* AppDelegate.swift in Sources */,
 				5670E9161FE2F1C900068D36 /* RuntimeConfiguration.m in Sources */,
+				562C20B11FE9195E00A1D38D /* QueryList.m in Sources */,
 				5670E8E61FE2F1C900068D36 /* Consumer.m in Sources */,
 				5670E8F21FE2F1C900068D36 /* HttpEx.m in Sources */,
 				56C35B7A1EADE76900E007A0 /* HttpExecutorSwift.swift in Sources */,

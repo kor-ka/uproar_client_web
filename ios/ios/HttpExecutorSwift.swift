@@ -8,22 +8,21 @@
 
 import Foundation
 class HttpExecutorSwift: NSObject, RuKorincRuntimeNetworkHttpExecutor {
-    func getMethodWithUrl(_ url: String!, withHeaders headers: IOSObjectArray!) -> RuKorincRuntimeNetworkHttpResponse! {
+    func getMethodWithUrl(_ url: String!, withHeaders headers: IOSObjectArray!, with callback: RuKorincRuntimeNetworkHttpCallback){
         print(url)
         let request = NSURLRequest(url: URL(string: url)!)
         var response: URLResponse?
         do {
             let data = try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: &response)
-            // делаю строку из Data, чтобы потом из строки сделать Data xD 
+            // делаю строку из Data, чтобы потом из строки сделать Data xD
             let str = String(data: data, encoding: String.Encoding.utf8)
-            return RuKorincRuntimeNetworkHttpResponse(int: 200, with: str, with: url)
+            callback.onResponce(with: RuKorincRuntimeNetworkHttpResponse(int: 200, with: str, with: url))
         } catch {
-            print(error)
+            callback.onFailure(with: JavaLangThrowable())
         }
-        return nil
     }
     
-    func putMethod(withUrl url: String!, withContent contents: String!, withHeaders headers: IOSObjectArray!) -> RuKorincRuntimeNetworkHttpResponse! {
-        return nil
+    func putMethod(withUrl url: String!, withContent contents: String!, withHeaders headers: IOSObjectArray!, with callback: RuKorincRuntimeNetworkHttpCallback) {
+        
     }
 }

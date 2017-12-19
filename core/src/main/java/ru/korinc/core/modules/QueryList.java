@@ -3,12 +3,13 @@ package ru.korinc.core.modules;
 import java.util.ArrayList;
 
 import ru.korinc.core.entity.Query;
+import ru.korinc.core.entity.SearchEntity;
 
 /**
  * Created by gputintsev on 19.12.17.
  */
 
-public class QueryList<T> extends ArrayList<T> {
+public class QueryList extends ArrayList<SearchEntity> {
 
     private final Query mQuery;
 

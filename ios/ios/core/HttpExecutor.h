@@ -17,16 +17,18 @@
 #define RuKorincRuntimeNetworkHttpExecutor_
 
 @class IOSObjectArray;
-@class RuKorincRuntimeNetworkHttpResponse;
+@class RuKorincRuntimeNetworkHttpCallback;
 
 @protocol RuKorincRuntimeNetworkHttpExecutor < JavaObject >
 
-- (RuKorincRuntimeNetworkHttpResponse *)getMethodWithUrl:(NSString *)url
-                                             WithHeaders:(IOSObjectArray *)headers;
+- (void)getMethodWithUrl:(NSString *)url
+             WithHeaders:(IOSObjectArray *)headers
+            WithCallback:(RuKorincRuntimeNetworkHttpCallback *)callback;
 
-- (RuKorincRuntimeNetworkHttpResponse *)putMethodWithUrl:(NSString *)url
-                                             WithContent:(NSString *)contents
-                                             WithHeaders:(IOSObjectArray *)headers;
+- (void)putMethodWithUrl:(NSString *)url
+             WithContent:(NSString *)contents
+             WithHeaders:(IOSObjectArray *)headers
+            WithCallback:(RuKorincRuntimeNetworkHttpCallback *)callback;
 
 @end
 

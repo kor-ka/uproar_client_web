@@ -26,6 +26,9 @@
 #include "Function.h"
 #include "StringObservable.h"
 
+
+#include "HttpCallback.h"
+
 #include "HttpExecutor.h"
 
 #include "HttpObserver.h"
@@ -44,6 +47,7 @@
 #include "SearchEntity.h"
 #include "Load.h"
 #include "Query.h"
+#include "QueryList.h"
 
 
 #include "java/util/List.h"

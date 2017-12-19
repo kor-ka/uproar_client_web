@@ -14,15 +14,15 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
-    { NULL, "LRuKorincRuntimeNetworkHttpResponse;", 0x481, 0, 1, 2, -1, -1, -1 },
-    { NULL, "LRuKorincRuntimeNetworkHttpResponse;", 0x481, 3, 4, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, 2, -1, -1, -1 },
+    { NULL, "V", 0x401, 3, 4, 2, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  methods[0].selector = @selector(getMethodWithUrl:WithHeaders:);
-  methods[1].selector = @selector(putMethodWithUrl:WithContent:WithHeaders:);
+  methods[0].selector = @selector(getMethodWithUrl:WithHeaders:WithCallback:);
+  methods[1].selector = @selector(putMethodWithUrl:WithContent:WithHeaders:WithCallback:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "get", "LNSString;[LNSString;", "LJavaLangException;", "put", "LNSString;LNSString;[LNSString;" };
+  static const void *ptrTable[] = { "get", "LNSString;[LNSString;LRuKorincRuntimeNetworkHttpCallback;", "LJavaLangException;", "put", "LNSString;LNSString;[LNSString;LRuKorincRuntimeNetworkHttpCallback;" };
   static const J2ObjcClassInfo _RuKorincRuntimeNetworkHttpExecutor = { "HttpExecutor", "ru.korinc.runtime.network", ptrTable, methods, NULL, 7, 0x609, 2, 0, -1, -1, -1, -1, -1 };
   return &_RuKorincRuntimeNetworkHttpExecutor;
 }

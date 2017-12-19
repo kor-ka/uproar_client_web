@@ -23,6 +23,13 @@ J2OBJC_FIELD_SETTER(RuKorincRuntimeNetworkHttpResponse, headers_, IOSObjectArray
 
 @implementation RuKorincRuntimeNetworkHttpResponse
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  RuKorincRuntimeNetworkHttpResponse_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
 - (instancetype)initWithInt:(jint)code
                withNSString:(NSString *)content
                withNSString:(NSString *)url
@@ -60,6 +67,7 @@ J2OBJC_FIELD_SETTER(RuKorincRuntimeNetworkHttpResponse, headers_, IOSObjectArray
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, NULL, 0x81, -1, 0, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -70,26 +78,40 @@ J2OBJC_FIELD_SETTER(RuKorincRuntimeNetworkHttpResponse, headers_, IOSObjectArray
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  methods[0].selector = @selector(initWithInt:withNSString:withNSString:withNSStringArray:);
-  methods[1].selector = @selector(initWithInt:withNSString:withNSString:);
-  methods[2].selector = @selector(getCode);
-  methods[3].selector = @selector(filter);
-  methods[4].selector = @selector(getContent);
-  methods[5].selector = @selector(getUrl);
-  methods[6].selector = @selector(getHeaders);
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(initWithInt:withNSString:withNSString:withNSStringArray:);
+  methods[2].selector = @selector(initWithInt:withNSString:withNSString:);
+  methods[3].selector = @selector(getCode);
+  methods[4].selector = @selector(filter);
+  methods[5].selector = @selector(getContent);
+  methods[6].selector = @selector(getUrl);
+  methods[7].selector = @selector(getHeaders);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "code_", "I", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
-    { "content_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
+    { "code_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "content_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "url_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "headers_", "[LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "ILNSString;LNSString;[LNSString;", "ILNSString;LNSString;" };
-  static const J2ObjcClassInfo _RuKorincRuntimeNetworkHttpResponse = { "HttpResponse", "ru.korinc.runtime.network", ptrTable, methods, fields, 7, 0x1, 7, 4, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _RuKorincRuntimeNetworkHttpResponse = { "HttpResponse", "ru.korinc.runtime.network", ptrTable, methods, fields, 7, 0x1, 8, 4, -1, -1, -1, -1, -1 };
   return &_RuKorincRuntimeNetworkHttpResponse;
 }
 
 @end
+
+void RuKorincRuntimeNetworkHttpResponse_init(RuKorincRuntimeNetworkHttpResponse *self) {
+  NSObject_init(self);
+  self->url_ = @"";
+}
+
+RuKorincRuntimeNetworkHttpResponse *new_RuKorincRuntimeNetworkHttpResponse_init() {
+  J2OBJC_NEW_IMPL(RuKorincRuntimeNetworkHttpResponse, init)
+}
+
+RuKorincRuntimeNetworkHttpResponse *create_RuKorincRuntimeNetworkHttpResponse_init() {
+  J2OBJC_CREATE_IMPL(RuKorincRuntimeNetworkHttpResponse, init)
+}
 
 void RuKorincRuntimeNetworkHttpResponse_initWithInt_withNSString_withNSString_withNSStringArray_(RuKorincRuntimeNetworkHttpResponse *self, jint code, NSString *content, NSString *url, IOSObjectArray *headers) {
   NSObject_init(self);

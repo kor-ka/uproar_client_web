@@ -34,7 +34,7 @@ public class Model {
         mModulesContext.getSearchModule().query(query);
     }
 
-    public ObservableWrapper<QueryList<SearchEntity>> getSearchResults() {
+    public ObservableWrapper<QueryList> getSearchResults() {
         return mModulesContext.getSearchModule().getSearchResults();
     }
 

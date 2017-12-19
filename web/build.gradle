@@ -50,12 +50,12 @@ dependencies {
 task buildPackage(dependsOn: ['war']) {
     doFirst {
         delete "$buildDir/package"
-        delete "$buildDir/library "
+        delete "$buildDir/library"
 
         copy {
             into "$buildDir/library"
             with war
-            exclude "actor/omdb.devmode.js"
+            exclude "omdb/omdb.devmode.js"
             include "omdb/**"
         }
 

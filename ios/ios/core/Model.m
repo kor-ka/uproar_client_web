@@ -4,6 +4,7 @@
 //
 
 #include "J2ObjC_source.h"
+#include "LogProvider.h"
 #include "Model.h"
 #include "ModulesContext.h"
 #include "ObservableWrapper.h"
@@ -59,7 +60,7 @@ J2OBJC_FIELD_SETTER(RuKorincCoreModel, mModulesContext_, RuKorincCoreModulesModu
     { "configuration_", "LRuKorincRuntimeRuntimeConfiguration;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mModulesContext_", "LRuKorincCoreModulesModulesContext;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LRuKorincRuntimeRuntimeConfiguration;", "searchMovieByTitleQuery", "LNSString;", "LRuKorincCoreEntityQuery;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/SearchEntity;>;>;" };
+  static const void *ptrTable[] = { "LRuKorincRuntimeRuntimeConfiguration;", "searchMovieByTitleQuery", "LNSString;", "LRuKorincCoreEntityQuery;", "()Lru/korinc/runtime/rx/ObservableWrapper<Lru/korinc/core/modules/QueryList;>;" };
   static const J2ObjcClassInfo _RuKorincCoreModel = { "Model", "ru.korinc.core", ptrTable, methods, fields, 7, 0x1, 4, 2, -1, -1, -1, -1, -1 };
   return &_RuKorincCoreModel;
 }
@@ -70,6 +71,7 @@ void RuKorincCoreModel_initWithRuKorincRuntimeRuntimeConfiguration_(RuKorincCore
   NSObject_init(self);
   self->configuration_ = configuration;
   self->mModulesContext_ = new_RuKorincCoreModulesModulesContext_initWithRuKorincRuntimeRuntimeConfiguration_(configuration);
+  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk([((RuKorincRuntimeRuntimeConfiguration *) nil_chk(configuration)) getLog])) dWithNSString:@"Model" withNSString:@"inited"];
 }
 
 RuKorincCoreModel *new_RuKorincCoreModel_initWithRuKorincRuntimeRuntimeConfiguration_(RuKorincRuntimeRuntimeConfiguration *configuration) {

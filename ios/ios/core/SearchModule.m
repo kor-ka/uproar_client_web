@@ -23,6 +23,7 @@
 #include "Movie.h"
 #include "ObservableWrapper.h"
 #include "Query.h"
+#include "QueryList.h"
 #include "RuntimeConfiguration.h"
 #include "RxProvider.h"
 #include "SearchModule.h"
@@ -35,6 +36,7 @@
  @public
   id<RuKorincRuntimeRxSubjectBSWrapper> input_;
   id<RuKorincRuntimeRxSubjectBSWrapper> searchResults_;
+  jint generation_;
   RuKorincCoreEntityQuery *lastQuery_;
 }
 
@@ -101,7 +103,7 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$1 *create
   RuKorincCoreModulesSearchModule *this$0_;
 }
 
-- (void)acceptWithId:(JavaUtilArrayList *)res;
+- (void)acceptWithId:(RuKorincCoreModulesQueryList *)res;
 
 @end
 
@@ -121,32 +123,38 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$4 *create
 }
 
 - (void)run {
-  JavaUtilArrayList *defaultValue = new_JavaUtilArrayList_init();
+  RuKorincCoreModulesQueryList *defaultValue = new_RuKorincCoreModulesQueryList_init();
   [defaultValue addWithId:new_RuKorincCoreEntityMovie_initWithNSString_withNSString_(@"search some movies!", @"")];
   searchResults_ = [((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) bsWithId:defaultValue];
 }
 
 - (void)queryWithNSString:(NSString *)query {
-  [self queryWithRuKorincCoreEntityQuery:new_RuKorincCoreEntityQuery_initWithInt_withNSString_(1, query)];
+  [self queryWithRuKorincCoreEntityQuery:[new_RuKorincCoreEntityQuery_initWithInt_withNSString_(1, query) setGenerationWithInt:++generation_]];
 }
 
 - (void)queryWithRuKorincCoreEntityQuery:(RuKorincCoreEntityQuery *)query {
-  if (lastQuery_ != nil && [((RuKorincCoreEntityQuery *) nil_chk(query)) getPage] > 1 && ![((NSString *) nil_chk([query getTitle])) java_hasSuffix:[((RuKorincCoreEntityQuery *) nil_chk(lastQuery_)) getTitle]]) {
+  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"SearchModule" withNSString:JreStrcat("$$", @"new query:", [((RuKorincCoreEntityQuery *) nil_chk(query)) description])];
+  if (lastQuery_ != nil && [query getPage] > 1 && ![((NSString *) nil_chk([query getTitle])) java_hasSuffix:[((RuKorincCoreEntityQuery *) nil_chk(lastQuery_)) getTitle]]) {
     return;
   }
-  if (lastQuery_ == nil || ![((NSString *) nil_chk([lastQuery_ getTitle])) isEqual:[((RuKorincCoreEntityQuery *) nil_chk(query)) getTitle]]) {
-    JavaUtilArrayList *empty = new_JavaUtilArrayList_init();
+  if (lastQuery_ == nil || ![((NSString *) nil_chk([lastQuery_ getTitle])) isEqual:[query getTitle]]) {
+    RuKorincCoreModulesQueryList *empty = new_RuKorincCoreModulesQueryList_init();
     [empty addWithId:new_RuKorincCoreEntityMovie_initWithNSString_withNSString_(@"Loading...", @"")];
     [((id<RuKorincRuntimeRxSubjectBSWrapper>) nil_chk(searchResults_)) onNextWithId:empty];
   }
   lastQuery_ = query;
   if (input_ == nil) {
+    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"SearchModule" withNSString:@"create bs"];
     input_ = [((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) bsWithId:query];
+    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"SearchModule" withNSString:@"bs created"];
+    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"SearchModule" withNSString:@"switchOnNext"];
     id<RuKorincRuntimeRxObservableWrapper> httpResponseObservableWrapper = [((id<RuKorincRuntimeRxSubjectBSWrapper>) nil_chk(input_)) switchOnNextWithSources:[((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([input_ throttleLastWithWindowMillis:500])) mapWithFunc:new_RuKorincCoreModulesSearchModule_$Lambda$1_initWithRuKorincCoreModulesSearchModule_(self)]];
+    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"SearchModule" withNSString:@"switchOnNext created"];
     (void) [((id<RuKorincRuntimeRxObservableWrapper>) nil_chk([((id<RuKorincRuntimeRxObservableWrapper>) nil_chk(httpResponseObservableWrapper)) subscribeOnWithScheduler:[((id<RuKorincRuntimeRxRxProvider>) nil_chk(mRxProvider_)) scheduler]])) subscribeWithConsumer:new_RuKorincCoreModulesSearchModule_$Lambda$4_initWithRuKorincCoreModulesSearchModule_(self)];
   }
   else {
-    [input_ onNextWithId:query];
+    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"SearchModule" withNSString:JreStrcat("$$", @"new input:", [query description])];
+    [((id<RuKorincRuntimeRxSubjectBSWrapper>) nil_chk(input_)) onNextWithId:query];
   }
 }
 
@@ -173,10 +181,11 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$4 *create
   static const J2ObjcFieldInfo fields[] = {
     { "input_", "LRuKorincRuntimeRxSubjectBSWrapper;", .constantValue.asLong = 0, 0x2, -1, -1, 5, -1 },
     { "searchResults_", "LRuKorincRuntimeRxSubjectBSWrapper;", .constantValue.asLong = 0, 0x2, -1, -1, 6, -1 },
+    { "generation_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "lastQuery_", "LRuKorincCoreEntityQuery;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LRuKorincCoreModulesModulesContext;", "query", "LNSString;", "LRuKorincCoreEntityQuery;", "()Lru/korinc/runtime/rx/ObservableWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/SearchEntity;>;>;", "Lru/korinc/runtime/rx/subject/BSWrapper<Lru/korinc/core/entity/Query;>;", "Lru/korinc/runtime/rx/subject/BSWrapper<Ljava/util/ArrayList<Lru/korinc/core/entity/SearchEntity;>;>;" };
-  static const J2ObjcClassInfo _RuKorincCoreModulesSearchModule = { "SearchModule", "ru.korinc.core.modules", ptrTable, methods, fields, 7, 0x1, 5, 3, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LRuKorincCoreModulesModulesContext;", "query", "LNSString;", "LRuKorincCoreEntityQuery;", "()Lru/korinc/runtime/rx/ObservableWrapper<Lru/korinc/core/modules/QueryList;>;", "Lru/korinc/runtime/rx/subject/BSWrapper<Lru/korinc/core/entity/Query;>;", "Lru/korinc/runtime/rx/subject/BSWrapper<Lru/korinc/core/modules/QueryList;>;" };
+  static const J2ObjcClassInfo _RuKorincCoreModulesSearchModule = { "SearchModule", "ru.korinc.core.modules", ptrTable, methods, fields, 7, 0x1, 5, 4, -1, -1, -1, -1, -1 };
   return &_RuKorincCoreModulesSearchModule;
 }
 
@@ -184,6 +193,7 @@ __attribute__((unused)) static RuKorincCoreModulesSearchModule_$Lambda$4 *create
 
 void RuKorincCoreModulesSearchModule_initWithRuKorincCoreModulesModulesContext_(RuKorincCoreModulesSearchModule *self, RuKorincCoreModulesModulesContext *context) {
   RuKorincCoreModulesModuleBase_initWithRuKorincCoreModulesModulesContext_(self, context);
+  self->generation_ = 0;
 }
 
 RuKorincCoreModulesSearchModule *new_RuKorincCoreModulesSearchModule_initWithRuKorincCoreModulesModulesContext_(RuKorincCoreModulesModulesContext *context) {
@@ -222,8 +232,9 @@ J2OBJC_INITIALIZED_DEFN(RuKorincCoreModulesSearchModule_$Lambda$3)
 @implementation RuKorincCoreModulesSearchModule_$Lambda$3
 
 - (id)applyWithId:(RuKorincCoreUtilsTouple *)respAndQuery {
-  JavaUtilArrayList *res = new_JavaUtilArrayList_init();
-  id<RuKorincRuntimeJsonJsonArrayWrapper> resp = [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk([((id<RuKorincRuntimeJsonJsonProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, json))) getJsonWithNSString:[((RuKorincRuntimeNetworkHttpResponse *) nil_chk([((RuKorincCoreUtilsTouple *) nil_chk(respAndQuery)) getB])) getContent]])) getJsonArrayWithNSString:@"Search"];
+  RuKorincCoreModulesQueryList *res = new_RuKorincCoreModulesQueryList_initWithRuKorincCoreEntityQuery_([((RuKorincCoreUtilsTouple *) nil_chk(respAndQuery)) getA]);
+  id<RuKorincRuntimeJsonJsonArrayWrapper> resp = [((id<RuKorincRuntimeJsonJsonObjectWrapper>) nil_chk([((id<RuKorincRuntimeJsonJsonProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, json))) getJsonWithNSString:[((RuKorincRuntimeNetworkHttpResponse *) nil_chk([respAndQuery getB])) getContent]])) getJsonArrayWithNSString:@"Search"];
+  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"SearchModule" withNSString:JreStrcat("$@", @"resp:", resp)];
   if (resp == nil) {
     [res addAllWithJavaUtilCollection:[((RuKorincCoreEntityQuery *) nil_chk([respAndQuery getA])) getOldResults]];
     if ([res size] == 0) {
@@ -292,9 +303,8 @@ RuKorincCoreModulesSearchModule_$Lambda$1 *create_RuKorincCoreModulesSearchModul
 
 @implementation RuKorincCoreModulesSearchModule_$Lambda$4
 
-- (void)acceptWithId:(JavaUtilArrayList *)res {
+- (void)acceptWithId:(RuKorincCoreModulesQueryList *)res {
   [((id<RuKorincRuntimeRxSubjectBSWrapper>) nil_chk(this$0_->searchResults_)) onNextWithId:res];
-  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"result" withNSString:[((JavaUtilArrayList *) nil_chk(res)) description]];
 }
 
 @end

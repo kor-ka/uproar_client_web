@@ -29,11 +29,11 @@ public class SearchModule extends ModuleBase {
     private BSWrapper<ru.korinc.core.entity.Query> input;
 
 
-    private BSWrapper<QueryList<SearchEntity>> searchResults;
+    private BSWrapper<QueryList> searchResults;
 
     @Override
     public void run() {
-        QueryList<SearchEntity> defaultValue = new QueryList<>();
+        QueryList defaultValue = new QueryList();
         defaultValue.add(new Movie("search some movies!", ""));
         searchResults = mRxProvider.bs(defaultValue);
 
@@ -61,7 +61,7 @@ public class SearchModule extends ModuleBase {
         }
 
         if (lastQuery == null || !lastQuery.getTitle().equals(query.getTitle())) {
-            QueryList<SearchEntity> empty = new QueryList<>();
+            QueryList empty = new QueryList();
             empty.add(new Movie("Loading...", ""));
             searchResults.onNext(empty);
         }
@@ -75,13 +75,13 @@ public class SearchModule extends ModuleBase {
 
             log.d("SearchModule", "switchOnNext");
 
-            ObservableWrapper<QueryList<SearchEntity>> httpResponseObservableWrapper = input
+            ObservableWrapper<QueryList> httpResponseObservableWrapper = input
                     .switchOnNext(input.throttleLast(500)
                             .map(s -> HttpObserver.get(s.toString(), new String[]{})
                                     .map(httpResponse -> new Touple<>(s, httpResponse))
                                     .map(respAndQuery -> {
 
-                                        QueryList<SearchEntity> res = new QueryList<>(
+                                        QueryList res = new QueryList(
                                                 respAndQuery.getA());
 
                                         JsonArrayWrapper resp = json
@@ -130,7 +130,7 @@ public class SearchModule extends ModuleBase {
         }
     }
 
-    public ObservableWrapper<QueryList<SearchEntity>> getSearchResults() {
+    public ObservableWrapper<QueryList> getSearchResults() {
         return searchResults;
     }
 }

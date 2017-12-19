@@ -7,6 +7,7 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 
+import ru.korinc.runtime.network.HttpCallback;
 import ru.korinc.runtime.network.HttpResponse;
 import ru.korinc.runtime.network.HttpExecutor;
 
@@ -21,7 +22,7 @@ public class Http implements HttpExecutor {
 
 
     @Override
-    public HttpResponse get(String url, String... headers) throws IOException {
+    public void get(String url, String[] headers, HttpCallback callback) throws IOException {
 
         final Request.Builder builder = new Request.Builder().url(url);
         for (int i = 0; i < headers.length; i++) {
@@ -31,12 +32,16 @@ public class Http implements HttpExecutor {
         }
         OkHttpClient client = new OkHttpClient();
 
-        Response response = client.newCall(builder.build()).execute();
-        return new HttpResponse(response.code(), response.body().string(), url);
+        try {
+            Response response = client.newCall(builder.build()).execute();
+            callback.onResponce(new HttpResponse(response.code(), response.body().string(), url));
+        } catch (Exception e) {
+            callback.onFailure(e);
+        }
     }
 
     @Override
-    public HttpResponse put(String url, String contents, String... headers)
+    public void put(String url, String contents, String[] headers, HttpCallback callback)
             throws IOException {
         final Request.Builder builder = new Request.Builder().url(url)
                 .method("PUT", RequestBody.create(null, contents));
@@ -47,7 +52,11 @@ public class Http implements HttpExecutor {
         }
         OkHttpClient client = new OkHttpClient();
 
-        Response response = client.newCall(builder.build()).execute();
-        return new HttpResponse(response.code(), response.body().string(), url);
+        try {
+            Response response = client.newCall(builder.build()).execute();
+            callback.onResponce(new HttpResponse(response.code(), response.body().string(), url));
+        } catch (Exception e) {
+            callback.onFailure(e);
+        }
     }
 }

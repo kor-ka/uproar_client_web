@@ -16,11 +16,17 @@
 #if !defined (RuKorincRuntimeNetworkHttpResponse_) && (INCLUDE_ALL_HttpResponse || defined(INCLUDE_RuKorincRuntimeNetworkHttpResponse))
 #define RuKorincRuntimeNetworkHttpResponse_
 
+#define RESTRICT_JavaIoSerializable 1
+#define INCLUDE_JavaIoSerializable 1
+#include "java/io/Serializable.h"
+
 @class IOSObjectArray;
 
-@interface RuKorincRuntimeNetworkHttpResponse : NSObject
+@interface RuKorincRuntimeNetworkHttpResponse : NSObject < JavaIoSerializable >
 
 #pragma mark Public
+
+- (instancetype)init;
 
 - (instancetype)initWithInt:(jint)code
                withNSString:(NSString *)content
@@ -41,13 +47,15 @@
 
 - (NSString *)getUrl;
 
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)init NS_UNAVAILABLE;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(RuKorincRuntimeNetworkHttpResponse)
+
+FOUNDATION_EXPORT void RuKorincRuntimeNetworkHttpResponse_init(RuKorincRuntimeNetworkHttpResponse *self);
+
+FOUNDATION_EXPORT RuKorincRuntimeNetworkHttpResponse *new_RuKorincRuntimeNetworkHttpResponse_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT RuKorincRuntimeNetworkHttpResponse *create_RuKorincRuntimeNetworkHttpResponse_init();
 
 FOUNDATION_EXPORT void RuKorincRuntimeNetworkHttpResponse_initWithInt_withNSString_withNSString_withNSStringArray_(RuKorincRuntimeNetworkHttpResponse *self, jint code, NSString *content, NSString *url, IOSObjectArray *headers);
 

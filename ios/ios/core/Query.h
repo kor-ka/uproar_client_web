@@ -22,14 +22,20 @@
 
 #pragma mark Public
 
+- (instancetype)init;
+
 - (instancetype)initWithInt:(jint)page
                withNSString:(NSString *)title;
+
+- (jint)getGeneration;
 
 - (JavaUtilArrayList *)getOldResults;
 
 - (jint)getPage;
 
 - (NSString *)getTitle;
+
+- (RuKorincCoreEntityQuery *)setGenerationWithInt:(jint)generation;
 
 - (RuKorincCoreEntityQuery *)setOldResultsWithJavaUtilArrayList:(JavaUtilArrayList *)oldResults;
 
@@ -39,13 +45,15 @@
 
 - (NSString *)description;
 
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)init NS_UNAVAILABLE;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(RuKorincCoreEntityQuery)
+
+FOUNDATION_EXPORT void RuKorincCoreEntityQuery_init(RuKorincCoreEntityQuery *self);
+
+FOUNDATION_EXPORT RuKorincCoreEntityQuery *new_RuKorincCoreEntityQuery_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT RuKorincCoreEntityQuery *create_RuKorincCoreEntityQuery_init();
 
 FOUNDATION_EXPORT void RuKorincCoreEntityQuery_initWithInt_withNSString_(RuKorincCoreEntityQuery *self, jint page, NSString *title);
 

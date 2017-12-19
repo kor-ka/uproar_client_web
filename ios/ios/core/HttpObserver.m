@@ -5,6 +5,7 @@
 
 #include "Emitter.h"
 #include "Function.h"
+#include "HttpCallback.h"
 #include "HttpExecutor.h"
 #include "HttpObserver.h"
 #include "HttpProvider.h"
@@ -17,7 +18,6 @@
 #include "RuntimeConfiguration.h"
 #include "RxProvider.h"
 #include "java/lang/Exception.h"
-#include "java/lang/NullPointerException.h"
 #include "java/lang/Throwable.h"
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -39,6 +39,29 @@ __attribute__((unused)) static void RuKorincRuntimeNetworkHttpObserver_$Lambda$1
 __attribute__((unused)) static RuKorincRuntimeNetworkHttpObserver_$Lambda$1 *new_RuKorincRuntimeNetworkHttpObserver_$Lambda$1_initWithNSString_withNSStringArray_(NSString *capture$0, IOSObjectArray *capture$1) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static RuKorincRuntimeNetworkHttpObserver_$Lambda$1 *create_RuKorincRuntimeNetworkHttpObserver_$Lambda$1_initWithNSString_withNSStringArray_(NSString *capture$0, IOSObjectArray *capture$1);
+
+@interface RuKorincRuntimeNetworkHttpObserver_1 : RuKorincRuntimeNetworkHttpCallback {
+ @public
+  NSString *val$url_;
+  id<RuKorincRuntimeRxEmitter> val$e_;
+}
+
+- (instancetype)initWithNSString:(NSString *)capture$0
+    withRuKorincRuntimeRxEmitter:(id<RuKorincRuntimeRxEmitter>)capture$1;
+
+- (void)onResponceWithRuKorincRuntimeNetworkHttpResponse:(RuKorincRuntimeNetworkHttpResponse *)response;
+
+- (void)onFailureWithJavaLangThrowable:(JavaLangThrowable *)throwable;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(RuKorincRuntimeNetworkHttpObserver_1)
+
+__attribute__((unused)) static void RuKorincRuntimeNetworkHttpObserver_1_initWithNSString_withRuKorincRuntimeRxEmitter_(RuKorincRuntimeNetworkHttpObserver_1 *self, NSString *capture$0, id<RuKorincRuntimeRxEmitter> capture$1);
+
+__attribute__((unused)) static RuKorincRuntimeNetworkHttpObserver_1 *new_RuKorincRuntimeNetworkHttpObserver_1_initWithNSString_withRuKorincRuntimeRxEmitter_(NSString *capture$0, id<RuKorincRuntimeRxEmitter> capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static RuKorincRuntimeNetworkHttpObserver_1 *create_RuKorincRuntimeNetworkHttpObserver_1_initWithNSString_withRuKorincRuntimeRxEmitter_(NSString *capture$0, id<RuKorincRuntimeRxEmitter> capture$1);
 
 @interface RuKorincRuntimeNetworkHttpObserver_$Lambda$3 : NSObject < RuKorincRuntimeRxFunction > {
  @public
@@ -93,6 +116,29 @@ __attribute__((unused)) static void RuKorincRuntimeNetworkHttpObserver_$Lambda$4
 __attribute__((unused)) static RuKorincRuntimeNetworkHttpObserver_$Lambda$4 *new_RuKorincRuntimeNetworkHttpObserver_$Lambda$4_initWithNSString_withNSString_withNSStringArray_(NSString *capture$0, NSString *capture$1, IOSObjectArray *capture$2) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static RuKorincRuntimeNetworkHttpObserver_$Lambda$4 *create_RuKorincRuntimeNetworkHttpObserver_$Lambda$4_initWithNSString_withNSString_withNSStringArray_(NSString *capture$0, NSString *capture$1, IOSObjectArray *capture$2);
+
+@interface RuKorincRuntimeNetworkHttpObserver_2 : RuKorincRuntimeNetworkHttpCallback {
+ @public
+  id<RuKorincRuntimeRxEmitter> val$e_;
+  NSString *val$url_;
+}
+
+- (instancetype)initWithRuKorincRuntimeRxEmitter:(id<RuKorincRuntimeRxEmitter>)capture$0
+                                    withNSString:(NSString *)capture$1;
+
+- (void)onResponceWithRuKorincRuntimeNetworkHttpResponse:(RuKorincRuntimeNetworkHttpResponse *)response;
+
+- (void)onFailureWithJavaLangThrowable:(JavaLangThrowable *)throwable;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(RuKorincRuntimeNetworkHttpObserver_2)
+
+__attribute__((unused)) static void RuKorincRuntimeNetworkHttpObserver_2_initWithRuKorincRuntimeRxEmitter_withNSString_(RuKorincRuntimeNetworkHttpObserver_2 *self, id<RuKorincRuntimeRxEmitter> capture$0, NSString *capture$1);
+
+__attribute__((unused)) static RuKorincRuntimeNetworkHttpObserver_2 *new_RuKorincRuntimeNetworkHttpObserver_2_initWithRuKorincRuntimeRxEmitter_withNSString_(id<RuKorincRuntimeRxEmitter> capture$0, NSString *capture$1) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static RuKorincRuntimeNetworkHttpObserver_2 *create_RuKorincRuntimeNetworkHttpObserver_2_initWithRuKorincRuntimeRxEmitter_withNSString_(id<RuKorincRuntimeRxEmitter> capture$0, NSString *capture$1);
 
 @interface RuKorincRuntimeNetworkHttpObserver_$Lambda$5 : NSObject < RuKorincRuntimeRxFunction >
 
@@ -179,17 +225,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(RuKorincRuntimeNetworkHttpObserver)
 
 - (void)subscribeWithRuKorincRuntimeRxEmitter:(id<RuKorincRuntimeRxEmitter>)e {
   @try {
-    RuKorincRuntimeNetworkHttpResponse *response = [((id<RuKorincRuntimeNetworkHttpExecutor>) nil_chk([((id<RuKorincRuntimeNetworkHttpProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, http))) getExecutor])) getMethodWithUrl:val$url_ WithHeaders:val$headers_];
-    if (response == nil) {
-      @throw new_JavaLangNullPointerException_init();
-    }
-    if ([response getCode] / 100 == 2) {
-      [((id<RuKorincRuntimeRxEmitter>) nil_chk(e)) onNextWithId:response];
-      [e onComplete];
-    }
-    else {
-      [((id<RuKorincRuntimeRxEmitter>) nil_chk(e)) onErrorWithJavaLangThrowable:new_JavaLangException_initWithNSString_(JreStrcat("$$$I", @"URL: ", val$url_, @"\nHttp error code", [response getCode]))];
-    }
+    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"HttpObserver" withNSString:JreStrcat("$$C@", @"try get: ", val$url_, ' ', val$headers_)];
+    [((id<RuKorincRuntimeNetworkHttpExecutor>) nil_chk([((id<RuKorincRuntimeNetworkHttpProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, http))) getExecutor])) getMethodWithUrl:val$url_ WithHeaders:val$headers_ WithCallback:new_RuKorincRuntimeNetworkHttpObserver_1_initWithNSString_withRuKorincRuntimeRxEmitter_(val$url_, e)];
   }
   @catch (JavaLangException *ex) {
     [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) eWithJavaLangThrowable:ex];
@@ -211,6 +248,69 @@ RuKorincRuntimeNetworkHttpObserver_$Lambda$1 *new_RuKorincRuntimeNetworkHttpObse
 
 RuKorincRuntimeNetworkHttpObserver_$Lambda$1 *create_RuKorincRuntimeNetworkHttpObserver_$Lambda$1_initWithNSString_withNSStringArray_(NSString *capture$0, IOSObjectArray *capture$1) {
   J2OBJC_CREATE_IMPL(RuKorincRuntimeNetworkHttpObserver_$Lambda$1, initWithNSString_withNSStringArray_, capture$0, capture$1)
+}
+
+@implementation RuKorincRuntimeNetworkHttpObserver_1
+
+- (instancetype)initWithNSString:(NSString *)capture$0
+    withRuKorincRuntimeRxEmitter:(id<RuKorincRuntimeRxEmitter>)capture$1 {
+  RuKorincRuntimeNetworkHttpObserver_1_initWithNSString_withRuKorincRuntimeRxEmitter_(self, capture$0, capture$1);
+  return self;
+}
+
+- (void)onResponceWithRuKorincRuntimeNetworkHttpResponse:(RuKorincRuntimeNetworkHttpResponse *)response {
+  if ([((RuKorincRuntimeNetworkHttpResponse *) nil_chk(response)) getCode] / 100 == 2) {
+    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) dWithNSString:@"HttpObserver" withNSString:JreStrcat("$$C$", @"res get: ", val$url_, ' ', [response getContent])];
+    [((id<RuKorincRuntimeRxEmitter>) nil_chk(val$e_)) onNextWithId:response];
+    [val$e_ onComplete];
+  }
+  else {
+    JavaLangException *error = new_JavaLangException_initWithNSString_(JreStrcat("$$$I", @"URL: ", val$url_, @"\nHttp error code", [response getCode]));
+    [((id<RuKorincRuntimeRxEmitter>) nil_chk(val$e_)) onErrorWithJavaLangThrowable:error];
+    [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) eWithJavaLangThrowable:error];
+  }
+}
+
+- (void)onFailureWithJavaLangThrowable:(JavaLangThrowable *)throwable {
+  [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) eWithJavaLangThrowable:throwable];
+  [((id<RuKorincRuntimeRxEmitter>) nil_chk(val$e_)) onErrorWithJavaLangThrowable:throwable];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(initWithNSString:withRuKorincRuntimeRxEmitter:);
+  methods[1].selector = @selector(onResponceWithRuKorincRuntimeNetworkHttpResponse:);
+  methods[2].selector = @selector(onFailureWithJavaLangThrowable:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$url_", "LNSString;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "val$e_", "LRuKorincRuntimeRxEmitter;", .constantValue.asLong = 0, 0x1012, -1, -1, 4, -1 },
+  };
+  static const void *ptrTable[] = { "onResponce", "LRuKorincRuntimeNetworkHttpResponse;", "onFailure", "LJavaLangThrowable;", "Lru/korinc/runtime/rx/Emitter<Lru/korinc/runtime/network/HttpResponse;>;", "LRuKorincRuntimeNetworkHttpObserver;", "getWithNSString:withNSStringArray:" };
+  static const J2ObjcClassInfo _RuKorincRuntimeNetworkHttpObserver_1 = { "", "ru.korinc.runtime.network", ptrTable, methods, fields, 7, 0x8018, 3, 2, 5, -1, 6, -1, -1 };
+  return &_RuKorincRuntimeNetworkHttpObserver_1;
+}
+
+@end
+
+void RuKorincRuntimeNetworkHttpObserver_1_initWithNSString_withRuKorincRuntimeRxEmitter_(RuKorincRuntimeNetworkHttpObserver_1 *self, NSString *capture$0, id<RuKorincRuntimeRxEmitter> capture$1) {
+  self->val$url_ = capture$0;
+  self->val$e_ = capture$1;
+  RuKorincRuntimeNetworkHttpCallback_init(self);
+}
+
+RuKorincRuntimeNetworkHttpObserver_1 *new_RuKorincRuntimeNetworkHttpObserver_1_initWithNSString_withRuKorincRuntimeRxEmitter_(NSString *capture$0, id<RuKorincRuntimeRxEmitter> capture$1) {
+  J2OBJC_NEW_IMPL(RuKorincRuntimeNetworkHttpObserver_1, initWithNSString_withRuKorincRuntimeRxEmitter_, capture$0, capture$1)
+}
+
+RuKorincRuntimeNetworkHttpObserver_1 *create_RuKorincRuntimeNetworkHttpObserver_1_initWithNSString_withRuKorincRuntimeRxEmitter_(NSString *capture$0, id<RuKorincRuntimeRxEmitter> capture$1) {
+  J2OBJC_CREATE_IMPL(RuKorincRuntimeNetworkHttpObserver_1, initWithNSString_withRuKorincRuntimeRxEmitter_, capture$0, capture$1)
 }
 
 @implementation RuKorincRuntimeNetworkHttpObserver_$Lambda$3
@@ -267,15 +367,7 @@ RuKorincRuntimeNetworkHttpObserver_$Lambda$2 *create_RuKorincRuntimeNetworkHttpO
 
 - (void)subscribeWithRuKorincRuntimeRxEmitter:(id<RuKorincRuntimeRxEmitter>)e {
   @try {
-    RuKorincRuntimeNetworkHttpResponse *response = [((id<RuKorincRuntimeNetworkHttpExecutor>) nil_chk([((id<RuKorincRuntimeNetworkHttpProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, http))) getExecutor])) putMethodWithUrl:val$url_ WithContent:val$data_ WithHeaders:val$headers_];
-    JreAssert(response != nil, @"ru/korinc/runtime/network/HttpObserver.java:48 condition failed: assert response != null;");
-    if ([((RuKorincRuntimeNetworkHttpResponse *) nil_chk(response)) getCode] / 100 == 2) {
-      [((id<RuKorincRuntimeRxEmitter>) nil_chk(e)) onNextWithId:response];
-      [e onComplete];
-    }
-    else {
-      [((id<RuKorincRuntimeRxEmitter>) nil_chk(e)) onErrorWithJavaLangThrowable:new_JavaLangException_initWithNSString_(JreStrcat("$$$I", @"URL: ", val$url_, @"\nHttp error code", [response getCode]))];
-    }
+    [((id<RuKorincRuntimeNetworkHttpExecutor>) nil_chk([((id<RuKorincRuntimeNetworkHttpProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, http))) getExecutor])) putMethodWithUrl:val$url_ WithContent:val$data_ WithHeaders:val$headers_ WithCallback:new_RuKorincRuntimeNetworkHttpObserver_2_initWithRuKorincRuntimeRxEmitter_withNSString_(e, val$url_)];
   }
   @catch (JavaLangException *ex) {
     [((id<RuKorincRuntimeLoggingLogProvider>) nil_chk(JreLoadStatic(RuKorincRuntimeRuntimeConfiguration, log))) eWithJavaLangThrowable:ex];
@@ -298,6 +390,65 @@ RuKorincRuntimeNetworkHttpObserver_$Lambda$4 *new_RuKorincRuntimeNetworkHttpObse
 
 RuKorincRuntimeNetworkHttpObserver_$Lambda$4 *create_RuKorincRuntimeNetworkHttpObserver_$Lambda$4_initWithNSString_withNSString_withNSStringArray_(NSString *capture$0, NSString *capture$1, IOSObjectArray *capture$2) {
   J2OBJC_CREATE_IMPL(RuKorincRuntimeNetworkHttpObserver_$Lambda$4, initWithNSString_withNSString_withNSStringArray_, capture$0, capture$1, capture$2)
+}
+
+@implementation RuKorincRuntimeNetworkHttpObserver_2
+
+- (instancetype)initWithRuKorincRuntimeRxEmitter:(id<RuKorincRuntimeRxEmitter>)capture$0
+                                    withNSString:(NSString *)capture$1 {
+  RuKorincRuntimeNetworkHttpObserver_2_initWithRuKorincRuntimeRxEmitter_withNSString_(self, capture$0, capture$1);
+  return self;
+}
+
+- (void)onResponceWithRuKorincRuntimeNetworkHttpResponse:(RuKorincRuntimeNetworkHttpResponse *)response {
+  if ([((RuKorincRuntimeNetworkHttpResponse *) nil_chk(response)) getCode] / 100 == 2) {
+    [((id<RuKorincRuntimeRxEmitter>) nil_chk(val$e_)) onNextWithId:response];
+    [val$e_ onComplete];
+  }
+  else {
+    [((id<RuKorincRuntimeRxEmitter>) nil_chk(val$e_)) onErrorWithJavaLangThrowable:new_JavaLangException_initWithNSString_(JreStrcat("$$$I", @"URL: ", val$url_, @"\nHttp error code", [response getCode]))];
+  }
+}
+
+- (void)onFailureWithJavaLangThrowable:(JavaLangThrowable *)throwable {
+  [((id<RuKorincRuntimeRxEmitter>) nil_chk(val$e_)) onErrorWithJavaLangThrowable:throwable];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  methods[0].selector = @selector(initWithRuKorincRuntimeRxEmitter:withNSString:);
+  methods[1].selector = @selector(onResponceWithRuKorincRuntimeNetworkHttpResponse:);
+  methods[2].selector = @selector(onFailureWithJavaLangThrowable:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "val$e_", "LRuKorincRuntimeRxEmitter;", .constantValue.asLong = 0, 0x1012, -1, -1, 4, -1 },
+    { "val$url_", "LNSString;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "onResponce", "LRuKorincRuntimeNetworkHttpResponse;", "onFailure", "LJavaLangThrowable;", "Lru/korinc/runtime/rx/Emitter<Lru/korinc/runtime/network/HttpResponse;>;", "LRuKorincRuntimeNetworkHttpObserver;", "putWithNSString:withNSString:withNSStringArray:" };
+  static const J2ObjcClassInfo _RuKorincRuntimeNetworkHttpObserver_2 = { "", "ru.korinc.runtime.network", ptrTable, methods, fields, 7, 0x8018, 3, 2, 5, -1, 6, -1, -1 };
+  return &_RuKorincRuntimeNetworkHttpObserver_2;
+}
+
+@end
+
+void RuKorincRuntimeNetworkHttpObserver_2_initWithRuKorincRuntimeRxEmitter_withNSString_(RuKorincRuntimeNetworkHttpObserver_2 *self, id<RuKorincRuntimeRxEmitter> capture$0, NSString *capture$1) {
+  self->val$e_ = capture$0;
+  self->val$url_ = capture$1;
+  RuKorincRuntimeNetworkHttpCallback_init(self);
+}
+
+RuKorincRuntimeNetworkHttpObserver_2 *new_RuKorincRuntimeNetworkHttpObserver_2_initWithRuKorincRuntimeRxEmitter_withNSString_(id<RuKorincRuntimeRxEmitter> capture$0, NSString *capture$1) {
+  J2OBJC_NEW_IMPL(RuKorincRuntimeNetworkHttpObserver_2, initWithRuKorincRuntimeRxEmitter_withNSString_, capture$0, capture$1)
+}
+
+RuKorincRuntimeNetworkHttpObserver_2 *create_RuKorincRuntimeNetworkHttpObserver_2_initWithRuKorincRuntimeRxEmitter_withNSString_(id<RuKorincRuntimeRxEmitter> capture$0, NSString *capture$1) {
+  J2OBJC_CREATE_IMPL(RuKorincRuntimeNetworkHttpObserver_2, initWithRuKorincRuntimeRxEmitter_withNSString_, capture$0, capture$1)
 }
 
 J2OBJC_INITIALIZED_DEFN(RuKorincRuntimeNetworkHttpObserver_$Lambda$5)

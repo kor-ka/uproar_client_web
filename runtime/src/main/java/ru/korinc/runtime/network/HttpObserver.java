@@ -1,7 +1,6 @@
 package ru.korinc.runtime.network;
 
 
-import java.util.HashMap;
 
 import ru.korinc.runtime.rx.ObservableOnSubscribe;
 import ru.korinc.runtime.rx.ObservableWrapper;

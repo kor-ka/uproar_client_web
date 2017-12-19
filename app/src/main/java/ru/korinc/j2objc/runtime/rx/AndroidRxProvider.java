@@ -53,12 +53,6 @@ public class AndroidRxProvider implements RxProvider {
     }
 
     @Override
-    public <T> BSWrapper<T> bs() {
-        BehaviorSubject<T> res = BehaviorSubject.create();
-        return new AndroidBS<>(res);
-    }
-
-    @Override
     public BackgroundSchedulerWrapper scheduler() {
         return new AndroidBackgroundScheduler();
     }
