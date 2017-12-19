@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         });
         input.setText("Star Wars");
 
-        ((AndroidObservable<QueryList<SearchEntity>>) model.getSearchResults()).getSource()
+        ((AndroidObservable<QueryList>) model.getSearchResults()).getSource()
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(strings -> {
             adapter.setList(strings);
             adapter.notifyDataSetChanged();
