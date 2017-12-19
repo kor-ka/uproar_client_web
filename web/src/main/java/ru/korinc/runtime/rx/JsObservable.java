@@ -70,7 +70,7 @@ public class JsObservable<T> implements ObservableWrapper<T> {
 
     @Override
     public ObservableWrapper<T> throttleLast(long windowMillis) {
-        return new JsObservable<>(source.throttleTime((int) windowMillis));
+        return new JsObservable<>(source.debounceTime((int) windowMillis));
     }
 
     @Override

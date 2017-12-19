@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import ru.korinc.core.entity.Load;
 import ru.korinc.core.entity.Movie;
-import ru.korinc.core.entity.Query;
 import ru.korinc.core.entity.SearchEntity;
 import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
@@ -27,26 +26,31 @@ public class SearchModule extends ModuleBase {
 
     }
 
-    private BSWrapper<Query> input;
+    private BSWrapper<ru.korinc.core.entity.Query> input;
 
 
-    private BSWrapper<ArrayList<SearchEntity>> searchResults;
+    private BSWrapper<QueryList<SearchEntity>> searchResults;
 
     @Override
     public void run() {
-        ArrayList<SearchEntity> defaultValue = new ArrayList<>();
+        QueryList<SearchEntity> defaultValue = new QueryList<>();
         defaultValue.add(new Movie("search some movies!", ""));
         searchResults = mRxProvider.bs(defaultValue);
 
     }
 
+    private int generation = 0;
+
+
     public void query(String query) {
-        query(new Query(1, query));
+        query(new ru.korinc.core.entity.Query(1, query).setGeneration(++generation));
     }
 
-    private Query lastQuery;
+    private ru.korinc.core.entity.Query lastQuery;
 
-    public void query(Query query) {
+
+    public void query(ru.korinc.core.entity.Query query) {
+
 
         log.d("SearchModule", "new query:" + query.toString());
 
@@ -57,7 +61,7 @@ public class SearchModule extends ModuleBase {
         }
 
         if (lastQuery == null || !lastQuery.getTitle().equals(query.getTitle())) {
-            ArrayList<SearchEntity> empty = new ArrayList<>();
+            QueryList<SearchEntity> empty = new QueryList<>();
             empty.add(new Movie("Loading...", ""));
             searchResults.onNext(empty);
         }
@@ -71,17 +75,19 @@ public class SearchModule extends ModuleBase {
 
             log.d("SearchModule", "switchOnNext");
 
-            ObservableWrapper<ArrayList<SearchEntity>> httpResponseObservableWrapper = input
+            ObservableWrapper<QueryList<SearchEntity>> httpResponseObservableWrapper = input
                     .switchOnNext(input.throttleLast(500)
                             .map(s -> HttpObserver.get(s.toString(), new String[]{})
                                     .map(httpResponse -> new Touple<>(s, httpResponse))
                                     .map(respAndQuery -> {
 
-                                        ArrayList<SearchEntity> res = new ArrayList<>();
+                                        QueryList<SearchEntity> res = new QueryList<>(
+                                                respAndQuery.getA());
 
                                         JsonArrayWrapper resp = json
                                                 .getJson(respAndQuery.getB().getContent())
                                                 .getJsonArray("Search");
+                                        log.d("SearchModule", "resp:" + resp);
                                         if (resp == null) {
                                             res.addAll(respAndQuery.getA().getOldResults());
                                             if (res.size() == 0) {
@@ -104,7 +110,7 @@ public class SearchModule extends ModuleBase {
 
                                         res.addAll(0, respAndQuery.getA().getOldResults());
 
-                                        Query q = respAndQuery.getA();
+                                        ru.korinc.core.entity.Query q = respAndQuery.getA();
                                         q.setPage(respAndQuery.getA().getPage() + 1);
                                         ArrayList<SearchEntity> oldResults = new ArrayList<>(res);
                                         q.setOldResults(oldResults);
@@ -116,7 +122,6 @@ public class SearchModule extends ModuleBase {
 
             httpResponseObservableWrapper.subscribeOn(mRxProvider.scheduler()).subscribe(res -> {
                 searchResults.onNext(res);
-                log.d("result", res.toString());
             });
         } else {
             log.d("SearchModule", "new input:" + query.toString());
@@ -125,7 +130,7 @@ public class SearchModule extends ModuleBase {
         }
     }
 
-    public ObservableWrapper<ArrayList<SearchEntity>> getSearchResults() {
+    public ObservableWrapper<QueryList<SearchEntity>> getSearchResults() {
         return searchResults;
     }
 }

@@ -11,9 +11,14 @@ import static ru.korinc.runtime.RuntimeConfiguration.encoder;
 
 public class Query {
 
+    private int generation = -1;
+
     private int page = 1;
 
     private String title = "";
+
+    public Query() {
+    }
 
     public Query(int page, String title) {
         this.page = page;
@@ -47,6 +52,15 @@ public class Query {
     public Query setTitle(String title) {
         this.title = title;
         return this;
+    }
+
+    public Query setGeneration(int generation) {
+        this.generation = generation;
+        return this;
+    }
+
+    public int getGeneration() {
+        return generation;
     }
 
     @Override

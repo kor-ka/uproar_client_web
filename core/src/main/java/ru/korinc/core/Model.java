@@ -6,6 +6,7 @@ import ru.korinc.core.entity.Movie;
 import ru.korinc.core.entity.Query;
 import ru.korinc.core.entity.SearchEntity;
 import ru.korinc.core.modules.ModulesContext;
+import ru.korinc.core.modules.QueryList;
 import ru.korinc.runtime.RuntimeConfiguration;
 import ru.korinc.runtime.rx.ObservableWrapper;
 
@@ -33,7 +34,7 @@ public class Model {
         mModulesContext.getSearchModule().query(query);
     }
 
-    public ObservableWrapper<ArrayList<SearchEntity>> getSearchResults() {
+    public ObservableWrapper<QueryList<SearchEntity>> getSearchResults() {
         return mModulesContext.getSearchModule().getSearchResults();
     }
 

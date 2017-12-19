@@ -1,16 +1,17 @@
 package ru.korinc.runtime.json;
 
 import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONObject;
 
 /**
  * Created by gputintsev on 18.12.17.
  */
 
-public class JsArray implements JsonArrayWrapper {
+public class JsJsonArray implements JsonArrayWrapper {
 
     private JSONArray mArray;
 
-    public JsArray(JSONArray array) {
+    public JsJsonArray(JSONArray array) {
         mArray = array;
     }
 
@@ -21,12 +22,14 @@ public class JsArray implements JsonArrayWrapper {
 
     @Override
     public JsonObjectWrapper getJsonObjectWrapper(int position) {
-        return new JsJsonObject(mArray.get(position).isObject());
+        JSONObject object = mArray.get(position).isObject();
+        return object != null ? new JsJsonObject(object) : null;
     }
 
     @Override
     public JsonArrayWrapper getJsonArrayWrapper(int position) {
-        return new JsArray(mArray.get(position).isArray());
+        JSONArray array = mArray.get(position).isArray();
+        return array != null ? new JsJsonArray(array) : null;
     }
 
     @Override

@@ -3,7 +3,6 @@ package ru.korinc.runtime.json;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.json.client.JSONValue;
 
 /**
  * Created by gputintsev on 18.12.17.
@@ -23,12 +22,14 @@ public class JsJsonObject implements JsonObjectWrapper {
 
     @Override
     public JsonObjectWrapper getJsonObject(String key) throws NullPointerException {
-        return new JsJsonObject((JSONObject) source.get(key));
+        JSONObject object = (JSONObject) this.source.get(key);
+        return object != null ? new JsJsonObject(object) : null;
     }
 
     @Override
     public JsonArrayWrapper getJsonArray(String key) throws NullPointerException {
-        return new JsArray((JSONArray) source.get(key));
+        JSONArray array = (JSONArray) source.get(key);
+        return array != null ? new JsJsonArray(array) : null;
     }
 
     @Override

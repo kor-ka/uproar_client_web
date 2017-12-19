@@ -7,7 +7,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
@@ -16,10 +15,9 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import java.util.ArrayList;
-
 import ru.korinc.core.AppCore;
 import ru.korinc.core.Model;
+import ru.korinc.core.entity.Load;
 import ru.korinc.core.entity.Movie;
 import ru.korinc.core.modules.Foo;
 import ru.korinc.shared.FieldVerifier;
@@ -47,14 +45,16 @@ public class Omdb implements EntryPoint {
 
     private final Model model = AppCore.sharedCore().getModel();
 
+    private int generation = -1;
+
     /**
      * This is the entry point method.
      */
     public void onModuleLoad() {
         final Button sendButton = new Button("Send");
         final TextBox nameField = new TextBox();
-        final Label res = new Label();
-        nameField.setText(new Foo().foo() + "");
+
+        nameField.setText("Star wars");
         final Label errorLabel = new Label();
 
         // We can add style names to widgets
@@ -63,8 +63,7 @@ public class Omdb implements EntryPoint {
         // Add the nameField and sendButton to the RootPanel
         // Use RootPanel.get() to get the entire body element
         RootPanel.get("nameFieldContainer").add(nameField);
-        RootPanel.get("nameFieldContainer").add(res);
-        RootPanel.get("sendButtonContainer").add(sendButton);
+        RootPanel labelListContainer = RootPanel.get("labelListContainer");
         RootPanel.get("errorLabelContainer").add(errorLabel);
 
         // Focus the cursor on the name field when the app loads
@@ -126,44 +125,12 @@ public class Omdb implements EntryPoint {
                 errorLabel.setText("");
                 String textToServer = nameField.getText();
                 if (!FieldVerifier.isValidName(textToServer)) {
-                    errorLabel.setText("Please enter at least four characters");
+                    errorLabel.setText("Please enter at least three characters");
                     return;
                 }
 
-//                // Then, we send the input to the server.
-//                sendButton.setEnabled(false);
-//                textToServerLabel.setText(textToServer);
-//                serverResponseLabel.setText("");
-//                greetingService.greetServer(textToServer, new AsyncCallback<String>() {
-//                    public void onFailure(Throwable caught) {
-//                        // Show the RPC error message to the user
-//                        dialogBox.setText("Remote Procedure Call - Failure");
-//                        serverResponseLabel.addStyleName("serverResponseLabelError");
-//                        serverResponseLabel.setHTML(SERVER_ERROR);
-//                        dialogBox.center();
-//                        closeButton.setFocus(true);
-//                    }
-//
-//                    public void onSuccess(String result) {
-//                        dialogBox.setText("Remote Procedure Call");
-//                        serverResponseLabel.removeStyleName("serverResponseLabelError");
-//                        serverResponseLabel.setHTML(result);
-//                        dialogBox.center();
-//                        closeButton.setFocus(true);
-//                    }
-//                });
 
                 model.searchMovieByTitleQuery(textToServer);
-
-                model.getSearchResults().subscribe(searchEntities -> {
-                    StringBuilder s = new StringBuilder();
-                    apply(searchEntities, (iterator, val) -> {
-                        if (val instanceof Movie) {
-                            s.append(((Movie) val).getTitle()).append("\n\n");
-                        }
-                    });
-                    res.setText(s.toString());
-                });
             }
         }
 
@@ -171,5 +138,30 @@ public class Omdb implements EntryPoint {
         MyHandler handler = new MyHandler();
         sendButton.addClickHandler(handler);
         nameField.addKeyUpHandler(handler);
+
+        model.getSearchResults().subscribe(searchEntities -> {
+            labelListContainer.clear(false);
+
+            apply(searchEntities, (iterator, val) -> {
+
+                if (val instanceof Movie) {
+                    Label l = new Label(((Movie) val).getTitle());
+                    labelListContainer.add(l);
+                } else if (val instanceof Load) {
+                    Button b = new Button("Load more");
+                    b.addClickHandler(new ClickHandler() {
+                        @Override
+                        public void onClick(ClickEvent event) {
+                            model.searchMovieByTitleQuery(((Load) val).getQuery());
+                            b.setEnabled(false);
+                            b.setText("loading...");
+                        }
+                    });
+                    labelListContainer.add(b);
+                }
+
+
+            });
+        });
     }
 }
