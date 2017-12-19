@@ -76,7 +76,6 @@ public class SearchModule extends ModuleBase {
                             .map(s -> HttpObserver.get(s.toString(), new String[]{})
                                     .map(httpResponse -> new Touple<>(s, httpResponse))
                                     .map(respAndQuery -> {
-                                        log.d("SearchModule", "switch map");
 
                                         ArrayList<SearchEntity> res = new ArrayList<>();
 

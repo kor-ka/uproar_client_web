@@ -26,11 +26,15 @@ public class HttpObserver {
                     @Override
                     public void onResponce(HttpResponse response) {
                         if (response.getCode() / 100 == 2) {
+                            log.d("HttpObserver", "res get: " + url + " " + response.getContent());
+
                             e.onNext(response);
                             e.onComplete();
                         } else {
-                            e.onError(new Exception(
-                                    "URL: " + url + "\nHttp error code" + response.getCode()));
+                            Exception error = new Exception(
+                                    "URL: " + url + "\nHttp error code" + response.getCode());
+                            e.onError(error);
+                            log.e(error);
                         }
                     }
 

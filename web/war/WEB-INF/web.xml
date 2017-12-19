@@ -14,6 +14,17 @@
         <url-pattern>/omdb/greet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>proxyServlet</servlet-name>
+        <servlet-class>ru.korinc.server.HttpProxyImpl</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>proxyServlet</servlet-name>
+        <url-pattern>/omdb/proxy</url-pattern>
+    </servlet-mapping>
+
     <!-- Default page to serve -->
     <welcome-file-list>
         <welcome-file>Omdb.html</welcome-file>
