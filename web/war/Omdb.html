@@ -16,7 +16,28 @@
     <!--                                           -->
     <!-- Any title is fine                         -->
     <!--                                           -->
-    <title>Web Application Starter Project</title>
+    <title>D-radio (wip)</title>
+
+
+    <script type="text/javascript" language="javascript">
+        window.addEventListener('load', function() {
+
+        // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+        if (typeof web3 !== 'undefined') {
+        // Use Mist/MetaMask's provider
+            window.web3 = new Web3(web3.currentProvider);
+        } else {
+            console.log('No web3? You should consider trying MetaMask!')
+            // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+            window.web3 = new Web3(new
+            Web3.providers.HttpProvider("http://localhost:8545"));
+         }
+
+         var coinbase = web3.eth.coinbase
+        console.log(coinbase)
+
+        })
+    </script>
 
     <script type="text/javascript" language="javascript"
             src="https://unpkg.com/rxjs@5.5.5/bundles/Rx.min.js"></script>
@@ -45,15 +66,15 @@
     </div>
 </noscript>
 
-<h1>Web Application Starter Project</h1>
+<h1>D-radio (wip)</h1>
 
 <table align="center">
     <tr>
-        <td colspan="2" style="font-weight:bold;">Search omdb:</td>
+        <td colspan="2" style="font-weight:bold;">Your ETH balance:</td>
     </tr>
     <tr>
         <td id="nameFieldContainer"></td>
-        <td id="sendButtonContainer"></td>
+        <td id="retryButtonContainer"></td>
     </tr>
     <tr>
         <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
