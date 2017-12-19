@@ -3,28 +3,6 @@
               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5"
         xmlns="http://java.sun.com/xml/ns/javaee">
 
-    <!-- Servlets -->
-    <servlet>
-        <servlet-name>greetServlet</servlet-name>
-        <servlet-class>ru.korinc.server.GreetingServiceImpl</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>greetServlet</servlet-name>
-        <url-pattern>/omdb/greet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>proxyServlet</servlet-name>
-        <servlet-class>ru.korinc.server.HttpProxyImpl</servlet-class>
-    </servlet>
-
-
-    <servlet-mapping>
-        <servlet-name>proxyServlet</servlet-name>
-        <url-pattern>/omdb/proxy</url-pattern>
-    </servlet-mapping>
-
     <!-- Default page to serve -->
     <welcome-file-list>
         <welcome-file>Omdb.html</welcome-file>

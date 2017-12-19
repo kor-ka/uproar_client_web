@@ -16,7 +16,7 @@
     <!--                                           -->
     <!-- Any title is fine                         -->
     <!--                                           -->
-    <title>D-radio (wip)</title>
+    <title>D-radiuon</title>
 
 
     <script type="text/javascript" language="javascript">
@@ -29,12 +29,8 @@
         } else {
             console.log('No web3? You should consider trying MetaMask!')
             // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-            window.web3 = new Web3(new
-            Web3.providers.HttpProvider("http://localhost:8545"));
+            window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
          }
-
-         var coinbase = web3.eth.coinbase
-        console.log(coinbase)
 
         })
     </script>
@@ -66,15 +62,15 @@
     </div>
 </noscript>
 
-<h1>D-radio (wip)</h1>
+<h1>Web Application Starter Project</h1>
 
 <table align="center">
     <tr>
-        <td colspan="2" style="font-weight:bold;">Your ETH balance:</td>
+        <td colspan="2" style="font-weight:bold;">Search omdb:</td>
     </tr>
     <tr>
         <td id="nameFieldContainer"></td>
-        <td id="retryButtonContainer"></td>
+        <td id="sendButtonContainer"></td>
     </tr>
     <tr>
         <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
