@@ -12,6 +12,8 @@ public class Eth {
     public Eth() {
     }
 
+    //TODO add wait web3 method
+
     public native void getBalance(BalanceCallback callback)/*-{
         var coinbase = $wnd.web3.eth.coinbase
         console.log(coinbase)
