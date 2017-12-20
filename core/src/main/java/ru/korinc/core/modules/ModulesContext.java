@@ -11,19 +11,20 @@ public class ModulesContext {
 
     private RuntimeConfiguration mRuntimeConfiguration;
 
-    SearchModule mSearchModule;
+    PlayerModule mPlayerModule;
 
     public ModulesContext(RuntimeConfiguration runtimeConfiguration) {
         mRuntimeConfiguration = runtimeConfiguration;
-        mSearchModule = new SearchModule(this);
-        mSearchModule.run();
+        mPlayerModule = new PlayerModule(this);
+
+        mPlayerModule.run();
     }
 
     protected RuntimeConfiguration getRuntimeConfiguration() {
         return mRuntimeConfiguration;
     }
 
-    public SearchModule getSearchModule() {
-        return mSearchModule;
+    public PlayerModule getPlayerModule() {
+        return mPlayerModule;
     }
 }

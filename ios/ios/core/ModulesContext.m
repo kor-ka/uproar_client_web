@@ -5,8 +5,8 @@
 
 #include "J2ObjC_source.h"
 #include "ModulesContext.h"
+#include "PlayerModule.h"
 #include "RuntimeConfiguration.h"
-#include "SearchModule.h"
 
 @interface RuKorincCoreModulesModulesContext () {
  @public
@@ -28,25 +28,25 @@ J2OBJC_FIELD_SETTER(RuKorincCoreModulesModulesContext, mRuntimeConfiguration_, R
   return mRuntimeConfiguration_;
 }
 
-- (RuKorincCoreModulesSearchModule *)getSearchModule {
-  return mSearchModule_;
+- (RuKorincCoreModulesPlayerModule *)getPlayerModule {
+  return mPlayerModule_;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, "LRuKorincRuntimeRuntimeConfiguration;", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LRuKorincCoreModulesSearchModule;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LRuKorincCoreModulesPlayerModule;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(initWithRuKorincRuntimeRuntimeConfiguration:);
   methods[1].selector = @selector(getRuntimeConfiguration);
-  methods[2].selector = @selector(getSearchModule);
+  methods[2].selector = @selector(getPlayerModule);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "mRuntimeConfiguration_", "LRuKorincRuntimeRuntimeConfiguration;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mSearchModule_", "LRuKorincCoreModulesSearchModule;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "mPlayerModule_", "LRuKorincCoreModulesPlayerModule;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LRuKorincRuntimeRuntimeConfiguration;" };
   static const J2ObjcClassInfo _RuKorincCoreModulesModulesContext = { "ModulesContext", "ru.korinc.core.modules", ptrTable, methods, fields, 7, 0x1, 3, 2, -1, -1, -1, -1, -1 };
@@ -58,8 +58,8 @@ J2OBJC_FIELD_SETTER(RuKorincCoreModulesModulesContext, mRuntimeConfiguration_, R
 void RuKorincCoreModulesModulesContext_initWithRuKorincRuntimeRuntimeConfiguration_(RuKorincCoreModulesModulesContext *self, RuKorincRuntimeRuntimeConfiguration *runtimeConfiguration) {
   NSObject_init(self);
   self->mRuntimeConfiguration_ = runtimeConfiguration;
-  self->mSearchModule_ = new_RuKorincCoreModulesSearchModule_initWithRuKorincCoreModulesModulesContext_(self);
-  [self->mSearchModule_ run];
+  self->mPlayerModule_ = new_RuKorincCoreModulesPlayerModule_initWithRuKorincCoreModulesModulesContext_(self);
+  [self->mPlayerModule_ run];
 }
 
 RuKorincCoreModulesModulesContext *new_RuKorincCoreModulesModulesContext_initWithRuKorincRuntimeRuntimeConfiguration_(RuKorincRuntimeRuntimeConfiguration *runtimeConfiguration) {

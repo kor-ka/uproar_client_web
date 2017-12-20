@@ -28,6 +28,14 @@ class RxProvider: NSObject, RuKorincRuntimeRxRxProvider{
         let res = BsSwift(obs:BehaviorSubject(value: defaultValue))
         return res;
     }
+
+    func ps() -> RuKorincRuntimeRxSubjectPublishSubjectWrapper! {
+        
+        let res = PsSwift(obs:PublishSubject())
+        return res;
+    }
+
+    
     
     func scheduler() -> RuKorincRuntimeRxBackgroundSchedulerWrapper! {
         return SchedulerSwift()

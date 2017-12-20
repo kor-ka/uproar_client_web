@@ -20,12 +20,15 @@
 @protocol RuKorincRuntimeRxObservableOnSubscribe;
 @protocol RuKorincRuntimeRxObservableWrapper;
 @protocol RuKorincRuntimeRxSubjectBSWrapper;
+@protocol RuKorincRuntimeRxSubjectPublishSubjectWrapper;
 
 @protocol RuKorincRuntimeRxRxProvider < JavaObject >
 
 - (id<RuKorincRuntimeRxObservableWrapper>)observableCreateWithSource:(id<RuKorincRuntimeRxObservableOnSubscribe>)observableOnSubscribe;
 
 - (id<RuKorincRuntimeRxSubjectBSWrapper>)bsWithId:(id)defaultValue;
+
+- (id<RuKorincRuntimeRxSubjectPublishSubjectWrapper>)ps;
 
 - (id<RuKorincRuntimeRxBackgroundSchedulerWrapper>)scheduler;
 

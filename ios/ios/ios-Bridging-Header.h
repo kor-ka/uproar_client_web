@@ -7,7 +7,7 @@
 #include "Consumer.h"
 
 #include "Foo.h"
-#include "BSWrapper.h"
+
 #include "DisposableWrapper.h"
 #include "Emitter.h"
 
@@ -19,6 +19,10 @@
 #include "RuntimeConfiguration.h"
 #include "RxProvider.h"
 #include "SubjectWrapper.h"
+#include "BSWrapper.h"
+#include "PublishSubjectWrapper.h"
+#include "RxActor.h"
+
 #include "TimeoutProvider.h"
 #include "LogProvider.h"
 
@@ -40,14 +44,9 @@
 #include "JsonProvider.h"
 #include "ModuleBase.h"
 #include "ModulesContext.h"
-#include "SearchModule.h"
 #include "TypedObservable.h"
 #include "Utils.h"
-#include "Movie.h"
-#include "SearchEntity.h"
-#include "Load.h"
-#include "Query.h"
-#include "QueryList.h"
+
 
 
 #include "java/util/List.h"

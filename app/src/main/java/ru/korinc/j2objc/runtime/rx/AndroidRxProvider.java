@@ -3,12 +3,14 @@ package ru.korinc.j2objc.runtime.rx;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
 import ru.korinc.runtime.rx.BackgroundSchedulerWrapper;
 import ru.korinc.runtime.rx.Emitter;
 import ru.korinc.runtime.rx.ObservableOnSubscribe;
 import ru.korinc.runtime.rx.ObservableWrapper;
 import ru.korinc.runtime.rx.RxProvider;
 import ru.korinc.runtime.rx.subject.BSWrapper;
+import ru.korinc.runtime.rx.subject.PublishSubjectWrapper;
 
 /**
  * Created by gputintsev on 12.04.17.
@@ -50,6 +52,11 @@ public class AndroidRxProvider implements RxProvider {
     public <T> BSWrapper<T> bs(T defaultValue) {
         BehaviorSubject<T> res = BehaviorSubject.createDefault(defaultValue);
         return new AndroidBS<>(res);
+    }
+
+    @Override
+    public <T> PublishSubjectWrapper<T> ps() {
+        return new AndroidPublishSubject<>(PublishSubject.create());
     }
 
     @Override

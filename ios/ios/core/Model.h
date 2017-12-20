@@ -16,21 +16,13 @@
 #if !defined (RuKorincCoreModel_) && (INCLUDE_ALL_Model || defined(INCLUDE_RuKorincCoreModel))
 #define RuKorincCoreModel_
 
-@class RuKorincCoreEntityQuery;
 @class RuKorincRuntimeRuntimeConfiguration;
-@protocol RuKorincRuntimeRxObservableWrapper;
 
 @interface RuKorincCoreModel : NSObject
 
 #pragma mark Public
 
 - (instancetype)initWithRuKorincRuntimeRuntimeConfiguration:(RuKorincRuntimeRuntimeConfiguration *)configuration;
-
-- (id<RuKorincRuntimeRxObservableWrapper>)getSearchResults;
-
-- (void)searchMovieByTitleQueryWithRuKorincCoreEntityQuery:(RuKorincCoreEntityQuery *)query;
-
-- (void)searchMovieByTitleQueryWithNSString:(NSString *)query;
 
 // Disallowed inherited constructors, do not use.
 

@@ -16,16 +16,18 @@
   static J2ObjcMethodInfo methods[] = {
     { NULL, "LRuKorincRuntimeRxObservableWrapper;", 0x401, 0, 1, -1, 2, -1, -1 },
     { NULL, "LRuKorincRuntimeRxSubjectBSWrapper;", 0x401, 3, 4, -1, 5, -1, -1 },
+    { NULL, "LRuKorincRuntimeRxSubjectPublishSubjectWrapper;", 0x401, -1, -1, -1, 6, -1, -1 },
     { NULL, "LRuKorincRuntimeRxBackgroundSchedulerWrapper;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   methods[0].selector = @selector(observableCreateWithSource:);
   methods[1].selector = @selector(bsWithId:);
-  methods[2].selector = @selector(scheduler);
+  methods[2].selector = @selector(ps);
+  methods[3].selector = @selector(scheduler);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "observableCreate", "LRuKorincRuntimeRxObservableOnSubscribe;", "<T:Ljava/lang/Object;>(Lru/korinc/runtime/rx/ObservableOnSubscribe<TT;>;)Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "bs", "LNSObject;", "<T:Ljava/lang/Object;>(TT;)Lru/korinc/runtime/rx/subject/BSWrapper<TT;>;" };
-  static const J2ObjcClassInfo _RuKorincRuntimeRxRxProvider = { "RxProvider", "ru.korinc.runtime.rx", ptrTable, methods, NULL, 7, 0x609, 3, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "observableCreate", "LRuKorincRuntimeRxObservableOnSubscribe;", "<T:Ljava/lang/Object;>(Lru/korinc/runtime/rx/ObservableOnSubscribe<TT;>;)Lru/korinc/runtime/rx/ObservableWrapper<TT;>;", "bs", "LNSObject;", "<T:Ljava/lang/Object;>(TT;)Lru/korinc/runtime/rx/subject/BSWrapper<TT;>;", "<T:Ljava/lang/Object;>()Lru/korinc/runtime/rx/subject/PublishSubjectWrapper<TT;>;" };
+  static const J2ObjcClassInfo _RuKorincRuntimeRxRxProvider = { "RxProvider", "ru.korinc.runtime.rx", ptrTable, methods, NULL, 7, 0x609, 4, 0, -1, -1, -1, -1, -1 };
   return &_RuKorincRuntimeRxRxProvider;
 }
 

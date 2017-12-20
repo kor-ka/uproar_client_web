@@ -16,19 +16,19 @@
 #if !defined (RuKorincCoreModulesModulesContext_) && (INCLUDE_ALL_ModulesContext || defined(INCLUDE_RuKorincCoreModulesModulesContext))
 #define RuKorincCoreModulesModulesContext_
 
-@class RuKorincCoreModulesSearchModule;
+@class RuKorincCoreModulesPlayerModule;
 @class RuKorincRuntimeRuntimeConfiguration;
 
 @interface RuKorincCoreModulesModulesContext : NSObject {
  @public
-  RuKorincCoreModulesSearchModule *mSearchModule_;
+  RuKorincCoreModulesPlayerModule *mPlayerModule_;
 }
 
 #pragma mark Public
 
 - (instancetype)initWithRuKorincRuntimeRuntimeConfiguration:(RuKorincRuntimeRuntimeConfiguration *)runtimeConfiguration;
 
-- (RuKorincCoreModulesSearchModule *)getSearchModule;
+- (RuKorincCoreModulesPlayerModule *)getPlayerModule;
 
 #pragma mark Protected
 
@@ -42,7 +42,7 @@
 
 J2OBJC_EMPTY_STATIC_INIT(RuKorincCoreModulesModulesContext)
 
-J2OBJC_FIELD_SETTER(RuKorincCoreModulesModulesContext, mSearchModule_, RuKorincCoreModulesSearchModule *)
+J2OBJC_FIELD_SETTER(RuKorincCoreModulesModulesContext, mPlayerModule_, RuKorincCoreModulesPlayerModule *)
 
 FOUNDATION_EXPORT void RuKorincCoreModulesModulesContext_initWithRuKorincRuntimeRuntimeConfiguration_(RuKorincCoreModulesModulesContext *self, RuKorincRuntimeRuntimeConfiguration *runtimeConfiguration);
 
