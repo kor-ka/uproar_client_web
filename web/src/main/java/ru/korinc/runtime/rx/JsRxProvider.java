@@ -4,7 +4,9 @@ package ru.korinc.runtime.rx;
 import ru.korinc.runtime.interop.observable.Observable;
 import ru.korinc.runtime.interop.subject.BehaviorSubject;
 
+import ru.korinc.runtime.interop.subject.Subject;
 import ru.korinc.runtime.rx.subject.BSWrapper;
+import ru.korinc.runtime.rx.subject.PublishSubjectWrapper;
 
 /**
  * Created by gputintsev on 15.12.17.
@@ -45,6 +47,11 @@ public class JsRxProvider implements RxProvider {
     @Override
     public <T> BSWrapper<T> bs(T defaultValue) {
         return new JsBs<T>(new BehaviorSubject<T>(defaultValue));
+    }
+
+    @Override
+    public <T> PublishSubjectWrapper<T> ps() {
+        return new JsPs<>(new Subject<>());
     }
 
     @Override

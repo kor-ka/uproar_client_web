@@ -14,12 +14,15 @@ public abstract class RxActor {
 
     public RxActor() {
 
-        ref.getRef().observeOn(rxProvider.scheduler()).subscribe(o -> {
+        ref.getRef().observeOn(rxProvider.scheduler()).subscribe(new Consumer<Object>() {
+            @Override
+            public void accept(Object o) throws Exception {
 
-            if (o instanceof OnStart) {
-                onStart();
-            } else {
-                onMessage(o);
+                if (o instanceof OnStart) {
+                    onStart();
+                } else {
+                    onMessage(o);
+                }
             }
         });
     }
