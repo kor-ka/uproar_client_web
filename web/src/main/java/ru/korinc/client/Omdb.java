@@ -1,22 +1,14 @@
 package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 
+import ru.korinc.client.player.PlayerController;
 import ru.korinc.core.AppCore;
 import ru.korinc.core.Model;
-import ru.korinc.runtime.interop.web3.Eth;
-
-import static ru.korinc.core.utils.Utils.apply;
+import ru.korinc.core.modules.player.Content;
+import ru.korinc.runtime.interop.Mqtt;
+import ru.korinc.runtime.logging.LogProvider;
 
 
 /**
@@ -24,102 +16,67 @@ import static ru.korinc.core.utils.Utils.apply;
  */
 public class Omdb implements EntryPoint {
 
-    /**
-     * The message displayed to the user when the server cannot be reached or
-     * returns an error.
-     */
-    private static final String SERVER_ERROR = "An error occurred while "
-            + "attempting to contact the server. Please check your network "
-            + "connection and try again.";
-
-    /**
-     * Create a remote service proxy to talk to the server-side Greeting service.
-     */
-    private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
 
     private final Model model = AppCore.sharedCore().getModel();
 
-    private int generation = -1;
 
     private RootPanel mRetryContainer;
 
-    private Button mRetry;
+    private Content currentContent = Content.dummy();
+
+    private LogProvider log = model.getConfiguration().getLog();
 
 
-    /**
-     * This is the entry point method.
-     */
     public void onModuleLoad() {
-        mRetry = new Button("Retry");
-        final TextBox balanceField = new TextBox();
-        balanceField.setEnabled(false);
-        // We can add style names to widgets
-        mRetry.addStyleName("sendButton");
 
+        String token = com.google.gwt.user.client.Window.Location.getParameter("token");
 
-        final Label errorLabel = new Label();
+        Mqtt mqtt = new Mqtt();
 
+        String[] split = token.split("-");
+        String username = split[0] + "-" + split[1];
 
+        log.d("MQTT login", username + " " + token);
 
-        // Add the balanceField and sendButton to the RootPanel
-        // Use RootPanel.get() to get the entire body element
-        RootPanel.get("nameFieldContainer").add(balanceField);
-        mRetryContainer = RootPanel.get("retryButtonContainer");
-        RootPanel.get("errorLabelContainer").add(errorLabel);
-
-
-        // Create a handler for the sendButton and balanceField
-        class MyHandler implements ClickHandler, KeyUpHandler {
-
-            /**
-             * Fired when the user clicks on the sendButton.
-             */
-            public void onClick(ClickEvent event) {
-                retry();
+        mqtt.init(username, token, new Mqtt.MqttCallbacks() {
+            @Override
+            public void onConnect() {
+                log.d("MQTT", "onConnect");
             }
 
-            /**
-             * Fired when the user types in the balanceField.
-             */
-            public void onKeyUp(KeyUpEvent event) {
-                if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                    retry();
-                }
+            @Override
+            public void onError() {
+                log.d("MQTT", "onError");
+
             }
 
-            /**
-             * Send the name from the balanceField to the server and wait for a response.
-             */
-            private void retry() {
+            @Override
+            public void onConnectionLost() {
+                log.d("MQTT", "onConnectionLost");
 
-                checkBalance(balanceField);
             }
-        }
 
-        checkBalance(balanceField);
+            @Override
+            public void onMessage(String message) {
+                log.d("MQTT", "onMessage: " + message);
+            }
+        });
 
+        PlayerController player = new PlayerController("player");
 
+        model.getCurrentTrack().observeOnMain().subscribe(content -> {
+            if (!currentContent.equals(content)) {
+                player.pause();
+                player.setSrc(content.getSrc());
+                player.play();
+                currentContent = content;
+            }
+        });
 
-        // Add a handler to send the name to the server
-        MyHandler handler = new MyHandler();
-        mRetry.addClickHandler(handler);
-        balanceField.addKeyUpHandler(handler);
-
-
-
-
-
-    }
-
-    private void checkBalance(TextBox nameField) {
-        mRetryContainer.clear();
-
-        if(new Eth().loggedIn()){
-            new Eth().getBalance(balance -> nameField.setText(balance + ""));
-        }else{
-            nameField.setText("login first");
-            mRetryContainer.add(mRetry);
-        }
+        player.addEventListener("ended", () -> {
+            //TODO resolve somehow exact track ended
+            model.onEnded(currentContent);
+        });
 
 
     }
