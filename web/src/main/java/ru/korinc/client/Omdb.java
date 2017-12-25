@@ -94,7 +94,7 @@ public class Omdb implements EntryPoint {
                     model.addContent(Content.fromJson(msg.getJsonObject("data")));
                 } else if (msg.getString("update").equals("promote")) {
                     model.promote(Integer.toString(msg.getInteger("data", -1)));
-                } else if (msg.getString("skip").equals("promote")) {
+                } else if (msg.getString("update").equals("skip")) {
                     model.skip(Integer.toString(msg.getInteger("data", -1)));
                 }
             }
