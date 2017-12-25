@@ -7,9 +7,9 @@ package ru.korinc.runtime.interop;
 public class Mqtt {
 
     public native void init(String username, String password, MqttCallbacks callbacks)/*-{
-        var client = $wnd.client;
-        client.onConnectionLost = onConnectionLost;
-        client.onMessageArrived = onMessageArrived;
+        $wnd.client.client_id = username + parseInt(Math.random() * 100, 10)
+        $wnd.client.onConnectionLost = onConnectionLost;
+        $wnd.client.onMessageArrived = onMessageArrived;
         var options = {
             useSSL: true,
             userName: username,
@@ -18,7 +18,7 @@ public class Mqtt {
             onFailure:doFail
         }
 
-        client.connect(options);
+        $wnd.client.connect(options);
 
 
           function onConnect() {
@@ -31,6 +31,7 @@ public class Mqtt {
 
           function onConnectionLost(responseObject) {
             if (responseObject.errorCode !== 0) {
+                console.log("onConnectionLost:"+responseObject.errorMessage)
                 callbacks.@ru.korinc.runtime.interop.Mqtt.MqttCallbacks::onConnectionLost()();
             }
           }
@@ -38,6 +39,16 @@ public class Mqtt {
           function onMessageArrived(message) {
               callbacks.@ru.korinc.runtime.interop.Mqtt.MqttCallbacks::onMessage(Ljava/lang/String;)(message.payloadString);
           }
+    }-*/;
+
+    public native void subscribe(String channel)/*-{
+      $wnd.client.subscribe(channel)
+    }-*/;
+
+    public native void send(String channel, String message)/*-{
+      message = new $wnd.Paho.MQTT.Message(message)
+      message.destinationName = channel
+      $wnd.client.send(message)
     }-*/;
 
     public interface MqttCallbacks {

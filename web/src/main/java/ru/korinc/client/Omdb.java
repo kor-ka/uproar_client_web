@@ -42,6 +42,10 @@ public class Omdb implements EntryPoint {
             @Override
             public void onConnect() {
                 log.d("MQTT", "onConnect");
+                mqtt.subscribe("device_in_" + token);
+
+                mqtt.send("registry", token);
+
             }
 
             @Override
