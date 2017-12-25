@@ -61,4 +61,8 @@ public class Mqtt {
 
         void onMessage(String message);
     }
+
+    public native String getClientId()/*-{
+        return $wnd.client.client_id
+    }-*/;
 }

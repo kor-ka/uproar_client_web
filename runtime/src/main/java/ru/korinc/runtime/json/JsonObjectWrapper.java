@@ -17,4 +17,10 @@ public interface JsonObjectWrapper {
 
     String getString(String key, String defaultValue);
 
+    JsonObjectWrapper putString(String key, String s);
+
+    JsonObjectWrapper putObject(String key, JsonObjectWrapper o);
+
+    String toJsonString();
+
 }

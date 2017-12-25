@@ -7,6 +7,7 @@ import java.util.Set;
 
 import ru.korinc.runtime.rx.RxActor;
 import ru.korinc.runtime.rx.subject.BSWrapper;
+import ru.korinc.runtime.rx.subject.PublishSubjectWrapper;
 
 import static ru.korinc.runtime.RuntimeConfiguration.log;
 import static ru.korinc.runtime.RuntimeConfiguration.rxProvider;
@@ -23,6 +24,18 @@ public class PlayerActor extends RxActor {
 
     private BSWrapper<Content> current = rxProvider.bs(Content.dummy());
 
+    private PublishSubjectWrapper<Content> actions = rxProvider.ps();
+
+    private PublishSubjectWrapper<Object> boring = rxProvider.ps();
+
+    public PlayerActor() {
+        fireStart();
+    }
+
+    @Override
+    protected void onStart() {
+        playNext();
+    }
 
     @Override
     protected void onMessage(Object message) {
@@ -49,6 +62,7 @@ public class PlayerActor extends RxActor {
             if (!((Promote) message).id.equals(currentContent.getOriginalId())) {
                 Content target = pickById(((Promote) message).id);
                 if (target != null) {
+                    target.setAction("promote");
                     queue.remove(target);
                     queue.set(0, target);
                 }
@@ -56,6 +70,7 @@ public class PlayerActor extends RxActor {
         } else if (message instanceof Skip) {
             Content target = pickById(((Skip) message).id);
             if (target != null) {
+                target.setAction("skip");
                 queue.remove(target);
             }
             if (currentContent.getOriginalId().equals(((Skip) message).id)) {
@@ -71,16 +86,25 @@ public class PlayerActor extends RxActor {
     private void playNext() {
         log.d("Player", "playNext");
         if (queue.size() > 0) {
-            current.onNext(queue.get(queue.size() - 1));
-            queue.remove(queue.size() - 1);
+            current.onNext(queue.get(0));
+            queue.remove(0);
         } else {
             current.onNext(Content.dummy());
+            boring.onNext(new Object());
         }
     }
 
 
     public BSWrapper<Content> getCurrent() {
         return current;
+    }
+
+    public PublishSubjectWrapper<Content> getActions() {
+        return actions;
+    }
+
+    public PublishSubjectWrapper<Object> getBoring() {
+        return boring;
     }
 
     private Content pickById(String id) {

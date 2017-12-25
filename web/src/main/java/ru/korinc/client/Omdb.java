@@ -3,6 +3,8 @@ package ru.korinc.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import java.util.ArrayList;
+
 import ru.korinc.client.player.PlayerController;
 import ru.korinc.client.player.YtbController;
 import ru.korinc.core.AppCore;
@@ -33,6 +35,14 @@ public class Omdb implements EntryPoint {
 
     private LogProvider log = model.getConfiguration().getLog();
 
+    private Mqtt mqtt = new Mqtt();
+
+    private String token;
+
+    private boolean connected = false;
+
+    private ArrayList<MqttMsg> pubQueue = new ArrayList<>();
+
 
     public void onModuleLoad() {
 
@@ -55,26 +65,34 @@ public class Omdb implements EntryPoint {
                     log.d("front", "ytb url: " + content.getSrc());
                     ytbController.play(content.getSrc());
                 }
+                if (!content.isDummy()) {
+                    publish("update_track_status",
+                            content.getBag().putString("message", "playing"));
+                }
+
                 currentContent = content;
             }
         });
 
-        player.addEventListener("ended", () -> {
-            //TODO resolve somehow exact track ended
-            model.onEnded(currentContent);
+        model.getActions().subscribe(content -> {
+            if (content.getAction() != null) {
+                publish("update_track_status",
+                        content.getBag().putString("message", content.getAction()));
+            }
         });
 
-        ytbController.setStopListener(() -> {
-            //TODO resolve somehow exact track ended
-            model.onEnded(currentContent);
+        model.getBoring().subscribe(b -> {
+            publish("boring", json.getJson("{}"));
         });
+
+        player.addEventListener("ended", this::onStop);
+        ytbController.setStopListener(this::onStop);
 
         //
         //  MQTT
         //
-        String token = com.google.gwt.user.client.Window.Location.getParameter("token");
+        token = com.google.gwt.user.client.Window.Location.getParameter("token");
 
-        Mqtt mqtt = new Mqtt();
 
         String[] split = token.split("-");
         String username = split[0] + "-" + split[1];
@@ -89,6 +107,14 @@ public class Omdb implements EntryPoint {
 
                 mqtt.send("registry", token);
 
+                connected = true;
+
+                for (MqttMsg m : pubQueue) {
+                    publish(m.topik, m.msg);
+                }
+
+                pubQueue.clear();
+
             }
 
             @Override
@@ -100,7 +126,7 @@ public class Omdb implements EntryPoint {
             @Override
             public void onConnectionLost() {
                 log.d("MQTT", "onConnectionLost");
-
+                connected = false;
             }
 
             @Override
@@ -108,7 +134,9 @@ public class Omdb implements EntryPoint {
                 log.d("MQTT", "onMessage: " + message);
                 JsonObjectWrapper msg = json.getJson(message);
                 if (msg.getString("update").equals("add_content")) {
-                    model.addContent(Content.fromJson(msg.getJsonObject("data")));
+                    Content data = Content.fromJson(msg.getJsonObject("data"));
+                    model.addContent(data);
+                    publish("update_track_status", data.getBag().putString("message", "queue"));
                 } else if (msg.getString("update").equals("promote")) {
                     model.promote(Integer.toString(msg.getInteger("data", -1)));
                 } else if (msg.getString("update").equals("skip")) {
@@ -119,4 +147,34 @@ public class Omdb implements EntryPoint {
 
 
     }
+
+    private void onStop() {
+        model.onEnded(currentContent);
+        publish("update_track_status", currentContent.getBag().putString("message", "done"));
+    }
+
+    private void publish(String update, JsonObjectWrapper data) {
+        JsonObjectWrapper msg = json.getJson("{}");
+        msg.putString("update", update);
+        msg.putString("token", token + "_web_" + mqtt.getClientId());
+        msg.putObject("data", data);
+        if (connected) {
+            mqtt.send("device_out", msg.toJsonString());
+        } else {
+            pubQueue.add(new MqttMsg(update, data));
+        }
+    }
+
+    private static class MqttMsg {
+
+        private String topik;
+
+        private JsonObjectWrapper msg;
+
+        public MqttMsg(String topik, JsonObjectWrapper msg) {
+            this.topik = topik;
+            this.msg = msg;
+        }
+    }
+
 }

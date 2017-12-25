@@ -20,6 +20,8 @@ public class Content {
 
     private JsonObjectWrapper bag;
 
+    private String action;
+
     public Content(String src, String originalId, JsonObjectWrapper bag) {
         this.src = src;
         this.originalId = originalId;
@@ -104,5 +106,18 @@ public class Content {
 
         log.d("Content", "as UnknownContent");
         return new UnknownContent("", "unknown", json);
+    }
+
+    public JsonObjectWrapper getBag() {
+        return bag;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public Content setAction(String action) {
+        this.action = action;
+        return this;
     }
 }

@@ -5,6 +5,7 @@ import ru.korinc.core.modules.player.Content;
 import ru.korinc.core.modules.player.PlayerActor;
 import ru.korinc.runtime.RuntimeConfiguration;
 import ru.korinc.runtime.rx.subject.BSWrapper;
+import ru.korinc.runtime.rx.subject.PublishSubjectWrapper;
 
 import static java.lang.Math.abs;
 
@@ -23,6 +24,16 @@ public class Model {
     public BSWrapper<Content> getCurrentTrack() {
         return mModulesContext.getPlayerModule().getPlayerActor().getCurrent();
     }
+
+    public PublishSubjectWrapper<Content> getActions() {
+        return mModulesContext.getPlayerModule().getPlayerActor().getActions();
+    }
+
+    public PublishSubjectWrapper<Object> getBoring() {
+        return mModulesContext.getPlayerModule().getPlayerActor().getBoring();
+    }
+
+
 
     public void onEnded(Content content) {
         mModulesContext.getPlayerModule().getPlayerActor().getRef()

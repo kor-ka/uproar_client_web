@@ -3,6 +3,7 @@ package ru.korinc.runtime.json;
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.json.client.JSONString;
 
 /**
  * Created by gputintsev on 18.12.17.
@@ -48,4 +49,23 @@ public class JsJsonObject implements JsonObjectWrapper {
         return source.get(key).isString() != null ? source.get(key).isString().stringValue()
                 : defaultValue;
     }
+
+    @Override
+    public JsonObjectWrapper putString(String key, String s) {
+        source.put(key, new JSONString(s));
+        return this;
+    }
+
+    @Override
+    public JsonObjectWrapper putObject(String key, JsonObjectWrapper o) {
+        source.put(key, ((JsJsonObject) o).source);
+        return this;
+    }
+
+    @Override
+    public String toJsonString() {
+        return source.toString();
+    }
+
+
 }

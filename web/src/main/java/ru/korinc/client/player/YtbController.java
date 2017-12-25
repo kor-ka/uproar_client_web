@@ -18,10 +18,18 @@ public class YtbController {
     public native void setStopListener(YtbStopListener listener)/*-{
 
         $wnd.ytb_player.addEventListener('onStateChange', 'on_ytb_stop')
+        $wnd.ytb_player.addEventListener('onError', 'on_ytb_error')
 
         $wnd.on_ytb_stop = function(e){
         console.log(e)
             if(e.data == 0) {
+                listener.@ru.korinc.client.player.YtbController.YtbStopListener::onStop()();
+            }
+        }
+
+        $wnd.on_ytb_error = function(e){
+        console.log(e)
+            if(e.data == 101 || e.data == 150) {
                 listener.@ru.korinc.client.player.YtbController.YtbStopListener::onStop()();
             }
         }
