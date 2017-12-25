@@ -2,6 +2,8 @@ package ru.korinc.core.modules.player;
 
 import ru.korinc.runtime.json.JsonObjectWrapper;
 
+import static ru.korinc.runtime.RuntimeConfiguration.log;
+
 /**
  * Created by gputintsev on 21.12.17.
  */
@@ -91,13 +93,16 @@ public class Content {
         JsonObjectWrapper audio = json.getJsonObject("audio");
         JsonObjectWrapper youtubeLink = json.getJsonObject("youtube_link");
         if (audio != null) {
+            log.d("Content", "as audio");
             return new Mp3Content(audio.getString("track_url"),
                     Integer.toString(audio.getInteger("orig", -1)), audio);
         } else if (youtubeLink != null) {
-            return new Mp3Content(youtubeLink.getString("url"),
+            log.d("Content", "as video");
+            return new YoutubeContent(youtubeLink.getString("url"),
                     Integer.toString(youtubeLink.getInteger("orig", -1)), youtubeLink);
         }
 
+        log.d("Content", "as UnknownContent");
         return new UnknownContent("", "unknown", json);
     }
 }

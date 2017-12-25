@@ -41,6 +41,6 @@ public class PlayerController {
 
     public interface EventListener {
 
-        void onEvent();
+        public void onEvent();
     }
 }

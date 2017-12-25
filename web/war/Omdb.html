@@ -25,8 +25,12 @@
     <script src="https://www.eclipse.org/paho/clients/js/utility/mqttws31.js"
             type="text/javascript"></script>
 
+    <script src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vfluxKqfs/www-widgetapi.js"
+            type="text/javascript"></script>
+
     <script type="text/javascript">
       client = new Paho.MQTT.Client("m21.cloudmqtt.com", 38552,"web_" + parseInt(Math.random() * 100, 10))
+
 
     </script>
 
@@ -57,6 +61,18 @@
 </noscript>
 
 <h1>Uproar</h1>
+
+<div id="ytb_player"></div>
+
+<script>
+    ytb_player = new YT.Player('ytb_player', {
+          height: '360',
+          width: '640',
+
+        });
+
+
+</script>
 
 
 </body>

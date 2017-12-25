@@ -4,9 +4,12 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import ru.korinc.client.player.PlayerController;
+import ru.korinc.client.player.YtbController;
 import ru.korinc.core.AppCore;
 import ru.korinc.core.Model;
 import ru.korinc.core.modules.player.Content;
+import ru.korinc.core.modules.player.Mp3Content;
+import ru.korinc.core.modules.player.YoutubeContent;
 import ru.korinc.runtime.interop.Mqtt;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.json.JsonProvider;
@@ -38,16 +41,30 @@ public class Omdb implements EntryPoint {
         //
         PlayerController player = new PlayerController("player");
 
+        YtbController ytbController = new YtbController();
+
         model.getCurrentTrack().observeOnMain().subscribe(content -> {
             if (!currentContent.equals(content)) {
                 player.pause();
-                player.setSrc(content.getSrc());
-                player.play();
+                ytbController.stop();
+                log.d("front", "on content: " + content.toString());
+                if (content instanceof Mp3Content) {
+                    player.setSrc(content.getSrc());
+                    player.play();
+                } else if (content instanceof YoutubeContent) {
+                    log.d("front", "ytb url: " + content.getSrc());
+                    ytbController.play(content.getSrc());
+                }
                 currentContent = content;
             }
         });
 
         player.addEventListener("ended", () -> {
+            //TODO resolve somehow exact track ended
+            model.onEnded(currentContent);
+        });
+
+        ytbController.setStopListener(() -> {
             //TODO resolve somehow exact track ended
             model.onEnded(currentContent);
         });

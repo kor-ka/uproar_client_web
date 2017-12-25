@@ -30,16 +30,11 @@ public class PlayerActor extends RxActor {
 
         Content currentContent = current.getValue();
         if (message instanceof AddContent) {
-            log.d("Player", "on AddContent");
+            log.d("Player", "on AddContent:" + ((AddContent) message).mContent);
 
             if (((AddContent) message).mContent instanceof UnknownContent) {
                 log.d("Player", "ignore unknown");
                 return;
-            }
-
-            if (((AddContent) message).mContent instanceof YoutubeContent) {
-                log.d("Player", "ignore YoutubeContent for now");
-
             }
 
             if (old.contains(((AddContent) message).mContent)) {
