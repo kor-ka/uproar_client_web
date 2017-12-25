@@ -38,6 +38,12 @@ public class JsJsonObject implements JsonObjectWrapper {
     }
 
     @Override
+    public int getInteger(String key, int fallback) {
+        return source.get(key).isNumber() != null ? ((int) source.get(key).isNumber().doubleValue())
+                : fallback;
+    }
+
+    @Override
     public String getString(String key, String defaultValue) {
         return source.get(key).isString() != null ? source.get(key).isString().stringValue()
                 : defaultValue;

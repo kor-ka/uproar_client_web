@@ -32,4 +32,18 @@ public class Model {
     public RuntimeConfiguration getConfiguration() {
         return configuration;
     }
+
+    public void addContent(Content content) {
+        mModulesContext.getPlayerModule().getPlayerActor().getRef()
+                .send(new PlayerActor.AddContent(content));
+    }
+
+    public void promote(String id) {
+        mModulesContext.getPlayerModule().getPlayerActor().getRef()
+                .send(new PlayerActor.Promote(id));
+    }
+
+    public void skip(String id) {
+        mModulesContext.getPlayerModule().getPlayerActor().getRef().send(new PlayerActor.Skip(id));
+    }
 }

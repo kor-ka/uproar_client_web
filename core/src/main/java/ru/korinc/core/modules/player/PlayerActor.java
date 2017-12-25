@@ -8,6 +8,7 @@ import java.util.Set;
 import ru.korinc.runtime.rx.RxActor;
 import ru.korinc.runtime.rx.subject.BSWrapper;
 
+import static ru.korinc.runtime.RuntimeConfiguration.log;
 import static ru.korinc.runtime.RuntimeConfiguration.rxProvider;
 
 /**
@@ -25,9 +26,24 @@ public class PlayerActor extends RxActor {
 
     @Override
     protected void onMessage(Object message) {
+        log.d("Player", message.toString());
+
         Content currentContent = current.getValue();
         if (message instanceof AddContent) {
+            log.d("Player", "on AddContent");
+
+            if (((AddContent) message).mContent instanceof UnknownContent) {
+                log.d("Player", "ignore unknown");
+                return;
+            }
+
+            if (((AddContent) message).mContent instanceof YoutubeContent) {
+                log.d("Player", "ignore YoutubeContent for now");
+
+            }
+
             if (old.contains(((AddContent) message).mContent)) {
+                log.d("Player", "old track - ignore");
                 return;
             }
             queue.add(((AddContent) message).mContent);
@@ -58,6 +74,7 @@ public class PlayerActor extends RxActor {
     }
 
     private void playNext() {
+        log.d("Player", "playNext");
         if (queue.size() > 0) {
             current.onNext(queue.get(queue.size() - 1));
             queue.remove(queue.size() - 1);

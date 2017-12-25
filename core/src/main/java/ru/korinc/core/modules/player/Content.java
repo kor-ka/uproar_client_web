@@ -1,12 +1,14 @@
 package ru.korinc.core.modules.player;
 
+import ru.korinc.runtime.json.JsonObjectWrapper;
+
 /**
  * Created by gputintsev on 21.12.17.
  */
 
 public class Content {
 
-    private String src = "";
+    private String src = "dummy";
 
     private String originalId = "";
 
@@ -14,9 +16,12 @@ public class Content {
 
     private boolean promoted = false;
 
-    public Content(String src, String originalId) {
+    private JsonObjectWrapper bag;
+
+    public Content(String src, String originalId, JsonObjectWrapper bag) {
         this.src = src;
         this.originalId = originalId;
+        this.bag = bag;
     }
 
     private Content() {
@@ -54,7 +59,7 @@ public class Content {
     }
 
     public boolean isDummy() {
-        return src == null;
+        return "dummy".equals(src);
     }
 
     @Override
@@ -80,5 +85,19 @@ public class Content {
         int result = src != null ? src.hashCode() : 0;
         result = 31 * result + (originalId != null ? originalId.hashCode() : 0);
         return result;
+    }
+
+    public static Content fromJson(JsonObjectWrapper json) {
+        JsonObjectWrapper audio = json.getJsonObject("audio");
+        JsonObjectWrapper youtubeLink = json.getJsonObject("youtube_link");
+        if (audio != null) {
+            return new Mp3Content(audio.getString("track_url"),
+                    Integer.toString(audio.getInteger("orig", -1)), audio);
+        } else if (youtubeLink != null) {
+            return new Mp3Content(youtubeLink.getString("url"),
+                    Integer.toString(youtubeLink.getInteger("orig", -1)), youtubeLink);
+        }
+
+        return new UnknownContent("", "unknown", json);
     }
 }
