@@ -14,7 +14,7 @@ public class PlayerController {
 
         player = $wnd.document.createElement('audio');
         player.controls = true
-        $wnd.document.body.appendChild(player);
+        $wnd.document.getElementById("audio_player").appendChild(player);
 
 
     }-*/;

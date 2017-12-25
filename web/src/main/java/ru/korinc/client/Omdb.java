@@ -1,6 +1,8 @@
 package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HeaderPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import java.util.ArrayList;
@@ -43,8 +45,12 @@ public class Omdb implements EntryPoint {
 
     private ArrayList<MqttMsg> pubQueue = new ArrayList<>();
 
+    private RootPanel headerContainer;
+
 
     public void onModuleLoad() {
+
+        headerContainer =  mRetryContainer = RootPanel.get("header");
 
         //
         //  Player
@@ -66,6 +72,9 @@ public class Omdb implements EntryPoint {
                     ytbController.play(content.getSrc());
                 }
                 if (!content.isDummy()) {
+                    headerContainer.clear();
+                    headerContainer.add(new HTMLPanel("h1", content.getTitle()));
+
                     publish("update_track_status",
                             content.getBag().putString("message", "playing"));
                 }

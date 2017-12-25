@@ -18,6 +18,9 @@
     <!--                                           -->
     <title>Uproar</title>
 
+    <div id="ytb_player" hidden="true"></div>
+    <div id="audio_player" hidden="true"></div>
+
 
     <script type="text/javascript" language="javascript"
             src="https://unpkg.com/rxjs@5.5.5/bundles/Rx.min.js"></script>
@@ -55,9 +58,8 @@
     </div>
 </noscript>
 
-<h1>Uproar</h1>
-
-<div id="ytb_player"></div>
+<div id="header">
+</div>
 
 <script>
     ytb_player = new YT.Player('ytb_player', {

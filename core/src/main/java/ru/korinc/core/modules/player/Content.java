@@ -108,6 +108,10 @@ public class Content {
         return new UnknownContent("", "unknown", json);
     }
 
+    public String getTitle(){
+        return bag.getString("title");
+    }
+
     public JsonObjectWrapper getBag() {
         return bag;
     }
