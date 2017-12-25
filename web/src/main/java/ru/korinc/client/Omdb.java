@@ -156,9 +156,10 @@ public class Omdb implements EntryPoint {
     private void publish(String update, JsonObjectWrapper data) {
         JsonObjectWrapper msg = json.getJson("{}");
         msg.putString("update", update);
-        msg.putString("token", token + "_web_" + mqtt.getClientId());
-        msg.putObject("data", data.putString("additional_id", mqtt.getClientId()));
+        msg.putString("token", token);
+        msg.putObject("data", data);
         if (connected) {
+            msg.putString("additional_id", mqtt.getClientId());
             mqtt.send("device_out", msg.toJsonString());
         } else {
             pubQueue.add(new MqttMsg(update, data));

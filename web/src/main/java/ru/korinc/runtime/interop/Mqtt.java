@@ -7,7 +7,10 @@ package ru.korinc.runtime.interop;
 public class Mqtt {
 
     public native void init(String username, String password, MqttCallbacks callbacks)/*-{
-        $wnd.client.client_id = username + parseInt(Math.random() * 100, 10)
+        $wnd.client = new $wnd.Paho.MQTT.Client("m21.cloudmqtt.com", 38552,"web_" + parseInt(Math.random() * 100, 10))
+
+        client_id = "web_" + parseInt(Math.random() * 100, 10)
+
         $wnd.client.onConnectionLost = onConnectionLost;
         $wnd.client.onMessageArrived = onMessageArrived;
         var options = {
@@ -63,6 +66,6 @@ public class Mqtt {
     }
 
     public native String getClientId()/*-{
-        return $wnd.client.client_id
+        return client_id
     }-*/;
 }
