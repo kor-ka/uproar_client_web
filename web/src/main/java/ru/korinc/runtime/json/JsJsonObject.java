@@ -35,18 +35,18 @@ public class JsJsonObject implements JsonObjectWrapper {
 
     @Override
     public String getString(String key) {
-        return source.get(key).isString() != null ? source.get(key).isString().stringValue() : null;
+        return (source.containsKey(key) && source.get(key).isString() != null) ? source.get(key).isString().stringValue() : null;
     }
 
     @Override
     public int getInteger(String key, int fallback) {
-        return source.get(key).isNumber() != null ? ((int) source.get(key).isNumber().doubleValue())
+        return (source.containsKey(key) && source.get(key).isNumber() != null) ? ((int) source.get(key).isNumber().doubleValue())
                 : fallback;
     }
 
     @Override
     public String getString(String key, String defaultValue) {
-        return source.get(key).isString() != null ? source.get(key).isString().stringValue()
+        return (source.containsKey(key) && source.get(key).isString() != null) ? source.get(key).isString().stringValue()
                 : defaultValue;
     }
 

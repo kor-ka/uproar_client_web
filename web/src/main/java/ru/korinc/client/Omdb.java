@@ -134,9 +134,12 @@ public class Omdb implements EntryPoint {
                 log.d("MQTT", "onMessage: " + message);
                 JsonObjectWrapper msg = json.getJson(message);
                 if (msg.getString("update").equals("add_content")) {
-                    Content data = Content.fromJson(msg.getJsonObject("data"));
-                    model.addContent(data);
-                    publish("update_track_status", data.getBag().putString("message", "queue"));
+                    String additionalId = msg.getString("additional_id");
+                    if(additionalId == null || additionalId.equals(mqtt.getClientId())){
+                        Content data = Content.fromJson(msg.getJsonObject("data"));
+                        model.addContent(data);
+                        publish("update_track_status", data.getBag().putString("message", "queue"));
+                    }
                 } else if (msg.getString("update").equals("promote")) {
                     model.promote(Integer.toString(msg.getInteger("data", -1)));
                 } else if (msg.getString("update").equals("skip")) {
