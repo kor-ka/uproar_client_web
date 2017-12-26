@@ -18,9 +18,6 @@ public class Mqtt {
             userName: username,
             password: password,
             onSuccess:onConnect,
-            reconnect : true,
-            keepAliveInterval: 60,
-            reconnectInterval: 1,
             onFailure:doFail
         }
 
@@ -49,6 +46,10 @@ public class Mqtt {
 
     public native void subscribe(String channel)/*-{
       $wnd.client.subscribe(channel)
+    }-*/;
+
+    public native void connect()/*-{
+        $wnd.client.connect(options);
     }-*/;
 
     public native void send(String channel, String message)/*-{

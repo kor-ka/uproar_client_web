@@ -132,13 +132,15 @@ public class Omdb implements EntryPoint {
             @Override
             public void onError() {
                 log.d("MQTT", "onError");
-
+                mqtt.connect();
             }
 
             @Override
             public void onConnectionLost() {
                 log.d("MQTT", "onConnectionLost");
                 connected = false;
+                mqtt.connect();
+
             }
 
             @Override
