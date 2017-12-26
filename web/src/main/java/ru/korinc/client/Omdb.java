@@ -1,6 +1,7 @@
 package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HeaderPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -132,14 +133,15 @@ public class Omdb implements EntryPoint {
             @Override
             public void onError() {
                 log.d("MQTT", "onError");
-                mqtt.connect();
+                Window.Location.reload();
             }
 
             @Override
             public void onConnectionLost() {
                 log.d("MQTT", "onConnectionLost");
                 connected = false;
-                mqtt.connect();
+                Window.Location.reload();
+
 
             }
 
