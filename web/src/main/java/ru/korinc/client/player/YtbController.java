@@ -25,6 +25,7 @@ public class YtbController {
         $wnd.on_ytb_stop = function(e){
         console.log(e)
             if(e.data == 0) {
+                $wnd.document.getElementById("ytb_container").style.height= '0px'
                 $wnd.document.getElementById("ytb_player").style.height= '0px'
                 listener.@ru.korinc.client.player.YtbController.YtbStopListener::onStop()();
 
@@ -34,6 +35,7 @@ public class YtbController {
         $wnd.on_ytb_error = function(e){
         console.log(e)
             if(e.data == 101 || e.data == 150) {
+                $wnd.document.getElementById("ytb_container").style.height= '0px'
                 $wnd.document.getElementById("ytb_player").style.height= '0px'
                 listener.@ru.korinc.client.player.YtbController.YtbStopListener::onStop()();
 
@@ -47,6 +49,7 @@ public class YtbController {
         inited = true
         $wnd.ytb_player.loadVideoByUrl(url)
 
+        $wnd.document.getElementById("ytb_container").style.height= height + 'px'
         $wnd.document.getElementById("ytb_player").style.height= height + 'px'
 
 //        $wnd.ytb_player.playVideo()

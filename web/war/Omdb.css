@@ -38,6 +38,12 @@ h1 {
     height: 0px;
 }
 
+#ytb_container {
+    position: relative;
+    width: 100%;
+    height: 0px;
+}
+
 html {
   height: 100%;
 }
