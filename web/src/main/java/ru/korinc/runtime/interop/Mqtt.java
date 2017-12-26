@@ -13,15 +13,15 @@ public class Mqtt {
 
         $wnd.client.onConnectionLost = onConnectionLost;
         $wnd.client.onMessageArrived = onMessageArrived;
-        var options = {
+        $wnd.mqtt_options = {
             useSSL: true,
             userName: username,
             password: password,
-            onSuccess:onConnect,
-            onFailure:doFail
+            onSuccess: onConnect,
+            onFailure: doFail
         }
 
-        $wnd.client.connect(options);
+        $wnd.client.connect($wnd.mqtt_options);
 
 
           function onConnect() {
@@ -49,7 +49,20 @@ public class Mqtt {
     }-*/;
 
     public native void connect()/*-{
-        $wnd.client.connect(options);
+        $wnd.client = new   $wnd.Paho.MQTT.Client("m21.cloudmqtt.com", 38552,"web_" + parseInt(Math.random() * 100, 10))
+
+        $wnd.mqtt_options = {
+            useSSL: $wnd.mqtt_options.useSSL,
+            userName: $wnd.mqtt_options.userName,
+            password: $wnd.mqtt_options.password,
+            onSuccess: $wnd.mqtt_options.onSuccess,
+            onFailure: $wnd.mqtt_options.onFailure
+        }
+
+
+        $wnd.client.connect($wnd.mqtt_options);
+
+
     }-*/;
 
     public native void send(String channel, String message)/*-{
