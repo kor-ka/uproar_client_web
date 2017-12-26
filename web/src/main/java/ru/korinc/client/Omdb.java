@@ -1,7 +1,6 @@
 package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HeaderPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -87,6 +86,7 @@ public class Omdb implements EntryPoint {
             }
         });
 
+        // update status
         model.getActions().subscribe(content -> {
             if (content.getAction() != null) {
                 publish("update_track_status",
@@ -94,6 +94,7 @@ public class Omdb implements EntryPoint {
             }
         });
 
+        // notify boring
         model.getBoring().subscribe(b -> {
             publish("boring", json.getJson("{}"));
         });
@@ -133,15 +134,14 @@ public class Omdb implements EntryPoint {
             @Override
             public void onError() {
                 log.d("MQTT", "onError");
-                Window.Location.reload();
+                mqtt.connect();
             }
 
             @Override
             public void onConnectionLost() {
                 log.d("MQTT", "onConnectionLost");
                 connected = false;
-                Window.Location.reload();
-
+                mqtt.connect();
 
             }
 
