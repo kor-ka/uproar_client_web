@@ -18,6 +18,9 @@ public class Mqtt {
             userName: username,
             password: password,
             onSuccess:onConnect,
+            reconnect : true,
+            keepAliveInterval: 60,
+            reconnectInterval: 1,
             onFailure:doFail
         }
 
