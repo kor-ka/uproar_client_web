@@ -52,6 +52,9 @@ public class Omdb implements EntryPoint {
 
         headerContainer =  mRetryContainer = RootPanel.get("header");
 
+        headerContainer.clear();
+        headerContainer.add(new HTMLPanel("h1", "Show me what you got!"));
+
         //
         //  Player
         //
