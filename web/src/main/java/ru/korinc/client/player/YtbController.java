@@ -57,6 +57,8 @@ public class YtbController {
 
     public native void stop()/*-{
         if(inited){
+            $wnd.document.getElementById("ytb_container").style.height= '0px'
+            $wnd.document.getElementById("ytb_player").style.height= '0px'
             $wnd.ytb_player.stopVideo()
         }
     }-*/;
