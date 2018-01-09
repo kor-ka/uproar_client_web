@@ -33,7 +33,7 @@ public class PlayerController implements Player {
         }
 
         function failure(err){
-
+             errorListener.@ru.korinc.client.player.Player.ErrorListener::onError()();
         }
 
     }-*/;
