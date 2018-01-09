@@ -14,6 +14,7 @@ public class PlayerController implements Player {
 
         player = $wnd.document.createElement('audio');
         player.controls = true
+        player.autoplay= true
         $wnd.document.getElementById("audio_player").appendChild(player);
 
 
