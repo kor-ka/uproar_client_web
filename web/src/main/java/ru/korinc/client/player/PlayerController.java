@@ -19,8 +19,22 @@ public class PlayerController implements Player {
 
     }-*/;
 
-    public native void play()/*-{
-        player.play()
+    public native void play(ErrorListener errorListener)/*-{
+        playPromise = player.play()
+
+        // In browsers that don’t yet support this functionality,
+        // playPromise won’t be defined.
+        if (playPromise !== undefined) {
+          playPromise.then(success, failure);
+        }
+
+        function success(){
+
+        }
+
+        function failure(err){
+
+        }
 
     }-*/;
 

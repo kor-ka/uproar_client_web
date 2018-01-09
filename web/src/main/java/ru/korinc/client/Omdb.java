@@ -1,8 +1,6 @@
 package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -31,7 +29,6 @@ public class Omdb implements EntryPoint {
 
 
     private final Model model = AppCore.sharedCore().getModel();
-
 
 
     private Content currentContent = Content.dummy();
@@ -70,7 +67,6 @@ public class Omdb implements EntryPoint {
 
         currentplayer = null;
 
-
         model.getCurrentTrack().observeOnMain().subscribe(content -> {
             if (!currentContent.equals(content)) {
                 player.pause();
@@ -79,12 +75,7 @@ public class Omdb implements EntryPoint {
                 currentplayer = null;
                 if (content instanceof Mp3Content) {
                     player.setSrc(content.getSrc());
-                    try {
-                        player.play();
-                    } catch (Exception e) {
-                        // probably cant force play om mobile without user input
-                        addPlayButton();
-                    }
+                    player.play(this::addPlayButton);
                     currentplayer = player;
                 } else if (content instanceof YoutubeContent) {
                     log.d("front", "ytb url: " + content.getSrc());
@@ -125,7 +116,6 @@ public class Omdb implements EntryPoint {
         //  MQTT
         //
         token = com.google.gwt.user.client.Window.Location.getParameter("token");
-
 
         String[] split = token.split("-");
         String username = split[0] + "-" + split[1];
@@ -170,7 +160,7 @@ public class Omdb implements EntryPoint {
                 JsonObjectWrapper msg = json.getJson(message);
                 if (msg.getString("update").equals("add_content")) {
                     String additionalId = msg.getString("additional_id");
-                    if(additionalId == null || additionalId.equals(mqtt.getClientId())){
+                    if (additionalId == null || additionalId.equals(mqtt.getClientId())) {
                         Content data = Content.fromJson(msg.getJsonObject("data"));
                         model.addContent(data);
                         publish("update_track_status", data.getBag().putString("message", "queue"));
@@ -191,7 +181,9 @@ public class Omdb implements EntryPoint {
         playContainer.add(forcePlay);
         forcePlay.addClickHandler(event -> {
             if (currentplayer != null) {
-                currentplayer.play();
+                currentplayer.play(() -> {
+                    //oops
+                });
                 playContainer.clear();
             }
         });
