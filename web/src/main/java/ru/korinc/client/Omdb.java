@@ -2,6 +2,8 @@ package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
@@ -31,7 +33,6 @@ public class Omdb implements EntryPoint {
     private final Model model = AppCore.sharedCore().getModel();
 
 
-    private RootPanel mRetryContainer;
 
     private Content currentContent = Content.dummy();
 
@@ -52,7 +53,7 @@ public class Omdb implements EntryPoint {
 
     public void onModuleLoad() {
 
-        headerContainer =  mRetryContainer = RootPanel.get("header");
+        headerContainer = RootPanel.get("header");
 
         headerContainer.clear();
         headerContainer.add(new HTMLPanel("h1", "Show me what you got!"));
@@ -75,7 +76,12 @@ public class Omdb implements EntryPoint {
                 currentplayer = null;
                 if (content instanceof Mp3Content) {
                     player.setSrc(content.getSrc());
-                    player.play();
+                    try {
+                        player.play();
+                    } catch (Exception e) {
+                        // probably cant force play om mobile without user input
+                        addPlayButton();
+                    }
                     currentplayer = player;
                 } else if (content instanceof YoutubeContent) {
                     log.d("front", "ytb url: " + content.getSrc());
@@ -86,11 +92,6 @@ public class Omdb implements EntryPoint {
                     // update title
                     headerContainer.clear();
                     HTMLPanel h1 = new HTMLPanel("h1", content.getTitle());
-                    h1.addDomHandler(click -> {
-                        if (currentplayer != null) {
-                            currentplayer.play();
-                        }
-                    }, ClickEvent.getType());
                     headerContainer.add(h1);
 
                     publish("update_track_status",
@@ -180,6 +181,17 @@ public class Omdb implements EntryPoint {
         });
 
 
+    }
+
+    private void addPlayButton() {
+        Button forcePlay = new Button("▶️");
+        headerContainer.add(forcePlay);
+        forcePlay.addClickHandler(event -> {
+            if (currentplayer != null) {
+                currentplayer.play();
+                headerContainer.remove(forcePlay);
+            }
+        });
     }
 
     private void onStop() {
