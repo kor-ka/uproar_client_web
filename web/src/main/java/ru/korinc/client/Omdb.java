@@ -48,12 +48,15 @@ public class Omdb implements EntryPoint {
 
     private RootPanel headerContainer;
 
+    private RootPanel playContainer;
+
     private Player currentplayer;
 
 
     public void onModuleLoad() {
 
         headerContainer = RootPanel.get("header");
+        playContainer = RootPanel.get("play_container");
 
         headerContainer.clear();
         headerContainer.add(new HTMLPanel("h1", "Show me what you got!"));
@@ -185,11 +188,11 @@ public class Omdb implements EntryPoint {
 
     private void addPlayButton() {
         Button forcePlay = new Button("▶️");
-        headerContainer.add(forcePlay);
+        playContainer.add(forcePlay);
         forcePlay.addClickHandler(event -> {
             if (currentplayer != null) {
                 currentplayer.play();
-                headerContainer.remove(forcePlay);
+                playContainer.clear();
             }
         });
     }

@@ -44,6 +44,12 @@ h1 {
     height: 0px;
 }
 
+#play_container {
+    position: center;
+    width: 200px;
+    height: 200px;
+}
+
 html {
   height: 100%;
 }
