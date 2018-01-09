@@ -17,7 +17,7 @@ public class JsObservable<T> implements ObservableWrapper<T> {
 
     @Override
     public ObservableWrapper<T> observeOnMain() {
-        return new JsObservable<>(source.observeOn(Scheduler.animationFrame));
+        return new JsObservable<>(source.observeOn(Scheduler.asap));
     }
 
     @Override
