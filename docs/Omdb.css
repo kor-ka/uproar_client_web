@@ -45,7 +45,7 @@ h1 {
 }
 
 #play_container {
-    position: center;
+    margin: auto;
     width: 200px;
     height: 200px;
 }

@@ -3,6 +3,7 @@ package ru.korinc.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import java.util.ArrayList;
@@ -177,7 +178,7 @@ public class Omdb implements EntryPoint {
     }
 
     private void addPlayButton() {
-        Button forcePlay = new Button("▶️");
+        Image forcePlay = new Image("play-button.svg");
         playContainer.add(forcePlay);
         forcePlay.addClickHandler(event -> {
             if (currentplayer != null) {
