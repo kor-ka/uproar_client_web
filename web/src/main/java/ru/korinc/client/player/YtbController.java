@@ -4,7 +4,7 @@ package ru.korinc.client.player;
  * Created by gputintsev on 25.12.17.
  */
 
-public class YtbController {
+public class YtbController implements Player {
 
     public YtbController() {
 
@@ -62,6 +62,12 @@ public class YtbController {
             $wnd.ytb_player.stopVideo()
         }
     }-*/;
+
+    @Override
+    public native void play()/*-{
+     $wnd.ytb_player.playVideo()
+    }-*/;
+
 
     public interface YtbStopListener {
 

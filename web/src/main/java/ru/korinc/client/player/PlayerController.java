@@ -4,7 +4,7 @@ package ru.korinc.client.player;
  * Created by gputintsev on 21.12.17.
  */
 
-public class PlayerController {
+public class PlayerController implements Player {
 
     public PlayerController(String tag) {
         init(tag);
@@ -26,11 +26,14 @@ public class PlayerController {
 
     public native void pause()/*-{
         player.pause()
+    }-*/;
 
+    public native void stop()/*-{
+        player.stop()
     }-*/;
 
     public native void setSrc(String src)/*-{
-            player.src = src
+        player.src = src
     }-*/;
 
     public native void addEventListener(String event, EventListener listener)/*-{

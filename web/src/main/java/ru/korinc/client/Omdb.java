@@ -1,12 +1,13 @@
 package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.HeaderPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import java.util.ArrayList;
 
+import ru.korinc.client.player.Player;
 import ru.korinc.client.player.PlayerController;
 import ru.korinc.client.player.YtbController;
 import ru.korinc.core.AppCore;
@@ -16,7 +17,6 @@ import ru.korinc.core.modules.player.Mp3Content;
 import ru.korinc.core.modules.player.YoutubeContent;
 import ru.korinc.runtime.interop.Mqtt;
 import ru.korinc.runtime.json.JsonObjectWrapper;
-import ru.korinc.runtime.json.JsonProvider;
 import ru.korinc.runtime.logging.LogProvider;
 
 import static ru.korinc.runtime.RuntimeConfiguration.json;
@@ -47,6 +47,8 @@ public class Omdb implements EntryPoint {
 
     private RootPanel headerContainer;
 
+    private Player currentplayer;
+
 
     public void onModuleLoad() {
 
@@ -62,21 +64,34 @@ public class Omdb implements EntryPoint {
 
         YtbController ytbController = new YtbController();
 
+        currentplayer = null;
+
+
         model.getCurrentTrack().observeOnMain().subscribe(content -> {
             if (!currentContent.equals(content)) {
-                player.pause();
+                player.stop();
                 ytbController.stop();
                 log.d("front", "on content: " + content.toString());
+                currentplayer = null;
                 if (content instanceof Mp3Content) {
                     player.setSrc(content.getSrc());
                     player.play();
+                    currentplayer = player;
                 } else if (content instanceof YoutubeContent) {
                     log.d("front", "ytb url: " + content.getSrc());
                     ytbController.play(content.getSrc());
+                    currentplayer = player;
                 }
                 if (!content.isDummy()) {
+                    // update title
                     headerContainer.clear();
-                    headerContainer.add(new HTMLPanel("h1", content.getTitle()));
+                    HTMLPanel h1 = new HTMLPanel("h1", content.getTitle());
+                    h1.addDomHandler(click -> {
+                        if (currentplayer != null) {
+                            currentplayer.play();
+                        }
+                    }, ClickEvent.getType());
+                    headerContainer.add(h1);
 
                     publish("update_track_status",
                             content.getBag().putString("message", "playing"));
