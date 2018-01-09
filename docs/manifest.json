@@ -1,0 +1,11 @@
+{
+  "manifest_version": 1,
+  "name": "Uproar",
+  "version": "1",
+  "background": {
+    "scripts": [
+      "omdb.nocache.js"
+    ],
+    "persistent": false
+  }
+}
