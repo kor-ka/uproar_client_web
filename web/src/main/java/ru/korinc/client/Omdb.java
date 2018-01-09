@@ -69,7 +69,7 @@ public class Omdb implements EntryPoint {
 
         model.getCurrentTrack().observeOnMain().subscribe(content -> {
             if (!currentContent.equals(content)) {
-                player.stop();
+                player.pause();
                 ytbController.stop();
                 log.d("front", "on content: " + content.toString());
                 currentplayer = null;

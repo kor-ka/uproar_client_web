@@ -24,13 +24,15 @@ public class PlayerController implements Player {
 
     }-*/;
 
+    @Override
+    public void stop() {
+        pause();
+    }
+
     public native void pause()/*-{
         player.pause()
     }-*/;
 
-    public native void stop()/*-{
-        player.stop()
-    }-*/;
 
     public native void setSrc(String src)/*-{
         player.src = src
