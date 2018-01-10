@@ -1,5 +1,7 @@
 package ru.korinc.core;
 
+import java.util.List;
+
 import ru.korinc.core.modules.ModulesContext;
 import ru.korinc.core.modules.player.Content;
 import ru.korinc.core.modules.player.PlayerActor;
@@ -23,6 +25,10 @@ public class Model {
 
     public BSWrapper<Content> getCurrentTrack() {
         return mModulesContext.getPlayerModule().getPlayerActor().getCurrent();
+    }
+
+    public BSWrapper<List<Content>> getQueue() {
+        return mModulesContext.getPlayerModule().getPlayerActor().getQueueVM();
     }
 
     public PublishSubjectWrapper<Content> getActions() {

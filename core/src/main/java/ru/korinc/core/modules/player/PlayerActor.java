@@ -24,6 +24,8 @@ public class PlayerActor extends RxActor {
 
     private BSWrapper<Content> current = rxProvider.bs(Content.dummy());
 
+    private BSWrapper<List<Content>> queueVM = rxProvider.bs(queue);
+
     private PublishSubjectWrapper<Content> actions = rxProvider.ps();
 
     private PublishSubjectWrapper<Object> boring = rxProvider.ps();
@@ -55,6 +57,7 @@ public class PlayerActor extends RxActor {
                 return;
             }
             queue.add(((AddContent) message).mContent);
+            notifyQueueUpdated();
             if (currentContent.isDummy()) {
                 playNext();
             }
@@ -65,6 +68,7 @@ public class PlayerActor extends RxActor {
                     target.setAction("promote");
                     queue.remove(target);
                     queue.set(0, target);
+                    notifyQueueUpdated();
                 }
             }
         } else if (message instanceof Skip) {
@@ -72,6 +76,7 @@ public class PlayerActor extends RxActor {
             if (target != null) {
                 target.setAction("skip");
                 queue.remove(target);
+                notifyQueueUpdated();
             }
             if (currentContent.getOriginalId().equals(((Skip) message).id)) {
                 playNext();
@@ -83,17 +88,25 @@ public class PlayerActor extends RxActor {
         }
     }
 
+    private void notifyQueueUpdated() {
+        queueVM.onNext(new ArrayList<>(queue));
+    }
+
     private void playNext() {
         log.d("Player", "playNext");
         if (queue.size() > 0) {
             current.onNext(queue.get(0));
             queue.remove(0);
+            notifyQueueUpdated();
         } else {
             current.onNext(Content.dummy());
             boring.onNext(new Object());
         }
     }
 
+    public BSWrapper<List<Content>> getQueueVM() {
+        return queueVM;
+    }
 
     public BSWrapper<Content> getCurrent() {
         return current;

@@ -4,9 +4,12 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.korinc.client.player.Player;
 import ru.korinc.client.player.PlayerController;
@@ -19,6 +22,7 @@ import ru.korinc.core.modules.player.YoutubeContent;
 import ru.korinc.runtime.interop.Mqtt;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.logging.LogProvider;
+import ru.korinc.runtime.rx.Consumer;
 
 import static ru.korinc.runtime.RuntimeConfiguration.json;
 
@@ -46,6 +50,8 @@ public class Omdb implements EntryPoint {
 
     private RootPanel headerContainer;
 
+    private RootPanel queueContainer;
+
     private RootPanel playContainer;
 
     private Player currentplayer;
@@ -55,9 +61,9 @@ public class Omdb implements EntryPoint {
 
         headerContainer = RootPanel.get("header");
         playContainer = RootPanel.get("play_container");
+        queueContainer = RootPanel.get("list");
 
-        headerContainer.clear();
-        headerContainer.add(new HTMLPanel("h1", "Show me what you got!"));
+        updateHeader("Connecting...");
 
         //
         //  Player
@@ -68,6 +74,7 @@ public class Omdb implements EntryPoint {
 
         currentplayer = null;
 
+        // actual content
         model.getCurrentTrack().observeOnMain().subscribe(content -> {
             if (!currentContent.equals(content)) {
                 player.pause();
@@ -94,6 +101,14 @@ public class Omdb implements EntryPoint {
                 }
 
                 currentContent = content;
+            }
+        });
+
+        // update queue
+        model.getQueue().observeOnMain().subscribe(queue -> {
+            queueContainer.clear();
+            for (int i = 0; i < queue.size(); i++) {
+                queueContainer.add(new Label(queue.get(i).getTitle()));
             }
         });
 
@@ -139,6 +154,8 @@ public class Omdb implements EntryPoint {
 
                 pubQueue.clear();
 
+                updateHeader("Bo-o-oring... Send some music to group!");
+
             }
 
             @Override
@@ -175,6 +192,11 @@ public class Omdb implements EntryPoint {
         });
 
 
+    }
+
+    private void updateHeader(String text) {
+        headerContainer.clear();
+        headerContainer.add(new HTMLPanel("h1", text));
     }
 
     private void addPlayButton() {
