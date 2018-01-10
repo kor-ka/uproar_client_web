@@ -1,8 +1,10 @@
 package ru.korinc.core.modules.player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import ru.korinc.runtime.rx.RxActor;
@@ -19,6 +21,8 @@ import static ru.korinc.runtime.RuntimeConfiguration.rxProvider;
 public class PlayerActor extends RxActor {
 
     private List<Content> queue = new ArrayList<>();
+
+    private Map<String, Content> cache = new HashMap<String, Content>();
 
     private Set<Content> old = new HashSet<>();
 
@@ -57,6 +61,8 @@ public class PlayerActor extends RxActor {
                 return;
             }
             queue.add(((AddContent) message).mContent);
+            cache.put(((AddContent) message).mContent.getOriginalId(),
+                    ((AddContent) message).mContent);
             notifyQueueUpdated();
             if (currentContent.isDummy()) {
                 playNext();
@@ -67,7 +73,7 @@ public class PlayerActor extends RxActor {
                 if (target != null) {
                     target.setAction("promote");
                     queue.remove(target);
-                    queue.set(0, target);
+                    queue.add(0, target);
                     notifyQueueUpdated();
                 }
             }
@@ -121,14 +127,7 @@ public class PlayerActor extends RxActor {
     }
 
     private Content pickById(String id) {
-        Content target = null;
-        for (Content c : queue) {
-            if (c.getOriginalId().equals(id)) {
-                target = c;
-            }
-        }
-
-        return target;
+        return cache.get(id);
     }
 
 
