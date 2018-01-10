@@ -61,6 +61,8 @@ public class Omdb implements EntryPoint {
 
         headerContainer = RootPanel.get("header");
         playContainer = RootPanel.get("play_container");
+        playContainer.setHeight("0px");
+
         queueContainer = RootPanel.get("list");
 
         updateHeader("Connecting...");
@@ -202,12 +204,15 @@ public class Omdb implements EntryPoint {
     private void addPlayButton() {
         Image forcePlay = new Image("play-button.svg");
         playContainer.add(forcePlay);
+        playContainer.setHeight("200px");
+
         forcePlay.addClickHandler(event -> {
             if (currentplayer != null) {
                 currentplayer.play(() -> {
                     //oops
                 });
                 playContainer.clear();
+                playContainer.setHeight("0px");
             }
         });
     }
