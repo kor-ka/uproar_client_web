@@ -106,6 +106,15 @@ public class Omdb implements EntryPoint {
                 if (!content.isDummy()) {
                     updateHeader(content.getTitle());
 
+                    line.asWidget().getElement().getStyle().setProperty("margin-top",
+                            headerContainer.getOffsetHeight() / 2 + Integer.parseInt(
+                                    headerContainer.getElement().getStyle().getMarginTop()
+                                            .replace("px", "")) + "px");
+                    line.asWidget().getElement().getStyle().setProperty("margin-bottom",
+                            headerContainer.getOffsetHeight() / 2 + Integer.parseInt(
+                                    headerContainer.getElement().getStyle().getMarginBottom()
+                                            .replace("px", "")) + "px");
+
                     publish("update_track_status",
                             content.getBag().putString("message", "playing"));
                 }
