@@ -124,7 +124,9 @@ public class Omdb implements EntryPoint {
         model.getQueue().observeOnMain().subscribe(queue -> {
             queueContainer.clear();
             if(queue.size() > 0){
-                queueContainer.add(new HTMLPanel("h2", "next:"));
+                HTMLPanel nextTitle = new HTMLPanel("h2", "next:");
+                nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "2em");
+                queueContainer.add(nextTitle);
             }
 
             queueContainer.asWidget().getElement().getStyle().setProperty("padding-bottom", queue.size() > 0 ? "30px":"0px");
