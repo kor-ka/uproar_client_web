@@ -29,7 +29,7 @@ h2{
     font-weight:  100;
   margin-left: 40px;
   margin-right: 40px;
-   margin-top: 15px;
+   margin-top: 30px;
   margin-bottom: 0px;
   color: #000000;
 
@@ -72,6 +72,7 @@ h2{
 .queue{
   margin:0 auto;
   width: 50%;
+  padding-bottom:30px;
   background-color: #ffffff;
 }
 
@@ -79,6 +80,7 @@ h2{
    .queue{
       margin:0 auto;
       width: 100%;
+      padding-bottom:30px;
       background-color: #ffffff;
     }
 }
