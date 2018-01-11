@@ -39,6 +39,12 @@ public class JsJsonObject implements JsonObjectWrapper {
     }
 
     @Override
+    public Boolean getBoolean(String key, Boolean fallback) {
+        return (source.containsKey(key) && source.get(key).isBoolean() != null) ? source.get(key).isBoolean().booleanValue() : fallback;
+
+    }
+
+    @Override
     public int getInteger(String key, int fallback) {
         return (source.containsKey(key) && source.get(key).isNumber() != null) ? ((int) source.get(key).isNumber().doubleValue())
                 : fallback;

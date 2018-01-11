@@ -13,6 +13,8 @@ public interface JsonObjectWrapper {
 
     String getString(String key);
 
+    Boolean getBoolean(String key, Boolean fallback);
+
     int getInteger(String key, int fallback);
 
     String getString(String key, String defaultValue);

@@ -66,6 +66,13 @@ public class Content {
         return "dummy".equals(src);
     }
 
+    public boolean isBoring(){
+        if(bag!=null){
+            return bag.getBoolean("boring", false);
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
