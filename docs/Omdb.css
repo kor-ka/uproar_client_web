@@ -3,9 +3,6 @@ html {
   height: 100%;
 }
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300,100italic,100);
-
-
 body {
     min-height: 100%;
     background-color: #000000;
@@ -19,7 +16,7 @@ body {
 
 h1 {
       font-size: 5em;
-    font-weight:  300;
+    font-weight:  100;
   margin: 40px;
   color: #ffffff;
   text-align: center;
@@ -29,7 +26,7 @@ h1 {
 
 h2{
       font-size: 3em;
-    font-weight:  300;
+    font-weight:  100;
   margin-left: 40px;
   margin-right: 40px;
    margin-top: 15px;
