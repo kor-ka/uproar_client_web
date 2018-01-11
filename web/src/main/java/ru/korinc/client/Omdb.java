@@ -95,8 +95,8 @@ public class Omdb implements EntryPoint {
                 if (!content.isDummy()) {
                     // update title
                     headerContainer.clear();
-                    HTMLPanel h1 = new HTMLPanel("h1", content.getTitle());
-                    headerContainer.add(h1);
+                    HTMLPanel h2 = new HTMLPanel("h2", content.getTitle());
+                    headerContainer.add(h2);
 
                     publish("update_track_status",
                             content.getBag().putString("message", "playing"));
@@ -155,9 +155,6 @@ public class Omdb implements EntryPoint {
                 }
 
                 pubQueue.clear();
-
-                updateHeader("Bo-o-oring... Send some music to group!");
-
             }
 
             @Override
