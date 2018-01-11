@@ -61,6 +61,10 @@ public class PlayerActor extends RxActor {
 
             // do not add boring if have one in queue
             if(((AddContent) message).mContent.isBoring()){
+                if(current.getValue().isBoring()){
+                    addThis = false;
+                }
+
                 for (Content aQueue : queue) {
                     if (aQueue.isBoring()) {
                         addThis = false;
