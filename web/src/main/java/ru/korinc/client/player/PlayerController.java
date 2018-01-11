@@ -37,7 +37,7 @@ public class PlayerController implements Player {
              errorListener.@ru.korinc.client.player.Player.ErrorListener::onError()();
         }
 
-        player.onprogress = function() {
+        player.ontimeupdate = function() {
             if(player.duration > 0){
                 progressListener.@ru.korinc.client.player.Player.ProgressListener::onProgress(Ljava/lang/Double;)(player.currentTime/player.duration);
 
