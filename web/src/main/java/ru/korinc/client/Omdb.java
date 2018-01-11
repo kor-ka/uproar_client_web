@@ -52,6 +52,8 @@ public class Omdb implements EntryPoint {
 
     private RootPanel queueContainer;
 
+    private RootPanel line;
+
     private RootPanel playContainer;
 
     private Player currentplayer;
@@ -64,6 +66,7 @@ public class Omdb implements EntryPoint {
         playContainer.setHeight("0px");
 
         queueContainer = RootPanel.get("list");
+        line = RootPanel.get("line");
 
         updateHeader("Connecting...");
 
@@ -83,13 +86,21 @@ public class Omdb implements EntryPoint {
                 ytbController.stop();
                 log.d("front", "on content: " + content.toString());
                 currentplayer = null;
+
+                line.setHeight("0px");
+
                 if (content instanceof Mp3Content) {
                     player.setSrc(content.getSrc());
-                    player.play(this::addPlayButton);
+                    player.play(this::addPlayButton, progress -> {
+                        line.setWidth(progress * 100 + "%");
+                    });
+                    line.setHeight("2px");
+
                     currentplayer = player;
                 } else if (content instanceof YoutubeContent) {
                     log.d("front", "ytb url: " + content.getSrc());
                     ytbController.play(content.getSrc());
+
                     currentplayer = player;
                 }
                 if (!content.isDummy()) {
@@ -204,6 +215,7 @@ public class Omdb implements EntryPoint {
             if (currentplayer != null) {
                 currentplayer.play(() -> {
                     //oops
+                }, p -> {
                 });
                 playContainer.clear();
                 playContainer.setHeight("0px");

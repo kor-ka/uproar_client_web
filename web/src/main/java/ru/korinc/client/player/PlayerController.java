@@ -20,7 +20,7 @@ public class PlayerController implements Player {
 
     }-*/;
 
-    public native void play(ErrorListener errorListener)/*-{
+    public native void play(ErrorListener errorListener, ProgressListener progressListener)/*-{
         playPromise = player.play()
 
         // In browsers that don’t yet support this functionality,
@@ -36,6 +36,16 @@ public class PlayerController implements Player {
         function failure(err){
              errorListener.@ru.korinc.client.player.Player.ErrorListener::onError()();
         }
+
+        player.onprogress = function() {
+            if(player.currentTime > 0){
+                errorListener.@ru.korinc.client.player.Player.ProgressListener::onProgress(Ljava/lang/Double;)(player.duration/player.currentTime);
+
+            }else{
+                errorListener.@ru.korinc.client.player.Player.ProgressListener::onProgress(Ljava/lang/Double;)(0);
+            }
+
+        };
 
     }-*/;
 

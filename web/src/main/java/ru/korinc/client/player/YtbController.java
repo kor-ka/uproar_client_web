@@ -64,7 +64,7 @@ public class YtbController implements Player {
     }-*/;
 
     @Override
-    public native void play(ErrorListener errorListener)/*-{
+    public native void play(ErrorListener errorListener, ProgressListener progressListener)/*-{
      $wnd.ytb_player.playVideo()
     }-*/;
 

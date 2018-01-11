@@ -6,12 +6,17 @@ package ru.korinc.client.player;
 
 public interface Player {
 
-    void play(ErrorListener onError);
+    void play(ErrorListener onError, ProgressListener listener);
 
     void stop();
 
     interface ErrorListener {
 
         void onError();
+    }
+
+    interface ProgressListener {
+
+        void onProgress(Double val);
     }
 }
