@@ -2,6 +2,7 @@ package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -122,6 +123,9 @@ public class Omdb implements EntryPoint {
         // update queue
         model.getQueue().observeOnMain().subscribe(queue -> {
             queueContainer.clear();
+            if(queue.size() > 0){
+                queueContainer.add(new HTMLPanel("next:"));
+            }
             for (int i = 0; i < queue.size(); i++) {
                 queueContainer.add(new HTMLPanel("h2", queue.get(i).getTitle()));
             }
@@ -209,6 +213,7 @@ public class Omdb implements EntryPoint {
     private void updateHeader(String text) {
         headerContainer.clear();
         headerContainer.add(new HTMLPanel("h1", text));
+        Window.setTitle(text);
     }
 
     private void addPlayButton() {
