@@ -1,1 +1,2 @@
-https://kor-ka.github.io/uproar_client_web/?token=1001184156487-1001184156487-609a9b1f06d2d47f84c067e4b6e7646600998f8719610f41b7de3f9ea668ab35
+![desktop](https://raw.githubusercontent.com/kor-ka/uproar_client_web/master/Screenshot%20from%202018-01-12%2001-00-23.png)
+![mobile](https://raw.githubusercontent.com/kor-ka/uproar_client_web/master/photo_2018-01-12_01-02-56.jpg)
