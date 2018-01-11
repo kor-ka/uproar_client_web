@@ -11,7 +11,6 @@ body {
     margin: 0;
     display:flex;
     flex-direction:column;
-    overflow-y:hidden;
 }
 
 h1 {
@@ -62,20 +61,21 @@ h2{
 
 .line{
   width: 50%;
-  color: #ffffff;
+  background-color: #ffffff;
    float: left;
+   height: 2px;
    position: absolute;
   margin: 100px auto;
 }
 
 .queue{
   margin:0 auto;
-  width: 40%;
+  width: 50%;
   background-color: #ffffff;
 }
 
 @media screen and (max-width: 780px) {
-   #queue{
+   .queue{
       margin:0 auto;
       width: 100%;
       background-color: #ffffff;
