@@ -216,6 +216,7 @@ public class Omdb implements EntryPoint {
                 currentplayer.play(() -> {
                     //oops
                 }, p -> {
+                    line.setWidth(p * 100 + "%");
                 });
                 playContainer.clear();
                 playContainer.setHeight("0px");
