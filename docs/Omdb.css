@@ -14,7 +14,7 @@ body {
     overflow-y:hidden;
 }
 
-.h1 {
+h1 {
     font-size: 3em;
      font-weight:  200;
    margin-left: 40px;
@@ -25,6 +25,19 @@ body {
 
    text-align: left;
 }
+
+h2{
+      font-size: 3em;
+    font-weight:  200;
+  margin-left: 40px;
+  margin-right: 40px;
+   margin-top: 15px;
+  margin-bottom: 0px;
+  color: #000000;
+
+  text-align: left;
+}
+
 
 #ytb_player {
     position: relative;
@@ -44,7 +57,7 @@ body {
     height: 0px;
 }
 
-#container{
+#header{
     flex:1;
     position:relative;
 }
