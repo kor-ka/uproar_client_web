@@ -38,6 +38,8 @@ public class PlayerController implements Player {
         }
 
         player.ontimeupdate = function() {
+           console.log("player.duration:"+player.duration);
+           console.log("player.currentTime:"+player.currentTime);
             if(player.duration > 0){
                 progressListener.@ru.korinc.client.player.Player.ProgressListener::onProgress(Ljava/lang/Double;)(player.currentTime/player.duration);
 
