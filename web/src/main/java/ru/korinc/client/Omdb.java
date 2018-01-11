@@ -107,7 +107,7 @@ public class Omdb implements EntryPoint {
         model.getQueue().observeOnMain().subscribe(queue -> {
             queueContainer.clear();
             for (int i = 0; i < queue.size(); i++) {
-                queueContainer.add(new Label(queue.get(i).getTitle()));
+                queueContainer.add(new HTMLPanel("h2", queue.get(i).getTitle()));
             }
         });
 
