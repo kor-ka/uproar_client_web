@@ -90,18 +90,18 @@ public class Omdb implements EntryPoint {
                 line.setHeight("0px");
 
                 if (content instanceof Mp3Content) {
+                    line.setHeight("2px");
                     player.setSrc(content.getSrc());
                     player.play(this::addPlayButton, progress -> {
                         line.setWidth(progress * 100 + "%");
                     });
-                    line.setHeight("2px");
 
                     currentplayer = player;
                 } else if (content instanceof YoutubeContent) {
                     log.d("front", "ytb url: " + content.getSrc());
                     ytbController.play(content.getSrc());
 
-                    currentplayer = player;
+                    currentplayer = ytbController;
                 }
                 if (!content.isDummy()) {
                     updateHeader(content.getTitle());
