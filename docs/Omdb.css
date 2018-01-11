@@ -60,12 +60,12 @@ h2{
 
 
 .line{
-  width: 50%;
+  width: 0px;
   background-color: #ffffff;
    float: left;
    height: 0px;
    position: absolute;
-  margin: 100px auto;
+  margin: calc(2.5em + 40px) auto;
 }
 
 .queue{

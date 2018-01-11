@@ -39,10 +39,10 @@ public class PlayerController implements Player {
 
         player.onprogress = function() {
             if(player.currentTime > 0){
-                errorListener.@ru.korinc.client.player.Player.ProgressListener::onProgress(Ljava/lang/Double;)(player.duration/player.currentTime);
+                progressListener.@ru.korinc.client.player.Player.ProgressListener::onProgress(Ljava/lang/Double;)(player.duration/player.currentTime);
 
             }else{
-                errorListener.@ru.korinc.client.player.Player.ProgressListener::onProgress(Ljava/lang/Double;)(0);
+                progressListener.@ru.korinc.client.player.Player.ProgressListener::onProgress(Ljava/lang/Double;)(0);
             }
 
         };
