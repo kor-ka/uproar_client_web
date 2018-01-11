@@ -24,8 +24,6 @@ public class PlayerActor extends RxActor {
 
     private Map<String, Content> cache = new HashMap<String, Content>();
 
-    private Set<Content> old = new HashSet<>();
-
     private BSWrapper<Content> current = rxProvider.bs(Content.dummy());
 
     private BSWrapper<List<Content>> queueVM = rxProvider.bs(queue);
@@ -50,20 +48,22 @@ public class PlayerActor extends RxActor {
         Content currentContent = current.getValue();
         if (message instanceof AddContent) {
             log.d("Player", "on AddContent:" + ((AddContent) message).mContent);
-
+            boolean addThis = true;
             if (((AddContent) message).mContent instanceof UnknownContent) {
                 log.d("Player", "ignore unknown");
-                return;
+                addThis = false;
             }
 
-            if (old.contains(((AddContent) message).mContent)) {
+            if (queue.contains(((AddContent) message).mContent)) {
                 log.d("Player", "old track - ignore");
-                return;
+                addThis = false;
             }
-            queue.add(((AddContent) message).mContent);
-            cache.put(((AddContent) message).mContent.getOriginalId(),
-                    ((AddContent) message).mContent);
-            notifyQueueUpdated();
+            if(addThis){
+                queue.add(((AddContent) message).mContent);
+                cache.put(((AddContent) message).mContent.getOriginalId(),
+                        ((AddContent) message).mContent);
+                notifyQueueUpdated();
+            }
             if (currentContent.isDummy()) {
                 playNext();
             }
