@@ -108,15 +108,14 @@ public class Omdb implements EntryPoint {
                     updateHeader(content.getTitle());
 
                     Style h1Style = headerContainer.getWidget(0).getElement().getStyle();
-                    String marginTop = h1Style.getMarginTop();
+                    String margin = h1Style.getMargin();
                     line.asWidget().getElement().getStyle().setProperty("margin-top",
                             headerContainer.getWidget(0).getOffsetHeight() / 2 + Integer.parseInt(
-                                    marginTop.isEmpty() ? "0" : marginTop
+                                    margin.isEmpty() ? "0" : margin
                                             .replace("px", "")) + "px");
-                    String marginBottom = h1Style.getMarginBottom();
                     line.asWidget().getElement().getStyle().setProperty("margin-bottom",
                             headerContainer.getWidget(0).getOffsetHeight() / 2 + Integer.parseInt(
-                                    marginBottom.isEmpty() ? "0" : marginBottom
+                                    margin.isEmpty() ? "0" : margin
                                             .replace("px", "")) + "px");
 
                     publish("update_track_status",
