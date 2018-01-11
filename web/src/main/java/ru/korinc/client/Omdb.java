@@ -1,6 +1,7 @@
 package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -106,14 +107,15 @@ public class Omdb implements EntryPoint {
                 if (!content.isDummy()) {
                     updateHeader(content.getTitle());
 
-                    String marginTop = headerContainer.getElement().getStyle().getMarginTop();
+                    Style h1Style = headerContainer.getWidget(0).getElement().getStyle();
+                    String marginTop = h1Style.getMarginTop();
                     line.asWidget().getElement().getStyle().setProperty("margin-top",
-                            headerContainer.getOffsetHeight() / 2 + Integer.parseInt(
+                            headerContainer.getWidget(0).getOffsetHeight() / 2 + Integer.parseInt(
                                     marginTop.isEmpty() ? "0" : marginTop
                                             .replace("px", "")) + "px");
-                    String marginBottom = headerContainer.getElement().getStyle().getMarginBottom();
+                    String marginBottom = h1Style.getMarginBottom();
                     line.asWidget().getElement().getStyle().setProperty("margin-bottom",
-                            headerContainer.getOffsetHeight() / 2 + Integer.parseInt(
+                            headerContainer.getWidget(0).getOffsetHeight() / 2 + Integer.parseInt(
                                     marginBottom.isEmpty() ? "0" : marginBottom
                                             .replace("px", "")) + "px");
 
