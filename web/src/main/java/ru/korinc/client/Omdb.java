@@ -93,10 +93,7 @@ public class Omdb implements EntryPoint {
                     currentplayer = player;
                 }
                 if (!content.isDummy()) {
-                    // update title
-                    headerContainer.clear();
-                    HTMLPanel h2 = new HTMLPanel("h2", content.getTitle());
-                    headerContainer.add(h2);
+                    updateHeader(content.getTitle());
 
                     publish("update_track_status",
                             content.getBag().putString("message", "playing"));
