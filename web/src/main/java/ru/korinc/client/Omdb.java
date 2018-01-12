@@ -162,7 +162,7 @@ public class Omdb implements EntryPoint {
 
         log.d("MQTT login", username + " " + token);
 
-        mqtt.init(username, token, new Mqtt.MqttCallbacks() {
+        mqtt.init("web", "web", new Mqtt.MqttCallbacks() {
             @Override
             public void onConnect() {
                 log.d("MQTT", "onConnect");
