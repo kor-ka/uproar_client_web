@@ -29,6 +29,7 @@ public class Mqtt {
           }
 
           function doFail(e){
+            console.log(e);
              callbacks.@ru.korinc.runtime.interop.Mqtt.MqttCallbacks::onError()();
           }
 

@@ -157,12 +157,7 @@ public class Omdb implements EntryPoint {
         //
         token = com.google.gwt.user.client.Window.Location.getParameter("token");
 
-        String[] split = token.split("-");
-        String username = split[0] + "-" + split[1];
-
-        log.d("MQTT login", username + " " + token);
-
-        mqtt.init("web", "web", new Mqtt.MqttCallbacks() {
+        mqtt.init("eksepjal", "UyPdNESZw5yo", new Mqtt.MqttCallbacks() {
             @Override
             public void onConnect() {
                 log.d("MQTT", "onConnect");
