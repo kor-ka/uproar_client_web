@@ -7,7 +7,7 @@ package ru.korinc.runtime.interop;
 public class Mqtt {
 
     public native void init(String username, String password, MqttCallbacks callbacks)/*-{
-        $wnd.client = new $wnd.Paho.MQTT.Client("m21.cloudmqtt.com", 38552,"web_" + parseInt(Math.random() * 100, 10))
+        $wnd.client = new $wnd.Paho.MQTT.Client("uproar.ddns.net", 38552,"web_" + parseInt(Math.random() * 100, 10))
 
         client_id = "web_" + parseInt(Math.random() * 100, 10)
 
