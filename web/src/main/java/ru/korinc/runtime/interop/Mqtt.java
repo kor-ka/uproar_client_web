@@ -50,7 +50,7 @@ public class Mqtt {
     }-*/;
 
     public native void connect()/*-{
-        $wnd.client = new   $wnd.Paho.MQTT.Client("m21.cloudmqtt.com", 38552,"web_" + parseInt(Math.random() * 100, 10))
+         $wnd.client = new $wnd.Paho.MQTT.Client("uproar.ddns.net", 8083,"web_" + parseInt(Math.random() * 100, 10))
 
         $wnd.mqtt_options = {
             useSSL: $wnd.mqtt_options.useSSL,
