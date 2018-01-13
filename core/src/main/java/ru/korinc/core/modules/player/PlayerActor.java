@@ -59,19 +59,10 @@ public class PlayerActor extends RxActor {
                 addThis = false;
             }
 
-            // do not add boring if have one in queue
-            if(((AddContent) message).mContent.isBoring()){
-                if(current.getValue().isBoring()){
-                    addThis = false;
-                }
-
-                for (Content aQueue : queue) {
-                    if (aQueue.isBoring()) {
-                        addThis = false;
-                        break;
-                    }
-                }
-            }
+            // do not add boring if have smth in queue
+           if(queue.size() > 0){
+               addThis = false;
+           }
 
             if(addThis){
                 queue.add(((AddContent) message).mContent);
@@ -119,8 +110,9 @@ public class PlayerActor extends RxActor {
             current.onNext(queue.get(0));
             queue.remove(0);
             notifyQueueUpdated();
-        } else {
-            current.onNext(Content.dummy());
+        }
+
+        if(queue.size() == 0){
             boring.onNext(new Object());
         }
     }
