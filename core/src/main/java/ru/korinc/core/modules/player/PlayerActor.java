@@ -1,11 +1,6 @@
 package ru.korinc.core.modules.player;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import ru.korinc.runtime.rx.RxActor;
 import ru.korinc.runtime.rx.subject.BSWrapper;
@@ -48,6 +43,17 @@ public class PlayerActor extends RxActor {
         Content currentContent = current.getValue();
         if (message instanceof AddContent) {
             log.d("Player", "on AddContent:" + ((AddContent) message).mContent);
+            
+            if(!((AddContent) message).mContent.isBoring()){
+                for (Iterator<Content> iter = queue.listIterator(); iter.hasNext(); ) {
+                    Content c = iter.next();
+                    if (c.isBoring()) {
+                        iter.remove();
+                    }
+                }
+            }
+            
+            
             boolean addThis = true;
             if (((AddContent) message).mContent instanceof UnknownContent) {
                 log.d("Player", "ignore unknown");
