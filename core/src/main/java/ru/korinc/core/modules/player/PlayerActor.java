@@ -54,9 +54,13 @@ public class PlayerActor extends RxActor {
                 addThis = false;
             }
 
-            if (queue.contains(((AddContent) message).mContent)) {
+            if (queue.contains(((AddContent) message).mContent) || currentContent.equals(((AddContent) message).mContent)) {
                 log.d("Player", "old track - ignore");
                 addThis = false;
+                // old track from boring - request one more
+                if(((AddContent) message).mContent.isBoring()){
+                    boring.onNext(new Object());
+                }
             }
 
             // do not add boring if have smth in queue
