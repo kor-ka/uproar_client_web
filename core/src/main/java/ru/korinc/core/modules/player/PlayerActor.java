@@ -64,7 +64,7 @@ public class PlayerActor extends RxActor {
                 log.d("Player", "old track - ignore");
                 addThis = false;
                 // old track from boring - request one more
-                if(((AddContent) message).mContent.isBoring()){
+                if(((AddContent) message).mContent.isBoring() && queue.size() == 0){
                     boring.onNext(new Object());
                 }
             }
