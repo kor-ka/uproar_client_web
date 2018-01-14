@@ -70,7 +70,7 @@ public class PlayerActor extends RxActor {
             }
 
             // do not add boring if have smth in queue
-           if(queue.size() > 0){
+           if(((AddContent) message).mContent.isBoring() && queue.size() > 0){
                addThis = false;
            }
 
