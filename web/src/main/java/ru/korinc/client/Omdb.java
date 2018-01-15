@@ -23,6 +23,7 @@ import ru.korinc.core.modules.player.Mp3Content;
 import ru.korinc.core.modules.player.YoutubeContent;
 import ru.korinc.runtime.RuntimeConfiguration;
 import ru.korinc.runtime.interop.Mqtt;
+import ru.korinc.runtime.json.JsJsonArray;
 import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.logging.LogProvider;
@@ -85,10 +86,11 @@ public class Omdb implements EntryPoint {
 
         // actual content
         model.getCurrentTrack().observeOnMain().subscribe(content -> {
+            log.d("front", "on content: " + content.toString());
+
             if (!currentContent.equals(content)) {
                 player.pause();
                 ytbController.stop();
-                log.d("front", "on content: " + content.toString());
                 currentplayer = null;
 
                 line.setHeight("0px");
@@ -148,12 +150,12 @@ public class Omdb implements EntryPoint {
 
         // notify boring
         model.getBoring().subscribe(b -> {
-            JsonObjectWrapper json = RuntimeConfiguration.json.getJson("{}");
-            JsonArrayWrapper jsonArray = RuntimeConfiguration.json.getJsonArray("[]");
-            for (Integer i:b) {
-                jsonArray.add(i);
-            }
-            json.putArray("exclude", jsonArray);
+
+            ArrayList<Integer> l = new ArrayList<>(b);
+
+            String s = "{ \"exclude\":" + l.toString() + "}";
+            JsonObjectWrapper json = RuntimeConfiguration.json.getJson(s);
+
             publish("boring", json);
         });
 
@@ -201,13 +203,29 @@ public class Omdb implements EntryPoint {
                 log.d("MQTT", "onMessage: " + message);
                 JsonObjectWrapper msg = json.getJson(message);
                 if (msg.getString("update").equals("add_content")) {
-                    String additionalId = msg.getString("additional_id");
-                    if (additionalId == null || additionalId.equals(mqtt.getClientId())) {
+                    String additionalId = msg.getJsonObject("data").getString("additional_id");
+                    log.d("addID", additionalId);
+                    if (additionalId.equals(mqtt.getClientId())) {
                         Content data = Content.fromJson(msg.getJsonObject("data"));
-                        model.addContent(data);
-                        publish("update_track_status", data.getBag().putString("message", "queue"));
+                        // old stuff - ignore
+                        if(!data.isBoring()){
+                            model.addContent(data);
+                            publish("update_track_status", data.getBag().putString("message", "queue"));
+                        }
                     }
-                } else if (msg.getString("update").equals("promote")) {
+                } else if (msg.getString("update").equals("boring_list")) {
+                    JsonArrayWrapper array = msg.getJsonObject("data").getJsonArray("boring_list");
+                    for (int i = 0; i < array.length(); i++) {
+                        JsonObjectWrapper json = array.getJsonObjectWrapper(i);
+                        String additionalId = json.getString("additional_id", "nope");
+                        log.d("addID", additionalId);
+                        if (additionalId.equals(mqtt.getClientId())) {
+                            Content data = Content.fromJson(json);
+                            model.addContent(data);
+                            publish("update_track_status", data.getBag().putString("message", "queue"));
+                        }
+                    }
+                }  else if (msg.getString("update").equals("promote")) {
                     model.promote(Integer.toString(msg.getInteger("data", -1)));
                 } else if (msg.getString("update").equals("skip")) {
                     model.skip(Integer.toString(msg.getInteger("data", -1)));
@@ -232,7 +250,7 @@ public class Omdb implements EntryPoint {
         forcePlay.addClickHandler(event -> {
             if (currentplayer != null) {
                 currentplayer.play(() -> {
-                    //oops
+                    model.onEnded(currentContent);
                 }, p -> {
                     line.setWidth(p * 100 + "%");
                 });
@@ -243,8 +261,8 @@ public class Omdb implements EntryPoint {
     }
 
     private void onStop() {
-        model.onEnded(currentContent);
         publish("update_track_status", currentContent.getBag().putString("message", "done"));
+        model.onEnded(currentContent);
     }
 
     private void publish(String update, JsonObjectWrapper data) {

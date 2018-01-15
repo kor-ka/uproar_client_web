@@ -68,6 +68,7 @@ public class PlayerActor extends RxActor {
                 }
 
                 queue.add(index, mContent);
+                log.d("as", queue.toString());
                 cache.put(mContent.getOriginalId(),
                         mContent);
 
@@ -120,7 +121,7 @@ public class PlayerActor extends RxActor {
             notifyQueueUpdated();
         }
 
-        if(queue.size() < 10){
+        if(queue.size() < 5){
             boring.onNext(latestPlayed);
         }
     }

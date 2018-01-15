@@ -9,5 +9,5 @@ public interface JsonProvider {
 
     JsonObjectWrapper getJson(String source);
 
-    JsonArrayWrapper getJsonArray(String spurce);
+    JsonArrayWrapper getJsonArray();
 }
