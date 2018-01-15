@@ -120,7 +120,7 @@ public class PlayerActor extends RxActor {
             notifyQueueUpdated();
         }
 
-        if(queue.size() < 0){
+        if(queue.size() < 10){
             boring.onNext(latestPlayed);
         }
     }
