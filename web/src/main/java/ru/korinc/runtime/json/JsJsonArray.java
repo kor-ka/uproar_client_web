@@ -1,6 +1,7 @@
 package ru.korinc.runtime.json;
 
 import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
 
 /**
@@ -9,7 +10,7 @@ import com.google.gwt.json.client.JSONObject;
 
 public class JsJsonArray implements JsonArrayWrapper {
 
-    private JSONArray mArray;
+    public JSONArray mArray;
 
     public JsJsonArray(JSONArray array) {
         mArray = array;
@@ -35,5 +36,10 @@ public class JsJsonArray implements JsonArrayWrapper {
     @Override
     public String getString(int position) {
         return mArray.get(position).isString().stringValue();
+    }
+
+    @Override
+    public void add(Integer i) {
+        mArray.set(mArray.size(), new JSONNumber(i));
     }
 }

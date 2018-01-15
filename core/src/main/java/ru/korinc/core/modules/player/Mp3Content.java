@@ -8,7 +8,7 @@ import ru.korinc.runtime.json.JsonObjectWrapper;
 
 public class Mp3Content extends Content {
 
-    public Mp3Content(String src, String originalId, JsonObjectWrapper bag) {
+    public Mp3Content(String src, Integer originalId, JsonObjectWrapper bag) {
         super(src, originalId, bag);
     }
 }

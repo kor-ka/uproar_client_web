@@ -2,6 +2,8 @@ package ru.korinc.core.modules.player;
 
 import ru.korinc.runtime.json.JsonObjectWrapper;
 
+import java.util.Objects;
+
 import static ru.korinc.runtime.RuntimeConfiguration.log;
 
 /**
@@ -12,7 +14,7 @@ public class Content {
 
     private String src = "dummy";
 
-    private String originalId = "";
+    private Integer originalId = -1;
 
     private boolean skipped = false;
 
@@ -22,7 +24,7 @@ public class Content {
 
     private String action;
 
-    public Content(String src, String originalId, JsonObjectWrapper bag) {
+    public Content(String src, int originalId, JsonObjectWrapper bag) {
         this.src = src;
         this.originalId = originalId;
         this.bag = bag;
@@ -54,7 +56,7 @@ public class Content {
         return this;
     }
 
-    public String getOriginalId() {
+    public Integer getOriginalId() {
         return originalId;
     }
 
@@ -75,27 +77,17 @@ public class Content {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Content content = (Content) o;
-
-        if (src != null ? !src.equals(content.src) : content.src != null) {
-            return false;
-        }
-        return originalId != null ? originalId.equals(content.originalId)
-                : content.originalId == null;
+        return originalId == content.originalId &&
+                Objects.equals(src, content.src);
     }
 
     @Override
     public int hashCode() {
-        int result = src != null ? src.hashCode() : 0;
-        result = 31 * result + (originalId != null ? originalId.hashCode() : 0);
-        return result;
+
+        return Objects.hash(src, originalId);
     }
 
     public static Content fromJson(JsonObjectWrapper json) {
@@ -104,15 +96,15 @@ public class Content {
         if (audio != null) {
             log.d("Content", "as audio");
             return new Mp3Content(audio.getString("track_url"),
-                    Integer.toString(audio.getInteger("orig", -1)), audio);
+                    audio.getInteger("orig", -1), audio);
         } else if (youtubeLink != null) {
             log.d("Content", "as video");
             return new YoutubeContent(youtubeLink.getString("url"),
-                    Integer.toString(youtubeLink.getInteger("orig", -1)), youtubeLink);
+                    youtubeLink.getInteger("orig", -1), youtubeLink);
         }
 
         log.d("Content", "as UnknownContent");
-        return new UnknownContent("", "unknown", json);
+        return new UnknownContent("", -1, json);
     }
 
     public String getTitle(){

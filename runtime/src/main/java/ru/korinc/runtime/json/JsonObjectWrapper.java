@@ -23,6 +23,8 @@ public interface JsonObjectWrapper {
 
     JsonObjectWrapper putObject(String key, JsonObjectWrapper o);
 
+    JsonObjectWrapper putArray(String key, JsonArrayWrapper a);
+
     String toJsonString();
 
 }

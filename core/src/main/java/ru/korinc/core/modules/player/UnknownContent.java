@@ -8,7 +8,7 @@ import ru.korinc.runtime.json.JsonObjectWrapper;
 
 public class UnknownContent extends Content {
 
-    public UnknownContent(String src, String originalId, JsonObjectWrapper bag) {
+    public UnknownContent(String src, Integer originalId, JsonObjectWrapper bag) {
         super(src, originalId, bag);
     }
 }

@@ -21,7 +21,9 @@ import ru.korinc.core.Model;
 import ru.korinc.core.modules.player.Content;
 import ru.korinc.core.modules.player.Mp3Content;
 import ru.korinc.core.modules.player.YoutubeContent;
+import ru.korinc.runtime.RuntimeConfiguration;
 import ru.korinc.runtime.interop.Mqtt;
+import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.logging.LogProvider;
 import ru.korinc.runtime.rx.Consumer;
@@ -146,7 +148,13 @@ public class Omdb implements EntryPoint {
 
         // notify boring
         model.getBoring().subscribe(b -> {
-            publish("boring", json.getJson("{}"));
+            JsonObjectWrapper json = RuntimeConfiguration.json.getJson("{}");
+            JsonArrayWrapper jsonArray = RuntimeConfiguration.json.getJsonArray("[]");
+            for (Integer i:b) {
+                jsonArray.add(i);
+            }
+            json.putArray("exclude", jsonArray);
+            publish("boring", json);
         });
 
         player.addEventListener("ended", this::onStop);

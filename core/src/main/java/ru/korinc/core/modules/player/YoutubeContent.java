@@ -8,7 +8,7 @@ import ru.korinc.runtime.json.JsonObjectWrapper;
 
 public class YoutubeContent extends Content {
 
-    public YoutubeContent(String src, String originalId, JsonObjectWrapper bag) {
+    public YoutubeContent(String src, Integer originalId, JsonObjectWrapper bag) {
         super(extractLink(src), originalId, bag);
     }
 

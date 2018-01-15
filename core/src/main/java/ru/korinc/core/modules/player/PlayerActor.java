@@ -17,7 +17,7 @@ public class PlayerActor extends RxActor {
 
     private List<Content> queue = new ArrayList<>();
 
-    private Map<String, Content> cache = new HashMap<String, Content>();
+    private Map<Integer, Content> cache = new HashMap<Integer, Content>();
 
     private BSWrapper<Content> current = rxProvider.bs(Content.dummy());
 
@@ -25,7 +25,9 @@ public class PlayerActor extends RxActor {
 
     private PublishSubjectWrapper<Content> actions = rxProvider.ps();
 
-    private PublishSubjectWrapper<Object> boring = rxProvider.ps();
+    private PublishSubjectWrapper<Collection<Integer>> boring = rxProvider.ps();
+
+    private LinkedHashSet<Integer> latestPlayed= new LinkedHashSet<>();
 
     public PlayerActor() {
         fireStart();
@@ -42,42 +44,38 @@ public class PlayerActor extends RxActor {
 
         Content currentContent = current.getValue();
         if (message instanceof AddContent) {
-            log.d("Player", "on AddContent:" + ((AddContent) message).mContent);
-            
-            if(!((AddContent) message).mContent.isBoring()){
-                for (Iterator<Content> iter = queue.listIterator(); iter.hasNext(); ) {
-                    Content c = iter.next();
-                    if (c.isBoring()) {
-                        iter.remove();
-                    }
-                }
-            }
-            
-            
+            Content mContent = ((AddContent) message).mContent;
+            log.d("Player", "on AddContent:" + mContent);
+
+
             boolean addThis = true;
-            if (((AddContent) message).mContent instanceof UnknownContent) {
+            if (mContent instanceof UnknownContent) {
                 log.d("Player", "ignore unknown");
                 addThis = false;
             }
 
-            if (queue.contains(((AddContent) message).mContent) || currentContent.equals(((AddContent) message).mContent)) {
-                log.d("Player", "old track - ignore");
-                addThis = false;
-                // old track from boring - request one more
-                if(((AddContent) message).mContent.isBoring() && queue.size() == 0){
-                    boring.onNext(new Object());
-                }
-            }
-
-            // do not add boring if have smth in queue
-           if(((AddContent) message).mContent.isBoring() && queue.size() > 0){
-               addThis = false;
-           }
-
             if(addThis){
-                queue.add(((AddContent) message).mContent);
-                cache.put(((AddContent) message).mContent.getOriginalId(),
-                        ((AddContent) message).mContent);
+                int index = queue.size();
+
+                // put actual content before boring
+                if(!mContent.isBoring()){
+                    for (int i = 0; i < queue.size(); i++) {
+                        if(queue.get(i).isBoring()){
+                            index = i;
+                            break;
+                        }
+                    }
+                }
+
+                queue.add(index, mContent);
+                cache.put(mContent.getOriginalId(),
+                        mContent);
+
+                // track played to exclude from boring later
+                if(latestPlayed.contains(mContent.getOriginalId())){
+                    latestPlayed.remove(mContent.getOriginalId());
+                }
+                latestPlayed.add(mContent.getOriginalId());
                 notifyQueueUpdated();
             }
             if (currentContent.isDummy()) {
@@ -122,8 +120,8 @@ public class PlayerActor extends RxActor {
             notifyQueueUpdated();
         }
 
-        if(queue.size() == 0){
-            boring.onNext(new Object());
+        if(queue.size() < 0){
+            boring.onNext(latestPlayed);
         }
     }
 
@@ -139,7 +137,7 @@ public class PlayerActor extends RxActor {
         return actions;
     }
 
-    public PublishSubjectWrapper<Object> getBoring() {
+    public PublishSubjectWrapper<Collection<Integer>> getBoring() {
         return boring;
     }
 

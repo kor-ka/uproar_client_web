@@ -1,5 +1,6 @@
 package ru.korinc.core;
 
+import java.util.Collection;
 import java.util.List;
 
 import ru.korinc.core.modules.ModulesContext;
@@ -35,7 +36,7 @@ public class Model {
         return mModulesContext.getPlayerModule().getPlayerActor().getActions();
     }
 
-    public PublishSubjectWrapper<Object> getBoring() {
+    public PublishSubjectWrapper<Collection<Integer>> getBoring() {
         return mModulesContext.getPlayerModule().getPlayerActor().getBoring();
     }
 

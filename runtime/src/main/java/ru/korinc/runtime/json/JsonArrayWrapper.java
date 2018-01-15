@@ -13,4 +13,6 @@ public interface JsonArrayWrapper {
     JsonArrayWrapper getJsonArrayWrapper(int position);
 
     String getString(int position);
+
+    void add(Integer i);
 }

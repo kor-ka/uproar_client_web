@@ -69,6 +69,12 @@ public class JsJsonObject implements JsonObjectWrapper {
     }
 
     @Override
+    public JsonObjectWrapper putArray(String key, JsonArrayWrapper o) {
+        source.put(key, ((JsJsonArray) o).mArray);
+        return this;
+    }
+
+    @Override
     public String toJsonString() {
         return source.toString();
     }
