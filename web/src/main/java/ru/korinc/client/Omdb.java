@@ -173,7 +173,11 @@ public class Omdb implements EntryPoint {
                 log.d("MQTT", "onConnect");
                 mqtt.subscribe("device_in_" + token);
 
-                mqtt.send("registry", token);
+                JsonObjectWrapper json = RuntimeConfiguration.json.getJson("{}");
+                json.putString("token", token);
+                json.putString("additional_id", mqtt.getClientId());
+
+                mqtt.send("registry", json.toJsonString());
 
                 connected = true;
 
@@ -205,7 +209,7 @@ public class Omdb implements EntryPoint {
                 if (msg.getString("update").equals("add_content")) {
                     String additionalId = msg.getJsonObject("data").getString("additional_id");
                     log.d("addID", additionalId);
-                    if (additionalId.equals(mqtt.getClientId())) {
+                    if (additionalId == null || additionalId.equals(mqtt.getClientId())) {
                         Content data = Content.fromJson(msg.getJsonObject("data"));
                         // old stuff - ignore
                         if(!data.isBoring()){
