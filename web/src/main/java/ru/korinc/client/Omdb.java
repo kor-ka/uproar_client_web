@@ -239,6 +239,7 @@ public class Omdb implements EntryPoint {
                         model.addContent(data);
                         publish("update_track_status", data.getBag().putString("message", "queue"));
                     }
+                    model.readyForBoring();
                 } else if (msg.getString("update").equals("promote")) {
                     model.promote(Integer.toString(msg.getInteger("data", -1)));
                 } else if (msg.getString("update").equals("skip")) {

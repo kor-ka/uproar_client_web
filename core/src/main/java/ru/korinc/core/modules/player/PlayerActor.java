@@ -29,6 +29,8 @@ public class PlayerActor extends RxActor {
 
     private LinkedHashSet<Integer> latestPlayed= new LinkedHashSet<>();
 
+    private boolean readyForBoring = true;
+
     public PlayerActor() {
         fireStart();
     }
@@ -105,6 +107,8 @@ public class PlayerActor extends RxActor {
             if (currentContent.getOriginalId().equals(((Ended) message).id.getOriginalId())) {
                 playNext();
             }
+        } else if (message instanceof ReadyForBorring) {
+            readyForBoring = true;
         }
     }
 
@@ -120,7 +124,8 @@ public class PlayerActor extends RxActor {
             notifyQueueUpdated();
         }
 
-        if(queue.size() < 5){
+        if (queue.size() < 5 && readyForBoring) {
+            readyForBoring = false;
             boring.onNext(latestPlayed);
         }
     }
@@ -180,6 +185,10 @@ public class PlayerActor extends RxActor {
         public Ended(Content id) {
             this.id = id;
         }
+    }
+
+    public static class ReadyForBorring {
+
     }
 
 

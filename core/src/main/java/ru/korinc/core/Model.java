@@ -64,4 +64,9 @@ public class Model {
     public void skip(String id) {
         mModulesContext.getPlayerModule().getPlayerActor().getRef().send(new PlayerActor.Skip(id));
     }
+
+    public void readyForBoring() {
+        mModulesContext.getPlayerModule().getPlayerActor().getRef()
+                .send(new PlayerActor.ReadyForBorring());
+    }
 }
