@@ -1,6 +1,7 @@
 package ru.korinc.runtime.json;
 
 import com.google.gwt.json.client.JSONArray;
+import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
@@ -59,6 +60,12 @@ public class JsJsonObject implements JsonObjectWrapper {
     @Override
     public JsonObjectWrapper putString(String key, String s) {
         source.put(key, new JSONString(s));
+        return this;
+    }
+
+    @Override
+    public JsonObjectWrapper putInt(String key, Integer s) {
+        source.put(key, new JSONNumber(s));
         return this;
     }
 

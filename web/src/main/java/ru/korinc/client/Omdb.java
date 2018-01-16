@@ -42,6 +42,14 @@ public class Omdb implements EntryPoint {
 
     private String token;
 
+    private String silentStr;
+
+    private Boolean silent = false;
+
+    private String startWithStr;
+
+    private Integer startWith;
+
     private boolean connected = false;
 
     private ArrayList<MqttMsg> pubQueue = new ArrayList<>();
@@ -58,6 +66,16 @@ public class Omdb implements EntryPoint {
 
 
     public void onModuleLoad() {
+
+        token = com.google.gwt.user.client.Window.Location.getParameter("token");
+        silentStr = com.google.gwt.user.client.Window.Location.getParameter("silent");
+        silent = "true".equals(silentStr);
+        startWithStr = com.google.gwt.user.client.Window.Location.getParameter("start_with");
+        try {
+            startWith = Integer.parseInt(startWithStr);
+        } catch (Exception ignore) {
+        }
+
 
         headerContainer = RootPanel.get("header");
         playContainer = RootPanel.get("play_container");
@@ -136,7 +154,7 @@ public class Omdb implements EntryPoint {
 
         // update status
         model.getActions().subscribe(content -> {
-            if (content.getAction() != null) {
+            if (!silent && content.getAction() != null) {
                 publish("update_track_status",
                         content.getBag().putString("message", content.getAction()));
             }
@@ -159,7 +177,6 @@ public class Omdb implements EntryPoint {
         //
         //  MQTT
         //
-        token = com.google.gwt.user.client.Window.Location.getParameter("token");
 
         mqtt.init("web", "web", new Mqtt.MqttCallbacks() {
             @Override
@@ -171,6 +188,9 @@ public class Omdb implements EntryPoint {
                 JsonObjectWrapper json = RuntimeConfiguration.json.getJson("{}");
                 json.putString("token", token);
                 json.putString("additional_id", mqtt.getClientId());
+                if (startWith != null) {
+                    json.putInt("start_with", startWith);
+                }
 
                 mqtt.send("registry", json.toJsonString());
 
