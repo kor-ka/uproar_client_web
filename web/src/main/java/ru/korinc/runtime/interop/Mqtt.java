@@ -9,7 +9,17 @@ public class Mqtt {
     public native void init(String username, String password, MqttCallbacks callbacks)/*-{
         $wnd.client = new $wnd.Paho.MQTT.Client("uproar.ddns.net", 8083,"web_" + parseInt(Math.random() * 100, 10))
 
-        client_id = "web_" + parseInt(Math.random() * 100, 10)
+        function guid() {
+          function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+              .toString(16)
+              .substring(1);
+          }
+          return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+            s4() + '-' + s4() + s4() + s4();
+        }
+
+        client_id =  guid()
 
         $wnd.client.onConnectionLost = onConnectionLost;
         $wnd.client.onMessageArrived = onMessageArrived;

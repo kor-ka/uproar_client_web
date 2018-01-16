@@ -68,7 +68,6 @@ public class PlayerActor extends RxActor {
                 }
 
                 queue.add(index, mContent);
-                log.d("as", queue.toString());
                 cache.put(mContent.getOriginalId(),
                         mContent);
 

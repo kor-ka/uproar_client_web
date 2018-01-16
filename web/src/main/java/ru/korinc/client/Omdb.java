@@ -1,17 +1,12 @@
 package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.TextBox;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import ru.korinc.client.player.Player;
 import ru.korinc.client.player.PlayerController;
@@ -23,11 +18,9 @@ import ru.korinc.core.modules.player.Mp3Content;
 import ru.korinc.core.modules.player.YoutubeContent;
 import ru.korinc.runtime.RuntimeConfiguration;
 import ru.korinc.runtime.interop.Mqtt;
-import ru.korinc.runtime.json.JsJsonArray;
 import ru.korinc.runtime.json.JsonArrayWrapper;
 import ru.korinc.runtime.json.JsonObjectWrapper;
 import ru.korinc.runtime.logging.LogProvider;
-import ru.korinc.runtime.rx.Consumer;
 
 import static ru.korinc.runtime.RuntimeConfiguration.json;
 
@@ -127,13 +120,14 @@ public class Omdb implements EntryPoint {
         // update queue
         model.getQueue().observeOnMain().subscribe(queue -> {
             queueContainer.clear();
-            if(queue.size() > 0){
+            if (queue.size() > 0) {
                 HTMLPanel nextTitle = new HTMLPanel("h2", "next:");
                 nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "2em");
                 queueContainer.add(nextTitle);
             }
 
-            queueContainer.asWidget().getElement().getStyle().setProperty("padding-bottom", queue.size() > 0 ? "30px":"0px");
+            queueContainer.asWidget().getElement().getStyle()
+                    .setProperty("padding-bottom", queue.size() > 0 ? "30px" : "0px");
 
             for (int i = 0; i < queue.size(); i++) {
                 queueContainer.add(new HTMLPanel("h2", queue.get(i).getTitle()));
@@ -172,6 +166,7 @@ public class Omdb implements EntryPoint {
             public void onConnect() {
                 log.d("MQTT", "onConnect");
                 mqtt.subscribe("device_in_" + token);
+                mqtt.subscribe("device_in_" + token + "_" + mqtt.getClientId());
 
                 JsonObjectWrapper json = RuntimeConfiguration.json.getJson("{}");
                 json.putString("token", token);
@@ -191,6 +186,7 @@ public class Omdb implements EntryPoint {
             @Override
             public void onError() {
                 log.d("MQTT", "onError");
+                connected = false;
                 mqtt.connect();
             }
 
@@ -209,27 +205,21 @@ public class Omdb implements EntryPoint {
                 if (msg.getString("update").equals("add_content")) {
                     String additionalId = msg.getJsonObject("data").getString("additional_id");
                     log.d("addID", additionalId);
-                    if (additionalId == null || additionalId.equals(mqtt.getClientId())) {
-                        Content data = Content.fromJson(msg.getJsonObject("data"));
-                        // old stuff - ignore
-                        if(!data.isBoring()){
-                            model.addContent(data);
-                            publish("update_track_status", data.getBag().putString("message", "queue"));
-                        }
+                    Content data = Content.fromJson(msg.getJsonObject("data"));
+                    // boring sent via add_content for backward devices capability
+                    if (!data.isBoring()) {
+                        model.addContent(data);
+                        publish("update_track_status", data.getBag().putString("message", "queue"));
                     }
                 } else if (msg.getString("update").equals("boring_list")) {
                     JsonArrayWrapper array = msg.getJsonObject("data").getJsonArray("boring_list");
                     for (int i = 0; i < array.length(); i++) {
                         JsonObjectWrapper json = array.getJsonObjectWrapper(i);
-                        String additionalId = json.getString("additional_id", "nope");
-                        log.d("addID", additionalId);
-                        if (additionalId.equals(mqtt.getClientId())) {
-                            Content data = Content.fromJson(json);
-                            model.addContent(data);
-                            publish("update_track_status", data.getBag().putString("message", "queue"));
-                        }
+                        Content data = Content.fromJson(json);
+                        model.addContent(data);
+                        publish("update_track_status", data.getBag().putString("message", "queue"));
                     }
-                }  else if (msg.getString("update").equals("promote")) {
+                } else if (msg.getString("update").equals("promote")) {
                     model.promote(Integer.toString(msg.getInteger("data", -1)));
                 } else if (msg.getString("update").equals("skip")) {
                     model.skip(Integer.toString(msg.getInteger("data", -1)));
