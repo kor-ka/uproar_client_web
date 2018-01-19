@@ -146,7 +146,7 @@ public class PlayerActor extends RxActor {
         return boring;
     }
 
-    private Content pickById(String id) {
+    private Content pickById(Integer id) {
         return cache.get(id);
     }
 
@@ -162,19 +162,27 @@ public class PlayerActor extends RxActor {
 
     public static class Promote {
 
-        private String id;
+        private Integer id;
 
         public Promote(String id) {
-            this.id = id;
+            try {
+                this.id = Integer.parseInt(id);
+            } catch (Exception ignore) {
+
+            }
         }
     }
 
     public static class Skip {
 
-        private String id;
+        private Integer id = -1;
 
         public Skip(String id) {
-            this.id = id;
+            try {
+                this.id = Integer.parseInt(id);
+            } catch (Exception ignore) {
+
+            }
         }
     }
 
