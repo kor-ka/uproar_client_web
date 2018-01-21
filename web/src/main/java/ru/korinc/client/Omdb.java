@@ -65,7 +65,7 @@ public class Omdb implements EntryPoint {
 
     private Player currentplayer;
 
-    private RootPanel context;
+    private Widget context;
     private Widget contextImage;
     private Widget contextTitle;
     private Widget contextId;
@@ -83,10 +83,9 @@ public class Omdb implements EntryPoint {
         }
 
         context = RootPanel.get("context");
-
-        contextImage = context.getWidget(0);
-        contextTitle = context.getWidget(1);
-        contextId = context.getWidget(2);
+        contextImage = RootPanel.get("context_image");
+        contextTitle = RootPanel.get("context_title");
+        contextId =  RootPanel.get("context_id");
 
         headerContainer = RootPanel.get("header");
         playContainer = RootPanel.get("play_container");

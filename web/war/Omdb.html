@@ -39,6 +39,8 @@
     <!--                                           -->
     <script type="text/javascript" language="javascript" src="omdb/omdb.nocache.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+
 
 </head>
 
@@ -48,6 +50,13 @@
 <!-- to create a completely dynamic UI.        -->
 <!--                                           -->
 <body>
+
+<div class="context" id="context_container">
+    <img src="https://pbs.twimg.com/profile_images/831993825635745796/HnVmB0-k.jpg" class="context_image" id="context_image">
+    <text class="context_title id="context_title"></text>
+    <text class="context_id" id="context_id"></text>
+</div>
+
 
 <div id="ytb_container">
     <div id="ytb_player"></div>
@@ -81,7 +90,6 @@
           width: '100%',
           height: '100%',
         });
-
 
 </script>
 
