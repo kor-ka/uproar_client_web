@@ -256,7 +256,7 @@ public class Omdb implements EntryPoint {
                     model.skip(Integer.toString(msg.getInteger("data", -1)));
                 } else if (msg.getString("update").equals("init")) {
                     JsonObjectWrapper contextData = msg.getJsonObject("data").getJsonObject("context");
-                    context.asWidget().getElement().getStyle().setProperty("height", null);
+                    context.getElement().getStyle().setProperty("height", null);
 
                     context.getElement().getStyle().setProperty("height", "auto");
                     contextImage.getElement().getStyle().setProperty("height", "4em");
