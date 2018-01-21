@@ -84,4 +84,36 @@ h2{
     }
 }
 
+.context{
+  background-color: #ffffff;
+  height: 0px;
+}
+
+.context_image{
+  border-radius: 50%;
+  float: left;
+  padding: 1em;
+  height: 4em;
+}
+
+.context_title {
+  font-size: 2em;
+  line-height: 3em;
+  font-weight:  100;
+  color: #000000;
+  text-align: left;
+}
+
+.context_id {
+  font-size: 2em;
+  line-height: 3em;
+  font-weight:  100;
+  color: #000000;
+  float: right;
+  margin-right: 1em;
+  opacity: 0.5;
+}
+
+
+
 

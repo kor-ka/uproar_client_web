@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import java.util.ArrayList;
 
+import com.google.gwt.user.client.ui.Widget;
 import ru.korinc.client.player.Player;
 import ru.korinc.client.player.PlayerController;
 import ru.korinc.client.player.YtbController;
@@ -64,6 +65,11 @@ public class Omdb implements EntryPoint {
 
     private Player currentplayer;
 
+    private RootPanel context;
+    private Widget contextImage;
+    private Widget contextTitle;
+    private Widget contextId;
+
 
     public void onModuleLoad() {
 
@@ -76,6 +82,11 @@ public class Omdb implements EntryPoint {
         } catch (Exception ignore) {
         }
 
+        context = RootPanel.get("context");
+
+        contextImage = context.getWidget(0);
+        contextTitle = context.getWidget(1);
+        contextId = context.getWidget(2);
 
         headerContainer = RootPanel.get("header");
         playContainer = RootPanel.get("play_container");
@@ -244,6 +255,13 @@ public class Omdb implements EntryPoint {
                     model.promote(Integer.toString(msg.getInteger("data", -1)));
                 } else if (msg.getString("update").equals("skip")) {
                     model.skip(Integer.toString(msg.getInteger("data", -1)));
+                } else if (msg.getString("update").equals("init")) {
+                    JsonObjectWrapper contextData = msg.getJsonObject("context");
+                    context.asWidget().getElement().getStyle().setProperty("height", null);
+
+                    contextTitle.getElement().setInnerText(contextData.getString("title"));
+                    contextImage.getElement().setAttribute("src", contextData.getString("photo"));
+                    contextId.getElement().setInnerText(token.substring(token.length()-5, token.length()));
                 }
             }
         });
