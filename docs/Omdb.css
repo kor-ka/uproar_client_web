@@ -94,6 +94,7 @@ h2{
   float: left;
   padding: 1em;
   height: 4em;
+  height: 0px;
 }
 
 .context_title {
@@ -102,6 +103,7 @@ h2{
   font-weight:  100;
   color: #000000;
   text-align: left;
+  height: 0px;
 }
 
 .context_id {
@@ -112,6 +114,7 @@ h2{
   float: right;
   margin-right: 1em;
   opacity: 0.5;
+  height: 0px;
 }
 
 

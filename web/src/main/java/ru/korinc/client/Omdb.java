@@ -258,9 +258,14 @@ public class Omdb implements EntryPoint {
                     JsonObjectWrapper contextData = msg.getJsonObject("context");
                     context.asWidget().getElement().getStyle().setProperty("height", null);
 
-                    contextTitle.getElement().setInnerText(contextData.getString("title"));
+                    context.getElement().getStyle().setProperty("height", "auto");
+                    contextImage.getElement().getStyle().setProperty("height", "4em");
+                    contextTitle.getElement().getStyle().setProperty("height", "auto");
+                    contextId.getElement().getStyle().setProperty("height", "auto");
+
+                    contextTitle.getElement().setAttribute("text", contextData.getString("title"));
                     contextImage.getElement().setAttribute("src", contextData.getString("photo"));
-                    contextId.getElement().setInnerText(token.substring(token.length()-5, token.length()));
+                    contextId.getElement().setAttribute("text", token.substring(token.length()-5, token.length()));
                 }
             }
         });
