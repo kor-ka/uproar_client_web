@@ -189,17 +189,15 @@ public class Omdb implements EntryPoint {
         //
 
         mqtt.init("web", "web", new Mqtt.MqttCallbacks() {
-            private final String clientId = mqtt.getClientId();
-
             @Override
             public void onConnect() {
                 log.d("MQTT", "onConnect");
                 mqtt.subscribe("device_in_" + token);
-                mqtt.subscribe("device_in_" + token + "_" + clientId);
+                mqtt.subscribe("device_in_" + token + "_" + mqtt.getClientId());
 
                 JsonObjectWrapper json = RuntimeConfiguration.json.getJson("{}");
                 json.putString("token", token);
-                json.putString("additional_id", clientId);
+                json.putString("additional_id", mqtt.getClientId());
                 if (startWith != null) {
                     json.putInt("start_with", startWith);
                 }
@@ -265,6 +263,7 @@ public class Omdb implements EntryPoint {
                     contextId.getElement().getStyle().setProperty("height", "auto");
 
                     contextTitle.getElement().setInnerText(contextData.getString("title"));
+                    String clientId = mqtt.getClientId();
                     contextId.getElement().setInnerText(clientId.substring(clientId.length()-5, clientId.length()));
                     contextImage.getElement().setAttribute("src", contextData.getString("photo"));
                 }
