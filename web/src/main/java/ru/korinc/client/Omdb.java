@@ -82,7 +82,7 @@ public class Omdb implements EntryPoint {
         } catch (Exception ignore) {
         }
 
-        context = RootPanel.get("context");
+        context = RootPanel.get("context_container");
         contextImage = RootPanel.get("context_image");
         contextTitle = RootPanel.get("context_title");
         contextId =  RootPanel.get("context_id");
