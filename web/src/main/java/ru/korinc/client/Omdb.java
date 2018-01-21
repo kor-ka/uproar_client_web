@@ -133,7 +133,7 @@ public class Omdb implements EntryPoint {
                 if (!content.isDummy()) {
                     updateHeader(content.getTitle());
 
-                    String margin = headerContainer.getWidget(0).getOffsetHeight() / 2 + 40 + "px";
+                    String margin = headerContainer.getWidget(0).getOffsetHeight() / 2 + 40 + context.asWidget().getOffsetHeight() + "px";
                     line.asWidget().getElement().getStyle().setProperty("margin-top", margin);
                     line.asWidget().getElement().getStyle().setProperty("margin-bottom", margin);
 
