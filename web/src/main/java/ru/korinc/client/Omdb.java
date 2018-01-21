@@ -262,9 +262,9 @@ public class Omdb implements EntryPoint {
                     contextTitle.getElement().getStyle().setProperty("height", "auto");
                     contextId.getElement().getStyle().setProperty("height", "auto");
 
-                    contextTitle.getElement().setAttribute("text", contextData.getString("title"));
+                    contextTitle.getElement().setInnerText(contextData.getString("title"));
+                    contextId.getElement().setInnerText(token.substring(token.length()-5, token.length()));
                     contextImage.getElement().setAttribute("src", contextData.getString("photo"));
-                    contextId.getElement().setAttribute("text", token.substring(token.length()-5, token.length()));
                 }
             }
         });
