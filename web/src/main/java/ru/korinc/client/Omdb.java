@@ -68,6 +68,7 @@ public class Omdb implements EntryPoint {
     private Widget context;
     private Widget contextImage;
     private Widget contextTitle;
+    private Widget contextOwner;
     private Widget contextId;
 
 
@@ -85,6 +86,7 @@ public class Omdb implements EntryPoint {
         context = RootPanel.get("context_container");
         contextImage = RootPanel.get("context_image");
         contextTitle = RootPanel.get("context_title");
+        contextOwner = RootPanel.get("context_owner");
         contextId = RootPanel.get("context_id");
 
         headerContainer = RootPanel.get("header");
@@ -145,7 +147,7 @@ public class Omdb implements EntryPoint {
                 }
 
                 if (content.getOwner() != null) {
-                    contextTitle.getElement().setInnerText(content.getOwner() != null ? (" : " + content.getOwner()) : "");
+                    contextOwner.getElement().setInnerText(content.getOwner() != null ? (" : " + content.getOwner()) : "");
                 }
 
                 currentContent = content;
@@ -157,14 +159,24 @@ public class Omdb implements EntryPoint {
             queueContainer.clear();
             if (queue.size() > 0) {
                 HTMLPanel nextTitle = new HTMLPanel("h2", "next:");
-                nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "2em");
+                nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "32px");
                 queueContainer.add(nextTitle);
             }
 
             queueContainer.asWidget().getElement().getStyle()
                     .setProperty("padding-bottom", queue.size() > 0 ? "30px" : "0px");
 
+            boolean once = true;
             for (int i = 0; i < queue.size(); i++) {
+                if(once && queue.get(i).isBoring() && i > 0){
+                    once = false;
+
+                    HTMLPanel nextTitle = new HTMLPanel("h2", "history:");
+                    nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "32px");
+                    queueContainer.add(nextTitle);
+                }
+
+
                 queueContainer.add(new HTMLPanel("h2", queue.get(i).getTitle()));
                 if (queue.get(i).getOwner() != null) {
                     HTMLPanel owner = new HTMLPanel("text", queue.get(i).getOwner());
