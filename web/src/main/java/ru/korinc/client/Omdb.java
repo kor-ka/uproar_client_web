@@ -168,14 +168,15 @@ public class Omdb implements EntryPoint {
 
             boolean once = true;
             for (int i = 0; i < queue.size(); i++) {
-                if(once && queue.get(i).isBoring() && i > 0){
+                if(once && queue.get(i).isBoring()){
                     once = false;
 
-                    HTMLPanel nextTitle = new HTMLPanel("h2", "history:");
-                    nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "32px");
-                    queueContainer.add(nextTitle);
+                    if (i > 0){
+                        HTMLPanel nextTitle = new HTMLPanel("h2", "history:");
+                        nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "32px");
+                        queueContainer.add(nextTitle);
+                    }
                 }
-
 
                 queueContainer.add(new HTMLPanel("h2", queue.get(i).getTitle()));
                 if (queue.get(i).getOwner() != null) {
