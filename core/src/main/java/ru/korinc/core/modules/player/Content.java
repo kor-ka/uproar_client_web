@@ -111,6 +111,10 @@ public class Content {
         return bag.getString("title");
     }
 
+    public String getOwner(){
+        return bag.getString("owner");
+    }
+
     public JsonObjectWrapper getBag() {
         return bag;
     }

@@ -15,24 +15,23 @@ body {
 }
 
 h1 {
-      font-size: 5em;
-    font-weight:  100;
+  font-size: 80px;
+  font-weight:  100;
   margin: 40px;
   color: #ffffff;
   text-align: center;
-   flex:1;
+  flex:1;
   position:relative;
 }
 
 h2{
-      font-size: 3em;
-    font-weight:  100;
+  font-size: 48px;
+  font-weight:  100;
   margin-left: 40px;
   margin-right: 40px;
    margin-top: 30px;
   margin-bottom: 0px;
   color: #000000;
-
   text-align: left;
 }
 
@@ -63,10 +62,10 @@ h2{
 .line{
   width: 0px;
   background-color: #ffffff;
-   float: left;
-   height: 0px;
-   position: absolute;
-  margin: calc(2.5em + 40px) auto;
+  float: left;
+  height: 0px;
+  position: absolute;
+  margin: 80px auto;
 }
 
 .queue{
@@ -92,14 +91,14 @@ h2{
 .context_image{
   border-radius: 50%;
   float: left;
-  padding: 1em;
-  height: 4em;
-  height: 0px;
+  padding: 16px;
+  height: 64px;
+  width: 0px;
 }
 
 .context_title {
-  font-size: 2em;
-  line-height: 3em;
+  font-size: 32px;
+  line-height: 300%;
   font-weight:  100;
   color: #000000;
   text-align: left;
@@ -107,14 +106,26 @@ h2{
 }
 
 .context_id {
-  font-size: 2em;
-  line-height: 3em;
+  font-size: 32px;
+  line-height: 300%;
   font-weight:  100;
   color: #000000;
   float: right;
-  margin-right: 1em;
+  margin-right: 16px;
   opacity: 0.5;
   height: 0px;
+}
+
+.owner {
+  font-size: 24px;
+  font-weight:  100;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  opacity: 0.5;
+  color: #000000;
+  text-align: left;
 }
 
 

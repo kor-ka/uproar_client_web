@@ -85,7 +85,7 @@ public class Omdb implements EntryPoint {
         context = RootPanel.get("context_container");
         contextImage = RootPanel.get("context_image");
         contextTitle = RootPanel.get("context_title");
-        contextId =  RootPanel.get("context_id");
+        contextId = RootPanel.get("context_id");
 
         headerContainer = RootPanel.get("header");
         playContainer = RootPanel.get("play_container");
@@ -124,11 +124,14 @@ public class Omdb implements EntryPoint {
                     });
 
                     currentplayer = player;
+                    show_context(true);
                 } else if (content instanceof YoutubeContent) {
                     log.d("front", "ytb url: " + content.getSrc());
                     ytbController.play(content.getSrc());
 
                     currentplayer = ytbController;
+                    show_context(false);
+
                 }
                 if (!content.isDummy()) {
                     updateHeader(content.getTitle());
@@ -139,6 +142,10 @@ public class Omdb implements EntryPoint {
 
                     publish("update_track_status",
                             content.getBag().putString("message", "playing"));
+                }
+
+                if (content.getOwner() != null) {
+                    contextTitle.getElement().setInnerText(content.getOwner() != null ? (" : " + content.getOwner()) : "");
                 }
 
                 currentContent = content;
@@ -159,6 +166,11 @@ public class Omdb implements EntryPoint {
 
             for (int i = 0; i < queue.size(); i++) {
                 queueContainer.add(new HTMLPanel("h2", queue.get(i).getTitle()));
+                if (queue.get(i).getOwner() != null) {
+                    HTMLPanel owner = new HTMLPanel("text", queue.get(i).getOwner());
+                    owner.getElement().setAttribute("class", "owner");
+                    queueContainer.add(owner);
+                }
             }
         });
 
@@ -257,20 +269,29 @@ public class Omdb implements EntryPoint {
                 } else if (msg.getString("update").equals("init")) {
                     JsonObjectWrapper contextData = msg.getJsonObject("data").getJsonObject("context");
 
-                    context.getElement().getStyle().setProperty("height", "auto");
-                    contextImage.getElement().getStyle().setProperty("height", "4em");
-                    contextTitle.getElement().getStyle().setProperty("height", "auto");
-                    contextId.getElement().getStyle().setProperty("height", "auto");
+                    show_context(true);
 
                     contextTitle.getElement().setInnerText(contextData.getString("title"));
                     String clientId = mqtt.getClientId();
-                    contextId.getElement().setInnerText(clientId.substring(clientId.length()-5, clientId.length()));
-                    contextImage.getElement().setAttribute("src", contextData.getString("photo"));
+                    contextId.getElement().setInnerText(clientId.substring(clientId.length() - 5, clientId.length()));
+                    String photo = contextData.getString("photo");
+                    if (photo != null) {
+                        contextImage.getElement().setAttribute("src", photo);
+                    } else {
+                        contextImage.getElement().getStyle().setProperty("width", "0px");
+                    }
                 }
             }
         });
 
 
+    }
+
+    private void show_context(boolean show) {
+        context.getElement().getStyle().setProperty("height", show ? "auto" : "0px");
+        contextImage.getElement().getStyle().setProperty("height", show ? "64px" : "0px");
+        contextTitle.getElement().getStyle().setProperty("height", show ? "auto" : "0px");
+        contextId.getElement().getStyle().setProperty("height", show ? "auto" : "0px");
     }
 
     private void updateHeader(String text) {
