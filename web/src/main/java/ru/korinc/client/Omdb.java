@@ -146,7 +146,7 @@ public class Omdb implements EntryPoint {
                             content.getBag().putString("message", "playing"));
                 }
 
-                if (content.getOwner() != null) {
+                if (content.getOwner() != null && !content.getOwner().equals(contextTitle.asWidget().getElement().getInnerText())) {
                     contextOwner.getElement().setInnerText(content.getOwner() != null ? (" : " + content.getOwner()) : "");
                 }
 
