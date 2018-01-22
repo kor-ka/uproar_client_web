@@ -302,7 +302,7 @@ public class Omdb implements EntryPoint {
 
     private void show_context(boolean show) {
         context.getElement().getStyle().setProperty("height", show ? "auto" : "0px");
-        contextImage.getElement().getStyle().setProperty("height", show ? "64px" : "0px");
+        contextImage.getElement().getStyle().setProperty("width", show ? "64px" : "0px");
         contextTitle.getElement().getStyle().setProperty("height", show ? "auto" : "0px");
         contextId.getElement().getStyle().setProperty("height", show ? "auto" : "0px");
     }
