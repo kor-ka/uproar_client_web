@@ -69,9 +69,19 @@ task buildPackage(dependsOn: ['war']) {
             from "$projectDir/src/main/javascript"
         }
 
-//        copy {
-//            into "$buildDir/package"
-//            from "$projectDir/../../runtime/runtime-js/src/main/javascript"
-//        }
+        delete "$buildDir/temp"
+        copy {
+            into "$buildDir/temp"
+            from "$buildDir/package"
+        }
+        delete "$buildDir/temp/gwt"
+
+        delete "$projectDir/../docs/omdb"
+        copy {
+            into "$projectDir/../docs/omdb"
+            from "$buildDir/temp"
+        }
+
+        println "ready: file://$projectDir/../docs/index.html?silent=true&token=c-1001244859246"
     }
 }
