@@ -6,6 +6,8 @@ package ru.korinc.client.player;
 
 public class PlayerController implements Player {
 
+    private EventListener onStop;
+
     public PlayerController(String tag) {
         init(tag);
     }
@@ -19,20 +21,45 @@ public class PlayerController implements Player {
         
         
         var isPlaying = false;
+        var isWaiting = false;
+        var pauseFromUser = false;
 
         function togglePlay() {
           if (isPlaying) {
+            pauseFromUser = true;
             player.pause()
           } else {
             player.play();
           }
         };
         player.onplaying = function() {
+          pauseFromUser = false;
           isPlaying = true;
+          isWaiting = false;
         };
+
         player.onpause = function() {
           isPlaying = false;
+          if(!pauseFromUser && !isWaiting &&  (typeof onStop != 'undefined')){
+            onStop.@ru.korinc.client.player.PlayerController.EventListener::onEvent()();
+          }
         };
+
+        player.onwaiting = function() {
+          isWaiting = true;
+        };
+
+//        player.stalled = function() {
+//          isWaiting = true;
+//        };
+//
+//        player.onloadstart = function() {
+//          isWaiting = true;
+//        };
+//
+//        player.onloadeddata = function() {
+//          isWaiting = false;
+//        };
 
         $wnd.document.getElementById("header").addEventListener("click", togglePlay);
 
@@ -87,6 +114,10 @@ public class PlayerController implements Player {
         player.addEventListener(event, function() {
             listener.@ru.korinc.client.player.PlayerController.EventListener::onEvent()();
         }, true);
+    }-*/;
+
+    public native void onStop(EventListener onStopCallback)/*-{
+        onStop = onStopCallback;
     }-*/;
 
     public interface EventListener {

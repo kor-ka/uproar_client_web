@@ -207,6 +207,7 @@ public class Omdb implements EntryPoint {
         });
 
         player.addEventListener("ended", this::onStop);
+        player.onStop(this::onStop);
         ytbController.setStopListener(this::onStop);
 
         //
