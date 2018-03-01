@@ -45,21 +45,25 @@ public class PlayerController implements Player {
           }
         };
 
-        player.onwaiting = function() {
+        player.stalled = function() {
           isWaiting = true;
         };
 
-//        player.stalled = function() {
-//          isWaiting = true;
-//        };
-//
-//        player.onloadstart = function() {
-//          isWaiting = true;
-//        };
-//
-//        player.onloadeddata = function() {
-//          isWaiting = false;
-//        };
+        player.onloadstart = function() {
+          isWaiting = true;
+        };
+
+        player.onloadeddata = function() {
+          isWaiting = false;
+        };
+
+        player.onerror = function() {
+          isWaiting = true;
+        };
+
+        player.onabort = function() {
+          isWaiting = false;
+        };
 
         $wnd.document.getElementById("header").addEventListener("click", togglePlay);
 
@@ -102,6 +106,7 @@ public class PlayerController implements Player {
     }
 
     public native void pause()/*-{
+        pauseFromUser = true
         player.pause()
     }-*/;
 
