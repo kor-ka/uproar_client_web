@@ -16,6 +16,25 @@ public class PlayerController implements Player {
         player.controls = true
         player.autoplay= true
         $wnd.document.getElementById("audio_player").appendChild(player);
+        
+        
+        var isPlaying = false;
+
+        function togglePlay() {
+          if (isPlaying) {
+            player.pause()
+          } else {
+            player.play();
+          }
+        };
+        player.onplaying = function() {
+          isPlaying = true;
+        };
+        player.onpause = function() {
+          isPlaying = false;
+        };
+
+        $wnd.document.getElementById("header").addEventListener("click", togglePlay);
 
 
     }-*/;
