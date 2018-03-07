@@ -2,7 +2,6 @@ package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -17,6 +16,9 @@ import com.google.gwt.user.client.ui.Widget;
 import ru.korinc.client.player.Player;
 import ru.korinc.client.player.PlayerController;
 import ru.korinc.client.player.YtbController;
+import ru.korinc.client.util.ContentDiffCallback;
+import ru.korinc.client.util.DiffUtil;
+import ru.korinc.client.util.ListUpdateCallback;
 import ru.korinc.core.AppCore;
 import ru.korinc.core.Model;
 import ru.korinc.core.modules.player.Content;
@@ -172,62 +174,101 @@ public class Omdb implements EntryPoint {
             }
         });
 
+        ArrayList<Content> old = new ArrayList<>();
+
+
         // update queue
         model.getQueue().observeOnMain().subscribe(queue -> {
-            queueContainer.clear();
-            if (queue.size() > 0) {
-                queueContainer.remove(nextTitle);
-                queueContainer.insert(nextTitle, 0);
-            }
+
+            HashSet<Integer> msgs = new HashSet<>();
+
+            DiffUtil.calculateDiff(new ContentDiffCallback(old, queue))
+                    .dispatchUpdatesTo(new ListUpdateCallback() {
+                        @Override
+                        public void onInserted(int position, int count) {
+
+//            boolean once = true;
+                            for (int i = position; i < position + count; i++) {
+//                if(once && queue.get(i).isBoring()){
+//                    once = false;
+//
+//                    if (i > 0){
+//                        queueContainer.add(historyTitle);
+//                    }
+//                }
+
+                                if (chatUsername == null) {
+                                    queueContainer
+                                            .add(new HTMLPanel("h2", queue.get(i).getTitle()));
+                                    if (queue.get(i).getOwner() != null) {
+                                        HTMLPanel owner = new HTMLPanel("text",
+                                                queue.get(i).getOwner());
+                                        owner.getElement().setAttribute("class", "owner");
+                                        queueContainer.add(owner);
+                                    }
+                                } else {
+                                    Integer originalId = queue.get(i).getOriginalId();
+                                    msgs.add(originalId);
+                                    HTMLPanel div = msgCache.get(originalId);
+                                    if (div == null) {
+                                        log.d("post", "new post div");
+                                        div = new HTMLPanel("div", "");
+
+                                        div.asWidget().getElement().getStyle()
+                                                .setProperty("padding-top",
+                                                        queue.size() > 0 ? "30px" : "0px");
+
+                                        ScriptElement sce = Document.get().createScriptElement();
+                                        sce.setType("text/javascript");
+                    /*
+                    <script async src="https://telegram.org/js/telegram-widget.js?4" data-telegram-post="radio_persimmon/55" data-width="100%"></script>
+                     */
+                                        sce.setSrc("https://telegram.org/js/telegram-widget.js?4");
+                                        sce.setAttribute("data-telegram-post",
+                                                chatUsername + "/" + originalId);
+                                        sce.setAttribute("data-width", "100%");
+                                        div.getElement().appendChild(sce);
+                                        msgCache.put(originalId, div);
+                                    }
+
+                                    queueContainer.insert(div, i);
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onRemoved(int position, int count) {
+                            for (int i = position; i < position + count; i++) {
+                                queueContainer.remove(i);
+                            }
+                        }
+
+                        @Override
+                        public void onMoved(int fromPosition, int toPosition) {
+                            HTMLPanel toMove = msgCache.get(old.get(fromPosition).getOriginalId());
+
+                            queueContainer.remove(toMove);
+                            queueContainer.insert(toMove, toPosition);
+                        }
+
+                        @Override
+                        public void onChanged(int position, int count, Object payload) {
+
+                        }
+                    });
+
+            old.clear();
+            old.addAll(queue);
+
+//            queueContainer.clear();
+//            if (queue.size() > 0) {
+//                queueContainer.insert(nextTitle, 0);
+//            }
 
             queueContainer.asWidget().getElement().getStyle()
                     .setProperty("padding-bottom", queue.size() > 0 ? "30px" : "0px");
 
-            boolean once = true;
-            HashSet<Integer> msgs = new HashSet<>();
-            for (int i = 0; i < queue.size(); i++) {
-                if(once && queue.get(i).isBoring()){
-                    once = false;
-
-                    if (i > 0){
-                        queueContainer.remove(historyTitle);
-                        queueContainer.add(historyTitle);
-                    }
-                }
-
-                if (chatUsername == null) {
-                    queueContainer.add(new HTMLPanel("h2", queue.get(i).getTitle()));
-                    if (queue.get(i).getOwner() != null) {
-                        HTMLPanel owner = new HTMLPanel("text", queue.get(i).getOwner());
-                        owner.getElement().setAttribute("class", "owner");
-                        queueContainer.add(owner);
-                    }
-                } else {
-                    Integer originalId = queue.get(i).getOriginalId();
-                    msgs.add(originalId);
-                    HTMLPanel div = msgCache.get(originalId);
-                    if (div == null) {
-                        div = new HTMLPanel("div", "");
-
-                        div.asWidget().getElement().getStyle()
-                                .setProperty("padding-top", queue.size() > 0 ? "30px" : "0px");
-
-                        ScriptElement sce = Document.get().createScriptElement();
-                        sce.setType("text/javascript");
-                    /*
-                    <script async src="https://telegram.org/js/telegram-widget.js?4" data-telegram-post="radio_persimmon/55" data-width="100%"></script>
-                     */
-                        sce.setSrc("https://telegram.org/js/telegram-widget.js?4");
-                        sce.setAttribute("data-telegram-post", chatUsername + "/" + originalId);
-                        sce.setAttribute("data-width", "100%");
-                        div.getElement().appendChild(sce);
-                        msgCache.put(originalId, div);
-                    }
-
-                    queueContainer.add(div);
-
-                }
-            }
 
             HashSet<Integer> toRemove = new HashSet<>();
             for (Integer key : msgCache.keySet()) {
