@@ -1,6 +1,9 @@
 package ru.korinc.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -50,6 +53,8 @@ public class Omdb implements EntryPoint {
     private String startWithStr;
 
     private Integer startWith;
+
+    private String chatUsername;
 
     private boolean connected = false;
 
@@ -178,11 +183,31 @@ public class Omdb implements EntryPoint {
                     }
                 }
 
-                queueContainer.add(new HTMLPanel("h2", queue.get(i).getTitle()));
-                if (queue.get(i).getOwner() != null) {
-                    HTMLPanel owner = new HTMLPanel("text", queue.get(i).getOwner());
-                    owner.getElement().setAttribute("class", "owner");
-                    queueContainer.add(owner);
+                if (chatUsername == null) {
+                    queueContainer.add(new HTMLPanel("h2", queue.get(i).getTitle()));
+                    if (queue.get(i).getOwner() != null) {
+                        HTMLPanel owner = new HTMLPanel("text", queue.get(i).getOwner());
+                        owner.getElement().setAttribute("class", "owner");
+                        queueContainer.add(owner);
+                    }
+                } else {
+                    HTMLPanel div = new HTMLPanel("div", "");
+
+                    div.asWidget().getElement().getStyle()
+                            .setProperty("padding-top", queue.size() > 0 ? "30px" : "0px");
+
+                    queueContainer.add(div);
+
+                    ScriptElement sce = Document.get().createScriptElement();
+                    sce.setType("text/javascript");
+                    /*
+                    <script async src="https://telegram.org/js/telegram-widget.js?4" data-telegram-post="radio_persimmon/55" data-width="100%"></script>
+                     */
+                    sce.setSrc("https://telegram.org/js/telegram-widget.js?4");
+                    sce.setAttribute("data-telegram-post",
+                            chatUsername + "/" + queue.get(i).getOriginalId());
+                    sce.setAttribute("data-width", "100%");
+                    div.getElement().appendChild(sce);
                 }
             }
         });
@@ -293,6 +318,8 @@ public class Omdb implements EntryPoint {
                         contextImage.getElement().setAttribute("src", photo);
                     }
                     contextImage.getElement().getStyle().setProperty("width", photo!=null ? "64px" : "0px");
+
+                    chatUsername = contextData.getString("username", null);
                 }
             }
         });

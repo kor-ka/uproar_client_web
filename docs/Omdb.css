@@ -5,7 +5,7 @@ html {
 
 body {
     min-height: 100%;
-    background-color: #000000;
+    background-color: #ffffff;
     font-family: 'Roboto', sans-serif;
     height:100vh;
 
@@ -18,7 +18,7 @@ h1 {
   font-size: 80px;
   font-weight:  100;
   margin: 40px;
-  color: #ffffff;
+  color: #000000;
   text-align: center;
   flex:1;
   position:relative;
@@ -32,7 +32,7 @@ h2{
    margin-top: 30px;
   margin-bottom: 0px;
   color: #000000;
-  text-align: left;
+  text-align: center;
 }
 
 #ytb_player {
@@ -61,7 +61,7 @@ h2{
 
 .line{
   width: 0px;
-  background-color: #ffffff;
+  background-color: #000000;
   float: left;
   height: 0px;
   position: absolute;
