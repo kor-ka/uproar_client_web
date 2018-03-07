@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import com.google.gwt.user.client.ui.Widget;
 import ru.korinc.client.player.Player;
@@ -76,6 +78,12 @@ public class Omdb implements EntryPoint {
     private Widget contextOwner;
     private Widget contextId;
 
+    private HTMLPanel nextTitle = new HTMLPanel("h2", "next:");
+
+    private HTMLPanel historyTitle = new HTMLPanel("h2", "history:");
+
+    private HashMap<Integer, HTMLPanel> msgCache = new HashMap<>();
+
 
     public void onModuleLoad() {
 
@@ -93,6 +101,11 @@ public class Omdb implements EntryPoint {
         contextTitle = RootPanel.get("context_title");
         contextOwner = RootPanel.get("context_owner");
         contextId = RootPanel.get("context_id");
+
+        //initial setting
+        nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "32px");
+        historyTitle.asWidget().getElement().getStyle().setProperty("font-size", "32px");
+
 
         headerContainer = RootPanel.get("header");
         playContainer = RootPanel.get("play_container");
@@ -163,23 +176,22 @@ public class Omdb implements EntryPoint {
         model.getQueue().observeOnMain().subscribe(queue -> {
             queueContainer.clear();
             if (queue.size() > 0) {
-                HTMLPanel nextTitle = new HTMLPanel("h2", "next:");
-                nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "32px");
-                queueContainer.add(nextTitle);
+                queueContainer.remove(nextTitle);
+                queueContainer.insert(nextTitle, 0);
             }
 
             queueContainer.asWidget().getElement().getStyle()
                     .setProperty("padding-bottom", queue.size() > 0 ? "30px" : "0px");
 
             boolean once = true;
+            HashSet<Integer> msgs = new HashSet<>();
             for (int i = 0; i < queue.size(); i++) {
                 if(once && queue.get(i).isBoring()){
                     once = false;
 
                     if (i > 0){
-                        HTMLPanel nextTitle = new HTMLPanel("h2", "history:");
-                        nextTitle.asWidget().getElement().getStyle().setProperty("font-size", "32px");
-                        queueContainer.add(nextTitle);
+                        queueContainer.remove(historyTitle);
+                        queueContainer.add(historyTitle);
                     }
                 }
 
@@ -191,24 +203,40 @@ public class Omdb implements EntryPoint {
                         queueContainer.add(owner);
                     }
                 } else {
-                    HTMLPanel div = new HTMLPanel("div", "");
+                    Integer originalId = queue.get(i).getOriginalId();
+                    msgs.add(originalId);
+                    HTMLPanel div = msgCache.get(originalId);
+                    if (div == null) {
+                        div = new HTMLPanel("div", "");
 
-                    div.asWidget().getElement().getStyle()
-                            .setProperty("padding-top", queue.size() > 0 ? "30px" : "0px");
+                        div.asWidget().getElement().getStyle()
+                                .setProperty("padding-top", queue.size() > 0 ? "30px" : "0px");
 
-                    queueContainer.add(div);
-
-                    ScriptElement sce = Document.get().createScriptElement();
-                    sce.setType("text/javascript");
+                        ScriptElement sce = Document.get().createScriptElement();
+                        sce.setType("text/javascript");
                     /*
                     <script async src="https://telegram.org/js/telegram-widget.js?4" data-telegram-post="radio_persimmon/55" data-width="100%"></script>
                      */
-                    sce.setSrc("https://telegram.org/js/telegram-widget.js?4");
-                    sce.setAttribute("data-telegram-post",
-                            chatUsername + "/" + queue.get(i).getOriginalId());
-                    sce.setAttribute("data-width", "100%");
-                    div.getElement().appendChild(sce);
+                        sce.setSrc("https://telegram.org/js/telegram-widget.js?4");
+                        sce.setAttribute("data-telegram-post", chatUsername + "/" + originalId);
+                        sce.setAttribute("data-width", "100%");
+                        div.getElement().appendChild(sce);
+                        msgCache.put(originalId, div);
+                    }
+
+                    queueContainer.add(div);
+
                 }
+            }
+
+            HashSet<Integer> toRemove = new HashSet<>();
+            for (Integer key : msgCache.keySet()) {
+                if (!msgs.contains(key)) {
+                    toRemove.add(key);
+                }
+            }
+            for (Integer key : toRemove) {
+                msgCache.remove(key);
             }
         });
 
