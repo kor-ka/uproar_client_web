@@ -181,21 +181,16 @@ public class Omdb implements EntryPoint {
         model.getQueue().observeOnMain().subscribe(queue -> {
 
             HashSet<Integer> msgs = new HashSet<>();
+            for (Content c : queue) {
+                msgs.add(c.getOriginalId());
+            }
 
             DiffUtil.calculateDiff(new ContentDiffCallback(old, queue))
                     .dispatchUpdatesTo(new ListUpdateCallback() {
                         @Override
                         public void onInserted(int position, int count) {
 
-//            boolean once = true;
                             for (int i = position; i < position + count; i++) {
-//                if(once && queue.get(i).isBoring()){
-//                    once = false;
-//
-//                    if (i > 0){
-//                        queueContainer.add(historyTitle);
-//                    }
-//                }
 
                                 if (chatUsername == null) {
                                     queueContainer
@@ -208,7 +203,6 @@ public class Omdb implements EntryPoint {
                                     }
                                 } else {
                                     Integer originalId = queue.get(i).getOriginalId();
-                                    msgs.add(originalId);
                                     HTMLPanel div = msgCache.get(originalId);
                                     if (div == null) {
                                         log.d("post", "new post div");
@@ -247,7 +241,8 @@ public class Omdb implements EntryPoint {
                         @Override
                         public void onMoved(int fromPosition, int toPosition) {
                             HTMLPanel toMove = msgCache.get(old.get(fromPosition).getOriginalId());
-
+                            log.d("onMOveDubug", "from:" + fromPosition + " to:" + toPosition);
+                            log.d("onMOveDubug", "obj:" + toMove);
                             queueContainer.remove(toMove);
                             queueContainer.insert(toMove, toPosition);
                         }
@@ -261,10 +256,6 @@ public class Omdb implements EntryPoint {
             old.clear();
             old.addAll(queue);
 
-//            queueContainer.clear();
-//            if (queue.size() > 0) {
-//                queueContainer.insert(nextTitle, 0);
-//            }
 
             queueContainer.asWidget().getElement().getStyle()
                     .setProperty("padding-bottom", queue.size() > 0 ? "30px" : "0px");
