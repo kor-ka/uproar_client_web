@@ -7,7 +7,7 @@ package ru.korinc.runtime.interop;
 public class Mqtt {
 
     public native void init(String username, String password, MqttCallbacks callbacks)/*-{
-        $wnd.client = new $wnd.Paho.MQTT.Client("uproar.ddns.net", 8083,"web_" + parseInt(Math.random() * 100, 10))
+        $wnd.client = new $wnd.Paho.MQTT.Client("uproar.ddns.net", 56001,"web_" + parseInt(Math.random() * 100, 10))
 
         function guid() {
           function s4() {
@@ -60,7 +60,7 @@ public class Mqtt {
     }-*/;
 
     public native void connect()/*-{
-         $wnd.client = new $wnd.Paho.MQTT.Client("uproar.ddns.net", 8083,"web_" + parseInt(Math.random() * 100, 10))
+         $wnd.client = new $wnd.Paho.MQTT.Client("uproar.ddns.net", 56001,"web_" + parseInt(Math.random() * 100, 10))
 
         $wnd.mqtt_options = {
             useSSL: $wnd.mqtt_options.useSSL,
